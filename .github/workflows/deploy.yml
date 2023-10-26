@@ -23,12 +23,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm run docs:build
-
-      # build docker image
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag kevin031/blog-vitepress:latest
+      - run: |
+          npm install
+          npm run docs:build
 
       # login
       - name: Log in to Docker Hub
@@ -37,12 +34,18 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # build docker image
+      - name: Build the Docker image
+        run: |
+          docker build . --file Dockerfile --tag kevin031/blog-vitepress:latest
+          docker push kevin031/blog-vitepress:latest
+
       # push to docker hub
-      - name: Push to Docker Hub
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: kevin031/blog-vitepress:latest
+      # - name: Push to Docker Hub
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     push: true
+      #     tags: kevin031/blog-vitepress:latest
 
       # - name: Execute SSH commmands on remote server
       #   uses: JimCronqvist/action-ssh@master
