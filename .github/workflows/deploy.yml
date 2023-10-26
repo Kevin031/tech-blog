@@ -59,7 +59,7 @@ jobs:
           # 私钥
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rltgoDzvO"
-          SOURCE: "docs/.vitepress/dist"
+          SOURCE: "docs/.vitepress/dist/"
           REMOTE_HOST: ${{ secrets.HOST }} #服务器ip
           REMOTE_USER: "root"
           TARGET: "/www/wwwroot/vitepress.kevinlau.cn/"
