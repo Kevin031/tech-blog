@@ -30,10 +30,14 @@
 
 以下例子证明 rem 数值与根元素有关：
 
-```
+```css
 /* 在初始字体大小16px的前提下 */
-html { font-size: 2rem; } /*32px*/
-p { font-size: 2rem; } /*64px*/
+html {
+  font-size: 2rem;
+} /*32px*/
+p {
+  font-size: 2rem;
+} /*64px*/
 ```
 
 ## rem 布局的实现
@@ -44,50 +48,68 @@ p { font-size: 2rem; } /*64px*/
 
 其中**100**的数值是可以自己定义的，这段代码相当于把页面可视区域分成了**100**份，每一份的宽度都为 1rem，所以如果一个元素的宽度为页面的 50%，CSS 只需要写成这样：
 
+```css
+p {
+  width: 50rem;
+}
 ```
-p { width: 50rem; }
-```
-
-<!--more-->
 
 实际开发中可以封装成以下的兼容浏览器的代码
 
-```
-function remChange () {
-    var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'; // 屏幕宽度改变的事件
-    var widthProportion = function () { // 计算
-        var doc = document.body || document.documentElement;
-        var p = doc.clientWidth;
-        return p / 100;
-    };
-    var changePage = function () { // 触发的函数
-        document.getElementsByTagName('html')[0].setAttribute('style', 'font-size:' + widthProportion() + 'px !important');
-    };
-    changePage(); // 初始化
-    window.addEventListener(resizeEvt, changePage, false); // 监听事件
+```javascript
+function remChange() {
+  var resizeEvt =
+    "orientationchange" in window ? "orientationchange" : "resize"; // 屏幕宽度改变的事件
+  var widthProportion = function () {
+    // 计算
+    var doc = document.body || document.documentElement;
+    var p = doc.clientWidth;
+    return p / 100;
+  };
+  var changePage = function () {
+    // 触发的函数
+    document
+      .getElementsByTagName("html")[0]
+      .setAttribute(
+        "style",
+        "font-size:" + widthProportion() + "px !important"
+      );
+  };
+  changePage(); // 初始化
+  window.addEventListener(resizeEvt, changePage, false); // 监听事件
 }
 ```
 
 同时针对 R 屏可以采用这样的方案
 
-```
-function setDPR () {
-    var viewport = document.querySelector('meta[name=viewport]');
-    if (window.devicePixelRatio === 1) {
-        viewport.setAttribute('content', 'width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no');
-    }
-    if (window.devicePixelRatio === 2) { // view宽度等于设备宽度，初始缩放值为0.5，允许用户最大缩放值0.5，不允许用户进行缩放
-        viewport.setAttribute('content', 'width=device-width,initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no');
-    }
-    if (window.devicePixelRatio === 3) {
-        viewport.setAttribute('content', 'width=device-width,initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no');
-    }
+```javascript
+function setDPR() {
+  var viewport = document.querySelector("meta[name=viewport]");
+  if (window.devicePixelRatio === 1) {
+    viewport.setAttribute(
+      "content",
+      "width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    );
+  }
+  if (window.devicePixelRatio === 2) {
+    // view宽度等于设备宽度，初始缩放值为0.5，允许用户最大缩放值0.5，不允许用户进行缩放
+    viewport.setAttribute(
+      "content",
+      "width=device-width,initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no"
+    );
+  }
+  if (window.devicePixelRatio === 3) {
+    viewport.setAttribute(
+      "content",
+      "width=device-width,initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no"
+    );
+  }
 }
 ```
 
 而 CSS 也可以采用预编译语言 less/sass/stylus 来简化计算过程，以下是 less 的例子
 
-```
+```javascript
 @baseUeWidth: 640; /* 设计稿的宽度 */
 .px2rem (@px) {
     @result: @px/@baseUeWidth * 1rem;
@@ -100,13 +122,13 @@ p {
 
 或采用另一种形式：
 
-```
+```less
 @baseUeWidth: 640; /* 设计稿的宽度 */
 .px2rem (@name, @px) {
-    @{name}: @px/@baseUeWidth * 1rem;
+  @{name}: @px / @baseUeWidth * 1rem;
 }
 p {
-    .px2rem(width, 100); /* 在设计稿中的宽度为100px */
+  .px2rem(width, 100); /* 在设计稿中的宽度为100px */
 }
 ```
 
