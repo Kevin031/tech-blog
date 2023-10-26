@@ -40,21 +40,27 @@ jobs:
           docker build . --file Dockerfile --tag kevin031/blog-vitepress:latest
           docker push kevin031/blog-vitepress:latest
 
-      # push to docker hub
-      # - name: Push to Docker Hub
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     push: true
-      #     tags: kevin031/blog-vitepress:latest
+      - name: Execute SSH commmands on remote server
+        uses: JimCronqvist/action-ssh@master
+        with:
+          hosts: ${{ secrets.HOST }}
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+          debug: true
+          command: |
+            docker ps -a
+            docker rm -f blog-vitepress
+            docker pull kevin031/blog-vitepress
+            docker run --name blog-vitepress --restart unless-stopped -p 20231:80 -d kevin031/blog-vitepress
 
-      # - name: Execute SSH commmands on remote server
-      #   uses: JimCronqvist/action-ssh@master
-      #   with:
-      #     hosts: ${{ secrets.HOST }}
-      #     privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     debug: true
-      #     command: |
-      #       docker ps -a
-      #       docker rm -f kevinlau-cn
-      #       docker pull kevin031/blog-vitepress
-      #       docker run --name kevinlau-cn --restart unless-stopped -p 20229:80 -d kevin031/blog-vitepress
+      # 资源直接部署到服务器
+      # - name: Deploy to Staging My server
+      #   uses: easingthemes/ssh-deploy@v2.1.6
+      #   env:
+      #     # 私钥
+      #     SSH_PRIVATE_KEY: ${{ secrets.MY_SERVER_PRIVATE_KEY }}
+      #     ARGS: "-rltgoDzvO"
+      #     SOURCE: "docs/.vuepress/dist"
+      #     REMOTE_HOST: ${{ secrets.IP }} #服务器ip
+      #     REMOTE_USER: "root"
+      #     TARGET: "/usr/share/nginx/blog/"
+      #     EXCLUDE: "/node_modules/"
