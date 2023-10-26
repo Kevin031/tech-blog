@@ -8,12 +8,25 @@ jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    # 用于配置当前workflow的参数
+    strategy:
+      matrix:
+        node-version: [18.x]
     steps:
       # checkout
       - name: Check out the repo
         uses: actions/checkout@v2
 
-      # build
+      # 在当前操作系统安装node
+      # vitepress build
+      - name: Build VitePress with Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run docs:build
+
+      # build docker image
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag kevin031/blog-vitepress:latest
 
