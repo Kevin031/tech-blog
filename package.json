@@ -12,6 +12,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "fs": "^0.0.1-security",
     "vitepress": "^1.0.0-rc.22"
+  },
+  "dependencies": {
+    "@types/node": "^20.8.9"
   }
 }

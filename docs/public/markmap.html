@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Markmap</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #mindmap {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/markmap-toolbar@0.15.3/dist/style.css"
+    />
+  </head>
+  <body>
+    <svg id="mindmap"></svg>
+    <script src="https://unpkg.com/d3@7.8.5/dist/d3.min.js"></script>
+    <script src="https://unpkg.com/markmap-view@0.15.3/dist/browser/index.js"></script>
+    <script src="https://unpkg.com/markmap-toolbar@0.15.3/dist/index.js"></script>
+    <script>
+      ((r) => {
+        setTimeout(r);
+      })(() => {
+        const { markmap, mm } = window;
+        const { el } = markmap.Toolbar.create(mm);
+        el.setAttribute("style", "position:absolute;bottom:20px;right:20px");
+        document.body.append(el);
+      });
+    </script>
+    <script>
+      ((getMarkmap, getOptions, root, jsonOptions) => {
+        const markmap = getMarkmap();
+        window.mm = markmap.Markmap.create(
+          "svg#mindmap",
+          (getOptions || markmap.deriveOptions)(jsonOptions),
+          root
+        );
+      })(
+        () => window.markmap,
+        null,
+        {
+          type: "heading",
+          depth: 0,
+          payload: { lines: [0, 1] },
+          content: "前端知识体系",
+          children: [
+            {
+              type: "heading",
+              depth: 1,
+              payload: { lines: [2, 3] },
+              content: "语言基础",
+              children: [
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [4, 5] },
+                  content: "语言核心能力",
+                  children: [
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [6, 7] },
+                      content: "HTML5",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [8, 9] },
+                      content: "CSS3",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [10, 11] },
+                      content: "EcmaScript 核心原理",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [12, 13] },
+                      content: "ES6-ES14",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [14, 15] },
+                      content: "程序设计与分析",
+                      children: [],
+                    },
+                  ],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [16, 17] },
+                  content: "语言高级能力",
+                  children: [
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [18, 19] },
+                      content: "手写 Promise",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [20, 21] },
+                      content: "代理与反射",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [22, 23] },
+                      content: "迭代器与生成器",
+                      children: [],
+                    },
+                  ],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [24, 25] },
+                  content: "宿主环境",
+                  children: [
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [26, 27] },
+                      content: "Web API",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [28, 29] },
+                      content: "设备能力",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [30, 31] },
+                      content: "浏览器工作原理",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [32, 33] },
+                      content: "http 协议与 AJAX",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [34, 35] },
+                      content: "AI 聊天机器人",
+                      children: [],
+                    },
+                  ],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [36, 37] },
+                  content: "效率与工具",
+                  children: [
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [38, 39] },
+                      content: "GIT",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [40, 41] },
+                      content: "bootstrap",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [42, 43] },
+                      content: "jQuery",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [44, 45] },
+                      content: "axios",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [46, 47] },
+                      content: "MockJS",
+                      children: [],
+                    },
+                    {
+                      type: "heading",
+                      depth: 3,
+                      payload: { lines: [48, 49] },
+                      content: "Moment",
+                      children: [],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "heading",
+              depth: 1,
+              payload: { lines: [50, 51] },
+              content: "编程思想",
+              children: [
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [52, 53] },
+                  content: "面向对象",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [54, 55] },
+                  content: "UI 框架源码",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [56, 57] },
+                  content: "手写 MVVM 框架",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [58, 59] },
+                  content: "设计模式",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [60, 61] },
+                  content: "前端算法",
+                  children: [],
+                },
+              ],
+            },
+            {
+              type: "heading",
+              depth: 1,
+              payload: { lines: [62, 63] },
+              content: "语言增强",
+              children: [
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [64, 65] },
+                  content: "TypeScript 语言核心",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [66, 67] },
+                  content: "泛型",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [68, 69] },
+                  content: "抽象类和接口",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [70, 71] },
+                  content: "装饰器",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [72, 73] },
+                  content: "类型验算",
+                  children: [],
+                },
+              ],
+            },
+            {
+              type: "heading",
+              depth: 1,
+              payload: { lines: [74, 75] },
+              content: "服务端",
+              children: [
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [76, 77] },
+                  content: "node",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [78, 79] },
+                  content: "主流数据库",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [80, 81] },
+                  content: "数据驱动和 ORM",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [82, 83] },
+                  content: "Koa / Express",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [84, 85] },
+                  content: "egg.js",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [86, 87] },
+                  content: "oauth2",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [88, 89] },
+                  content: "Docker",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [90, 91] },
+                  content: "服务器部署与持续集成",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [92, 93] },
+                  content: "服务端渲染 SSR 与服务端组件 CSR",
+                  children: [],
+                },
+              ],
+            },
+            {
+              type: "heading",
+              depth: 1,
+              payload: { lines: [94, 95] },
+              content: "工程化",
+              children: [
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [96, 97] },
+                  content: "Webpack",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [98, 99] },
+                  content: "Vite",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [100, 101] },
+                  content: "Rollup",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [102, 103] },
+                  content: "模块化",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [104, 105] },
+                  content: "包管理器",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [106, 107] },
+                  content: "兼容性管理",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [108, 109] },
+                  content: "代码风格管理",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [110, 111] },
+                  content: "预编译器 less / sass",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [112, 113] },
+                  content: "性能分析与优化",
+                  children: [],
+                },
+              ],
+            },
+            {
+              type: "heading",
+              depth: 1,
+              payload: { lines: [114, 115] },
+              content: "框架",
+              children: [
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [116, 117] },
+                  content: "Vue 3.x",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [118, 119] },
+                  content: "Vue 生态",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [120, 121] },
+                  content: "React v18",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [122, 123] },
+                  content: "React 生态",
+                  children: [],
+                },
+              ],
+            },
+            {
+              type: "heading",
+              depth: 1,
+              payload: { lines: [124, 125] },
+              content: "移动端",
+              children: [
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [126, 127] },
+                  content: "WebApp",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [128, 129] },
+                  content: "小程序",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [130, 131] },
+                  content: "uniapp",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [132, 133] },
+                  content: "ReactNative",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [134, 135] },
+                  content: "Taro",
+                  children: [],
+                },
+              ],
+            },
+            {
+              type: "heading",
+              depth: 1,
+              payload: { lines: [136, 137] },
+              content: "可视化",
+              children: [
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [138, 139] },
+                  content: "Canvas",
+                  children: [],
+                },
+                {
+                  type: "heading",
+                  depth: 2,
+                  payload: { lines: [140, 141] },
+                  content: "WebGL",
+                  children: [],
+                },
+              ],
+            },
+          ],
+        },
+        {}
+      );
+    </script>
+  </body>
+</html>
