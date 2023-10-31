@@ -62,5 +62,5 @@ jobs:
           SOURCE: "docs/.vitepress/dist/"
           REMOTE_HOST: ${{ secrets.HOST }} #服务器ip
           REMOTE_USER: "root"
-          TARGET: "/www/wwwroot/vitepress.kevinlau.cn/"
+          TARGET: "/www/wwwroot/kevinlau.cn/"
           EXCLUDE: "/node_modules/"
