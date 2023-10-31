@@ -124,3 +124,38 @@ function sum(a: string, b: string, c: number) {
 }
 
 const currySum = curry(sum)("1")("2")(3);
+
+type JSTypeName =
+  | "string"
+  | "number"
+  | "boolean"
+  | "object"
+  | "function"
+  | "symbol"
+  | "undefined"
+  | "bigint";
+
+type JSTypeMap = {
+  string: string;
+  number: number;
+  boolean: boolean;
+  object: object;
+  function: Function;
+  symbol: symbol;
+  undefined: undefined;
+  bigint: bigint;
+};
+
+type ArgsType<T extends JSTypeName[]> = {
+  [K in keyof T]: JSTypeMap[T[K]];
+};
+
+declare function addImpl<T extends JSTypeName[]>(
+  ...args: [...T, (...args: ArgsType<T>) => any]
+): void;
+
+addImpl("string", "boolean", "number", (a, b, c) => {});
+
+type DeepReadonly<T extends Record<string | symbol, any>> = {
+  readonly [K in keyof T]: DeepReadonly<T[K]>;
+};

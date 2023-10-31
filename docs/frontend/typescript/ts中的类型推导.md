@@ -265,3 +265,104 @@ function method(fn: fn3) {
   // }) => any
 }
 ```
+
+## 前置的不定量参数
+
+有如下场景，需要对 addImpl 的参数类型进行约束，让最后一个函数的参数约束为和它传入的前置类型一致
+
+```typescript
+declare function addImpl(...args: string[], fn: Function): void;
+
+addImpl("string", "boolean", "number", (a, b, c) => {});
+```
+
+实现如下
+
+```typescript
+type JSTypeName =
+  | "string"
+  | "number"
+  | "boolean"
+  | "object"
+  | "function"
+  | "symbol"
+  | "undefined"
+  | "bigint";
+
+type JSTypeMap = {
+  string: string;
+  number: number;
+  boolean: boolean;
+  object: object;
+  function: Function;
+  symbol: symbol;
+  undefined: undefined;
+  bigint: bigint;
+};
+
+type ArgsType<T extends JSTypeName[]> = {
+  [K in keyof T]: JSTypeMap[T[K]];
+};
+
+declare function addImpl<T extends JSTypeName[]>(
+  ...args: [...T, (...args: ArgsType<T>) => any]
+): void;
+
+addImpl("string", "boolean", "number", (a, b, c) => {});
+```
+
+关键在于建立字符串和类型的索引
+
+### 实现对象的深度不可变
+
+`typescript`官方提供的`Readonly`只能提供浅层的不可变约束，当值为对象的时候，没有对它的属性进行进一步的约束
+
+```typescript
+interface Obj {
+  a: number;
+  b: number;
+  c: {
+    d: number;
+  };
+}
+
+let obj: Readonly<Obj> = {
+  a: 1,
+  b: 2,
+  c: {
+    d: 3,
+  },
+};
+
+obj.a = 2; // 报错
+obj.c.d = 4; // 不报错
+```
+
+可以自己实现一个`DeepReadOnly`进行深层约束
+
+```typescript
+type DeepReadonly<T extends Record<string | symbol, any>> = {
+  readonly [K in keyof T]: DeepReadonly<T[K]>;
+};
+
+interface Obj {
+  a: number;
+  b: number;
+  c: {
+    d: number;
+  };
+}
+
+let obj: DeepReadonly<Obj> = {
+  a: 1,
+  b: 2,
+  c: {
+    d: 3,
+  },
+};
+
+obj.a = 2; // 报错
+obj.c.d = 4; // 报错
+
+let str: DeepReadonly<string> = 1; // 报错
+```
