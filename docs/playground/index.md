@@ -5,20 +5,16 @@ hero:
   name: 实验室
 
 features:
-  - icon: 🛠️
-    title: rem布局
-    details: Lorem ipsum...
-    link: ../css/rem布局原理及简单实践
-  - icon: 🛠️
-    title: 实现Vue的reactive模块
-    details: Lorem ipsum...
-  - icon: 💡
-    title: 实现vite基础能力
-    details: Lorem ipsum...
-  - icon: ✋🏻
-    title: 原生JS实现购物车
-    details: Lorem ipsum...
-  - icon: ✋🏻
-    title: 其它
-    details: Lorem ipsum...
+  - icon: 🚀
+    title: 低代码引擎
+    details: 通过React实现低代码的简易模型
+  - icon: 🤖
+    title: AI聊天室
+    details:
+  - icon: 🎸
+    title: 音乐播放器
+    details:
+  - icon: 🚧
+    title: 更多功能建设中...
+    details:
 ---
