@@ -22,7 +22,7 @@ const makeNavFromDir = (dirName) => {
         text: fileName,
         link: `/${dirName}/${fileName}`,
       });
-    } else {
+    } else if (!name.includes(".")) {
       try {
         let childList = fs.readdirSync(ABS_PATH + "/" + name);
         let items: Array<DefaultTheme.SidebarItem> = [];
@@ -52,6 +52,15 @@ const makeNavFromDir = (dirName) => {
 export default defineConfig({
   title: "Kevin的技术博客",
   description: "",
+  lastUpdated: true,
+  markdown: {
+    anchor: {},
+    toc: { level: [1, 2, 3] },
+    theme: {
+      light: "min-dark",
+      dark: "one-dark-pro",
+    },
+  },
   themeConfig: {
     search: {
       provider: "local",
