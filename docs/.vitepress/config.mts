@@ -50,7 +50,7 @@ const makeNavFromDir = (dirName) => {
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Kevin的技术博客",
+  title: "花生酱的小铺",
   description: "",
   lastUpdated: true,
   markdown: {

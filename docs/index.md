@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "个人文章云笔记"
-  text: "Kevin的技术博客 💻"
+  text: "花生酱的小铺 💻"
   tagline: 知识、构思和行动
   # actions:
   #   - theme: brand

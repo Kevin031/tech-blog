@@ -167,5 +167,11 @@
       background: transparent !important;
       background-color: transparent !important;
     }
+    .VPNavBar:not(.has-sidebar):not(.top) {
+      border: none;
+      -webkit-backdrop-filter: saturate(50%) blur(8px);
+      backdrop-filter: saturate(50%) blur(8px);
+      background: var(--vp-c-bg-alpha-with-backdrop) !important;
+    }
   }
 }
