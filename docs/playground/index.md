@@ -9,6 +9,10 @@ features:
     title: 种树
     details: 通过canvas随机种一棵树
     link: /playground/plant-tree/index
+  - icon: 👋
+    title: 拖拽列表
+    details: 通过原生API实现拖拽列表
+    link: /playground/drag-and-drop/index
   - icon: 🔧
     title: 图片加载占位指令
     details: 通过自定义指令生成图片加载loading动画
@@ -18,13 +22,13 @@ features:
     details: 通过IntersectionObserver实现瀑布流
     link: /playground/water-fall/index
   - icon: 🚀
-    title: 低代码引擎
+    title: 低代码引擎（建设中）
     details: 通过React实现低代码的简易模型
   - icon: 🤖
-    title: AI聊天室
+    title: AI聊天室（建设中）
     details:
   - icon: 🎸
-    title: 音乐播放器
+    title: 音乐播放器（建设中）
     details:
   - icon: 🚧
     title: 更多功能建设中...

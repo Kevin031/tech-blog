@@ -50,16 +50,16 @@ const makeNavFromDir = (dirName) => {
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "花生酱的小铺",
+  title: "peanut的小铺",
   description: "",
   lastUpdated: true,
   markdown: {
     anchor: {},
     toc: { level: [1, 2, 3] },
-    theme: {
-      light: "min-dark",
-      dark: "one-dark-pro",
-    },
+    // theme: {
+    //   light: "one-dark-pro",
+    //   dark: "one-dark-pro",
+    // },
   },
   themeConfig: {
     search: {
