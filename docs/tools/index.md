@@ -18,6 +18,6 @@ grid 布局：[https://cssgridgarden.com]('https://cssgridgarden.com')
 
 CSS 选择器：[https://flukeout.github.io](https://flukeout.github.io)
 
-JS 机器人：['https://lab.reaal.me/jsrobot/']('https://lab.reaal.me/jsrobot/')
+JS 机器人：[https://lab.reaal.me/jsrobot/]('https://lab.reaal.me/jsrobot/')
 
-GIT 命令：['https://learngitbranching.js.org'](https://learngitbranching.js.org)
+GIT 命令：[https://learngitbranching.js.org](https://learngitbranching.js.org)
