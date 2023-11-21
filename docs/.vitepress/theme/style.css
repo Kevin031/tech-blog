@@ -163,6 +163,9 @@
       flex-grow: 0;
       left: 272px;
     }
+    .VPNavBar.has-sidebar .curtain {
+      display: none;
+    }
     .VPNavBar:not(.top) .content-body {
       background: transparent !important;
       background-color: transparent !important;
