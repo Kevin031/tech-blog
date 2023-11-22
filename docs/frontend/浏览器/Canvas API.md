@@ -83,7 +83,8 @@ onMounted(() => {
 <canvas ref="canvasRef1" width="600" height="400"></canvas>
 
 <script setup>
-  import CanvasPlayground from '../../vue-exm/CanvasPlayground.vue'
+  import CanvasLinePoint from '../../vue-exm/CanvasLinePoint.vue'
+  import CanvasDragAndDrop from '../../vue-exm/CanvasDragAndDrop.vue'
   import { ref, onMounted } from 'vue'
   const canvasRef1 = ref()
   onMounted(() => {
@@ -121,8 +122,16 @@ onMounted(() => {
 
 ## 自定义封装方法
 
-<CanvasPlayground />
+<CanvasLinePoint />
 
 源码如下：
 
-<<< ../../vue-exm/CanvasPlayground.vue
+<<< ../../vue-exm/CanvasLinePoint.vue
+
+## 在 canvas 中进行用户交互
+
+<CanvasDragAndDrop />
+
+源码如下：
+
+<<< ../../vue-exm/CanvasDragAndDrop.vue

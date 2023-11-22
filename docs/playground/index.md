@@ -21,6 +21,12 @@ features:
     title: 瀑布流
     details: 通过IntersectionObserver实现瀑布流
     link: /playground/water-fall/index
+  - icon: 🔧
+    title: canvas动态背景
+    link: /playground/canvas-animate-point/index
+  - icon: 🌧️
+    title: canvas代码雨
+    link: /playground/canvas-code-rain/index
   - icon: 🚀
     title: 低代码引擎（建设中）
     details: 通过React实现低代码的简易模型
