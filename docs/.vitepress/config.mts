@@ -76,6 +76,10 @@ export default defineConfig({
         items: [
           { text: "实用工具", link: "/tools/index" },
           { text: "文章", link: "/posts/index" },
+          {
+            text: "webpack5核心原理与应用实践",
+            link: "/learning/webpack5核心原理与应用实践/1 重新认识 Webpack：旧时代的破局者",
+          },
         ],
       },
     ],
@@ -85,14 +89,17 @@ export default defineConfig({
         {
           text: "实用工具整理",
           items: [
-            { text: "Markdown Examples", link: "/markdown-examples" },
-            { text: "Markdown Examples", link: "/markdown-examples" },
-            { text: "Runtime API Examples", link: "/api-examples" },
+            // { text: "Markdown Examples", link: "/markdown-examples" },
+            // { text: "Markdown Examples", link: "/markdown-examples" },
+            // { text: "Runtime API Examples", link: "/api-examples" },
           ],
         },
       ],
       "/frontend": makeNavFromDir("frontend"),
       "/challenge": makeNavFromDir("challenge"),
+      "/learning/webpack5核心原理与应用实践": makeNavFromDir(
+        "learning/webpack5核心原理与应用实践"
+      ),
     },
 
     footer: {

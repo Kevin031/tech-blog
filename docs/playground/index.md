@@ -27,6 +27,10 @@ features:
   - icon: 🌧️
     title: canvas代码雨
     link: /playground/canvas-code-rain/index
+  - icon: ⬆️
+    title: 文件上传
+    details: 原生js实现文件上传
+    link: /playground/file-upload/index
   - icon: 🚀
     title: 低代码引擎（建设中）
     details: 通过React实现低代码的简易模型

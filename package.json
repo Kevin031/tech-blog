@@ -17,6 +17,7 @@
     "vitepress": "^1.0.0-rc.22"
   },
   "dependencies": {
-    "@types/node": "^20.8.9"
+    "@types/node": "^20.8.9",
+    "vue": "^3.3.8"
   }
 }

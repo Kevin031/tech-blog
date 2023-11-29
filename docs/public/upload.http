@@ -1,0 +1,34 @@
+POST / HTTP/1.1
+HOST: peanut-1256322637.cos.ap-guangzhou.myqcloud.com
+Content-Type: multipart/form-data; boundary=aaa
+
+--aaa
+Content-Disposition: form-data; name="key"
+
+/upload/${filename}
+--aaa
+Content-Disposition: form-data; name="policy"
+
+ewogICAgImV4cGlyYXRpb24iOiAiMjAyMy0xMS0yNFQwMzo0MjoyMC4wMDBaIiwKICAgICJjb25kaXRpb25zIjogWwogICAgICAgIHsicS1zaWduLWFsZ29yaXRobSI6ICJzaGExIn0sCiAgICAgICAgeyJxLWFrIjogIkFLSURMV1I1VGFRekhJM1hEY2xkRVhaTHEzemYzQTBhdHZnQSJ9LAogICAgICAgIHsicS1zaWduLXRpbWUiOiAiMTcwMDc5Mzc0MDsxNzAwNzk3MzQwIn0KICAgIF0KfQ==
+--aaa
+Content-Disposition: form-data; name="q-sign-algorithm"
+
+sha1
+--aaa
+Content-Disposition: form-data; name="q-ak"
+
+AKIDLWR5TaQzHI3XDcldEXZLq3zf3A0atvgA
+--aaa
+Content-Disposition: form-data; name="q-key-time"
+
+1700793740;1700797340
+--aaa
+Content-Disposition: form-data; name="q-signature"
+
+ac6251c1479f1398b6ffd6e842ca50046c643128
+--aaa
+Content-Disposition: form-data; name="file"; filename="img-example.jpg"
+Content-Type: image/jpeg
+
+< ./img-example.jpg
+--aaa--
