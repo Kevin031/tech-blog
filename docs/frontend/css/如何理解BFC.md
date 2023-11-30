@@ -79,7 +79,7 @@ const boxList = ref(Array(10).fill(""))
 
 - overflow 不等于 visible 的块盒
 
-- display 属性为 table 的元素
+- display 属性为 table 或 inline-block 的元素
 
 成本最小的方式：`overflow: hidden`
 
@@ -88,6 +88,7 @@ const boxList = ref(Array(10).fill(""))
 视觉格式化模型是浏览器根据基础盒模型将文档元素转换成一个个盒子的算法，它规定了客户端在媒介中如何处理文档树。
 
 视觉格式化模型中包含了块级格式化上下文。
+
 
 盒子的布局由以下因素决定：
 
