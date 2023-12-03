@@ -1,4 +1,4 @@
-# HTTP 新增特性
+# HTTP 特性整理
 
 到目前为止，HTTP 常⻅到版本有 HTTP/1.1，HTTP/2.0，HTTP/3.0，不同版本的 HTTP 特性 是不一样的。
 
