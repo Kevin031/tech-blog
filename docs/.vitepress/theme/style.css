@@ -159,9 +159,17 @@
       -webkit-backdrop-filter: saturate(50%) blur(8px);
       backdrop-filter: saturate(50%) blur(8px);
       background: var(--vp-c-bg-alpha-with-backdrop);
-      width: calc(100% - 272px);
+      /* width: calc(100% - 272px); */
       flex-grow: 0;
-      left: 272px;
+      /* left: 272px; */
+      margin-left: 272px;
+      padding-left: 0!important;
+      width: 100%;
+
+
+      @media (min-width: 1440px) {
+        margin-left: 376px;
+      }
     }
     .VPNavBar.has-sidebar .curtain {
       display: none;
