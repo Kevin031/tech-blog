@@ -1,24 +1,28 @@
-const deepClone = (target, map = new WeakMap()) => {
-  // 如果是基本类型，直接返回
-  if (typeof target !== "object" || target === null) return target;
-
-  // 对函数、日期、正则、Map、Set等对象执行构造函数
-  const constructor = target.constructor;
-  if (/^(Function|RegExp|Date|Map|Set)$/i.test(constructor.name)) {
-    return new constructor(target);
+function* walk(str) {
+  let part = ''
+  for (let i = 0; i < str.length; i++) {
+    part += str[i]
+    yield part
   }
+}
 
-  // 执行对象拷贝
-  let cloneTarget = Array.isArray(target) ? [] : {};
+function compare(s1, s2) {
+  let genS1 = walk(s1)
+  let genS2 = walk(s2)
+  while (true) {
+    const n1 = genS1.next()
+    const n2 = genS2.next()
+    if (n1.value !== n2.value) {
+      return false
+    }
 
-  // 标记出现过的属性，避免循环引用
-  if (map.get(target)) return map.get(target);
-  map.set(target, true);
-
-  // 遍历原始对象
-  for (let prop in target) {
-    cloneTarget[prop] = deepClone(target[prop], map);
+    if (n1.done && n2.done) {
+      return true
+    }
   }
+}
 
-  return cloneTarget;
-};
+const s1 = '1234567777'
+const s2 = '1234567777'
+
+console.log(compare(s1, s2))

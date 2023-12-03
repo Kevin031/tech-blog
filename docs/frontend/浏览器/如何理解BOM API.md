@@ -72,6 +72,10 @@ BOM 是 browser object model 的缩写，中文意思是浏览器对象模型，
 
 - MutationObserver
 
+- BroadcastChannel 可以跨页签通信
+
+- MessageChannel 消息通道
+
 - Image
 
 - Video
@@ -89,3 +93,5 @@ BOM 是 browser object model 的缩写，中文意思是浏览器对象模型，
 - requestAnimationFrame
 
 - requestIdleCallback
+
+- postMessage
