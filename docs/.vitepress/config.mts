@@ -99,6 +99,7 @@ export default defineConfig({
         }
       ],
       '/frontend': makeNavFromDir('frontend'),
+      '/posts': makeNavFromDir('posts'),
       '/challenge': makeNavFromDir('challenge'),
       '/learning/webpack5核心原理与应用实践': makeNavFromDir(
         'learning/webpack5核心原理与应用实践'
