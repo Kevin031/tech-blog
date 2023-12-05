@@ -38,6 +38,8 @@ github：http://www.github.com/Kevin031
 
 ⭐️ 熟悉 Node.js, Koa, Express，了解 PHP、Python，有中间层的实践经验
 
+⭐️ 持续关注和了解 ssr/csr、threejs、PWA、hybrid、electron 等前沿技术
+
 ⭐️ 良好的编码习惯，对技术有追求和热情，持续输出技术文章
 
 ## 工作经历
@@ -66,7 +68,7 @@ github：http://www.github.com/Kevin031
 
 - 通过接入 monorepo 的包管理机制，同步产出 demo 和在线文档，接入代码检验和单元测试提高可维护性
 
-- 最终在公司内部推广至多条业务线使用，交付高还原度、高稳定性的 UI 界面，提高了 80% 的业务生产效率，
+- 最终在公司内部推广至多条业务线使用，交付高还原度、高稳定性的 UI 界面，提高了 80% 的业务生产效率
 
 ### 2020.06 - 2021.06 瑞云科技 前端工程师
 
