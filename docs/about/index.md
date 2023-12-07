@@ -48,7 +48,7 @@ github：http://www.github.com/Kevin031
 
 #### xOne 低代码研发平台
 
-职责：前端主开发 | 技术栈：React、Taro、Webpack、gulp、npm
+职责：前端主开发 | 技术栈：React、Taro、Webpack、gulp、nodejs、monorepo
 
 - 参与设计和主导实现基于**编辑器壳工程**和**渲染引擎**，**接入多组件库**的低代码开发平台，产出**后管**和**移动端 h5**、**小程序**页面
 
