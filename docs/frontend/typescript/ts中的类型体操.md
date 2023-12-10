@@ -6,24 +6,24 @@
 
 ```typescript
 interface Article {
-  title: string;
-  content: string;
-  author: string;
-  date: Date;
-  readCount: number;
+  title: string
+  content: string
+  author: string
+  date: Date
+  readCount: number
 }
 
-type CreateArticleOptions = Optional<Article, "author" | "date" | "readCount">;
+type CreateArticleOptions = Optional<Article, 'author' | 'date' | 'readCount'>
 
 function createArticle(options: CreateArticleOptions) {
-  console.log(options);
+  console.log(options)
 }
 ```
 
 可以通过泛型以及 Omit、Partial，用以下方式实现
 
 ```typescript
-type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
 ```
 
 解析如下：
@@ -39,22 +39,22 @@ type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
 ```typescript
 interface Article {
-  title: string;
-  content: string;
-  author: string;
-  date?: Date;
-  readCount?: number;
+  title: string
+  content: string
+  author: string
+  date?: Date
+  readCount?: number
 }
 
-type AraticalOptionals = GetOptional<Article>;
+type AraticalOptionals = GetOptional<Article>
 ```
 
 可以通过以下方式封装
 
 ```typescript
 type GetOptional<T> = {
-  [P in keyof T as T[P] extends Required<T>[P] ? never : P]: T[P];
-};
+  [P in keyof T as T[P] extends Required<T>[P] ? never : P]: T[P]
+}
 ```
 
 解析如下：
@@ -71,20 +71,20 @@ type GetOptional<T> = {
 ```typescript
 type Watcher = {
   on(
-    eventName: `${"firstName" | "lastName" | "age"}Change`,
+    eventName: `${'firstName' | 'lastName' | 'age'}Change`,
     callback: (oldValue: any, newValue: any) => void
-  ): void;
-};
+  ): void
+}
 
-declare function watch(obj: object): Watcher;
+declare function watch(obj: object): Watcher
 
 const personalWatcher = watch({
-  firstName: "Sonier",
-  lastName: "Roson",
-  age: 20,
-});
+  firstName: 'Sonier',
+  lastName: 'Roson',
+  age: 20
+})
 
-personalWatcher.on("ageChange", (oldValue, newValue) => {});
+personalWatcher.on('ageChange', (oldValue, newValue) => {})
 ```
 
 可以进行如下改造
@@ -94,18 +94,18 @@ type Watcher<T> = {
   on<K extends string & keyof T>(
     eventName: `${K}Change`,
     callback: (oldValue: T[K], newValue: T[K]) => void
-  ): void;
-};
+  ): void
+}
 
-declare function watch<T>(obj: T): Watcher<T>;
+declare function watch<T>(obj: T): Watcher<T>
 
 const personalWatcher = watch({
-  firstName: "Sonier",
-  lastName: "Roson",
-  age: 20,
-});
+  firstName: 'Sonier',
+  lastName: 'Roson',
+  age: 20
+})
 
-personalWatcher.on("ageChange", (oldValue, newValue) => {});
+personalWatcher.on('ageChange', (oldValue, newValue) => {})
 ```
 
 通过这种方式，可以通过函数接收到的对象类型进行推演，得到返回的新对象类型
@@ -115,17 +115,17 @@ personalWatcher.on("ageChange", (oldValue, newValue) => {});
 有如下场景，需要实现 Return 类型得到函数的返回类型
 
 ```typescript
-type sum = (a: number, b: number) => number;
-type concat = (a: any[], b: any[]) => any[];
+type sum = (a: number, b: number) => number
+type concat = (a: any[], b: any[]) => any[]
 
-let sumResult: Return<sum>;
-let concatResult: Return<concat>;
+let sumResult: Return<sum>
+let concatResult: Return<concat>
 ```
 
 可以通过以下方式实现:
 
 ```typescript
-type Return<T> = T extends (...args: any[]) => infer R ? R : T;
+type Return<T> = T extends (...args: any[]) => infer R ? R : T
 ```
 
 `(...args: any[])`用于表示函数中不定量的参数
@@ -137,42 +137,42 @@ type Return<T> = T extends (...args: any[]) => infer R ? R : T;
 有以下场景，需要实现 PromiseType 得到 resolve 的类型
 
 ```typescript
-type pt = PromiseType<Promise<string>>; // string
+type pt = PromiseType<Promise<string>> // string
 ```
 
 实现如下：
 
 ```typescript
-type PromiseType<T> = T extends Promise<infer K> ? K : T;
+type PromiseType<T> = T extends Promise<infer K> ? K : T
 ```
 
 对于递归的场景，可以进行类型的递归，进一步推导
 
 ```typescript
-type PromiseType<T> = T extends Promise<infer K> ? Promise<K> : T;
+type PromiseType<T> = T extends Promise<infer K> ? Promise<K> : T
 
-type pt = PromiseType<Promise<Promise<string>>>; // string
+type pt = PromiseType<Promise<Promise<string>>> // string
 ```
 
 ## 获取函数中第一个参数的类型
 
 ```typescript
-type FirstArg<T> = T extends (first: infer F, ...args: any[]) => any ? F : T;
-type fa = FirstArg<(name: string, age: number) => void>; // string
+type FirstArg<T> = T extends (first: infer F, ...args: any[]) => any ? F : T
+type fa = FirstArg<(name: string, age: number) => void> // string
 ```
 
 ## 对柯里化函数做类型推断
 
 ```typescript
-declare function curry(fn: Function): Function;
+declare function curry(fn: Function): Function
 
 function sum(a: string, b: string, c: number) {
-  return a + b + c;
+  return a + b + c
 }
 
-const currySum = curry(sum);
+const currySum = curry(sum)
 
-currySum(1, 2, 3);
+currySum(1, 2, 3)
 ```
 
 需要进行以下改造
@@ -188,17 +188,15 @@ type Curried<A, R> = A extends []
   ? (params: ARG) => R
   : A extends [infer ARG, ...infer REST]
   ? (param: ARG) => Curried<REST, R>
-  : never;
+  : never
 
-declare function curry<A extends any[], R>(
-  fn: (...args: A) => R
-): Curried<A, R>;
+declare function curry<A extends any[], R>(fn: (...args: A) => R): Curried<A, R>
 
 function sum(a: string, b: string, c: number) {
-  return a + b + c;
+  return a + b + c
 }
 
-const currySum = curry(sum)("1")("2")(3);
+const currySum = curry(sum)('1')('2')(3)
 ```
 
 关键在于用好 infer，以及通过递归解决问题
@@ -206,10 +204,10 @@ const currySum = curry(sum)("1")("2")(3);
 ## 获取数组的元类型
 
 ```typescript
-type ArrayType<T> = T extends (infer I)[] ? I : T;
+type ArrayType<T> = T extends (infer I)[] ? I : T
 
-type ItemType1 = ArrayType<[string, number]>; // stirng | number
-type ItemType2 = ArrayType<string[]>; // string[]
+type ItemType1 = ArrayType<[string, number]> // stirng | number
+type ItemType2 = ArrayType<string[]> // string[]
 ```
 
 ## 联合类型转交叉类型
@@ -217,9 +215,9 @@ type ItemType2 = ArrayType<string[]>; // string[]
 有以下场景，需要实现 UnionToIntersection 类型将联合类型转成交叉类型
 
 ```typescript
-type Test = { a: string } | { b: number } | { c: boolean };
+type Test = { a: string } | { b: number } | { c: boolean }
 
-type BothTest = UnionToIntersection<Test>;
+type BothTest = UnionToIntersection<Test>
 ```
 
 可以通过这种方式实现：
@@ -229,7 +227,7 @@ type UnionToIntersection<T> = (T extends any ? (x: T) => any : never) extends (
   X: infer R
 ) => any
   ? R
-  : never;
+  : never
 ```
 
 涉及到**协变**和**逆变**的概念：
@@ -239,25 +237,25 @@ type UnionToIntersection<T> = (T extends any ? (x: T) => any : never) extends (
 而对于函数参数则正好相反
 
 ```typescript
-let a: Big = { a: 1 };
-let b: Small = { a: 1, b: 2 };
+let a: Big = { a: 1 }
+let b: Small = { a: 1, b: 2 }
 
-let fn1 = (value: Big) => {};
-let fn2 = (value: Small) => {};
+let fn1 = (value: Big) => {}
+let fn2 = (value: Small) => {}
 
-fn2 = fn1;
+fn2 = fn1
 // fn1 = fn2 // 报错
 ```
 
 对于函数而言，联合类型的函数，会将它的参数变成交叉类型（逆变）
 
 ```typescript
-type fn1 = (x: { a: string }) => any;
-type fn2 = (x: { b: number }) => any;
-type fn3 = fn1 | fn2;
+type fn1 = (x: { a: string }) => any
+type fn2 = (x: { b: number }) => any
+type fn3 = fn1 | fn2
 
 function method(fn: fn3) {
-  fn({ a: "1", b: 2 });
+  fn({ a: '1', b: 2 })
   // (parameter) fn: (x: {
   //     a: string;
   // } & {
@@ -271,44 +269,44 @@ function method(fn: fn3) {
 有如下场景，需要对 addImpl 的参数类型进行约束，让最后一个函数的参数约束为和它传入的前置类型一致
 
 ```typescript
-declare function addImpl(...args: string[], fn: Function): void;
+declare function addImpl(...args: string[], fn: Function): void
 
-addImpl("string", "boolean", "number", (a, b, c) => {});
+addImpl('string', 'boolean', 'number', (a, b, c) => {})
 ```
 
 实现如下
 
 ```typescript
 type JSTypeName =
-  | "string"
-  | "number"
-  | "boolean"
-  | "object"
-  | "function"
-  | "symbol"
-  | "undefined"
-  | "bigint";
+  | 'string'
+  | 'number'
+  | 'boolean'
+  | 'object'
+  | 'function'
+  | 'symbol'
+  | 'undefined'
+  | 'bigint'
 
 type JSTypeMap = {
-  string: string;
-  number: number;
-  boolean: boolean;
-  object: object;
-  function: Function;
-  symbol: symbol;
-  undefined: undefined;
-  bigint: bigint;
-};
+  string: string
+  number: number
+  boolean: boolean
+  object: object
+  function: Function
+  symbol: symbol
+  undefined: undefined
+  bigint: bigint
+}
 
 type ArgsType<T extends JSTypeName[]> = {
-  [K in keyof T]: JSTypeMap[T[K]];
-};
+  [K in keyof T]: JSTypeMap[T[K]]
+}
 
 declare function addImpl<T extends JSTypeName[]>(
   ...args: [...T, (...args: ArgsType<T>) => any]
-): void;
+): void
 
-addImpl("string", "boolean", "number", (a, b, c) => {});
+addImpl('string', 'boolean', 'number', (a, b, c) => {})
 ```
 
 关键在于建立字符串和类型的索引
@@ -319,50 +317,50 @@ addImpl("string", "boolean", "number", (a, b, c) => {});
 
 ```typescript
 interface Obj {
-  a: number;
-  b: number;
+  a: number
+  b: number
   c: {
-    d: number;
-  };
+    d: number
+  }
 }
 
 let obj: Readonly<Obj> = {
   a: 1,
   b: 2,
   c: {
-    d: 3,
-  },
-};
+    d: 3
+  }
+}
 
-obj.a = 2; // 报错
-obj.c.d = 4; // 不报错
+obj.a = 2 // 报错
+obj.c.d = 4 // 不报错
 ```
 
 可以自己实现一个`DeepReadOnly`进行深层约束
 
 ```typescript
 type DeepReadonly<T extends Record<string | symbol, any>> = {
-  readonly [K in keyof T]: DeepReadonly<T[K]>;
-};
+  readonly [K in keyof T]: DeepReadonly<T[K]>
+}
 
 interface Obj {
-  a: number;
-  b: number;
+  a: number
+  b: number
   c: {
-    d: number;
-  };
+    d: number
+  }
 }
 
 let obj: DeepReadonly<Obj> = {
   a: 1,
   b: 2,
   c: {
-    d: 3,
-  },
-};
+    d: 3
+  }
+}
 
-obj.a = 2; // 报错
-obj.c.d = 4; // 报错
+obj.a = 2 // 报错
+obj.c.d = 4 // 报错
 
-let str: DeepReadonly<string> = 1; // 报错
+let str: DeepReadonly<string> = 1 // 报错
 ```
