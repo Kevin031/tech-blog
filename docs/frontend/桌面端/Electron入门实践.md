@@ -128,7 +128,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 按照以上流程，我们获得了一个基本的 electron 项目框架，可以通过主进程和预加载脚本扩充基于 node 端的能力，也可以通过页面运行脚本扩充基于 web 端的能力。
 
-![electron运行机制](./electron-base.png)
+![electron运行机制](./electron-runtime.png)
 
 ## 理解多进程模型
 
@@ -383,3 +383,85 @@ secondaryWindow.once('ready-to-show', () => {
   secondaryWindow.webContents.postMessage('port', null, [port2])
 })
 ```
+
+### 小结
+
+Electron 采用了是多进程模型，每个进程的上下文是隔离沙箱化的，其中渲染器进程需要通过预加载脚本的 contextBridge 定义上下文，进程间可以通过 `Electron` 的 `ICP Api` 或消息管道进行通信。
+
+![多进程模型](electron-process-model.png)
+
+## Electron + vite + Vue3 结合使用
+
+1. 使用 vite 模板重新初始化项目
+
+```shell
+pnpm create vite electron-vite-app
+
+cd electron-vite-app
+
+pnpm i
+
+pnpm i electron vite-plugin-electron vite-plugin-electron-renderer
+```
+
+2. 创建 electron 文件夹，在 electron 文件夹下新建 main.ts
+
+```ts {main.ts}
+import { app, BrowserWindow } from 'electron'
+import { join } from 'path'
+
+const url = process.env.VITE_DEV_SERVER_URL
+
+const createdWindow = () => {
+  const win = new BrowserWindow({
+    width: 900,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    }
+  })
+  win.webContents.openDevTools()
+  if (url) {
+    win.loadURL('http://localhost:5173')
+  } else {
+    win.loadFile(join(__dirname, 'index.html'))
+  }
+}
+
+app.whenReady().then(() => {
+  createdWindow()
+})
+```
+
+3. 配置`vite.config.ts`
+
+之所以要经过编译，是因为 Electron 运行在 node 环境，可能不支持 es module，需要编译成 commonjs
+
+```ts
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import electron from 'vite-plugin-electron'
+import renderer from 'vite-plugin-electron-renderer'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+    electron({
+      entry: 'electron/main.ts'
+    }),
+    renderer()
+  ]
+})
+```
+
+4. 修改`package.json`，移除 module 字段，改为`"main": "electron-dist/main.js"`
+
+5. 启动项目
+
+```shell
+npm run dev
+```
+
+至此，我们就得到了一个基于 vite 和 Vue3 的 Electron 项目，同时还支持在浏览器上进行 UI 的开发
