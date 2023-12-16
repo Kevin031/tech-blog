@@ -73,7 +73,7 @@ export default defineConfig({
       { text: '知识体系', link: '/frontend/前端知识体系' },
       { text: '前端挑战', link: '/challenge/index' },
       { text: '实验室', link: '/playground/index' },
-      { text: '关于我', link: '/about/index' },
+      // { text: '关于我', link: '/about/index' },
       {
         text: '其它',
         items: [
