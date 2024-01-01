@@ -25,3 +25,9 @@ features:
     details: 尝试有趣的新技能
     link: /playground/index
 ---
+
+<script setup>
+import HomeBg from '/.vitepress/components/home-bg.vue'
+</script>
+
+<HomeBg />

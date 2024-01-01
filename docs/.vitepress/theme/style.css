@@ -127,11 +127,11 @@
   --vp-custom-block-tip-text: var(--vp-c-text-1);
   --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
   --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
-  --vp-c-bg-alpha-with-backdrop: rgba(255, 255, 255, 0.7);
+  --vp-c-bg-alpha-with-backdrop: rgba(255, 255, 255, 0.4);
 }
 
 .dark {
-  --vp-c-bg-alpha-with-backdrop: rgba(36, 36, 36, 0.7);
+  --vp-c-bg-alpha-with-backdrop: rgba(36, 36, 36, 0.4);
 }
 
 /**
@@ -163,9 +163,8 @@
       flex-grow: 0;
       /* left: 272px; */
       margin-left: 272px;
-      padding-left: 0!important;
+      padding-left: 0 !important;
       width: 100%;
-
 
       @media (min-width: 1440px) {
         margin-left: 376px;
