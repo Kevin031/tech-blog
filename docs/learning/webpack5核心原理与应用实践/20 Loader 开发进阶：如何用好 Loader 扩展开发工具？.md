@@ -293,41 +293,41 @@ Webpack 支持以类似 `[path]/[name]-[hash].js` 方式设定 `output.filename`
 
 ```js
 // file-loader/src/index.js
-import { interpolateName } from 'loader-utils';
+import { interpolateName } from 'loader-utils'
 
 export default function loader(content) {
-  const context = options.context || this.rootContext;
-  const name = options.name || '[contenthash].[ext]';
+  const context = options.context || this.rootContext
+  const name = options.name || '[contenthash].[ext]'
 
   // 拼接最终输出的名称
   const url = interpolateName(this, name, {
     context,
     content,
-    regExp: options.regExp,
-  });
+    regExp: options.regExp
+  })
 
-  let outputPath = url;
+  let outputPath = url
   // ...
 
-  let publicPath = `__webpack_public_path__ + ${JSON.stringify(outputPath)}`;
+  let publicPath = `__webpack_public_path__ + ${JSON.stringify(outputPath)}`
   // ...
 
   if (typeof options.emitFile === 'undefined' || options.emitFile) {
     // ...
 
     // 提交、写出文件
-    this.emitFile(outputPath, content, null, assetInfo);
+    this.emitFile(outputPath, content, null, assetInfo)
   }
   // ...
 
   const esModule =
-    typeof options.esModule !== 'undefined' ? options.esModule : true;
+    typeof options.esModule !== 'undefined' ? options.esModule : true
 
   // 返回模块化内容
-  return `${esModule ? 'export default' : 'module.exports ='} ${publicPath};`;
+  return `${esModule ? 'export default' : 'module.exports ='} ${publicPath};`
 }
 
-export const raw = true;
+export const raw = true
 ```
 
 代码的核心逻辑：
@@ -359,21 +359,19 @@ export const raw = true;
 三者协作共同完成对 SFC 的处理，使用时需要用户同时注册 Normal Loader 和 Plugin，如：
 
 ```js
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   module: {
     rules: [
       {
         test: /.vue$/,
-        use: [{ loader: "vue-loader" }],
+        use: [{ loader: 'vue-loader' }]
       }
-    ],
+    ]
   },
-  plugins: [
-    new VueLoaderPlugin()
-  ],
-};
+  plugins: [new VueLoaderPlugin()]
+}
 ```
 
 `vue-loader` 运行过程大致上可以划分为两个阶段：
@@ -387,7 +385,7 @@ module.exports = {
 
 ```js
 class VueLoaderPlugin {
-  apply (compiler) {
+  apply(compiler) {
     // ...
 
     const rules = compiler.options.module.rules
@@ -395,7 +393,7 @@ class VueLoaderPlugin {
 
     const clonedRules = rules
       .filter(r => r !== rawVueRules)
-      .map((rawRule) => cloneRule(rawRule, refs))
+      .map(rawRule => cloneRule(rawRule, refs))
 
     // ...
 
@@ -404,7 +402,9 @@ class VueLoaderPlugin {
     const pitcher = {
       loader: require.resolve('./loaders/pitcher'),
       resourceQuery: query => {
-        if (!query) { return false }
+        if (!query) {
+          return false
+        }
         const parsed = qs.parse(query.slice(1))
         return parsed.vue != null
       }
@@ -412,16 +412,12 @@ class VueLoaderPlugin {
     }
 
     // replace original rules
-    compiler.options.module.rules = [
-      pitcher,
-      ...clonedRules,
-      ...rules
-    ]
+    compiler.options.module.rules = [pitcher, ...clonedRules, ...rules]
   }
 }
 
-function cloneRule (rawRule, refs) {
-    // ...
+function cloneRule(rawRule, refs) {
+  // ...
 }
 
 module.exports = VueLoaderPlugin
@@ -443,29 +439,29 @@ module.exports = {
     rules: [
       {
         test: /.vue$/i,
-        use: [{ loader: "vue-loader" }],
+        use: [{ loader: 'vue-loader' }]
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.js$/i,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: [["@babel/preset-env", { targets: "defaults" }]],
-          },
-        },
-      },
-    ],
+            presets: [['@babel/preset-env', { targets: 'defaults' }]]
+          }
+        }
+      }
+    ]
   },
   plugins: [
     new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({ filename: "[name].css" }),
-  ],
-};
+    new MiniCssExtractPlugin({ filename: '[name].css' })
+  ]
+}
 ```
 
 这里定义了三个 rule，分别对应 vue、js、css 文件。经过 plugin 转换之后的结果大概为：
@@ -475,19 +471,19 @@ module.exports = {
   module: {
     rules: [
       {
-        loader: "/node_modules/vue-loader/lib/loaders/pitcher.js",
+        loader: '/node_modules/vue-loader/lib/loaders/pitcher.js',
         resourceQuery: () => {},
-        options: {},
+        options: {}
       },
       {
         resource: () => {},
         resourceQuery: () => {},
         use: [
           {
-            loader: "/node_modules/mini-css-extract-plugin/dist/loader.js",
+            loader: '/node_modules/mini-css-extract-plugin/dist/loader.js'
           },
-          { loader: "css-loader" },
-        ],
+          { loader: 'css-loader' }
+        ]
       },
       {
         resource: () => {},
@@ -495,45 +491,45 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
-              presets: [["@babel/preset-env", { targets: "defaults" }]],
+              presets: [['@babel/preset-env', { targets: 'defaults' }]]
             },
-            ident: "clonedRuleSet-2[0].rules[0].use",
-          },
-        ],
+            ident: 'clonedRuleSet-2[0].rules[0].use'
+          }
+        ]
       },
       {
         test: /\.vue$/i,
         use: [
-          { loader: "vue-loader", options: {}, ident: "vue-loader-options" },
-        ],
+          { loader: 'vue-loader', options: {}, ident: 'vue-loader-options' }
+        ]
       },
       {
         test: /\.css$/i,
         use: [
           {
-            loader: "/node_modules/mini-css-extract-plugin/dist/loader.js",
+            loader: '/node_modules/mini-css-extract-plugin/dist/loader.js'
           },
-          { loader: "css-loader" },
-        ],
+          { loader: 'css-loader' }
+        ]
       },
       {
         test: /\.vue$/i,
         exclude: /node_modules/,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
-              presets: [["@babel/preset-env", { targets: "defaults" }]],
+              presets: [['@babel/preset-env', { targets: 'defaults' }]]
             },
-            ident: "clonedRuleSet-2[0].rules[0].use",
-          },
-        ],
-      },
-    ],
-  },
-};
+            ident: 'clonedRuleSet-2[0].rules[0].use'
+          }
+        ]
+      }
+    ]
+  }
+}
 ```
 
 转换之后生成6个rule，按定义的顺序分别为：
@@ -548,54 +544,63 @@ module.exports = {
 可以看到，第2、3项是从开发者提供的配置中复制过来的，内容相似，只是 `cloneRule` 在复制过程会给这些规则重新定义 `resourceQuery` 函数：
 
 ```js
-function cloneRule (rawRule, refs) {
-    const rules = ruleSetCompiler.compileRules(`clonedRuleSet-${++uid}`, [{
-      rules: [rawRule]
-    }], refs)
-  
-    const conditions = rules[0].rules
-      .map(rule => rule.conditions)
-      // shallow flat
-      .reduce((prev, next) => prev.concat(next), [])
-
-    // ...
-  
-    const res = Object.assign({}, rawRule, {
-      resource: resources => {
-        currentResource = resources
-        return true
-      },
-      resourceQuery: query => {
-        if (!query) { return false }
-        const parsed = qs.parse(query.slice(1))
-        if (parsed.vue == null) {
-          return false
-        }
-        if (!conditions) {
-          return false
-        }
-        // 用import路径的lang参数测试是否适用于当前rule
-        const fakeResourcePath = `${currentResource}.${parsed.lang}`
-        for (const condition of conditions) {
-          // add support for resourceQuery
-          const request = condition.property === 'resourceQuery' ? query : fakeResourcePath
-          if (condition && !condition.fn(request)) {
-            return false
-          }
-        }
-        return true
+function cloneRule(rawRule, refs) {
+  const rules = ruleSetCompiler.compileRules(
+    `clonedRuleSet-${++uid}`,
+    [
+      {
+        rules: [rawRule]
       }
-    })
-    // ...
-  
-    return res
-  }
+    ],
+    refs
+  )
+
+  const conditions = rules[0].rules
+    .map(rule => rule.conditions)
+    // shallow flat
+    .reduce((prev, next) => prev.concat(next), [])
+
+  // ...
+
+  const res = Object.assign({}, rawRule, {
+    resource: resources => {
+      currentResource = resources
+      return true
+    },
+    resourceQuery: query => {
+      if (!query) {
+        return false
+      }
+      const parsed = qs.parse(query.slice(1))
+      if (parsed.vue == null) {
+        return false
+      }
+      if (!conditions) {
+        return false
+      }
+      // 用import路径的lang参数测试是否适用于当前rule
+      const fakeResourcePath = `${currentResource}.${parsed.lang}`
+      for (const condition of conditions) {
+        // add support for resourceQuery
+        const request =
+          condition.property === 'resourceQuery' ? query : fakeResourcePath
+        if (condition && !condition.fn(request)) {
+          return false
+        }
+      }
+      return true
+    }
+  })
+  // ...
+
+  return res
+}
 ```
 
 `cloneRule` 内部定义的 `resourceQuery` 函数对应 [module.rules.resourceQuery](https://link.juejin.cn/?target=https%3A%2F%2Fwebpack.js.org%2Fconfiguration%2Fmodule%2F%23ruleresourcequery) 配置项，与我们经常用的 `test` 差不多，都用于判断资源路径是否适用这个rule。这里 `resourceQuery` 核心逻辑就是取出路径中的lang参数，伪造一个以 `lang` 结尾的路径，传入rule的condition中测试路径名对该rule是否生效，例如下面这种会命中 `/\.js$/i` 规则：
 
 ```js
-import script from "./index.vue?vue&type=script&lang=js&"
+import script from './index.vue?vue&type=script&lang=js&'
 ```
 
 `vue-loader` 正是基于这一规则，为不同内容块 (css/js/template) 匹配、复用用户所提供的 rule 设置。
@@ -616,18 +621,22 @@ import script from "./index.vue?vue&type=script&lang=js&"
 
 ```js
 // 原始代码
-import xx from './index.vue';
+import xx from './index.vue'
 // 第一步，命中 vue-loader，转换为：
-import { render, staticRenderFns } from "./index.vue?vue&type=template&id=2964abc9&scoped=true&"
-import script from "./index.vue?vue&type=script&lang=js&"
-export * from "./index.vue?vue&type=script&lang=js&"
-import style0 from "./index.vue?vue&type=style&index=0&id=2964abc9&scoped=true&lang=css&"
+import {
+  render,
+  staticRenderFns
+} from './index.vue?vue&type=template&id=2964abc9&scoped=true&'
+import script from './index.vue?vue&type=script&lang=js&'
+export * from './index.vue?vue&type=script&lang=js&'
+import style0 from './index.vue?vue&type=style&index=0&id=2964abc9&scoped=true&lang=css&'
 
 // 第二步，命中 pitcher，转换为：
-export * from "-!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=template&id=2964abc9&scoped=true&"
-import mod from "-!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-2[0].rules[0].use!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=script&lang=js&"; 
-export default mod; export * from "-!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-2[0].rules[0].use!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=script&lang=js&"
-export * from "-!../../node_modules/mini-css-extract-plugin/dist/loader.js!../../node_modules/css-loader/dist/cjs.js!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=style&index=0&id=2964abc9&scoped=true&lang=css&"
+export * from '-!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=template&id=2964abc9&scoped=true&'
+import mod from '-!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-2[0].rules[0].use!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=script&lang=js&'
+export default mod
+export * from '-!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-2[0].rules[0].use!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=script&lang=js&'
+export * from '-!../../node_modules/mini-css-extract-plugin/dist/loader.js!../../node_modules/css-loader/dist/cjs.js!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=style&index=0&id=2964abc9&scoped=true&lang=css&'
 
 // 第三步，根据行内路径规则按序调用loader
 ```
@@ -688,7 +697,7 @@ var component = normalizer(
   null,
   "2964abc9",
   null
-  
+
 )
 
 ...
@@ -711,7 +720,9 @@ export default component.exports
 const pitcher = {
   loader: require.resolve('./loaders/pitcher'),
   resourceQuery: query => {
-    if (!query) { return false }
+    if (!query) {
+      return false
+    }
     const parsed = qs.parse(query.slice(1))
     return parsed.vue != null
   }
@@ -762,7 +773,7 @@ module.exports.pitch = function (remainingRequest) {
   }
 
   const genRequest = loaders => {
-    ... 
+    ...
   }
 
   // Inject style-post-loader before css-loader for scoped CSS and trimming
@@ -801,9 +812,9 @@ module.exports.pitch = function (remainingRequest) {
 // 开发代码：
 import xx from 'index.vue'
 // 第一步，通过vue-loader转换成带参数的路径
-import script from "./index.vue?vue&type=script&lang=js&"
+import script from './index.vue?vue&type=script&lang=js&'
 // 第二步，在 pitcher 中解读loader数组的配置，并将路径转换成完整的行内路径格式
-import mod from "-!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-2[0].rules[0].use!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=script&lang=js&";
+import mod from '-!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-2[0].rules[0].use!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=script&lang=js&'
 ```
 
 > 第二次执行vue-loader
@@ -811,7 +822,7 @@ import mod from "-!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-2
 通过上面 `vue-loader` -> Pitch Loader 处理后，会得到一个新的行内路径，例如：
 
 ```js
-import mod from "-!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-2[0].rules[0].use!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=script&lang=js&";
+import mod from '-!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-2[0].rules[0].use!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=script&lang=js&'
 ```
 
 以这个 import 语句为例，之后 Webpack 会按照下述逻辑运行：
@@ -832,8 +843,8 @@ module.exports = function (source) {
     sourceMap,
     rootContext,
     resourcePath,
-    resourceQuery = "",
-  } = loaderContext;
+    resourceQuery = ''
+  } = loaderContext
   // ...
 
   const descriptor = parse({
@@ -841,8 +852,8 @@ module.exports = function (source) {
     compiler: options.compiler || loadTemplateCompiler(loaderContext),
     filename,
     sourceRoot,
-    needMap: sourceMap,
-  });
+    needMap: sourceMap
+  })
 
   // if the query has a type field, this is a language block request
   // e.g. foo.vue?type=template&id=xxxxx
@@ -853,19 +864,19 @@ module.exports = function (source) {
       loaderContext,
       incomingQuery,
       !!options.appendExtension
-    );
+    )
   }
   //...
-  return code;
-};
+  return code
+}
 
-module.exports.VueLoaderPlugin = plugin;
+module.exports.VueLoaderPlugin = plugin
 ```
 
 第二次运行时由于路径已经带上了 `type` 参数，会命中上面第26行的判断语句，进入 `selectBlock` 函数，这个函数的逻辑很简单：
 
 ```js
-module.exports = function selectBlock (
+module.exports = function selectBlock(
   descriptor,
   loaderContext,
   query,
@@ -903,22 +914,14 @@ module.exports = function selectBlock (
     if (appendExtension) {
       loaderContext.resourcePath += '.' + (style.lang || 'css')
     }
-    loaderContext.callback(
-      null,
-      style.content,
-      style.map
-    )
+    loaderContext.callback(null, style.content, style.map)
     return
   }
 
   // custom
   if (query.type === 'custom' && query.index != null) {
     const block = descriptor.customBlocks[query.index]
-    loaderContext.callback(
-      null,
-      block.content,
-      block.map
-    )
+    loaderContext.callback(null, block.content, block.map)
     return
   }
 }

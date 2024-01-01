@@ -22,17 +22,13 @@ Sourcemap 最初版本生成的 `.map` 文件非常大，体积大概为编译�
 
 ```json
 {
-    "version": 3,
-    "sources": [
-        "webpack:///./src/index.js"
-    ],
-    "names": ["name", "console", "log"],
-    "mappings": ";;;;;AAAA,IAAMA,IAAI,GAAG,QAAb;AAEAC,OAAO,CAACC,GAAR,CAAYF,IAAZ,E",
-    "file": "main.js",
-    "sourcesContent": [
-        "const name = 'tecvan';\n\nconsole.log(name)"
-    ],
-    "sourceRoot": ""
+  "version": 3,
+  "sources": ["webpack:///./src/index.js"],
+  "names": ["name", "console", "log"],
+  "mappings": ";;;;;AAAA,IAAMA,IAAI,GAAG,QAAb;AAEAC,OAAO,CAACC,GAAR,CAAYF,IAAZ,E",
+  "file": "main.js",
+  "sourcesContent": ["const name = 'tecvan';\n\nconsole.log(name)"],
+  "sourceRoot": ""
 }
 ```
 
@@ -50,11 +46,9 @@ Sourcemap 最初版本生成的 `.map` 文件非常大，体积大概为编译�
 
 举个例子，对于下面的代码：
 
-| 编译前                                       | 编译后                                                       |
-| -------------------------------------------- | ------------------------------------------------------------ |
+| 编译前                                       | 编译后                                                                                                                                                                                                                                             |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `const name = 'tecvan';  console.log(name) ` | `/******/ (() => { // webpackBootstrap var __webpack_exports__ = {}; /*!**********************!*\   !*** ./src/index.js ***!   \**********************/ var name = 'tecvan'; console.log(name); /******/ })() ; //# sourceMappingURL=main.js.map ` |
-
-
 
 当 `devtool = 'source-map'` 时，Webpack 生成的 `mappings` 字段为：
 
@@ -67,11 +61,15 @@ Sourcemap 最初版本生成的 `.map` 文件非常大，体积大概为编译�
 - 以 `;` 分割的**行映射**，每一个 `;` 对应编译产物每一行到源码的映射，上例经过分割后：
 
 ```js
-[
+;[
   // 产物第 1-5 行内容为 Webpack 生成的 runtime，不需要记录映射关系
-  '', '', '', '', '', 
+  '',
+  '',
+  '',
+  '',
+  '',
   // 产物第 6 行的映射信息
-  'AAAA,IAAMA,IAAI,GAAG,QAAb', 
+  'AAAA,IAAMA,IAAI,GAAG,QAAb',
   // 产物第 7 行的映射信息
   'AAEAC,OAAO,CAACC,GAAR,CAAYF,IAAZ,E'
 ]
@@ -80,17 +78,24 @@ Sourcemap 最初版本生成的 `.map` 文件非常大，体积大概为编译�
 - 以 `,` 分割的**片段映射**，每一个 `,` 对应该行中每一个代码片段到源码的映射，上例经过分割后：
 
 ```js
-[
+;[
   // 产物第 1-5 行内容为 Webpack 生成的 runtime，不需要记录映射关系
-  '', '', '', '', '', 
+  '',
+  '',
+  '',
+  '',
+  '',
   // 产物第 6 行的映射信息
   [
     // 片段 `var` 到 `const` 的映射
-    'AAAA', 
+    'AAAA',
     // 片段 `name` 到 `name` 的映射
-    'IAAMA', 
+    'IAAMA',
     // 等等
-    'IAAI', 'GAAG', 'QAAb'], 
+    'IAAI',
+    'GAAG',
+    'QAAb'
+  ],
   // 产物第 7 行的映射信息
   ['AAEAC', 'OAAO', 'CAACC', 'GAAR', 'CAAYF', 'IAAZ', 'E']
 ]
@@ -98,13 +103,9 @@ Sourcemap 最初版本生成的 `.map` 文件非常大，体积大概为编译�
 
 - 第三层逻辑为片段映射到源码的具体位置，以上例
 
-   
-
   ```
   IAAMA
   ```
-
-   
 
   为例：
 
@@ -164,11 +165,9 @@ Sourcemap 最初版本生成的 `.map` 文件非常大，体积大概为编译�
 
 结合 VLQ 编码规则，我们再回过头来解读本章开头的例子，对于代码：
 
-| 编译前                                       | 编译后                                                       |
-| -------------------------------------------- | ------------------------------------------------------------ |
+| 编译前                                       | 编译后                                                                                                                                                                                                                                             |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `const name = 'tecvan';  console.log(name) ` | `/******/ (() => { // webpackBootstrap var __webpack_exports__ = {}; /*!**********************!*\   !*** ./src/index.js ***!   \**********************/ var name = 'tecvan'; console.log(name); /******/ })() ; //# sourceMappingURL=main.js.map ` |
-
-
 
 编译生成 `mappings`：
 
@@ -181,9 +180,9 @@ Sourcemap 最初版本生成的 `.map` 文件非常大，体积大概为编译�
 ```csharp
 [
   // 产物第 1-5 行内容为 Webpack 生成的 runtime，不需要记录映射关系
-  '', '', '', '', '', 
+  '', '', '', '', '',
   // 产物第 6 行的映射信息
-  ['AAAA', 'IAAMA', 'IAAI', 'GAAG', 'QAAb'], 
+  ['AAAA', 'IAAMA', 'IAAI', 'GAAG', 'QAAb'],
   // 产物第 7 行的映射信息
   ['AAEAC', 'OAAO', 'CAACC', 'GAAR', 'CAAYF', 'IAAZ', 'E']
 ]
@@ -202,36 +201,34 @@ Webpack 提供了两种设置 Sourcemap 的方式，一是通过 `devtool` 配�
 
 [devtool](https://link.juejin.cn/?target=https%3A%2F%2Fwebpack.js.org%2Fconfiguration%2Fdevtool%2F) 支持 25 种字符串枚举值，包括 `eval`、`source-map`、`eval-source-map` 等：
 
-| devtool                                  | performance                     | production | quality        | comment                                                      |
-| ---------------------------------------- | ------------------------------- | ---------- | -------------- | ------------------------------------------------------------ |
-| (none)                                   | build: fastest rebuild: fastest | yes        | bundle         | Recommended choice for production builds with maximum performance. |
-| eval                                     | build: fast rebuild: fastest    | no         | generated      | Recommended choice for development builds with maximum performance. |
-| eval-cheap-source-map                    | build: ok rebuild: fast         | no         | transformed    | Tradeoff choice for development builds.                      |
-| eval-cheap-module-source-map             | build: slow rebuild: fast       | no         | original lines | Tradeoff choice for development builds.                      |
-| eval-source-map                          | build: slowest rebuild: ok      | no         | original       | Recommended choice for development builds with high quality SourceMaps. |
-| cheap-source-map                         | build: ok rebuild: slow         | no         | transformed    |                                                              |
-| cheap-module-source-map                  | build: slow rebuild: slow       | no         | original lines |                                                              |
-| source-map                               | build: slowest rebuild: slowest | yes        | original       | Recommended choice for production builds with high quality SourceMaps. |
-| inline-cheap-source-map                  | build: ok rebuild: slow         | no         | transformed    |                                                              |
-| inline-cheap-module-source-map           | build: slow rebuild: slow       | no         | original lines |                                                              |
-| inline-source-map                        | build: slowest rebuild: slowest | no         | original       | Possible choice when publishing a single file                |
-| eval-nosources-cheap-source-map          | build: ok rebuild: fast         | no         | transformed    | source code not included                                     |
-| eval-nosources-cheap-module-source-map   | build: slow rebuild: fast       | no         | original lines | source code not included                                     |
-| eval-nosources-source-map                | build: slowest rebuild: ok      | no         | original       | source code not included                                     |
-| inline-nosources-cheap-source-map        | build: ok rebuild: slow         | no         | transformed    | source code not included                                     |
-| inline-nosources-cheap-module-source-map | build: slow rebuild: slow       | no         | original lines | source code not included                                     |
-| inline-nosources-source-map              | build: slowest rebuild: slowest | no         | original       | source code not included                                     |
-| nosources-cheap-source-map               | build: ok rebuild: slow         | no         | transformed    | source code not included                                     |
-| nosources-cheap-module-source-map        | build: slow rebuild: slow       | no         | original lines | source code not included                                     |
-| nosources-source-map                     | build: slowest rebuild: slowest | yes        | original       | source code not included                                     |
-| hidden-nosources-cheap-source-map        | build: ok rebuild: slow         | no         | transformed    | no reference, source code not included                       |
-| hidden-nosources-cheap-module-source-map | build: slow rebuild: slow       | no         | original lines | no reference, source code not included                       |
-| hidden-nosources-source-map              | build: slowest rebuild: slowest | yes        | original       | no reference, source code not included                       |
-| hidden-cheap-source-map                  | build: ok rebuild: slow         | no         | transformed    | no reference                                                 |
-| hidden-cheap-module-source-map           | build: slow rebuild: slow       | no         | original lines | no reference                                                 |
+| devtool                                  | performance                     | production | quality        | comment                                                                               |
+| ---------------------------------------- | ------------------------------- | ---------- | -------------- | ------------------------------------------------------------------------------------- |
+| (none)                                   | build: fastest rebuild: fastest | yes        | bundle         | Recommended choice for production builds with maximum performance.                    |
+| eval                                     | build: fast rebuild: fastest    | no         | generated      | Recommended choice for development builds with maximum performance.                   |
+| eval-cheap-source-map                    | build: ok rebuild: fast         | no         | transformed    | Tradeoff choice for development builds.                                               |
+| eval-cheap-module-source-map             | build: slow rebuild: fast       | no         | original lines | Tradeoff choice for development builds.                                               |
+| eval-source-map                          | build: slowest rebuild: ok      | no         | original       | Recommended choice for development builds with high quality SourceMaps.               |
+| cheap-source-map                         | build: ok rebuild: slow         | no         | transformed    |                                                                                       |
+| cheap-module-source-map                  | build: slow rebuild: slow       | no         | original lines |                                                                                       |
+| source-map                               | build: slowest rebuild: slowest | yes        | original       | Recommended choice for production builds with high quality SourceMaps.                |
+| inline-cheap-source-map                  | build: ok rebuild: slow         | no         | transformed    |                                                                                       |
+| inline-cheap-module-source-map           | build: slow rebuild: slow       | no         | original lines |                                                                                       |
+| inline-source-map                        | build: slowest rebuild: slowest | no         | original       | Possible choice when publishing a single file                                         |
+| eval-nosources-cheap-source-map          | build: ok rebuild: fast         | no         | transformed    | source code not included                                                              |
+| eval-nosources-cheap-module-source-map   | build: slow rebuild: fast       | no         | original lines | source code not included                                                              |
+| eval-nosources-source-map                | build: slowest rebuild: ok      | no         | original       | source code not included                                                              |
+| inline-nosources-cheap-source-map        | build: ok rebuild: slow         | no         | transformed    | source code not included                                                              |
+| inline-nosources-cheap-module-source-map | build: slow rebuild: slow       | no         | original lines | source code not included                                                              |
+| inline-nosources-source-map              | build: slowest rebuild: slowest | no         | original       | source code not included                                                              |
+| nosources-cheap-source-map               | build: ok rebuild: slow         | no         | transformed    | source code not included                                                              |
+| nosources-cheap-module-source-map        | build: slow rebuild: slow       | no         | original lines | source code not included                                                              |
+| nosources-source-map                     | build: slowest rebuild: slowest | yes        | original       | source code not included                                                              |
+| hidden-nosources-cheap-source-map        | build: ok rebuild: slow         | no         | transformed    | no reference, source code not included                                                |
+| hidden-nosources-cheap-module-source-map | build: slow rebuild: slow       | no         | original lines | no reference, source code not included                                                |
+| hidden-nosources-source-map              | build: slowest rebuild: slowest | yes        | original       | no reference, source code not included                                                |
+| hidden-cheap-source-map                  | build: ok rebuild: slow         | no         | transformed    | no reference                                                                          |
+| hidden-cheap-module-source-map           | build: slow rebuild: slow       | no         | original lines | no reference                                                                          |
 | hidden-source-map                        | build: slowest rebuild: slowest | yes        | original       | no reference. Possible choice when using SourceMap only for error reporting purposes. |
-
-
 
 > 提示：内容摘抄自 Webpack [官网](https://link.juejin.cn/?target=https%3A%2F%2Fwebpack.js.org%2Fconfiguration%2Fdevtool%2F)。
 
@@ -249,20 +246,13 @@ eval("var foo = 'bar'\n\n\n//# sourceURL=webpack:///./src/index.ts?")
 
 ```json
 {
-    "version": 3,
-    "sources": [
-        "webpack:///./src/index.ts"
-    ],
-    "names": [
-        "console",
-        "log"
-    ],
-    "mappings": "AACAA,QAAQC,IADI",
-    "file": "bundle.js",
-    "sourcesContent": [
-        "const foo = 'bar';\nconsole.log(foo);"
-    ],
-    "sourceRoot": ""
+  "version": 3,
+  "sources": ["webpack:///./src/index.ts"],
+  "names": ["console", "log"],
+  "mappings": "AACAA,QAAQC,IADI",
+  "file": "bundle.js",
+  "sourcesContent": ["const foo = 'bar';\nconsole.log(foo);"],
+  "sourceRoot": ""
 }
 ```
 
@@ -304,17 +294,12 @@ eval("var foo = 'bar'\n\n\n//# sourceURL=webpack:///./src/index.ts?")
 
 ```json
 {
-    "version": 3,
-    "sources": [
-        "webpack:///./src/index.ts"
-    ],
-    "names": [
-        "console",
-        "log"
-    ],
-    "mappings": "AACAA,QAAQC,IADI",
-    "file": "bundle.js",
-    "sourceRoot": ""
+  "version": 3,
+  "sources": ["webpack:///./src/index.ts"],
+  "names": ["console", "log"],
+  "mappings": "AACAA,QAAQC,IADI",
+  "file": "bundle.js",
+  "sourceRoot": ""
 }
 ```
 
@@ -331,11 +316,9 @@ console.log("bar");
 
 1. **`hidden` 关键字**：通常，产物中必须携带 `//# sourceMappingURL=` 指令，浏览器才能正确找到 Sourcemap 文件，当 `devtool` 包含 `hidden` 时，编译产物中不包含 `//# sourceMappingURL=` 指令。例如：
 
-| `devtool = 'hidden-source-map'`                              | `devtool = 'source-map'`                                     |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `devtool = 'hidden-source-map'`                                                                                                                                                                                           | `devtool = 'source-map'`                                                                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `/******/ (() => { // webpackBootstrap var __webpack_exports__ = {}; /*!**********************!*\   !*** ./src/index.ts ***!   \**********************/ var Person = /** @class */ (function () { }());  /******/ })(); ` | `/******/ (() => { // webpackBootstrap var __webpack_exports__ = {}; /*!**********************!*\   !*** ./src/index.ts ***!   \**********************/ var Person = /** @class */ (function () { }());  /******/ })(); //# sourceMappingURL=bundle.js.map ` |
-
-
 
 两者区别仅在于编译产物最后一行的 `//# sourceMappingURL=` 指令，当你需要 Sourcemap 功能，又不希望浏览器 Devtool 工具自动加载时，可使用此选项。需要打开 Sourcemap 时，可在浏览器中手动加载：
 
@@ -370,14 +353,16 @@ console.log("bar");
 使用方法与其它插件无异，如：
 
 ```js
-const webpack = require('webpack');
+const webpack = require('webpack')
 module.exports = {
   // ...
   devtool: false,
-  plugins: [new webpack.SourceMapDevToolPlugin({
+  plugins: [
+    new webpack.SourceMapDevToolPlugin({
       exclude: ['vendor.js']
-  })],
-};
+    })
+  ]
+}
 ```
 
 插件配置规则较简单，此处不赘述。

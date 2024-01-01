@@ -6,7 +6,7 @@
 
 ```html
 <script type="module">
-  import lodash from "https://cdn.skypack.dev/lodash";
+  import lodash from 'https://cdn.skypack.dev/lodash'
 </script>
 ```
 
@@ -15,7 +15,7 @@
 node 环境下可以依赖文件系统层层查找
 
 ```js
-import lodash from "lodash";
+import lodash from 'lodash'
 ```
 
 ```shell
@@ -43,9 +43,9 @@ import lodash from "lodash";
 
 ```html
 <script type="module">
-  import data from "./data.json" assert { type: "json" };
+  import data from './data.json' assert { type: 'json' }
 
-  console.log(data);
+  console.log(data)
 </script>
 ```
 
@@ -63,22 +63,22 @@ import lodash from "lodash";
 
 ```js
 // Named export/import
-export { sum };
-import { sum } from "sum";
+export { sum }
+import { sum } from 'sum'
 
 // Default export/import
-export default sum;
-import sum from "sum";
+export default sum
+import sum from 'sum'
 ```
 
 2. `CommonJS` 仅支持一种方式
 
 ```js
-exports.a = 3;
+exports.a = 3
 // 等价于
-module.exports;
+module.exports
 
-module.exports = sum;
+module.exports = sum
 ```
 
 ## CommonJS 转 ESM
@@ -87,12 +87,12 @@ module.exports = sum;
 
 ```js
 // Input:  index.cjs
-exports.a = 3;
+exports.a = 3
 
 // Output: index.mjs
 // 此处既要转化为默认导出，又要转化为具名导出！
-export const a = 3;
-export default { a };
+export const a = 3
+export default { a }
 ```
 
 ### 复杂转换
@@ -105,8 +105,8 @@ export default { a };
 
 ```js
 Promise.resolve().then(() => {
-  exports.sum = 100;
-});
+  exports.sum = 100
+})
 ```
 
 ### 转换工具

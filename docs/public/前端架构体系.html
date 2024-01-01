@@ -1,40 +1,185 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Markmap</title>
-<style>
-* {
-  margin: 0;
-  padding: 0;
-}
-#mindmap {
-  display: block;
-  width: 100vw;
-  height: 100vh;
-}
-</style>
-<link rel="stylesheet" href="https://unpkg.com/markmap-toolbar@0.15.3/dist/style.css">
-</head>
-<body>
-<svg id="mindmap"></svg>
-<script src="https://unpkg.com/d3@7.8.5/dist/d3.min.js"></script><script src="https://unpkg.com/markmap-view@0.15.3/dist/browser/index.js"></script><script src="https://unpkg.com/markmap-toolbar@0.15.3/dist/index.js"></script><script>(r => {
-                setTimeout(r);
-              })(() => {
-  const {
-    markmap,
-    mm
-  } = window;
-  const {
-    el
-  } = markmap.Toolbar.create(mm);
-  el.setAttribute('style', 'position:absolute;bottom:20px;right:20px');
-  document.body.append(el);
-})</script><script>((getMarkmap, getOptions, root, jsonOptions) => {
-          const markmap = getMarkmap();
-          window.mm = markmap.Markmap.create('svg#mindmap', (getOptions || markmap.deriveOptions)(jsonOptions), root);
-        })(() => window.markmap,null,{"type":"heading","depth":0,"payload":{"lines":[0,1]},"content":"前端架构体系","children":[{"type":"heading","depth":1,"payload":{"lines":[2,3]},"content":"通用组件库开发","children":[{"type":"heading","depth":2,"payload":{"lines":[4,5]},"content":"CSS 企业应用方案","children":[]},{"type":"heading","depth":2,"payload":{"lines":[6,7]},"content":"主题切换","children":[]},{"type":"heading","depth":2,"payload":{"lines":[8,9]},"content":"国际化","children":[]}]},{"type":"heading","depth":1,"payload":{"lines":[10,11]},"content":"工程化","children":[{"type":"heading","depth":2,"payload":{"lines":[12,13]},"content":"前端工具链","children":[]},{"type":"heading","depth":2,"payload":{"lines":[14,15]},"content":"rollup","children":[]},{"type":"heading","depth":2,"payload":{"lines":[16,17]},"content":"企业包管理方案","children":[]},{"type":"heading","depth":2,"payload":{"lines":[18,19]},"content":"服务监控","children":[]},{"type":"heading","depth":2,"payload":{"lines":[20,21]},"content":"自定义脚手架","children":[]},{"type":"heading","depth":2,"payload":{"lines":[22,23]},"content":"vite 深度剖析","children":[{"type":"heading","depth":3,"payload":{"lines":[24,25]},"content":"esbuild","children":[]}]}]},{"type":"heading","depth":1,"payload":{"lines":[26,27]},"content":"源码解析","children":[{"type":"heading","depth":2,"payload":{"lines":[28,29]},"content":"React 源码","children":[]},{"type":"heading","depth":2,"payload":{"lines":[30,31]},"content":"Vue 源码","children":[]},{"type":"heading","depth":2,"payload":{"lines":[32,33]},"content":"vue-router 源码","children":[]},{"type":"heading","depth":2,"payload":{"lines":[34,35]},"content":"pinia 源码","children":[]}]}]},{})</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Markmap</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #mindmap {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/markmap-toolbar@0.15.3/dist/style.css"
+    />
+  </head>
+  <body>
+    <svg id="mindmap"></svg>
+    <script src="https://unpkg.com/d3@7.8.5/dist/d3.min.js"></script>
+    <script src="https://unpkg.com/markmap-view@0.15.3/dist/browser/index.js"></script>
+    <script src="https://unpkg.com/markmap-toolbar@0.15.3/dist/index.js"></script>
+    <script>
+      ;(r => {
+        setTimeout(r)
+      })(() => {
+        const { markmap, mm } = window
+        const { el } = markmap.Toolbar.create(mm)
+        el.setAttribute('style', 'position:absolute;bottom:20px;right:20px')
+        document.body.append(el)
+      })
+    </script>
+    <script>
+      ;((getMarkmap, getOptions, root, jsonOptions) => {
+        const markmap = getMarkmap()
+        window.mm = markmap.Markmap.create(
+          'svg#mindmap',
+          (getOptions || markmap.deriveOptions)(jsonOptions),
+          root
+        )
+      })(
+        () => window.markmap,
+        null,
+        {
+          type: 'heading',
+          depth: 0,
+          payload: { lines: [0, 1] },
+          content: '前端架构体系',
+          children: [
+            {
+              type: 'heading',
+              depth: 1,
+              payload: { lines: [2, 3] },
+              content: '通用组件库开发',
+              children: [
+                {
+                  type: 'heading',
+                  depth: 2,
+                  payload: { lines: [4, 5] },
+                  content: 'CSS 企业应用方案',
+                  children: []
+                },
+                {
+                  type: 'heading',
+                  depth: 2,
+                  payload: { lines: [6, 7] },
+                  content: '主题切换',
+                  children: []
+                },
+                {
+                  type: 'heading',
+                  depth: 2,
+                  payload: { lines: [8, 9] },
+                  content: '国际化',
+                  children: []
+                }
+              ]
+            },
+            {
+              type: 'heading',
+              depth: 1,
+              payload: { lines: [10, 11] },
+              content: '工程化',
+              children: [
+                {
+                  type: 'heading',
+                  depth: 2,
+                  payload: { lines: [12, 13] },
+                  content: '前端工具链',
+                  children: []
+                },
+                {
+                  type: 'heading',
+                  depth: 2,
+                  payload: { lines: [14, 15] },
+                  content: 'rollup',
+                  children: []
+                },
+                {
+                  type: 'heading',
+                  depth: 2,
+                  payload: { lines: [16, 17] },
+                  content: '企业包管理方案',
+                  children: []
+                },
+                {
+                  type: 'heading',
+                  depth: 2,
+                  payload: { lines: [18, 19] },
+                  content: '服务监控',
+                  children: []
+                },
+                {
+                  type: 'heading',
+                  depth: 2,
+                  payload: { lines: [20, 21] },
+                  content: '自定义脚手架',
+                  children: []
+                },
+                {
+                  type: 'heading',
+                  depth: 2,
+                  payload: { lines: [22, 23] },
+                  content: 'vite 深度剖析',
+                  children: [
+                    {
+                      type: 'heading',
+                      depth: 3,
+                      payload: { lines: [24, 25] },
+                      content: 'esbuild',
+                      children: []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              type: 'heading',
+              depth: 1,
+              payload: { lines: [26, 27] },
+              content: '源码解析',
+              children: [
+                {
+                  type: 'heading',
+                  depth: 2,
+                  payload: { lines: [28, 29] },
+                  content: 'React 源码',
+                  children: []
+                },
+                {
+                  type: 'heading',
+                  depth: 2,
+                  payload: { lines: [30, 31] },
+                  content: 'Vue 源码',
+                  children: []
+                },
+                {
+                  type: 'heading',
+                  depth: 2,
+                  payload: { lines: [32, 33] },
+                  content: 'vue-router 源码',
+                  children: []
+                },
+                {
+                  type: 'heading',
+                  depth: 2,
+                  payload: { lines: [34, 35] },
+                  content: 'pinia 源码',
+                  children: []
+                }
+              ]
+            }
+          ]
+        },
+        {}
+      )
+    </script>
+  </body>
 </html>

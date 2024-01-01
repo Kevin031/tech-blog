@@ -12,9 +12,9 @@ Webpack 是一种 **「配置」** 驱动的构建工具，所以站在应用的
 
 ```js
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.js'
   // 其它配置...
-};
+}
 ```
 
 实际上，Webpack 还支持以数组、函数方式配置运行参数，以适配不同场景应用需求，它们之间大致上区别：
@@ -33,14 +33,14 @@ module.exports = {
 // webpack.config.js
 module.exports = [
   {
-    entry: "./src/index.js",
+    entry: './src/index.js'
     // 其它配置...
   },
   {
-    entry: "./src/index.js",
+    entry: './src/index.js'
     // 其它配置...
-  },
-];
+  }
+]
 ```
 
 使用数组方式时，Webpack 会在启动后创建多个 `Compilation` 实例，并行执行构建工作，但需要注意，`Compilation` 实例间基本上不作通讯，这意味着这种并行构建对运行性能并没有任何正向收益，例如某个 Module 在 `Compilation` 实例 A 中完成解析、构建后，在其它 `Compilation` 中依然需要完整经历构建流程，无法直接复用结果。
@@ -52,23 +52,23 @@ module.exports = [
 module.exports = [
   {
     output: {
-      filename: "./dist-amd.js",
-      libraryTarget: "amd",
+      filename: './dist-amd.js',
+      libraryTarget: 'amd'
     },
-    name: "amd",
-    entry: "./app.js",
-    mode: "production",
+    name: 'amd',
+    entry: './app.js',
+    mode: 'production'
   },
   {
     output: {
-      filename: "./dist-commonjs.js",
-      libraryTarget: "commonjs",
+      filename: './dist-commonjs.js',
+      libraryTarget: 'commonjs'
     },
-    name: "commonjs",
-    entry: "./app.js",
-    mode: "production",
-  },
-];
+    name: 'commonjs',
+    entry: './app.js',
+    mode: 'production'
+  }
+]
 ```
 
 > 提示：使用配置数组时，还可以通过 `--config-name` 参数指定需要构建的配置对象，例如上例配置中若执行 `npx webpack --config-name='amd'`，则仅使用数组中 `name='amd'` 的项做构建。
@@ -78,31 +78,31 @@ module.exports = [
 使用数组方式时，我们还可以借助 [webpack-merge](https://link.juejin.cn/?target=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fwebpack-merge) 工具简化配置逻辑，如：
 
 ```js
-const { merge } = require("webpack-merge");
+const { merge } = require('webpack-merge')
 
 const baseConfig = {
   output: {
-    path: "./dist",
+    path: './dist'
   },
-  name: "amd",
-  entry: "./app.js",
-  mode: "production",
-};
+  name: 'amd',
+  entry: './app.js',
+  mode: 'production'
+}
 
 module.exports = [
   merge(baseConfig, {
     output: {
-      filename: "[name]-amd.js",
-      libraryTarget: "amd",
-    },
+      filename: '[name]-amd.js',
+      libraryTarget: 'amd'
+    }
   }),
   merge(baseConfig, {
     output: {
-      filename: "./[name]-commonjs.js",
-      libraryTarget: "commonjs",
-    },
-  }),
-];
+      filename: './[name]-commonjs.js',
+      libraryTarget: 'commonjs'
+    }
+  })
+]
 ```
 
 > 提示：`webpack-merge` 是 Webpack 生态内专门用于合并配置对象的工具，后面我们还会展开讲解使用方法。
@@ -117,10 +117,10 @@ module.exports = [
 module.exports = function (env, argv) {
   // ...
   return {
-    entry: "./src/index.js",
+    entry: './src/index.js'
     // 其它配置...
-  };
-};
+  }
+}
 ```
 
 运行时，Webpack 会传入两个环境参数对象：
@@ -198,7 +198,7 @@ npx webpack --config webpack.development.js
 - 支持数组属性合并，例如：
 
 ```js
-merge({ arr: [1] }, { arr: [2] }) === { arr: [1, 2] };
+merge({ arr: [1] }, { arr: [2] }) === { arr: [1, 2] }
 ```
 
 - 支持函数属性合并，例如：
@@ -207,8 +207,8 @@ merge({ arr: [1] }, { arr: [2] }) === { arr: [1, 2] };
 const res = merge(
   { func: () => console.log(1) },
   { func: () => console.log(2) }
-);
-res.func();
+)
+res.func()
 // => 1,2
 ```
 
@@ -222,25 +222,25 @@ res.func();
 
 ```js
 // webpack.common.js
-const path = require("path");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
+const path = require('path')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: { main: "./src/index.js" },
+  entry: { main: './src/index.js' },
   output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, "dist"),
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        use: ["babel-loader"],
-      },
-    ],
+        use: ['babel-loader']
+      }
+    ]
   },
-  plugins: [new HTMLWebpackPlugin()],
-};
+  plugins: [new HTMLWebpackPlugin()]
+}
 ```
 
 其次，需要安装 `webpack-merge` 做配置合并操作：
@@ -253,15 +253,15 @@ yarn add -D webpack-merge
 
 ```js
 // webpack.development.js
-const { merge } = require("webpack-merge");
-const baseConfig = require("./webpack.common");
+const { merge } = require('webpack-merge')
+const baseConfig = require('./webpack.common')
 
 // 使用 webpack-merge 合并配置对象
 module.exports = merge(baseConfig, {
-  mode: "development",
-  devtool: "source-map",
-  devServer: { hot: true },
-});
+  mode: 'development',
+  devtool: 'source-map',
+  devServer: { hot: true }
+})
 ```
 
 最后，执行构建命令并通过 `--config` 参数传入配置文件路径，如：
@@ -306,23 +306,23 @@ module.exports = {
   //...
   entry: {
     // 字符串形态
-    home: "./home.js",
+    home: './home.js',
     // 数组形态
-    shared: ["react", "react-dom", "redux", "react-redux"],
+    shared: ['react', 'react-dom', 'redux', 'react-redux'],
     // 对象形态
     personal: {
-      import: "./personal.js",
-      filename: "pages/personal.js",
-      dependOn: "shared",
-      chunkLoading: "jsonp",
-      asyncChunks: true,
+      import: './personal.js',
+      filename: 'pages/personal.js',
+      dependOn: 'shared',
+      chunkLoading: 'jsonp',
+      asyncChunks: true
     },
     // 函数形态
     admin: function () {
-      return "./admin.js";
-    },
-  },
-};
+      return './admin.js'
+    }
+  }
+}
 ```
 
 这其中，**「对象」** 形态的配置逻辑最为复杂，支持如下配置属性：
@@ -346,10 +346,10 @@ module.exports = {
 module.exports = {
   // ...
   entry: {
-    main: "./src/index.js",
-    foo: { import: "./src/foo.js", dependOn: "main" },
-  },
-};
+    main: './src/index.js',
+    foo: { import: './src/foo.js', dependOn: 'main' }
+  }
+}
 ```
 
 > 提示：示例代码已上传到 [小册仓库](https://link.juejin.cn/?target=https%3A%2F%2Fgithub1s.com%2FTecvan-fe%2Fwebpack-book-samples%2Fblob%2Fmain%2Fentry-obj%2Fwebpack.config.js)。
@@ -377,21 +377,21 @@ module.exports = {
 不要小看运行时代码量，极端情况下甚至有可能超过业务代码总量！为此，必要时我们可以尝试使用 [runtime](https://link.juejin.cn/?target=https%3A%2F%2Fwebpack.js.org%2Fconcepts%2Fentry-points%2F%23entrydescription-object) 配置将运行时抽离为独立 Bundle，例如：
 
 ```js
-const path = require("path");
+const path = require('path')
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
   devtool: false,
   entry: {
-    main: { import: "./src/index.js", runtime: "common-runtime" },
-    foo: { import: "./src/foo.js", runtime: "common-runtime" },
+    main: { import: './src/index.js', runtime: 'common-runtime' },
+    foo: { import: './src/foo.js', runtime: 'common-runtime' }
   },
   output: {
     clean: true,
-    filename: "[name].js",
-    path: path.resolve(__dirname, "dist"),
-  },
-};
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
+  }
+}
 ```
 
 > 提示：示例代码已上传到 [小册仓库](https://link.juejin.cn/?target=https%3A%2F%2Fgithub1s.com%2FTecvan-fe%2Fwebpack-book-samples%2Fblob%2Fmain%2Fentry-runtime%2Fwebpack.config.js)。
@@ -435,35 +435,35 @@ Webpack 的 [output](https://link.juejin.cn/?target=https%3A%2F%2Fwebpack.js.org
 
 ```js
 // foo.js
-export default "foo";
+export default 'foo'
 
 // index.js
-import("./foo").then(console.log);
+import('./foo').then(console.log)
 ```
 
 使用如下配置，同时构建 `node` 与 `web` 版本：
 
 ```js
-const path = require("path");
-const { merge } = require("webpack-merge");
+const path = require('path')
+const { merge } = require('webpack-merge')
 
 const baseConfig = {
-  mode: "development",
-  target: "web",
+  mode: 'development',
+  target: 'web',
   devtool: false,
   entry: {
-    main: { import: "./src/index.js" },
+    main: { import: './src/index.js' }
   },
   output: {
     clean: true,
-    path: path.resolve(__dirname, "dist"),
-  },
-};
+    path: path.resolve(__dirname, 'dist')
+  }
+}
 
 module.exports = [
-  merge(baseConfig, { target: "web", output: { filename: "web-[name].js" } }),
-  merge(baseConfig, { target: "node", output: { filename: "node-[name].js" } }),
-];
+  merge(baseConfig, { target: 'web', output: { filename: 'web-[name].js' } }),
+  merge(baseConfig, { target: 'node', output: { filename: 'node-[name].js' } })
+]
 ```
 
 > 提示：相关示例已上传到小册[仓库](https://link.juejin.cn/?target=https%3A%2F%2Fgithub1s.com%2FTecvan-fe%2Fwebpack-book-samples%2Fblob%2Fmain%2Ftarget-node-web%2Fwebpack.config.js)，强烈建议你拉下来，对比两种目标下构建产物的差异。

@@ -59,117 +59,117 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref } from 'vue'
 
 // 放置提示样式
-const LIST_DROPPABLE = "droppable";
+const LIST_DROPPABLE = 'droppable'
 
 // 拖拽容器node
-const dragContainer = ref();
+const dragContainer = ref()
 
 // 当前正在拖拽的元素
-let dragTarget;
+let dragTarget
 
 // 原始列表
 const sourceList = ref(
   Array(7)
-    .fill("")
+    .fill('')
     .map((_, idx) => ({
-      name: `元素${idx + 1}`,
+      name: `元素${idx + 1}`
     }))
-);
+)
 
 // 接受数据的列表
 const targetList = reactive({
   first: [
     {
-      name: "复制元素1",
+      name: '复制元素1'
     },
     {
-      name: "复制元素2",
-    },
+      name: '复制元素2'
+    }
   ],
-  second: [],
-});
+  second: []
+})
 
 /**
  * 清除所有放置样式
  */
 const clearDropStyle = () => {
-  dragContainer.value.querySelectorAll(`.${LIST_DROPPABLE}`).forEach((node) => {
-    node.classList.remove(LIST_DROPPABLE);
-  });
-};
+  dragContainer.value.querySelectorAll(`.${LIST_DROPPABLE}`).forEach(node => {
+    node.classList.remove(LIST_DROPPABLE)
+  })
+}
 
 /**
  * 处理开始拖拽的逻辑
  * @param {*} evt
  */
-const handleSourceDragStart = (evt) => {
-  dragTarget = evt.target;
-  const { effect, index } = dragTarget.dataset;
-  console.log("effect", effect);
-  evt.dataTransfer.effectAllowed = effect;
+const handleSourceDragStart = evt => {
+  dragTarget = evt.target
+  const { effect, index } = dragTarget.dataset
+  console.log('effect', effect)
+  evt.dataTransfer.effectAllowed = effect
   evt.dataTransfer.setData(
-    "dataSource",
+    'dataSource',
     JSON.stringify(sourceList.value[Number(index)])
-  );
-};
+  )
+}
 
 /**
  * 处理进入拖放区域的逻辑
  * @param {*} evt
  */
-const handleDragEnter = (evt) => {
-  clearDropStyle();
-  let dropNode = evt.target.closest("[data-drop]");
+const handleDragEnter = evt => {
+  clearDropStyle()
+  let dropNode = evt.target.closest('[data-drop]')
   if (
     dropNode &&
     dropNode.dataset.drop &&
     dropNode.dataset.drop === evt.dataTransfer.effectAllowed
   ) {
-    dropNode.classList.add(LIST_DROPPABLE);
+    dropNode.classList.add(LIST_DROPPABLE)
   }
-};
+}
 
-const getTransferDataSource = (evt) => {
+const getTransferDataSource = evt => {
   try {
-    let res = JSON.parse(evt.dataTransfer.getData("dataSource"));
-    return res;
+    let res = JSON.parse(evt.dataTransfer.getData('dataSource'))
+    return res
   } catch {
-    return undefined;
+    return undefined
   }
-};
+}
 
 /**
  * 处理放置逻辑
  * @param {*} evt
  */
-const handleDrop = (evt) => {
-  clearDropStyle();
-  let dataSource = getTransferDataSource(evt);
-  let dropNode = evt.target.closest("[data-drop]");
+const handleDrop = evt => {
+  clearDropStyle()
+  let dataSource = getTransferDataSource(evt)
+  let dropNode = evt.target.closest('[data-drop]')
 
-  if (!evt.dataTransfer || !dataSource) return;
-  if (!dataSource || !dropNode) return;
+  if (!evt.dataTransfer || !dataSource) return
+  if (!dataSource || !dropNode) return
 
-  const wrapperNode = dropNode.closest(`.target-list[data-model]`);
-  const modelName = wrapperNode.dataset.model;
-  const { dropType = "list", index, drop } = dropNode.dataset;
-  console.log("drop", drop, dragTarget.dataset);
-  if (drop !== dragTarget.dataset.effect) return;
-  handleListAdd(modelName, dataSource, dropType, Number(index));
-};
+  const wrapperNode = dropNode.closest(`.target-list[data-model]`)
+  const modelName = wrapperNode.dataset.model
+  const { dropType = 'list', index, drop } = dropNode.dataset
+  console.log('drop', drop, dragTarget.dataset)
+  if (drop !== dragTarget.dataset.effect) return
+  handleListAdd(modelName, dataSource, dropType, Number(index))
+}
 
 const handleListAdd = (modelName, dataSource, dropType, index) => {
-  dataSource.name = "复制" + dataSource.name;
-  if (!(modelName in targetList)) return;
-  if (dropType === "item") {
-    targetList[modelName].splice(index + 1, 0, dataSource);
+  dataSource.name = '复制' + dataSource.name
+  if (!(modelName in targetList)) return
+  if (dropType === 'item') {
+    targetList[modelName].splice(index + 1, 0, dataSource)
   } else {
-    targetList[modelName].push(dataSource);
+    targetList[modelName].push(dataSource)
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -202,7 +202,7 @@ const handleListAdd = (modelName, dataSource, dropType, index) => {
 
     .item {
       &::after {
-        content: "";
+        content: '';
         display: none;
         height: 10px;
         background-color: aqua;

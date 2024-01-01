@@ -1,8 +1,8 @@
 Dependency Graph 概念来自官网 [Dependency Graph | webpack](https://link.juejin.cn/?target=https%3A%2F%2Fwebpack.js.org%2Fconcepts%2Fdependency-graph%2F) 一文，原文解释：
 
-> Any time one file depends on another, webpack treats this as a *dependency*. This allows webpack to take non-code assets, such as images or web fonts, and also provide them as *dependencies* for your application.
+> Any time one file depends on another, webpack treats this as a _dependency_. This allows webpack to take non-code assets, such as images or web fonts, and also provide them as _dependencies_ for your application.
 >
-> When webpack processes your application, it starts from a list of modules defined on the command line or in its configuration file. Starting from these *[entry points](https://link.juejin.cn/?target=https%3A%2F%2Fwebpack.js.org%2Fconcepts%2Fentry-points%2F)*, webpack recursively builds a *dependency graph* that includes every module your application needs, then bundles all of those modules into a small number of *bundles* - often, just one - to be loaded by the browser.
+> When webpack processes your application, it starts from a list of modules defined on the command line or in its configuration file. Starting from these _[entry points](https://link.juejin.cn/?target=https%3A%2F%2Fwebpack.js.org%2Fconcepts%2Fentry-points%2F)_, webpack recursively builds a _dependency graph_ that includes every module your application needs, then bundles all of those modules into a small number of _bundles_ - often, just one - to be loaded by the browser.
 
 大意：Webpack 处理应用代码时，会从开发者提供的 `entry` 开始递归地组建起包含所有模块的 **Dependency Graph**，之后再将这些 `module` 打包为 `bundles` 。
 
@@ -62,35 +62,23 @@ Webpack 5.0 之后的 Dependency Graph 涉及如下数据类型：
   ModuleGraph
   ```
 
-   
-
   除了记录依赖关系外，还提供了许多工具方法，方便使用者迅速读取出
-
-   
 
   ```
   module
   ```
 
-   
-
   或
-
-   
 
   ```
   dependency
   ```
-
-   
 
   附加的信息。
 
   ```
   ModuleGraph
   ```
-
-   
 
   内部有两个关键属性：
 
@@ -110,37 +98,37 @@ Webpack 5.0 之后的 Dependency Graph 涉及如下数据类型：
 
 ```js
 class ModuleGraph {
-    constructor() {
-        /** @type {Map<Dependency, ModuleGraphConnection>} */
-        this._dependencyMap = new Map();
-        /** @type {Map<Module, ModuleGraphModule>} */
-        this._moduleMap = new Map();
-    }
+  constructor() {
+    /** @type {Map<Dependency, ModuleGraphConnection>} */
+    this._dependencyMap = new Map()
+    /** @type {Map<Module, ModuleGraphModule>} */
+    this._moduleMap = new Map()
+  }
 
-    /**
-     * @param {Module} originModule the referencing module
-     * @param {Dependency} dependency the referencing dependency
-     * @param {Module} module the referenced module
-     * @returns {void}
-     */
-    setResolvedModule(originModule, dependency, module) {
-        const connection = new ModuleGraphConnection(
-            originModule,
-            dependency,
-            module,
-            undefined,
-            dependency.weak,
-            dependency.getCondition(this)
-        );
-        this._dependencyMap.set(dependency, connection);
-        const connections = this._getModuleGraphModule(module).incomingConnections;
-        connections.add(connection);
-        const mgm = this._getModuleGraphModule(originModule);
-        if (mgm.outgoingConnections === undefined) {
-            mgm.outgoingConnections = new Set();
-        }
-        mgm.outgoingConnections.add(connection);
+  /**
+   * @param {Module} originModule the referencing module
+   * @param {Dependency} dependency the referencing dependency
+   * @param {Module} module the referenced module
+   * @returns {void}
+   */
+  setResolvedModule(originModule, dependency, module) {
+    const connection = new ModuleGraphConnection(
+      originModule,
+      dependency,
+      module,
+      undefined,
+      dependency.weak,
+      dependency.getCondition(this)
+    )
+    this._dependencyMap.set(dependency, connection)
+    const connections = this._getModuleGraphModule(module).incomingConnections
+    connections.add(connection)
+    const mgm = this._getModuleGraphModule(originModule)
+    if (mgm.outgoingConnections === undefined) {
+      mgm.outgoingConnections = new Set()
     }
+    mgm.outgoingConnections.add(connection)
+  }
 }
 ```
 
@@ -165,24 +153,24 @@ Webpack 启动后：
 ```js
 ModuleGraph: {
     _dependencyMap: Map(3){
-        { 
+        {
             EntryDependency{request: "./src/index.js"} => ModuleGraphConnection{
-                module: NormalModule{request: "./src/index.js"}, 
+                module: NormalModule{request: "./src/index.js"},
                 // 入口模块没有引用者，故设置为 null
                 originModule: null
-            } 
+            }
         },
-        { 
+        {
             HarmonyImportSideEffectDependency{request: "./src/a.js"} => ModuleGraphConnection{
-                module: NormalModule{request: "./src/a.js"}, 
+                module: NormalModule{request: "./src/a.js"},
                 originModule: NormalModule{request: "./src/index.js"}
-            } 
+            }
         },
-        { 
+        {
             HarmonyImportSideEffectDependency{request: "./src/a.js"} => ModuleGraphConnection{
-                module: NormalModule{request: "./src/b.js"}, 
+                module: NormalModule{request: "./src/b.js"},
                 originModule: NormalModule{request: "./src/index.js"}
-            } 
+            }
         }
     },
 

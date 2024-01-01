@@ -13,8 +13,8 @@ Babel 是一个开源 JavaScript 转编译器，它能将高版本 —— 如 ES
 arr.map(item => item + 1)
 
 // 转译后
-arr.map(function (item){
-  return item + 1;
+arr.map(function (item) {
+  return item + 1
 })
 ```
 
@@ -39,11 +39,11 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: ['babel-loader'],
-      },
-    ],
-  },
-};
+        use: ['babel-loader']
+      }
+    ]
+  }
+}
 ```
 
 示例中，`module` 属性用于声明模块处理规则，`module.rules` 子属性则用于定义针对什么类型的文件使用哪些 Loader 处理器，上例可解读为：
@@ -72,14 +72,14 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env'],
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
+              presets: ['@babel/preset-env']
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
 ```
 
 特别提一下，示例中的 `@babel/preset-env` 是一种 Babel 预设规则集 —— Preset，这种设计能按需将一系列复杂、数量庞大的配置、插件、Polyfill 等打包成一个单一的资源包，从而简化 Babel 的应用、学习成本。Preset 是 Babel 的主要应用方式之一，社区已经针对不同应用场景打包了各种 Preset 资源，例如：
@@ -111,7 +111,7 @@ npm i -D typescript ts-loader
 1. 配置 Webpack
 
 ```js
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   /* xxx */
@@ -120,13 +120,13 @@ module.exports = {
       {
         test: /\.ts$/,
         use: 'ts-loader'
-      },
-    ],
+      }
+    ]
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js']
   }
-};
+}
 ```
 
 - 使用 `module.rules` 声明对所有符合 `/\.ts$/` 正则 —— 即 `.ts` 结尾的文件应用 `ts-loader` 加载器
@@ -173,14 +173,14 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-typescript'],
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
+              presets: ['@babel/preset-typescript']
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
 ```
 
 不过，`@babel/preset-typescript` 只是简单完成代码转换，并未做类似 `ts-loader` 的类型检查工作，大家需要根据实际场景选择适当工具。
@@ -191,13 +191,11 @@ JavaScript 被设计成一种高度灵活的动态、弱类型脚本语言，这
 
 ESLint 是一种扩展性极佳的 JavaScript 代码风格检查工具，它能够自动识别违反风格规则的代码并予以修复，例如对于下面的示例：
 
-| 源码                                                         | ESLint 修复后                                                |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `const foo ='foo'; let  bar='bar';  console.log(foo,bar) `   | `const foo = 'foo' const bar = 'bar'  console.log(foo, bar) ` |
-| ESLint 配置：`module.exports = {     "extends": "standard" } ` |                                                              |
-| ESLint 报错：![img](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c8f12f682beb4d9288eeb7c3cf107835~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp) |                                                              |
-
-
+| 源码                                                                                                                                                       | ESLint 修复后                                                 |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `const foo ='foo'; let  bar='bar';  console.log(foo,bar) `                                                                                                 | `const foo = 'foo' const bar = 'bar'  console.log(foo, bar) ` |
+| ESLint 配置：`module.exports = {     "extends": "standard" } `                                                                                             |                                                               |
+| ESLint 报错：![img](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c8f12f682beb4d9288eeb7c3cf107835~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp) |                                                               |
 
 这里先忽略 ESLint 配置的具体规则，样例源码存在诸多风格不统一的地方，例如 1、2 行以 `;` 结尾，而第 3 行没有 `;`；第一行变量以 `const` 声明，第二行变量以 `let` 声明，等等。ESLint 会找出这些风格不一致的地方，并予以告警，甚至自动修复，生成如上表右上角的代码。
 
@@ -209,7 +207,7 @@ Webpack 下，可以使用 `eslint-webpack-plugin` 接入 ESLint 工具，步骤
 # 安装 webpack 依赖
 yarn add -D webpack webpack-cli
 
-# 安装 eslint 
+# 安装 eslint
 yarn add -D eslint eslint-webpack-plugin
 
 # 简单起见，这里直接使用 standard 规范
@@ -326,12 +324,10 @@ module.exports = {
 
 之后只需执行 `npx webpack` 命令即可完成编译操作，例如：
 
-| `src/index.ts` 源码                                          | 编译结果                                                     |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `const say = (statements: string) => {     console.log(statements) };  // @ts-ignore say("Tecvan"); ` | `/******/ (() => { // webpackBootstrap var __webpack_exports__ = {}; /*!**********************!*\   !*** ./src/index.ts ***!   \**********************/ const say = statements => {   console.log(statements); }; // @ts-ignore   say("Tecvan"); /******/ })() ; ` |
-| ![img](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dd3bd994134743a9a30200da59b47606~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp) |                                                              |
-
-
+| `src/index.ts` 源码                                                                                                                           | 编译结果                                                                                                                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `const say = (statements: string) => {     console.log(statements) };  // @ts-ignore say("Tecvan"); `                                         | `/******/ (() => { // webpackBootstrap var __webpack_exports__ = {}; /*!**********************!*\   !*** ./src/index.ts ***!   \**********************/ const say = statements => {   console.log(statements); }; // @ts-ignore   say("Tecvan"); /******/ })() ; ` |
+| ![img](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dd3bd994134743a9a30200da59b47606~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp) |                                                                                                                                                                                                                                                                    |
 
 至此，我们就搭建了一个支持 Babel + TypeScript + ESLint 的开发环境，读者可在此基础上修改各项工具配置，定制适合自己项目的开发环境。
 

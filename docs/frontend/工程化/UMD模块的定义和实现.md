@@ -13,70 +13,70 @@
 ```js
 function factory() {
   return {
-    name: "我是一个umd模块",
-  };
+    name: '我是一个umd模块'
+  }
 }
 ```
 
 如果不考虑其它模块规范，仅仅作为全局属性，可以这么写
 
 ```js
-(function (root, factory) {
-  root.umdModule = factory();
+;(function (root, factory) {
+  root.umdModule = factory()
 })(window, function () {
   return {
-    name: "我是一个umd模块",
-  };
-});
+    name: '我是一个umd模块'
+  }
+})
 ```
 
 导入方式
 
 ```js
 window.onload = () => {
-  const { name } = umdModule;
-};
+  const { name } = umdModule
+}
 ```
 
 接着，判断是否满足支持 commonjs 的环境
 
 ```js
-(function (root, factory) {
-  if (typeof module === "object" && typeof module.exports === "object") {
+;(function (root, factory) {
+  if (typeof module === 'object' && typeof module.exports === 'object') {
     // node环境，直接挂载到当前模块的exports
     // commonjs规范
-    module.exports = factory();
-  } else if (typeof define === "function" && define.cmd) {
+    module.exports = factory()
+  } else if (typeof define === 'function' && define.cmd) {
     // 使用了CMD规范，即require.js
     // require.js会全局定义一个define方法来接收模块
     define(function (require, exports, module) {
-      module.exports = factory();
-    });
+      module.exports = factory()
+    })
   } else {
-    root.umdModule = factory();
+    root.umdModule = factory()
   }
 })(this, function () {
   return {
-    name: "我是一个umd模块",
-  };
-});
+    name: '我是一个umd模块'
+  }
+})
 ```
 
 ```js
 // requirejs
-const globalModule = {};
+const globalModule = {}
 
 function require(name) {
-  return globalModule[name];
+  return globalModule[name]
 }
 
 function define(fn) {
   let module = {
-    exports: null,
-  };
-  let currentModule = fn(require, exports, module);
-  Object.keys(module.exports).forEach((name) => {
-    globalModule[name] = module.exports[name];
-  });
+    exports: null
+  }
+  let currentModule = fn(require, exports, module)
+  Object.keys(module.exports).forEach(name => {
+    globalModule[name] = module.exports[name]
+  })
 }
 ```

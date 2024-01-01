@@ -185,10 +185,10 @@ currySum(1, 2, 3)
 type Curried<A, R> = A extends []
   ? () => R
   : A extends [infer ARG]
-  ? (params: ARG) => R
-  : A extends [infer ARG, ...infer REST]
-  ? (param: ARG) => Curried<REST, R>
-  : never
+    ? (params: ARG) => R
+    : A extends [infer ARG, ...infer REST]
+      ? (param: ARG) => Curried<REST, R>
+      : never
 
 declare function curry<A extends any[], R>(fn: (...args: A) => R): Curried<A, R>
 

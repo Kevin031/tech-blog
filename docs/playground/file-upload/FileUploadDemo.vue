@@ -6,5 +6,5 @@
 </template>
 
 <script setup lang="ts">
-import FileUploader from "./FileUploader.vue";
+import FileUploader from './FileUploader.vue'
 </script>

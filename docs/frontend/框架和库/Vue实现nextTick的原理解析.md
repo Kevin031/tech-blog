@@ -9,27 +9,27 @@
 以下是部分实现的伪代码：
 
 ```js
-let queue = [];
-let isFlushPending = false;
+let queue = []
+let isFlushPending = false
 
 // 加入微队列的具体实现
 // 提供2种调用方式
 function nextTick(cb) {
-  return cb ? Promise.resolve().then(cb) : Promise.resolve();
+  return cb ? Promise.resolve().then(cb) : Promise.resolve()
 }
 
 /**
  * 加入微队列
  */
 function flushJobs() {
-  if (!isFlushPending) return;
+  if (!isFlushPending) return
   nextTick(() => {
-    isFlushPending = false;
-    let job;
+    isFlushPending = false
+    let job
     while ((job = queue.shift())) {
-      job && job();
+      job && job()
     }
-  });
+  })
 }
 
 /**
@@ -37,9 +37,9 @@ function flushJobs() {
  */
 function queueJobs(job) {
   if (!queue.includes(job)) {
-    queue.push(job);
+    queue.push(job)
   }
-  flushJobs();
+  flushJobs()
 }
 
 // patch方法用于diff和更新视图DOM
@@ -47,20 +47,20 @@ function setupRenderEffect(instance) {
   instance.update = effect(
     () => {
       if (!instance.isMounted) {
-        const vnode = instance.render();
+        const vnode = instance.render()
         // 挂载逻辑
-        patch(null, vnode);
+        patch(null, vnode)
       } else {
-        const nextVNode = instance.render();
-        patch(instance.vnode, nextVnode);
-        instance.vnode = nextVnode;
+        const nextVNode = instance.render()
+        patch(instance.vnode, nextVnode)
+        instance.vnode = nextVnode
       }
     },
     {
       scheduler() {
-        queueJobs(instance.update);
-      },
+        queueJobs(instance.update)
+      }
     }
-  );
+  )
 }
 ```

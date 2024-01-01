@@ -22,25 +22,25 @@ Tree Shaking 较早前由 Rich Harris 在 Rollup 中率先实现，Webpack 自 2
 ```js
 // webpack.config.js
 module.exports = {
-  entry: "./src/index",
-  mode: "production",
+  entry: './src/index',
+  mode: 'production',
   devtool: false,
   optimization: {
-    usedExports: true,
-  },
-};
+    usedExports: true
+  }
+}
 ```
 
 上述配置即可启动代码 Tree-Shaking 功能，我们来看看效果：
 
 ```js
 // index.js
-import {bar} from './bar';
-console.log(bar);
+import { bar } from './bar'
+console.log(bar)
 
 // bar.js
-export const bar = 'bar';
-export const foo = 'foo';
+export const bar = 'bar'
+export const foo = 'foo'
 ```
 
 示例中，`bar.js` 模块导出了 `bar` 、`foo` ，但只有 `bar` 导出值被其它模块使用，经过 Tree Shaking 处理后，`foo` 变量会被视作无用代码删除。
@@ -76,8 +76,8 @@ Tree-Shaking 的实现大致上可以分为三个步骤：
 例如对于下面的模块：
 
 ```js
-export const bar = 'bar';
-export const foo = 'foo';
+export const bar = 'bar'
+export const foo = 'foo'
 
 export default 'foo-bar'
 ```
@@ -111,7 +111,7 @@ export default 'foo-bar'
 4. 对已经被使用及未被使用的导出值，分别创建对应的 `HarmonyExportInitFragment` 对象，保存到 `initFragments` 数组；
 5. 遍历 `initFragments` 数组，生成最终结果。
 
-*💡提示：关于模块生成逻辑的更多介绍，可参考《**[Runtime：模块编译打包及运行时逻辑](https://juejin.cn/book/7115598540721618944/section/7119036016274440192)**》章节。*
+_💡提示：关于模块生成逻辑的更多介绍，可参考《**[Runtime：模块编译打包及运行时逻辑](https://juejin.cn/book/7115598540721618944/section/7119036016274440192)**》章节。_
 
 简单说，这一步的逻辑就是，用前面收集好的 `exportsInfo` 对象为模块的导出值分别生成导出语句。再来看个例子：
 
@@ -141,18 +141,18 @@ export default 'foo-bar'
 记住，Tree-Shaking 强依赖于 ESM 模块化方案的静态分析能力，所以你应该尽量坚持使用 ESM 编写模块代码。对比而言，在过往的 CommonJS、AMD、CMD 旧版本模块化方案中，导入导出行为是高度动态，难以预测的，例如：
 
 ```js
-if(process.env.NODE_ENV === 'development'){
-  require('./bar');
-  exports.foo = 'foo';
+if (process.env.NODE_ENV === 'development') {
+  require('./bar')
+  exports.foo = 'foo'
 }
 ```
 
 而 ESM 方案则从规范层面规避这一行为，它要求所有的导入导出语句只能出现在模块顶层，且导入导出的模块名必须为字符串常量，这意味着下述代码在 ESM 方案下是非法的：
 
 ```js
-if(process.env.NODE_ENV === 'development'){
-  import bar from 'bar';
-  export const foo = 'foo';
+if (process.env.NODE_ENV === 'development') {
+  import bar from 'bar'
+  export const foo = 'foo'
 }
 ```
 
@@ -178,20 +178,20 @@ if(process.env.NODE_ENV === 'development'){
 更深层次的原因则是 JavaScript 的赋值语句并不**纯**，具体场景下有可能产生意料之外的副作用，例如：
 
 ```js
-import { bar, foo } from "./bar";
+import { bar, foo } from './bar'
 
-let count = 0;
+let count = 0
 const mock = {}
 
 Object.defineProperty(mock, 'f', {
-    set(v) {
-        mock._f = v;
-        count += 1;
-    }
+  set(v) {
+    mock._f = v
+    count += 1
+  }
 })
 
-mock.f = foo;
-console.log(count);
+mock.f = foo
+console.log(count)
 ```
 
 示例中，对 `mock` 对象施加的 `Object.defineProperty` 调用，导致 `mock.f = foo` 赋值语句对 `count` 变量产生了副作用，这种场景下即使用复杂的动态语义分析，也很难在确保正确副作用的前提下，完美地 Shaking 掉所有无用的代码枝叶。
@@ -224,8 +224,8 @@ Tree Shaking 逻辑作用在 ESM 的 `export` 语句上，因此对于下面这�
 
 ```js
 export default {
-    bar: 'bar',
-    foo: 'foo'
+  bar: 'bar',
+  foo: 'foo'
 }
 ```
 
@@ -235,10 +235,7 @@ export default {
 const bar = 'bar'
 const foo = 'foo'
 
-export {
-    bar,
-    foo
-}
+export { bar, foo }
 ```
 
 ### 实践：使用支持 Tree Shaking 的包
@@ -254,9 +251,9 @@ export {
 Webpack5 之后，我们还可以用一种特殊的备注语法，实现异步模块的 Tree-Shaking 功能，例如：
 
 ```js
-import(/* webpackExports: ["foo", "default"] */ "./foo").then((module) => {
-  console.log(module.foo);
-});
+import(/* webpackExports: ["foo", "default"] */ './foo').then(module => {
+  console.log(module.foo)
+})
 ```
 
 示例中，通过 `/* webpackExports: xxx */` 备注语句，显式声明即将消费异步模块的那些导出内容，Webpack 即可借此判断模块依赖，实现 Tree-Shaking。

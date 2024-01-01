@@ -32,54 +32,54 @@
 </style>
 
 <script>
-import { render, h, ref, nextTick } from "vue";
-import Loading from "./Loading.vue";
+import { render, h, ref, nextTick } from 'vue'
+import Loading from './Loading.vue'
 
 export default {
   setup() {
     const list = ref(
       Array(100)
-        .fill("")
+        .fill('')
         .map((_, idx) => idx)
-    );
+    )
 
     const refresh = () => {
-      let current = list.value[list.value.length - 1];
-      list.value = [];
+      let current = list.value[list.value.length - 1]
+      list.value = []
       nextTick(() => {
         list.value = Array(100)
-          .fill("")
-          .map((_, idx) => idx + current);
-        console.log("list", list);
-      });
-    };
+          .fill('')
+          .map((_, idx) => idx + current)
+        console.log('list', list)
+      })
+    }
 
     return {
       list,
-      refresh,
-    };
+      refresh
+    }
   },
   directives: {
     loading: {
-      mounted: (el) => {
-        let img = el.querySelector("img");
-        el.style.position = "relative";
-        const VNode = h(Loading);
-        const div = document.createElement("div");
+      mounted: el => {
+        let img = el.querySelector('img')
+        el.style.position = 'relative'
+        const VNode = h(Loading)
+        const div = document.createElement('div')
         div.setAttribute(
-          "style",
-          "position: absolute; width: 100%; height: 100%; top: 0; left: 0; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,.3);"
-        );
-        render(VNode, div);
-        el.append(div);
+          'style',
+          'position: absolute; width: 100%; height: 100%; top: 0; left: 0; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,.3);'
+        )
+        render(VNode, div)
+        el.append(div)
         img.onload = () => {
-          el.removeChild(div);
-        };
+          el.removeChild(div)
+        }
         img.onerror = () => {
-          el.removeChild(div);
-        };
-      },
-    },
-  },
-};
+          el.removeChild(div)
+        }
+      }
+    }
+  }
+}
 </script>

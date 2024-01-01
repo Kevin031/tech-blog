@@ -52,37 +52,37 @@ yarn add -D workbox-webpack-plugin webpack-pwa-manifest
 之后，在 `webpack.config.js` 配置文件中注册插件：
 
 ```js
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { GenerateSW } = require("workbox-webpack-plugin");
-const WebpackPwaManifest = require("webpack-pwa-manifest");
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { GenerateSW } = require('workbox-webpack-plugin')
+const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 module.exports = {
   // ...
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Progressive Web Application",
+      title: 'Progressive Web Application'
     }),
     // 自动生成 Manifest 文件
     new WebpackPwaManifest({
-      name: "My Progressive Web App",
-      short_name: "MyPWA",
-      description: "My awesome Progressive Web App!",
-      publicPath: "/",
+      name: 'My Progressive Web App',
+      short_name: 'MyPWA',
+      description: 'My awesome Progressive Web App!',
+      publicPath: '/',
       icons: [
         {
           // 桌面图标，注意这里只支持 PNG、JPG、BMP 格式
-          src: path.resolve("src/assets/logo.png"),
-          sizes: [150],
-        },
-      ],
+          src: path.resolve('src/assets/logo.png'),
+          sizes: [150]
+        }
+      ]
     }),
     // 自动生成 ServiceWorker 文件
     new GenerateSW({
       clientsClaim: true,
-      skipWaiting: true,
-    }),
-  ],
-};
+      skipWaiting: true
+    })
+  ]
+}
 ```
 
 > 提示：示例代码已上传到 [小册仓库](https://link.juejin.cn/?target=https%3A%2F%2Fgithub1s.com%2FTecvan-fe%2Fwebpack-book-samples%2Ftree%2Fmain%2F8-1_pwa)。
@@ -166,7 +166,7 @@ module.exports = merge(WebpackBaseConfig, {
 其中 `main.js` 为入口文件，代码：
 
 ```js
-const modules = ['foo', 'bar'].map(r => require(`./${r}.js`));
+const modules = ['foo', 'bar'].map(r => require(`./${r}.js`))
 ```
 
 可以看到在 `main.js` 中并没有引用 `unused.js` ，但打包产物中却包含了 `src` 目录下所有文件：
@@ -220,7 +220,7 @@ Electron 这种多进程机构，要求我们能在同一个项目中同时支�
 
 ```js
 // src/main.js
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow } = require('electron')
 
 // 应用启动后
 app.whenReady().then(() => {
@@ -228,10 +228,10 @@ app.whenReady().then(() => {
   const win = new BrowserWindow({
     width: 800,
     height: 600
-  });
+  })
   // 使用 BrowserWindow 实例打开页面
-  win.loadFile("home.html");
-});
+  win.loadFile('home.html')
+})
 ```
 
 代码核心逻辑是在应用启动后 （`app.whenReady` 钩子），创建 `BrowserWindow` 实例并打开页面。
@@ -248,24 +248,24 @@ Electron 主进程本质上是一个 Node 程序，因此许多适用于 Node �
 
 ```js
 // webpack.main.config.js
-const path = require("path");
-const nodeExternals = require("webpack-node-externals");
+const path = require('path')
+const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
   // 主进程需要将 `target` 设置为 `electron-main`
-  target: "electron-main",
-  mode: process.env.NODE_ENV || "development",
+  target: 'electron-main',
+  mode: process.env.NODE_ENV || 'development',
   // 开发环境使用 `source-map`，保持高保真源码映射，方便调试
-  devtool: process.env.NODE_ENV === "production"? false: "source-map",
+  devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',
   entry: {
-    main: path.join(__dirname, "./src/main"),
+    main: path.join(__dirname, './src/main')
   },
   output: {
-    filename: "[name].js",
-    path: path.join(__dirname, "./dist"),
+    filename: '[name].js',
+    path: path.join(__dirname, './dist')
   },
-  externals: [nodeExternals()],
-};
+  externals: [nodeExternals()]
+}
 ```
 
 至此，一个非常简单的主进程脚本与构建环境示例就搭建完毕了，执行下述命令即可完成构建工作：
@@ -286,14 +286,14 @@ Electron 渲染进程本质上就一个运行在 Chromium 浏览器上的网页�
 
 ```js
 // src/home/index.js
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-const root = document.createElement("div");
+const root = document.createElement('div')
 
-ReactDOM.render(<h1>Hello world!</h1>, root);
+ReactDOM.render(<h1>Hello world!</h1>, root)
 
-document.body.append(root);
+document.body.append(root)
 ```
 
 > 提示：示例代码已上传到 [小册仓库](https://link.juejin.cn/?target=https%3A%2F%2Fgithub1s.com%2FTecvan-fe%2Fwebpack-book-samples%2Ftree%2Fmain%2F8-3_electron-wp)。
@@ -310,8 +310,8 @@ document.body.append(root);
 // webpack.renderer.config.js
 module.exports = {
   // 渲染进程需要将 `target` 设置为 `electron-renderer`
-  target: "electron-renderer"
-};
+  target: 'electron-renderer'
+}
 ```
 
 > 提示：Webpack 为 Electron 提供了三种特殊 `target` 值：`electron-main/electron-renderer/electron-preload`，分别用于主进程、Renderer 进程、Preload 脚本三种场景。
@@ -322,27 +322,27 @@ module.exports = {
 // webpack.renderer.config.js
 // 入口文件列表
 const entries = {
-  home: path.join(__dirname, "./src/pages/home"),
-  login: path.join(__dirname, "./src/pages/login"),
-};
+  home: path.join(__dirname, './src/pages/home'),
+  login: path.join(__dirname, './src/pages/login')
+}
 
 // 为每一个入口创建 HTMLWebpackPlugin 实例
 const htmlPlugins = Object.keys(entries).map(
-  (k) =>
+  k =>
     new HtmlWebpackPlugin({
       title: `[${k}] My Awesome Electron App`,
       filename: `${k}.html`,
-      chunks: [k],
+      chunks: [k]
     })
-);
+)
 
 module.exports = {
-  mode: process.env.NODE_ENV || "development",
+  mode: process.env.NODE_ENV || 'development',
   entry: entries,
-  target: "electron-renderer",
-  plugins: [...htmlPlugins],
+  target: 'electron-renderer',
+  plugins: [...htmlPlugins]
   // ...
-};
+}
 ```
 
 第三点，由于 Webpack 的 HMR 功能强依赖于 WebSocket 实现通讯，但 Electron 主进程常用文件协议 `file://` 打开页面，该协议不支持 WebSocket 接口，为此我们需要改造主进程启动代码，以 HTTP 方式打开页面代码，如：
@@ -351,14 +351,14 @@ module.exports = {
 function createWindow() {
   const win = new BrowserWindow({
     //...
-  });
+  })
 
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === 'development') {
     // 开发环境下，加载 http 协议的页面，方便启动 HMR
-    win.loadURL("http://localhost:8080/home");
+    win.loadURL('http://localhost:8080/home')
   } else {
     // 生产环境下，依然使用 `file://` 协议
-    win.loadFile(path.join(app.getAppPath(), "home.html"));
+    win.loadFile(path.join(app.getAppPath(), 'home.html'))
   }
 }
 ```

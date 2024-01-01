@@ -10,31 +10,31 @@ schedule 是 React 的主流程，它的核心逻辑是闲时调度
 
 ```js
 // 下一个任务的指针
-let nextFiberReconcileWork = null;
+let nextFiberReconcileWork = null
 
 // 正在构建的fiber根节点
-let wipRoot = null;
+let wipRoot = null
 
 /**
  * 无限循环的任务（闲时调度，每一帧绘制完就执行一遍）
  */
 function workLoop(deadline) {
   // 是否暂停任务
-  let shouldYield = false;
+  let shouldYield = false
 
   // 递归调用最小的「处理单元」，直到暂停为止
   while (nextFiberReconcileWork && !shouldYield) {
     // 构建一个fiber和它的子节点，然后指向下一个需要构建的fiber
-    nextFiberReconcileWork = performNextWork(nextFiberReconcileWork);
+    nextFiberReconcileWork = performNextWork(nextFiberReconcileWork)
     // 每构建一轮，就判断一下是否有剩余时间
-    shouldYield = deadline.timeRemaining() < 1;
+    shouldYield = deadline.timeRemaining() < 1
   }
 
   // 进下一轮循环
-  requestIdleCallback(workLoop);
+  requestIdleCallback(workLoop)
 }
 
-requestIdleCallback(workLoop);
+requestIdleCallback(workLoop)
 ```
 
 ### 总结
@@ -54,10 +54,10 @@ schedule 通过闲时调度，逐步执行每个 fiber 节点的 reconcile（vdo
 function performNextWork(fiber) {
   // 「递」阶段
   // 构造当前节点和它的子节点
-  reconcile(fiber);
+  reconcile(fiber)
   // 深度优先，指向子节点，也就是说让子节点进到下一个「处理单元」
   if (fiber.child) {
-    return fiber.child;
+    return fiber.child
   }
   // ==================
   // 结束此轮「处理单元」
@@ -66,14 +66,14 @@ function performNextWork(fiber) {
   // 去到叶子节点了
   // 进入「归」阶段
   // 不断指向兄弟节点和父节点
-  let nextFiber = fiber;
+  let nextFiber = fiber
   // 这个while最终会指向「根节点」的return，也就是null，「递归」完成
   while (nextFiber) {
     if (nextFiber.sibling) {
-      return nextFiber.silbling;
+      return nextFiber.silbling
     }
     // 回到父节点，转而去构造父节点的兄弟节点
-    nextFibling = nextFibling.return;
+    nextFibling = nextFibling.return
   }
 }
 ```
@@ -134,10 +134,10 @@ function render(element, container) {
   wipRoot = {
     dom: container,
     props: {
-      children: [element],
-    },
-  };
-  nextFiberReconcileWork = wipRoot;
+      children: [element]
+    }
+  }
+  nextFiberReconcileWork = wipRoot
 }
 ```
 
@@ -162,35 +162,35 @@ commit 做的事情就是对 dom 进行增删改，并且这个过程远比比 r
 ```js
 function commitRoot() {
   // commitWork会一次性把所有更新执行完毕
-  commitWork(wipRoot.child);
+  commitWork(wipRoot.child)
 
   // 此时需要清空wipRoot，等待下一轮render执行的时候再重新调度
-  wipRoot = null;
+  wipRoot = null
 }
 ```
 
 ```js
 function commitWork(fiber) {
   if (!fiber) {
-    return;
+    return
   }
 
-  let domParentFiber = fiber.return;
+  let domParentFiber = fiber.return
 
   // 缺少dom，去父节点的父节点寻找
   while (!domParentFiber.dom) {
-    domParentFiber = domParentFiber.return;
+    domParentFiber = domParentFiber.return
   }
-  const domParent = domParentFiber.dom;
+  const domParent = domParentFiber.dom
 
   // 处理新增
-  if (fiber.effectTag === "PLACEMENT" && fiber.dom !== null) {
-    domParent.appendChild(fiber.dom);
+  if (fiber.effectTag === 'PLACEMENT' && fiber.dom !== null) {
+    domParent.appendChild(fiber.dom)
   }
 
   // 处理子节点，深度优先
-  commit(fiber.child);
-  commit(fiber.sibling);
+  commit(fiber.child)
+  commit(fiber.sibling)
 }
 ```
 
@@ -202,47 +202,47 @@ function commitWork(fiber) {
  */
 function createDom(fiber) {
   const dom =
-    fiber.type === "TEXT_ELEMENT"
-      ? document.createTextNode("")
-      : document.createElement(fiber.type);
+    fiber.type === 'TEXT_ELEMENT'
+      ? document.createTextNode('')
+      : document.createElement(fiber.type)
   for (const prop in fiber.props) {
-    setAttribute(dom, prop, fiber.props[value]);
+    setAttribute(dom, prop, fiber.props[value])
   }
-  return dom;
+  return dom
 }
 
 /**
  * 设置dom属性
  */
 function setAttribute(dom, key, value) {
-  if (key === "children") return;
+  if (key === 'children') return
 
-  if (key === "nodeValue") {
+  if (key === 'nodeValue') {
     // 处理文本节点
-    dom.textContent = value;
+    dom.textContent = value
   } else if (isEventListenerAttr(key, value)) {
-    const eventType = key.slice(2).toLowerCase();
+    const eventType = key.slice(2).toLowerCase()
     // 实际上在React源码中使用的是重新注册的合成事件
-    dom.addEventListener(eventType, value);
+    dom.addEventListener(eventType, value)
   } else if (isStyleAttr(key)) {
     // 合并style
-    Object.assign(dom.style, value);
+    Object.assign(dom.style, value)
   } else if (isPlainAttr(key, value)) {
     // 纯粹的属性
-    dom.setAttribute(key, value);
+    dom.setAttribute(key, value)
   }
 }
 
 function isEventListenerAttr(key, value) {
-  return /^on/.test(key) && typeof value === "function";
+  return /^on/.test(key) && typeof value === 'function'
 }
 
 function isStyleAttr(key, value) {
-  return key === "style" && typeof value === "object";
+  return key === 'style' && typeof value === 'object'
 }
 
 function isPlainAttr(key, value) {
-  return typeof value !== "object" && typeof value !== "function";
+  return typeof value !== 'object' && typeof value !== 'function'
 }
 ```
 
@@ -268,40 +268,40 @@ render + commit(before mutation, mutation, layout)
 
 ```js
 function useRef(initialValue) {
-  currentHookNameInDev = "useRef";
-  mountHookTypesDev();
+  currentHookNameInDev = 'useRef'
+  mountHookTypesDev()
 
   // 第一次调用触发mount
-  return mountRef(initialValue);
+  return mountRef(initialValue)
   // 第二次调用触发udpate
   // return updateRef()
 }
 
 function mountRef(initialValue) {
-  const hook = mountWorkInProgressHook();
+  const hook = mountWorkInProgressHook()
   const ref = {
-    current: initialValue,
-  };
-  hook.memoizedState = ref;
-  return ref;
+    current: initialValue
+  }
+  hook.memoizedState = ref
+  return ref
 }
 
 function updateRef() {
-  const hook = mountWorkInProgressHook();
-  return hook.memoizedState;
+  const hook = mountWorkInProgressHook()
+  return hook.memoizedState
 }
 
 function mountWorkInProgressHook() {
   const hook = {
-    memoizedState: null,
+    memoizedState: null
     // ...
-  };
-  if (workInProgressHook === null) {
-    currentlyRenderingFiber.memoizedState = workInProgressHook = hook;
-  } else {
-    workInProgressHook = workInProgressHook.next = hook;
   }
-  return workInProgressHook;
+  if (workInProgressHook === null) {
+    currentlyRenderingFiber.memoizedState = workInProgressHook = hook
+  } else {
+    workInProgressHook = workInProgressHook.next = hook
+  }
+  return workInProgressHook
 }
 ```
 

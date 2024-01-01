@@ -5,8 +5,8 @@
 通过 var 定义的变量会挂载到 window 上，而通过 let 定义的变量不会
 
 ```js
-var a = 1;
-console.log(window.a); // 1
+var a = 1
+console.log(window.a) // 1
 ```
 
 let 虽然不会污染全局，但是可以跨 script 标签使用。

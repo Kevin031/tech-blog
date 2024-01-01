@@ -18,19 +18,19 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref } from 'vue'
 
 type PictureCardType = {
-  picture: string;
-  height: number;
-};
+  picture: string
+  height: number
+}
 
-const loadMoreDiv = ref();
+const loadMoreDiv = ref()
 
-const dataSource = ref<Array<PictureCardType>>([]);
+const dataSource = ref<Array<PictureCardType>>([])
 
 const pushItems = () => {
-  console.log("push item");
+  console.log('push item')
   dataSource.value = dataSource.value.concat(
     Array(10)
       .fill({})
@@ -38,34 +38,34 @@ const pushItems = () => {
         return {
           // picture: `https://t.mwm.moe/mp/?hash=${idx}`,
           picture: `http://api.mtyqx.cn/api/random.php?hash=${idx}`,
-          height: Math.floor(Math.random() * 300) + 200,
-        };
+          height: Math.floor(Math.random() * 300) + 200
+        }
       })
-  );
-};
+  )
+}
 
 const createLoadMoreObserver = () => {
   const ob = new IntersectionObserver(
-    (entries) => {
-      let entrie = entries[0];
+    entries => {
+      let entrie = entries[0]
       if (entrie.isIntersecting) {
         // 模拟接口请求
         setTimeout(() => {
-          pushItems();
-        }, 800);
+          pushItems()
+        }, 800)
       }
     },
     {
       root: null,
-      threshold: 1,
+      threshold: 1
     }
-  );
-  ob.observe(loadMoreDiv.value);
-};
+  )
+  ob.observe(loadMoreDiv.value)
+}
 
 onMounted(() => {
-  createLoadMoreObserver();
-});
+  createLoadMoreObserver()
+})
 </script>
 
 <style lang="less" scoped>

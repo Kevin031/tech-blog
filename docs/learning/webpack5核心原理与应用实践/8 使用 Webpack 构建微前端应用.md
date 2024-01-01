@@ -1,6 +1,6 @@
 > Module Federation 通常译作“**模块联邦**”，是 Webpack 5 新引入的一种远程模块动态加载、运行技术。MF 允许我们将原本单个巨大应用按我们理想的方式拆分成多个体积更小、职责更内聚的小应用形式，理想情况下各个应用能够实现独立部署、独立开发(不同应用甚至允许使用不同技术栈)、团队自治，从而降低系统与团队协作的复杂度 —— 没错，这正是所谓的微前端架构。
 >
-> *An architectural style where independently deliverable frontend applications are composed into a greater whole —— 摘自《**[Micro Frontends](https://link.juejin.cn/?target=https%3A%2F%2Fmartinfowler.com%2Farticles%2Fmicro-frontends.html)**》。*
+> _An architectural style where independently deliverable frontend applications are composed into a greater whole —— 摘自《**[Micro Frontends](https://link.juejin.cn/?target=https%3A%2F%2Fmartinfowler.com%2Farticles%2Fmicro-frontends.html)**》。_
 
 英文社区对 Webpack Module Federation 的响应非常热烈，甚至被誉为“[A game-changer in JavaScript architecture](https://link.juejin.cn/?target=https%3A%2F%2Fmedium.com%2Fswlh%2Fwebpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669)”，相对而言国内对此热度并不高，这一方面是因为 MF 强依赖于 Webpack5，升级成本有点高；另一方面是国内已经有一些成熟微前端框架，例如 [qiankun](https://link.juejin.cn/?target=https%3A%2F%2Fqiankun.umijs.org%2Fzh%2Fguide)。不过我个人觉得 MF 有不少实用性强，非常值得学习、使用的特性，包括：
 
@@ -52,38 +52,38 @@ MF-basic
 我们先看看模块导出方 —— 也就是 `app-1` 的构建配置：
 
 ```js
-const path = require("path");
-const { ModuleFederationPlugin } = require("webpack").container;
+const path = require('path')
+const { ModuleFederationPlugin } = require('webpack').container
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
   devtool: false,
-  entry: path.resolve(__dirname, "./src/main.js"),
+  entry: path.resolve(__dirname, './src/main.js'),
   output: {
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(__dirname, './dist'),
     // 必须指定产物的完整路径，否则使用方无法正确加载产物资源
-    publicPath: `http://localhost:8081/dist/`,
+    publicPath: `http://localhost:8081/dist/`
   },
   plugins: [
     new ModuleFederationPlugin({
       // MF 应用名称
-      name: "app1",
+      name: 'app1',
       // MF 模块入口，可以理解为该应用的资源清单
       filename: `remoteEntry.js`,
       // 定义应用导出哪些模块
       exposes: {
-        "./utils": "./src/utils",
-        "./foo": "./src/foo",
-      },
-    }),
+        './utils': './src/utils',
+        './foo': './src/foo'
+      }
+    })
   ],
   // MF 应用资源提供方必须以 http(s) 形式提供服务
   // 所以这里需要使用 devServer 提供 http(s) server 能力
   devServer: {
     port: 8081,
-    hot: true,
-  },
-};
+    hot: true
+  }
+}
 ```
 
 > 提示：Module Federation 依赖于 Webpack5 内置的 [ModuleFederationPlugin](https://link.juejin.cn/?target=https%3A%2F%2Fwebpack.js.org%2Fplugins%2Fmodule-federation-plugin%2F) 实现模块导入导出功能。
@@ -114,16 +114,16 @@ MF-basic
 接下来继续看看模块导入方 —— 也就是 `app-2` 的配置方法：
 
 ```js
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { ModuleFederationPlugin } = require("webpack").container;
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { ModuleFederationPlugin } = require('webpack').container
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
   devtool: false,
-  entry: path.resolve(__dirname, "./src/main.js"),
+  entry: path.resolve(__dirname, './src/main.js'),
   output: {
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(__dirname, './dist')
   },
   plugins: [
     // 模块使用方也依然使用 ModuleFederationPlugin 插件搭建 MF 环境
@@ -131,27 +131,27 @@ module.exports = {
       // 使用 remotes 属性声明远程模块列表
       remotes: {
         // 地址需要指向导出方生成的应用入口文件
-        RemoteApp: "app1@http://localhost:8081/dist/remoteEntry.js",
-      },
+        RemoteApp: 'app1@http://localhost:8081/dist/remoteEntry.js'
+      }
     }),
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin()
   ],
   devServer: {
     port: 8082,
     hot: true,
-    open: true,
-  },
-};
+    open: true
+  }
+}
 ```
 
 作用远程模块使用方，`app-2` 需要使用 `ModuleFederationPlugin` 声明远程模块的 HTTP(S) 地址与模块名称(示例中的 `RemoteApp`)，之后在 `app-2` 中就可以使用模块名称异步导入 `app-1` 暴露出来的模块，例如：
 
 ```js
 // app-2/src/main.js
-(async () => {
-  const { sayHello } = await import("RemoteApp/utils");
-  sayHello();
-})();
+;(async () => {
+  const { sayHello } = await import('RemoteApp/utils')
+  sayHello()
+})()
 ```
 
 到这里，简单示例就算是搭建完毕了，之后运行页面，打开开发者工具的 Network 面板，可以看到：
@@ -183,7 +183,7 @@ module.exports = {
       exposes: {
         "./utils": "./src/utils",
         "./foo": "./src/foo",
-      }, 
+      },
       // 可被共享的依赖模块
 +     shared: ['lodash']
     }),
@@ -217,11 +217,9 @@ module.exports = {
 
 之后，运行页面可以看到最终只加载了一次 `lodash` 产物(下表左图)，而改动前则需要分别从导入/导出方各加载一次 `lodash`(下表右图)：
 
-| 添加 `shared` 后                                             | 改动前                                                       |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 添加 `shared` 后                                                                                                                              | 改动前                                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | ![img](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/55d6c1597e6743a29067aa5ab64c3544~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp) | ![img](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d216a327b16d414eaa4f7cba93d16476~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp) |
-
-
 
 注意，这里要求两个应用使用 **版本号完全相同** 的依赖才能被复用，假设上例应用 `app-1` 用了 `lodash@4.17.0` ，而 `app-2` 用的是 `lodash@4.17.1`，Webpack 还是会同时加载两份 lodash 代码，我们可以通过 `shared.[lib].requiredVersion` 配置项显式声明应用需要的依赖库版本来解决这个问题：
 
@@ -319,15 +317,15 @@ module.exports = {
   // ...
   plugins: [
     new ModuleFederationPlugin({
-      name: "order",
-      filename: "remoteEntry.js",
+      name: 'order',
+      filename: 'remoteEntry.js',
       // 导入路由配置
       exposes: {
-        "./routes": "./src/routes",
-      },
-    }),
-  ],
-};
+        './routes': './src/routes'
+      }
+    })
+  ]
+}
 ```
 
 注意，`order` 应用实际导出的是路由配置文件 `routes.js`。而 `host` 则通过 MF 插件导入并消费 `order` 应用的组件，对应配置：
@@ -341,22 +339,22 @@ module.exports = {
       // 使用 remotes 属性声明远程模块列表
       remotes: {
         // 地址需要指向导出方生成的应用入口文件
-        RemoteOrder: "order@http://localhost:8081/dist/remoteEntry.js",
-      },
+        RemoteOrder: 'order@http://localhost:8081/dist/remoteEntry.js'
+      }
     })
-  ],
+  ]
   // ...
-};
+}
 ```
 
 之后，在 `host` 应用中引入 `order` 的路由配置并应用到页面中：
 
 ```js
-import localRoutes from "./routes";
+import localRoutes from './routes'
 // 引入远程 order 模块
-import orderRoutes from "RemoteOrder/routes";
+import orderRoutes from 'RemoteOrder/routes'
 
-const routes = [...localRoutes, ...orderRoutes];
+const routes = [...localRoutes, ...orderRoutes]
 
 const App = () => (
   <React.StrictMode>
@@ -364,7 +362,7 @@ const App = () => (
       <h1>Micro Frontend Example</h1>
       <Navigation />
       <Routes>
-        {routes.map((route) => (
+        {routes.map(route => (
           <Route
             key={route.path}
             path={route.path}
@@ -379,9 +377,9 @@ const App = () => (
       </Routes>
     </HashRouter>
   </React.StrictMode>
-);
+)
 
-export default App;
+export default App
 ```
 
 通过这种方式，一是可以将业务代码分解为更细粒度的应用形态；二是应用可以各自管理路由逻辑，降低应用间耦合性。最终能降低系统组件间耦合度，更有利于多团队协作。除此之外，MF 技术还有非常大想象空间，国外有大神专门整理了一系列实用 MF 示例：[Module Federation Examples](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fmodule-federation%2Fmodule-federation-examples%2F)，感兴趣的读者务必仔细阅读这些示例代码。

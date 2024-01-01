@@ -120,8 +120,8 @@ export const PatchFlags = {
   NEED_PATCH: 1 << 9, //
   DYNAMIC_SLOTS: 1 << 10, // 动态slot
   HOISTED: -1, // 表示永远不会用作diff
-  BAIL: -2, // 指代差异算法
-};
+  BAIL: -2 // 指代差异算法
+}
 ```
 
 这里还采用了位运算，在 js 中位运算的判断效率是非常高的
@@ -134,14 +134,14 @@ export const PatchFlags = {
 // 接收到一个vnode参数，这是新生成的虚拟dom树
 function update(vnode) {
   // 通过当前组件的_vnode拿到旧的虚拟dom树
-  let oldVnode = this._vnode;
+  let oldVnode = this._vnode
   // 将组件的_vnode值指向新树
-  this._vnode = vnode;
+  this._vnode = vnode
   if (oldVnode) {
     // 旧树存在，执行diff
-    this.__patch__(this.$el, vnode, oldVnode);
+    this.__patch__(this.$el, vnode, oldVnode)
   } else {
-    this.__patch__(this.$el, vnode);
+    this.__patch__(this.$el, vnode)
   }
 }
 ```

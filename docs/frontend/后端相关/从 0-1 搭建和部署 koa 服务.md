@@ -66,44 +66,44 @@ tsconfig.json       // ts配置
 ::: code-group
 
 ```ts [src/index.js]
-import "module-alias/register";
-import "@/app";
+import 'module-alias/register'
+import '@/app'
 ```
 
 ```ts [src/app.js]
-import Koa from "koa";
-import InitManager from "./init";
-import { PORT } from "./config/constants";
-import cors from "koa-cors";
+import Koa from 'koa'
+import InitManager from './init'
+import { PORT } from './config/constants'
+import cors from 'koa-cors'
 
-const app = new Koa();
-let routerMap: any = [];
+const app = new Koa()
+let routerMap: any = []
 
 // 解除跨域限制
-app.use(cors());
+app.use(cors())
 // 初始化
-InitManager.initCore(app).then((list) => {
-  console.log("router Map", list);
-  routerMap = list;
-});
+InitManager.initCore(app).then(list => {
+  console.log('router Map', list)
+  routerMap = list
+})
 
 app.use((ctx, next) => {
   // 请求根目录直接返回可用的接口列表
-  if (ctx.request.path === "/") {
+  if (ctx.request.path === '/') {
     ctx.body = {
       ok: 1,
-      data: routerMap,
-    };
-    return;
+      data: routerMap
+    }
+    return
   }
-  next();
-});
+  next()
+})
 
-app.listen(PORT);
+app.listen(PORT)
 
-console.log("server is running at: " + `http://localhost:${PORT}`);
+console.log('server is running at: ' + `http://localhost:${PORT}`)
 
-export default app;
+export default app
 ```
 
 :::
@@ -161,80 +161,80 @@ npm i ts-node-dev
 路由使用了 `koa-router`，这是因为如果直接使用 koa 来开发的话，需要在 use 回调中写一大堆 if else 来处理不同路由
 
 ```ts
-import Koa from "koa";
+import Koa from 'koa'
 
-const app = new Koa();
+const app = new Koa()
 
-app.use((ctx) => {
-  if (ctx.request.path === "/api-1") {
+app.use(ctx => {
+  if (ctx.request.path === '/api-1') {
     // ...
-  } else if (ctx.request.path === "/api-2") {
+  } else if (ctx.request.path === '/api-2') {
     // ...
-  } else if (ctx.request.path === "/api-3") {
+  } else if (ctx.request.path === '/api-3') {
     // ...
-  } else if (ctx.request.path === "/api-4") {
+  } else if (ctx.request.path === '/api-4') {
     // ...
   }
-});
+})
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 而通过`koa-router`，不但可以将定义路由的代码块分开，还可以分别放置到不同的文件下，便于实现关注点分离，减少心智负担
 
 ```ts
-import Koa from "koa";
-import Router from "koa-router";
+import Koa from 'koa'
+import Router from 'koa-router'
 
-const app = new Koa();
+const app = new Koa()
 
 // 后续可以拆分到不同的文件中，再通过app.use挂载
-const router = new Router();
-router.get("/api-1", (ctx) => {
+const router = new Router()
+router.get('/api-1', ctx => {
   // ...
-});
-router.get("/api-2", (ctx) => {
+})
+router.get('/api-2', ctx => {
   // ...
-});
-router.get("/api-3", (ctx) => {
+})
+router.get('/api-3', ctx => {
   // ...
-});
-router.get("/api-4", (ctx) => {
+})
+router.get('/api-4', ctx => {
   // ...
-});
-app.use(router.routes());
+})
+app.use(router.routes())
 
-app.listen(3000);
+app.listen(3000)
 ```
 
 而在本项目中，对 router.get 进一步抽象，实现类似以下写法的封装方式
 
 ```ts
 // src/api/v1/user
-import { get, post } from "@/utils/route-controller";
-import Koa from "koa";
+import { get, post } from '@/utils/route-controller'
+import Koa from 'koa'
 
-const users = [{ name: "tom", age: 20 }];
+const users = [{ name: 'tom', age: 20 }]
 
 class User {
-  @get("/list")
+  @get('/list')
   public getList(ctx: Koa.Context) {
     ctx.body = {
       ok: 1,
-      data: users,
-    };
+      data: users
+    }
   }
 
-  @post("/list")
+  @post('/list')
   public postList(ctx: Koa.Context) {
     ctx.body = {
       ok: 1,
-      data: users,
-    };
+      data: users
+    }
   }
 }
 
-export default User;
+export default User
 ```
 
 与此同时，项目需要遍历 api 目录获取到所有文件，批量注册路由，并根据文件目录的路径补全路由的前缀路径
@@ -251,28 +251,28 @@ export default User;
 ```ts
 // src/utils/route-controller.ts
 type RouteOptions = {
-  prefix: string;
-};
+  prefix: string
+}
 
-type MethodType = "get" | "post" | "put" | "delete";
+type MethodType = 'get' | 'post' | 'put' | 'delete'
 
 const method =
   (type: MethodType) =>
   (path: string, options?: RouteOptions) =>
   (target: any, property: string) => {
-    let url = options && options.prefix ? options.prefix + path : path;
+    let url = options && options.prefix ? options.prefix + path : path
     target[property].router = {
       url,
-      type,
-    };
-  };
+      type
+    }
+  }
 
-const get = method("get");
-const post = method("post");
-const put = method("put");
-const _delete = method("delete");
+const get = method('get')
+const post = method('post')
+const put = method('put')
+const _delete = method('delete')
 
-export { get, post, put, _delete, MethodType };
+export { get, post, put, _delete, MethodType }
 ```
 
 它的关键在于给方法本身挂载路由的请求路径和请求方式，方便提供给下一步路由的批量注册进行遍历。
@@ -282,68 +282,66 @@ export { get, post, put, _delete, MethodType };
 ```ts
 // src/init.ts
 
-import Router from "koa-router";
-import Koa from "koa";
-import path from "path";
-import * as glob from "glob";
-import { MethodType } from "@/utils/route-controller";
+import Router from 'koa-router'
+import Koa from 'koa'
+import path from 'path'
+import * as glob from 'glob'
+import { MethodType } from '@/utils/route-controller'
 
-const router = new Router();
+const router = new Router()
 
 class InitManager {
-  static app: Koa;
+  static app: Koa
 
   static initCore(app: Koa) {
-    InitManager.app = app;
-    return InitManager.initLoadRouters();
+    InitManager.app = app
+    return InitManager.initLoadRouters()
   }
 
   static initLoadRouters() {
     return new Promise((resolve, reject) => {
       let routerMap: Array<{
-        type: string;
-        url: string;
-      }> = [];
+        type: string
+        url: string
+      }> = []
       Promise.all([
-        ...glob
-          .sync(path.resolve(__dirname, `./api/**/*.{js,ts}`))
-          .map((item) =>
-            import(item).then((obj) => {
-              if (obj.default instanceof Router) {
-                // 路由对象，直接执行注册
-                InitManager.app.use(obj.default.routes());
-              } else {
-                // 自定义对象，遍历属性方法获取到对应的路由信息，补全文件基础路径，再执行注册
-                let Prototype = obj.default.prototype;
-                Object.getOwnPropertyNames(Prototype).forEach((key) => {
-                  if (key === "constructor") return;
-                  let method = Prototype[key];
-                  let pathMatch = item.match(/(\/api\/.+?)\.(js|ts)/);
-                  let basePath = pathMatch ? pathMatch[1] : "";
-                  if (method.router) {
-                    const { url, type } = method.router;
-                    let fullPath = basePath + url;
-                    router[type as MethodType](fullPath, method);
-                    routerMap.push({
-                      url: fullPath,
-                      type,
-                    });
-                    console.log(`注册路由:[${type}]${fullPath}`);
-                  }
-                });
-              }
-              return Promise.resolve();
-            })
-          ),
+        ...glob.sync(path.resolve(__dirname, `./api/**/*.{js,ts}`)).map(item =>
+          import(item).then(obj => {
+            if (obj.default instanceof Router) {
+              // 路由对象，直接执行注册
+              InitManager.app.use(obj.default.routes())
+            } else {
+              // 自定义对象，遍历属性方法获取到对应的路由信息，补全文件基础路径，再执行注册
+              let Prototype = obj.default.prototype
+              Object.getOwnPropertyNames(Prototype).forEach(key => {
+                if (key === 'constructor') return
+                let method = Prototype[key]
+                let pathMatch = item.match(/(\/api\/.+?)\.(js|ts)/)
+                let basePath = pathMatch ? pathMatch[1] : ''
+                if (method.router) {
+                  const { url, type } = method.router
+                  let fullPath = basePath + url
+                  router[type as MethodType](fullPath, method)
+                  routerMap.push({
+                    url: fullPath,
+                    type
+                  })
+                  console.log(`注册路由:[${type}]${fullPath}`)
+                }
+              })
+            }
+            return Promise.resolve()
+          })
+        )
       ]).then(() => {
-        InitManager.app.use(router.routes());
-        resolve(routerMap);
-      });
-    });
+        InitManager.app.use(router.routes())
+        resolve(routerMap)
+      })
+    })
   }
 }
 
-export default InitManager;
+export default InitManager
 ```
 
 其核心原理是通过`glob.sync`深度遍历 api 目录获取到文件路径，再执行 `import` 得到模块导出的对象。

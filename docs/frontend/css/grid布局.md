@@ -139,11 +139,11 @@
   grid-template-rows: [X1] 100px [X2] 100px [X3] 100px [X4] 100px [X5] 100px;
   grid-template-columns: [Y1] 100px [Y2] 100px [Y3] 100px [Y4] 100px [Y5] 100px;
   grid-template-areas:
-    "header header header header header"
-    "nav main main main main"
-    "nav main main main main"
-    "nav main main main main"
-    ". footer footer footer .";
+    'header header header header header'
+    'nav main main main main'
+    'nav main main main main'
+    'nav main main main main'
+    '. footer footer footer .';
   row-gap: 10px;
   column-gap: 10px;
   .header {

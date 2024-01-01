@@ -11,11 +11,11 @@ beginWork 会根据当前的 fiberNode 创建下一级的 fiberNode，在 update
 **骨架搭建**
 
 ```jsx
-import ReactReconciler from "react-reconciler";
+import ReactReconciler from 'react-reconciler'
 
-const hostConfig = {};
+const hostConfig = {}
 
-const ReactReconcilerInst = ReactReconciler(hostConfig);
+const ReactReconcilerInst = ReactReconciler(hostConfig)
 
 export default {
   render: (reactElement, domElement, callback) => {
@@ -23,25 +23,25 @@ export default {
       document._rootContainer = ReactReconcilerInst.createContainer(
         domElement,
         false
-      );
+      )
     }
     return ReactReconsilerInst.updateContainer(
       reactElement,
       domElement._rootContainer,
       null,
       callback
-    );
-  },
-};
+    )
+  }
+}
 ```
 
 **更改入口文件**
 
 ```jsx
-import ReactDOM from "react-dom";
-import CustomRenderer from "./customRenderer";
+import ReactDOM from 'react-dom'
+import CustomRenderer from './customRenderer'
 
-CustomRenderer.render(<App />, document.getElementById("root"));
+CustomRenderer.render(<App />, document.getElementById('root'))
 ```
 
 **填充 hostConfig，避免缺失方法导致报错**
@@ -56,9 +56,9 @@ const hostConfig = {
   commitUpdate() {},
   commitTextUpdate() {},
   createInstance() {},
-  createTextInstance() {},
+  createTextInstance() {}
   // ...
-};
+}
 ```
 
 **需要重点实现的方法**
@@ -75,61 +75,61 @@ const hostConfig = {
     _currentHostContext,
     workInProgress
   ) {
-    const domElement = document.createElement(type);
-    Object.keys(newProps).forEach((propName) => {
-      const propValue = newProps[propName];
-      if (propName === "children") {
-        if (typeof propValue === "string" || typeof propValue === "number") {
-          domElement.textContent = propValue;
+    const domElement = document.createElement(type)
+    Object.keys(newProps).forEach(propName => {
+      const propValue = newProps[propName]
+      if (propName === 'children') {
+        if (typeof propValue === 'string' || typeof propValue === 'number') {
+          domElement.textContent = propValue
         }
-      } else if (propName === "onClick") {
-        domElement.addEventListener("click", propValue);
-      } else if (propName === "className") {
-        domElement.setAttribute("class", propValue);
+      } else if (propName === 'onClick') {
+        domElement.addEventListener('click', propValue)
+      } else if (propName === 'className') {
+        domElement.setAttribute('class', propValue)
       } else {
-        domElement.setAttribute(propName, propValue);
+        domElement.setAttribute(propName, propValue)
       }
-    });
-    return domElement;
+    })
+    return domElement
   },
   /**
    * 创建文本节点
    */
   createTextInstance(text) {
-    return document.createTextNode(text);
+    return document.createTextNode(text)
   },
   /**
    * 插入节点
    */
   appendInitialChild(parent, child) {
-    parent.appendChild(child);
+    parent.appendChild(child)
   },
   appendChild(parent, child) {
-    parent.appendChild(child);
+    parent.appendChild(child)
   },
   /**
    * 更新节点
    */
   commitUpdate(domElement, updatePayload, type, oldProps, newProps) {
-    Object.keys(newProps).forEach((propName) => {
-      const propValue = newProps[propName];
-      if (propName === "children") {
-        if (typeof propValue === "string" || typeof propValue === "number") {
-          domElement.textContent = propValue;
+    Object.keys(newProps).forEach(propName => {
+      const propValue = newProps[propName]
+      if (propName === 'children') {
+        if (typeof propValue === 'string' || typeof propValue === 'number') {
+          domElement.textContent = propValue
         }
       } else {
-        domElement.setAttirbute(propName, propValue);
+        domElement.setAttirbute(propName, propValue)
       }
-    });
+    })
   },
   commitTextUpdate(textInstance, oldText, newText) {
-    textInstance.text = newText;
+    textInstance.text = newText
   },
   /**
    * 移除节点
    */
   removeChild(parentInstance, child) {
-    parentInstance.removeChild(child);
-  },
-};
+    parentInstance.removeChild(child)
+  }
+}
 ```

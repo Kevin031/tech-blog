@@ -20,7 +20,7 @@ const html = renderToString(<App />)
 - 5. 将渲染字符串插入 HTML，将渲染出的 HTML 字符串嵌入服务端框架的模板中
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -49,7 +49,7 @@ hydrate(<App />, document.getElementById('root'))
 激活过程：在服务器端渲染时，React 会将组件的状态以 JSON 数据的形式嵌入到 HTML 中，通常通过将一个 window.**INITIAL_STATE** 的全局变量设置为包含组件状态的 JSON 对象。
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />

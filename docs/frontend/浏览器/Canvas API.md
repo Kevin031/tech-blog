@@ -4,7 +4,7 @@
 
 ```js
 // 获取绘制上下文
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext('2d')
 // 使用上下文对象ctx完成后续绘图
 ```
 
@@ -38,35 +38,35 @@ const ctx = canvas.getContext("2d");
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-const canvasRef = ref();
+import { ref, onMounted } from 'vue'
+const canvasRef = ref()
 onMounted(() => {
-  const canvas = canvasRef1.value;
+  const canvas = canvasRef1.value
 
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext('2d')
 
   // 画一个三角形
-  ctx.beginPath();
-  ctx.moveTo(100, 50);
-  ctx.lineTo(300, 100);
-  ctx.lineTo(123, 222);
-  ctx.closePath();
-  ctx.strokeStyle = "#000";
-  ctx.stroke();
+  ctx.beginPath()
+  ctx.moveTo(100, 50)
+  ctx.lineTo(300, 100)
+  ctx.lineTo(123, 222)
+  ctx.closePath()
+  ctx.strokeStyle = '#000'
+  ctx.stroke()
 
   // 画一个圆
-  ctx.beginPath();
-  ctx.arc(200, 300, 100, 0, 2 * Math.PI);
-  ctx.strokeStyle = "#f00";
-  ctx.stroke();
+  ctx.beginPath()
+  ctx.arc(200, 300, 100, 0, 2 * Math.PI)
+  ctx.strokeStyle = '#f00'
+  ctx.stroke()
 
   // 画文字
-  ctx.font = "50px serif";
-  ctx.fillText("Hello world", 300, 100);
+  ctx.font = '50px serif'
+  ctx.fillText('Hello world', 300, 100)
 
   // 画图片
-  let image = new Image();
-  image.src = "/img-example.jpg";
+  let image = new Image()
+  image.src = '/img-example.jpg'
   image.onload = () => {
     ctx.drawImage(
       image,
@@ -74,9 +74,9 @@ onMounted(() => {
       200,
       image.naturalWidth / 4,
       image.naturalHeight / 4
-    );
-  };
-});
+    )
+  }
+})
 </script>
 ```
 

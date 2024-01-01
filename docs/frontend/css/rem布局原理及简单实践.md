@@ -58,25 +58,21 @@ p {
 
 ```javascript
 function remChange() {
-  var resizeEvt =
-    "orientationchange" in window ? "orientationchange" : "resize"; // 屏幕宽度改变的事件
+  var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize' // 屏幕宽度改变的事件
   var widthProportion = function () {
     // 计算
-    var doc = document.body || document.documentElement;
-    var p = doc.clientWidth;
-    return p / 100;
-  };
+    var doc = document.body || document.documentElement
+    var p = doc.clientWidth
+    return p / 100
+  }
   var changePage = function () {
     // 触发的函数
     document
-      .getElementsByTagName("html")[0]
-      .setAttribute(
-        "style",
-        "font-size:" + widthProportion() + "px !important"
-      );
-  };
-  changePage(); // 初始化
-  window.addEventListener(resizeEvt, changePage, false); // 监听事件
+      .getElementsByTagName('html')[0]
+      .setAttribute('style', 'font-size:' + widthProportion() + 'px !important')
+  }
+  changePage() // 初始化
+  window.addEventListener(resizeEvt, changePage, false) // 监听事件
 }
 ```
 
@@ -84,25 +80,25 @@ function remChange() {
 
 ```javascript
 function setDPR() {
-  var viewport = document.querySelector("meta[name=viewport]");
+  var viewport = document.querySelector('meta[name=viewport]')
   if (window.devicePixelRatio === 1) {
     viewport.setAttribute(
-      "content",
-      "width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
-    );
+      'content',
+      'width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no'
+    )
   }
   if (window.devicePixelRatio === 2) {
     // view宽度等于设备宽度，初始缩放值为0.5，允许用户最大缩放值0.5，不允许用户进行缩放
     viewport.setAttribute(
-      "content",
-      "width=device-width,initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no"
-    );
+      'content',
+      'width=device-width,initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no'
+    )
   }
   if (window.devicePixelRatio === 3) {
     viewport.setAttribute(
-      "content",
-      "width=device-width,initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no"
-    );
+      'content',
+      'width=device-width,initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no'
+    )
   }
 }
 ```

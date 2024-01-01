@@ -431,7 +431,7 @@ module.exports = () => {
 # 客户端版本：
 npx webpack --config ./webpack.client.js
 # 服务端版本：
-npx webpack --config ./webpack.server.js 
+npx webpack --config ./webpack.server.js
 ```
 
 1. 至此，SSR 的工程化框架搭建完毕，接下来可以开始编写任何 React 代码，例如：
@@ -499,11 +499,11 @@ module.exports = override(
   addLessLoader({
     strictMath: true,
     noIeCompat: true,
-    cssLoaderOptions: {}, 
+    cssLoaderOptions: {},
     cssModules: {
-      localIdentName: "[path][name]__[local]--[hash:base64:5]", 
+      localIdentName: "[path][name]__[local]--[hash:base64:5]",
     },
-  }) 
+  })
 ));
 ```
 

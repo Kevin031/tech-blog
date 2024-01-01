@@ -13,15 +13,15 @@
 假如有这样 2 个文件
 
 ```js
-import name from "./name";
+import name from './name'
 
-console.log(name);
+console.log(name)
 ```
 
 ```js
-const name = "jack";
+const name = 'jack'
 
-export { name };
+export { name }
 ```
 
 使用 webpack 打包后，精简代码如下：
@@ -29,20 +29,20 @@ export { name };
 ```js
 const __webpack_modules__ = [
   (module, require) => {
-    const name = require(1);
-    console.log(name);
+    const name = require(1)
+    console.log(name)
   },
   (modole, require) => {
-    const name = "jack";
-    module.exports = name;
-  },
-];
-const __webpack_require__ = (id) => {
-  const module = { exports: {} };
-  const m = __webpack_modules__[id](module, __webpack_require__);
-  return module.exports;
-};
-__webpack_require(0);
+    const name = 'jack'
+    module.exports = name
+  }
+]
+const __webpack_require__ = id => {
+  const module = { exports: {} }
+  const m = __webpack_modules__[id](module, __webpack_require__)
+  return module.exports
+}
+__webpack_require(0)
 ```
 
 相比与 rollup 的方案
@@ -50,8 +50,8 @@ __webpack_require(0);
 rollup 仅仅将所有模块平铺开，对于变量冲突，直接重新命名
 
 ```js
-const name = "jack";
-console.log(name);
+const name = 'jack'
+console.log(name)
 ```
 
 ## 代码分割
@@ -59,13 +59,13 @@ console.log(name);
 通过`import()`可进行代码分割
 
 ```js
-import("./sum").then((m) => {
-  m.default(3, 4);
-});
+import('./sum').then(m => {
+  m.default(3, 4)
+})
 
 // 以下为 sum.js 内容
-const sum = (x, y) => x + y;
-export default sum;
+const sum = (x, y) => x + y
+export default sum
 ```
 
 将被编译成以下代码
@@ -74,9 +74,9 @@ export default sum;
 __webpack_require__
   .e(/* import() | sum */ 644)
   .then(__webpack_require__.bind(__webpack_require__, 709))
-  .then((m) => {
-    m.default(3, 4);
-  });
+  .then(m => {
+    m.default(3, 4)
+  })
 ```
 
 1. `__webpack_require__.e`: 加载 chunk。该函数将使用 `document.createElement('script')` 异步加载 `chunk` 并封装为 `Promise`。
@@ -97,18 +97,18 @@ __webpack_require__
 // 实际上的 user.json 被编译为以下内容
 export default {
   id: 10086,
-  name: "shanyue",
-  github: "https://github.com/shfshanyue",
-};
+  name: 'shanyue',
+  github: 'https://github.com/shfshanyue'
+}
 ```
 
 json-loader 的最小实现原理如下
 
 ```js
 module.exports = function (source) {
-  const json = typeof source === "string" ? source : JSON.stringify(source);
-  return `module.exports = ${json}`;
-};
+  const json = typeof source === 'string' ? source : JSON.stringify(source)
+  return `module.exports = ${json}`
+}
 ```
 
 ### 图片
@@ -131,8 +131,8 @@ function injectCss(css) {
 }
 
 injectCss(\`${source}\`)
-  `;
-};
+  `
+}
 ```
 
 3. `mini-css-extract-plugin`: 将样式打包成单独的文件，提升渲染速度
@@ -164,19 +164,19 @@ injectCss(\`${source}\`)
 ```js
 const __webpack_modules = [
   (module, exports, __webpack_require__) => {
-    __webpack_require__(0);
+    __webpack_require__(0)
   },
   () => {
-    console.log("这是一号模块");
-  },
-];
+    console.log('这是一号模块')
+  }
+]
 
 // HMR chunk代码
-self["webpackHotUpdate"](0, {
+self['webpackHotUpdate'](0, {
   1: () => {
-    console.log("这是最新的一号模块");
-  },
-});
+    console.log('这是最新的一号模块')
+  }
+})
 ```
 
 具体实现流程如下：

@@ -63,17 +63,11 @@ Webpack 会将 Entry 模块、异步模块所有代码都打进同一个单独�
   SplitChunksPlugin
   ```
 
-   
-
   支持根据 Module 路径、Module 被引用次数、Chunk 大小、Chunk 请求数等决定是否对 Chunk 做进一步拆解，这些决策都可以通过
-
-   
 
   ```
   optimization.splitChunks
   ```
-
-   
 
   相应配置项调整定制，基于这些能力我们可以实现：
 
@@ -86,31 +80,19 @@ Webpack 会将 Entry 模块、异步模块所有代码都打进同一个单独�
   SplitChunksPlugin
   ```
 
-   
-
   还内置了
-
-   
 
   ```
   default
   ```
 
-   
-
   与
-
-   
 
   ```
   defaultVendors
   ```
 
-   
-
   两个
-
-   
 
   ```
   cacheGroup
@@ -133,8 +115,8 @@ module.exports = {
   optimization: {
     splitChunks: {
       // ...
-    },
-  },
+    }
+  }
 }
 ```
 
@@ -161,9 +143,9 @@ module.exports = {
   //...
   optimization: {
     splitChunks: {
-      chunks: 'all',
-    },
-  },
+      chunks: 'all'
+    }
+  }
 }
 ```
 
@@ -182,8 +164,8 @@ module.exports = {
     splitChunks: {
       // 设定引用次数超过 2 的模块才进行分包
       minChunks: 2
-    },
-  },
+    }
+  }
 }
 ```
 
@@ -191,7 +173,7 @@ module.exports = {
 
 ```js
 // common.js
-export default "common chunk";
+export default 'common chunk'
 
 // async-module.js
 import common from './common'
@@ -219,12 +201,12 @@ module.exports = {
   },
   // ...
   optimization: {
-    splitChunks: {      
-      minChunks: 2,
+    splitChunks: {
+      minChunks: 2
       //...
     }
   }
-};
+}
 ```
 
 > 提示：示例已上传到 [小册仓库](https://link.juejin.cn/?target=https%3A%2F%2Fgithub1s.com%2FTecvan-fe%2Fwebpack-book-samples%2Ftree%2Fmain%2Fsplitchunks-basic)。
@@ -290,13 +272,9 @@ module.exports = {
 
 3. 判断该 Chunk 资源的体积是否大于上述配置项
 
-    
-
    ```
    minSize
    ```
-
-    
 
    声明的下限阈值；
 
@@ -324,14 +302,14 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         vendors: {
-            test: /[\\/]node_modules[\\/]/,
-            minChunks: 1,
-            minSize: 0
+          test: /[\\/]node_modules[\\/]/,
+          minChunks: 1,
+          minSize: 0
         }
-      },
-    },
-  },
-};
+      }
+    }
+  }
+}
 ```
 
 示例通过 `cacheGroups` 属性设置 `vendors` 缓存组，所有命中 `vendors.test` 规则的模块都会被归类 `vendors` 分组，优先应用该组下的 `minChunks`、`minSize` 等分包配置。
@@ -354,21 +332,21 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         default: {
-          idHint: "",
+          idHint: '',
           reuseExistingChunk: true,
           minChunks: 2,
           priority: -20
         },
         defaultVendors: {
-          idHint: "vendors",
+          idHint: 'vendors',
           reuseExistingChunk: true,
           test: /[\\/]node_modules[\\/]/i,
           priority: -10
         }
-      },
-    },
-  },
-};
+      }
+    }
+  }
+}
 ```
 
 这两个配置组能帮助我们：
@@ -385,10 +363,10 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         default: false
-      },
-    },
-  },
-};
+      }
+    }
+  }
+}
 ```
 
 ## 配置项与最佳实践
@@ -408,13 +386,9 @@ module.exports = {
 
 - 针对
 
-   
-
   ```
   node_modules
   ```
-
-   
 
   资源：
 

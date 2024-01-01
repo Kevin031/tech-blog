@@ -71,168 +71,168 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref } from "vue";
+import { computed, reactive, ref } from 'vue'
 
 // 是否正在排序
-const isMoving = ref(false);
+const isMoving = ref(false)
 
 // 拖拽容器node
-const dragContainer = ref();
+const dragContainer = ref()
 
 // 放置提示样式
-const LIST_DROPPABLE = "droppable";
+const LIST_DROPPABLE = 'droppable'
 
 // 当前正在拖拽的元素
 let currentDrag = {
-  target: null,
-};
+  target: null
+}
 
 const targetListAllowedType = computed(() => {
-  return isMoving.value ? "move" : "copy";
-});
+  return isMoving.value ? 'move' : 'copy'
+})
 
 // 原始列表
 const sourceList = ref(
   Array(7)
-    .fill("")
+    .fill('')
     .map((_, idx) => ({
-      name: `元素${idx + 1}`,
+      name: `元素${idx + 1}`
     }))
-);
+)
 
 // 接受数据的列表
 const targetList = reactive({
   first: [
     {
-      name: "复制元素1",
+      name: '复制元素1'
     },
     {
-      name: "复制元素2",
+      name: '复制元素2'
     },
     {
-      name: "复制元素3",
+      name: '复制元素3'
     },
     {
-      name: "复制元素4",
+      name: '复制元素4'
     },
     {
-      name: "复制元素5",
-    },
+      name: '复制元素5'
+    }
   ],
-  second: [],
-});
+  second: []
+})
 
 /**
  * 清除所有放置样式
  */
 const clearDropStyle = () => {
-  dragContainer.value.querySelectorAll(`.${LIST_DROPPABLE}`).forEach((node) => {
-    node.classList.remove(LIST_DROPPABLE);
-  });
-};
+  dragContainer.value.querySelectorAll(`.${LIST_DROPPABLE}`).forEach(node => {
+    node.classList.remove(LIST_DROPPABLE)
+  })
+}
 
 /**
  * 处理开始拖拽的逻辑
  * @param {*} evt
  */
-const handleDragStart = (evt) => {
-  const { effect, index } = evt.target.dataset;
-  evt.dataTransfer.effectAllowed = effect;
-  evt.dataTransfer.setData("oldIndex", index);
+const handleDragStart = evt => {
+  const { effect, index } = evt.target.dataset
+  evt.dataTransfer.effectAllowed = effect
+  evt.dataTransfer.setData('oldIndex', index)
   currentDrag = {
     target: evt.target,
-    index,
-  };
-  if (effect === "move") {
-    let modelName = evt.target.closest("[data-model]").dataset.model;
-    currentDrag.modelName = modelName;
+    index
+  }
+  if (effect === 'move') {
+    let modelName = evt.target.closest('[data-model]').dataset.model
+    currentDrag.modelName = modelName
     evt.dataTransfer.setData(
-      "dataSource",
+      'dataSource',
       JSON.stringify(targetList[modelName][Number(index)])
-    );
-    isMoving.value = true;
+    )
+    isMoving.value = true
   } else {
     evt.dataTransfer.setData(
-      "dataSource",
+      'dataSource',
       JSON.stringify(sourceList.value[Number(index)])
-    );
-    isMoving.value = false;
+    )
+    isMoving.value = false
   }
-};
+}
 
-const getElementModelName = (ele) => {
-  return ele.closest("[data-model]")?.dataset.model;
-};
+const getElementModelName = ele => {
+  return ele.closest('[data-model]')?.dataset.model
+}
 
-const getElementIndex = (ele) => {
-  return ele.closest("[data-index]")?.dataset.index;
-};
+const getElementIndex = ele => {
+  return ele.closest('[data-index]')?.dataset.index
+}
 
 /**
  * 处理进入拖放区域的逻辑
  * @param {*} evt
  */
-const handleDragEnter = (evt) => {
-  clearDropStyle();
-  let dropNode = evt.target.closest("[data-drop]");
-  let dropAllowedType = dropNode?.dataset?.drop;
+const handleDragEnter = evt => {
+  clearDropStyle()
+  let dropNode = evt.target.closest('[data-drop]')
+  let dropAllowedType = dropNode?.dataset?.drop
   if (dropAllowedType === evt.dataTransfer.effectAllowed) {
     // 如果是移动且index是它自己，则不考虑
-    if (dropAllowedType === "move") {
-      let oldIndex = currentDrag.index;
-      let oldModelName = currentDrag.modelName;
-      let modelName = getElementModelName(evt.target);
-      let index = getElementIndex(evt.target);
+    if (dropAllowedType === 'move') {
+      let oldIndex = currentDrag.index
+      let oldModelName = currentDrag.modelName
+      let modelName = getElementModelName(evt.target)
+      let index = getElementIndex(evt.target)
       if (oldModelName === modelName && index === oldIndex) {
-        evt.stopPropagation();
-        return;
+        evt.stopPropagation()
+        return
       }
     }
-    dropNode.classList.add(LIST_DROPPABLE);
+    dropNode.classList.add(LIST_DROPPABLE)
   }
-};
+}
 
-const getTransferDataSource = (evt) => {
+const getTransferDataSource = evt => {
   try {
-    let res = JSON.parse(evt.dataTransfer.getData("dataSource"));
-    return res;
+    let res = JSON.parse(evt.dataTransfer.getData('dataSource'))
+    return res
   } catch {
-    return undefined;
+    return undefined
   }
-};
+}
 
 /**
  * 处理放置逻辑
  * @param {*} evt
  */
-const handleDrop = (evt) => {
-  clearDropStyle();
-  let dataSource = getTransferDataSource(evt);
-  let dropNode = evt.target.closest("[data-drop]");
+const handleDrop = evt => {
+  clearDropStyle()
+  let dataSource = getTransferDataSource(evt)
+  let dropNode = evt.target.closest('[data-drop]')
 
-  if (!evt.dataTransfer || !dataSource) return;
-  if (!dataSource || !dropNode) return;
+  if (!evt.dataTransfer || !dataSource) return
+  if (!dataSource || !dropNode) return
 
-  const wrapperNode = dropNode.closest(`.target-list[data-model]`);
-  const modelName = wrapperNode.dataset.model;
-  let { dropType = "list", index, drop } = dropNode.dataset;
+  const wrapperNode = dropNode.closest(`.target-list[data-model]`)
+  const modelName = wrapperNode.dataset.model
+  let { dropType = 'list', index, drop } = dropNode.dataset
   if (!index) {
-    index = targetList[modelName].length;
+    index = targetList[modelName].length
   }
-  if (drop !== currentDrag.target.dataset.effect) return;
-  if (drop === "copy") {
-    handleListAdd(modelName, dataSource, dropType, Number(index));
-  } else if (drop === "move") {
-    let { index: oldIndex, modelName: oldModelName } = currentDrag;
+  if (drop !== currentDrag.target.dataset.effect) return
+  if (drop === 'copy') {
+    handleListAdd(modelName, dataSource, dropType, Number(index))
+  } else if (drop === 'move') {
+    let { index: oldIndex, modelName: oldModelName } = currentDrag
     handleListMove(
       modelName,
       oldModelName,
       dataSource,
       Number(index),
       Number(oldIndex)
-    );
+    )
   }
-};
+}
 
 /**
  * 处理列表复制
@@ -242,14 +242,14 @@ const handleDrop = (evt) => {
  * @param {number} index 放置位置
  */
 const handleListAdd = (modelName, dataSource, dropType, index) => {
-  dataSource.name = "复制" + dataSource.name;
-  if (!(modelName in targetList)) return;
-  if (dropType === "item") {
-    targetList[modelName].splice(index + 1, 0, dataSource);
+  dataSource.name = '复制' + dataSource.name
+  if (!(modelName in targetList)) return
+  if (dropType === 'item') {
+    targetList[modelName].splice(index + 1, 0, dataSource)
   } else {
-    targetList[modelName].push(dataSource);
+    targetList[modelName].push(dataSource)
   }
-};
+}
 
 /**
  * 处理列表移动
@@ -269,22 +269,22 @@ const handleListMove = (
   if (modelName === oldModelName) {
     if (index > oldIndex) {
       // 增加
-      targetList[modelName].splice(index + 1, 0, dataSource);
+      targetList[modelName].splice(index + 1, 0, dataSource)
       // 移除
-      targetList[modelName].splice(oldIndex, 1);
+      targetList[modelName].splice(oldIndex, 1)
     } else {
       // 移除
-      targetList[modelName].splice(oldIndex, 1);
+      targetList[modelName].splice(oldIndex, 1)
       // 增加，由于移除后少了1位，所以这里是index
-      targetList[modelName].splice(index, 0, dataSource);
+      targetList[modelName].splice(index, 0, dataSource)
     }
   } else {
     // 增加
-    targetList[modelName].splice(index + 1, 0, dataSource);
+    targetList[modelName].splice(index + 1, 0, dataSource)
     // 移除
-    targetList[oldModelName].splice(oldIndex, 1);
+    targetList[oldModelName].splice(oldIndex, 1)
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -317,7 +317,7 @@ const handleListMove = (
 
     .item {
       &::after {
-        content: "";
+        content: '';
         display: none;
         height: 10px;
         background-color: aqua;

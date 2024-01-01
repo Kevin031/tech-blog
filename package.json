@@ -7,13 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "lint": "prettier **/* --write"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "fs": "^0.0.1-security",
     "less": "^4.2.0",
+    "prettier": "^3.1.1",
     "vitepress": "^1.0.0-rc.22"
   },
   "dependencies": {

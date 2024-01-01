@@ -44,13 +44,9 @@ Webpack 能够将各种类型的资源 —— 包括图片、音视频、CSS、J
 
 3. 调用
 
-    
-
    ```
    new WebpackOptionsApply().process
    ```
-
-    
 
    方法，根据配置内容动态注入相应插件，包括：
 
@@ -61,7 +57,7 @@ Webpack 能够将各种类型的资源 —— 包括图片、音视频、CSS、J
 **最后，调用 `compiler.compile` 方法开始执行构建**，这一步非常重要，源码：
 
 ```js
-// webpack/lib/compiler.js 
+// webpack/lib/compiler.js
 compile(callback) {
     const params = this.newCompilationParams();
     this.hooks.beforeCompile.callAsync(params, err => {
@@ -109,17 +105,17 @@ compile(callback) {
 
 ```js
 class EntryPlugin {
-    apply(compiler) {
-        const { entry, options, context } = this;
-        // 创建入口 Dependency 对象
-        const dep = EntryPlugin.createDependency(entry, options);
+  apply(compiler) {
+    const { entry, options, context } = this
+    // 创建入口 Dependency 对象
+    const dep = EntryPlugin.createDependency(entry, options)
 
-        compiler.hooks.make.tapAsync("EntryPlugin", (compilation, callback) => {
-            compilation.addEntry(context, dep, options, err => {
-                callback(err);
-            });
-        });
-    }
+    compiler.hooks.make.tapAsync('EntryPlugin', (compilation, callback) => {
+      compilation.addEntry(context, dep, options, err => {
+        callback(err)
+      })
+    })
+  }
 }
 ```
 
@@ -135,11 +131,7 @@ class EntryPlugin {
 
 4. 在
 
-    
-
    JavaScriptParser
-
-    
 
    类中遍历 AST，触发各种钩子，其中最关键的：
 
@@ -192,7 +184,7 @@ class EntryPlugin {
 「生成阶段」发生在 `make` 阶段执行完毕，`compiler.compile` 调用 [compilation.seal](https://link.juejin.cn/?target=https%3A%2F%2Fgithub1s.com%2Fwebpack%2Fwebpack%2Fblob%2FHEAD%2Flib%2FCompilation.js%23L2780-L2781) 函数时：
 
 ```js
-// webpack/lib/compiler.js 
+// webpack/lib/compiler.js
 compile(callback) {
     // ...
     const compilation = this.newCompilation(params);
@@ -211,11 +203,7 @@ compile(callback) {
 
 2. 遍历
 
-    
-
    入口集合
-
-    
 
    ```
    compilation.entries
@@ -232,35 +220,23 @@ compile(callback) {
 
 5. 一直到最后一个 Optimize 钩子
 
-    
-
    ```
    optimizeChunkModules
    ```
 
-    
-
    执行完毕后，开始调用
-
-    
 
    compilation.codeGeneration
 
-    
-
    方法生成 Chunk 代码，在
-
-    
 
    ```
    codeGeneration
    ```
 
-    
-
    方法内部：
 
-   1. 遍历每一个 Chunk 的 Module 对象，调用 [_codeGenerationModule](https://link.juejin.cn/?target=https%3A%2F%2Fgithub1s.com%2Fwebpack%2Fwebpack%2Fblob%2FHEAD%2Flib%2FCompilation.js%23L3297-L3298)；
+   1. 遍历每一个 Chunk 的 Module 对象，调用 [\_codeGenerationModule](https://link.juejin.cn/?target=https%3A%2F%2Fgithub1s.com%2Fwebpack%2Fwebpack%2Fblob%2FHEAD%2Flib%2FCompilation.js%23L3297-L3298)；
    2. `_codeGenerationModule` 又会继续往下调用 [module.codeGeneration](https://link.juejin.cn/?target=https%3A%2F%2Fgithub1s.com%2Fwebpack%2Fwebpack%2Fblob%2FHEAD%2Flib%2FModule.js%23L876-L877) 生成单个 Module 的代码，这里注意不同 Module 子类有不同 `codeGeneration` 实现，对应不同产物代码效果。
 
 ![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d3fe03a7c0c745e199d1b4c3f817c955~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?)
@@ -280,11 +256,11 @@ compile(callback) {
 // webpack.config.js
 module.exports = {
   entry: {
-    a: "./src/a.js",
-    b: "./src/b.js",
-  },
+    a: './src/a.js',
+    b: './src/b.js'
+  }
   // ...
-};
+}
 ```
 
 实例配置中有两个入口，对应的文件结构：
@@ -309,8 +285,6 @@ OK，上面我们已经把逻辑层面的构造主流程梳理完了，最后我
   compiler.make
   ```
 
-   
-
   阶段：
 
   - `entry` 文件以 `dependence` 对象形式加入 `compilation` 的依赖列表，`dependence` 对象记录了 `entry` 的类型、路径等信息；
@@ -319,8 +293,6 @@ OK，上面我们已经把逻辑层面的构造主流程梳理完了，最后我
 - ```
   compilation.seal
   ```
-
-   
 
   阶段：
 
@@ -331,8 +303,6 @@ OK，上面我们已经把逻辑层面的构造主流程梳理完了，最后我
 - ```
   compiler.emitAssets
   ```
-
-   
 
   阶段：
 

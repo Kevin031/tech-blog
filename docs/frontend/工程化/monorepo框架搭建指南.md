@@ -28,7 +28,7 @@ packages:
   # - page-editor
 
   # exclude packages
-  - "!**/test/**"
+  - '!**/test/**'
 ```
 
 ## 4. 在 packages 下的子目录创建 package.json 开始开发即可

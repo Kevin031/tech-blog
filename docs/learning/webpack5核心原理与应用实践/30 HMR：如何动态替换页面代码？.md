@@ -21,27 +21,27 @@ module.exports = {
     // 必须设置 devServer.hot = true，启动 HMR 功能
     hot: true
   }
-};
+}
 ```
 
 1. 之后，还需要在代码调用 `module.hot.accept` 接口，声明如何将模块安全地替换为最新代码，如：
 
 ```js
-import component from "./component";
-let demoComponent = component();
+import component from './component'
+let demoComponent = component()
 
-document.body.appendChild(demoComponent);
+document.body.appendChild(demoComponent)
 // HMR interface
 if (module.hot) {
   // Capture hot update
-  module.hot.accept("./component", () => {
-    const nextComponent = component();
+  module.hot.accept('./component', () => {
+    const nextComponent = component()
 
     // Replace old content with the hot loaded one
-    document.body.replaceChild(nextComponent, demoComponent);
+    document.body.replaceChild(nextComponent, demoComponent)
 
-    demoComponent = nextComponent;
-  });
+    demoComponent = nextComponent
+  })
 }
 ```
 
@@ -115,13 +115,13 @@ module.hot.accept(path?: string, callback?: function);
 export const bar = 'bar'
 
 // src/index.js
-import { bar } from './bar';
+import { bar } from './bar'
 const node = document.createElement('div')
-node.innerText = bar;
+node.innerText = bar
 document.body.appendChild(node)
 
 module.hot.accept('./bar.js', function () {
-    node.innerText = bar;
+  node.innerText = bar
 })
 ```
 
@@ -158,9 +158,9 @@ module.hot.accept('./bar.js', function () {
 
 ```js
 // src/bar.js
-console.log('bar');
+console.log('bar')
 
-module.hot.accept();
+module.hot.accept()
 ```
 
 示例模块发生变动之后，会从头开始重复执行 `console.log` 语句。

@@ -19,18 +19,18 @@ Webpack 之所以能够应对 Web 场景下极度复杂、多样的构建需求�
 先简单看看 Tapable 的用法：
 
 ```js
-const { SyncHook } = require("tapable");
+const { SyncHook } = require('tapable')
 
 // 1. 创建钩子实例
-const sleep = new SyncHook();
+const sleep = new SyncHook()
 
 // 2. 调用订阅接口注册回调
-sleep.tap("test", () => {
-  console.log("callback A");
-});
+sleep.tap('test', () => {
+  console.log('callback A')
+})
 
 // 3. 调用发布接口触发回调
-sleep.call();
+sleep.call()
 
 // 运行结果：
 // callback A
@@ -48,20 +48,18 @@ Webpack 内部的钩子大体上都遵循上面三个步骤，只是在某些钩
 
 Tabable 提供如下类型的钩子：
 
-| 名称                       | 简介               | 统计                                                         |
-| -------------------------- | ------------------ | ------------------------------------------------------------ |
-| `SyncHook`                 | 同步钩子           | Webpack 共出现 71 次，如 `Compiler.hooks.compilation`        |
-| `SyncBailHook`             | 同步熔断钩子       | Webpack 共出现 66 次，如 `Compiler.hooks.shouldEmit`         |
-| `SyncWaterfallHook`        | 同步瀑布流钩子     | Webpack 共出现 37 次，如 `Compilation.hooks.assetPath`       |
-| `SyncLoopHook`             | 同步循环钩子       | Webpack 中未使用                                             |
-| `AsyncParallelHook`        | 异步并行钩子       | Webpack 仅出现 1 次：`Compiler.hooks.make`                   |
-| `AsyncParallelBailHook`    | 异步并行熔断钩子   | Webpack 中未使用                                             |
-| `AsyncSeriesHook`          | 异步串行钩子       | Webpack 共出现 16 次，如 `Compiler.hooks.done`               |
-| `AsyncSeriesBailHook`      | 异步串行熔断钩子   | Webpack 中未使用                                             |
-| `AsyncSeriesLoopHook`      | 异步串行循环钩子   | Webpack 中未使用                                             |
+| 名称                       | 简介               | 统计                                                              |
+| -------------------------- | ------------------ | ----------------------------------------------------------------- |
+| `SyncHook`                 | 同步钩子           | Webpack 共出现 71 次，如 `Compiler.hooks.compilation`             |
+| `SyncBailHook`             | 同步熔断钩子       | Webpack 共出现 66 次，如 `Compiler.hooks.shouldEmit`              |
+| `SyncWaterfallHook`        | 同步瀑布流钩子     | Webpack 共出现 37 次，如 `Compilation.hooks.assetPath`            |
+| `SyncLoopHook`             | 同步循环钩子       | Webpack 中未使用                                                  |
+| `AsyncParallelHook`        | 异步并行钩子       | Webpack 仅出现 1 次：`Compiler.hooks.make`                        |
+| `AsyncParallelBailHook`    | 异步并行熔断钩子   | Webpack 中未使用                                                  |
+| `AsyncSeriesHook`          | 异步串行钩子       | Webpack 共出现 16 次，如 `Compiler.hooks.done`                    |
+| `AsyncSeriesBailHook`      | 异步串行熔断钩子   | Webpack 中未使用                                                  |
+| `AsyncSeriesLoopHook`      | 异步串行循环钩子   | Webpack 中未使用                                                  |
 | `AsyncSeriesWaterfallHook` | 异步串行瀑布流钩子 | Webpack 共出现 5 次，如 `NormalModuleFactory.hooks.beforeResolve` |
-
-
 
 类型虽多，但整体遵循两种分类规则：
 
@@ -84,10 +82,10 @@ Tabable 提供如下类型的钩子：
 
 ```js
 function syncCall() {
-  const callbacks = [fn1, fn2, fn3];
+  const callbacks = [fn1, fn2, fn3]
   for (let i = 0; i < callbacks.length; i++) {
-    const cb = callbacks[i];
-    cb();
+    const cb = callbacks[i]
+    cb()
   }
 }
 ```
@@ -95,34 +93,34 @@ function syncCall() {
 举个例子：
 
 ```js
-const { SyncHook } = require("tapable");
+const { SyncHook } = require('tapable')
 
 class Somebody {
   constructor() {
     this.hooks = {
-      sleep: new SyncHook(),
-    };
+      sleep: new SyncHook()
+    }
   }
   sleep() {
     //   触发回调
-    this.hooks.sleep.call();
+    this.hooks.sleep.call()
   }
 }
 
-const person = new Somebody();
+const person = new Somebody()
 
 // 注册回调
-person.hooks.sleep.tap("test", () => {
-  console.log("callback A");
-});
-person.hooks.sleep.tap("test", () => {
-  console.log("callback B");
-});
-person.hooks.sleep.tap("test", () => {
-  console.log("callback C");
-});
+person.hooks.sleep.tap('test', () => {
+  console.log('callback A')
+})
+person.hooks.sleep.tap('test', () => {
+  console.log('callback B')
+})
+person.hooks.sleep.tap('test', () => {
+  console.log('callback C')
+})
 
-person.sleep();
+person.sleep()
 // 输出结果：
 // callback A
 // callback B
@@ -138,52 +136,52 @@ person.sleep();
 ```js
 // call 风格
 try {
-  this.hooks.sleep.call();
+  this.hooks.sleep.call()
 } catch (e) {
-    // 错误处理逻辑
+  // 错误处理逻辑
 }
 // callAsync 风格
-this.hooks.sleep.callAsync((err) => {
+this.hooks.sleep.callAsync(err => {
   if (err) {
     // 错误处理逻辑
   }
-});
+})
 ```
 
 由于调用方式不会 Hook 本身的规则，所以对使用者来说，无需关心底层到底用的是 `call` 还是 `callAsync`，上面的例子只需要做简单的修改就可以适配 `callAsync` 场景：
 
 ```js
-const { SyncHook } = require("tapable");
+const { SyncHook } = require('tapable')
 
 class Somebody {
   constructor() {
     this.hooks = {
-      sleep: new SyncHook(),
-    };
+      sleep: new SyncHook()
+    }
   }
   sleep() {
     //   触发回调
-    this.hooks.sleep.callAsync((err) => {
+    this.hooks.sleep.callAsync(err => {
       if (err) {
-        console.log(`interrupt with "${err.message}"`);
+        console.log(`interrupt with "${err.message}"`)
       }
-    });
+    })
   }
 }
 
-const person = new Somebody();
+const person = new Somebody()
 
 // 注册回调
-person.hooks.sleep.tap("test", (cb) => {
-  console.log("callback A");
-  throw new Error("我就是要报错");
-});
+person.hooks.sleep.tap('test', cb => {
+  console.log('callback A')
+  throw new Error('我就是要报错')
+})
 // 第一个回调出错后，后续回调不会执行
-person.hooks.sleep.tap("test", () => {
-  console.log("callback B");
-});
+person.hooks.sleep.tap('test', () => {
+  console.log('callback B')
+})
 
-person.sleep();
+person.sleep()
 
 // 输出结果：
 // callback A
@@ -196,50 +194,50 @@ person.sleep();
 
 ```js
 function bailCall() {
-  const callbacks = [fn1, fn2, fn3];
+  const callbacks = [fn1, fn2, fn3]
   for (let i in callbacks) {
-    const cb = callbacks[i];
-    const result = cb(lastResult);
+    const cb = callbacks[i]
+    const result = cb(lastResult)
     // 如果有任意一个回调返回结果，则停止调用剩下的回调
     if (result !== undefined) {
       // 熔断
-      return result;
+      return result
     }
   }
-  return undefined;
+  return undefined
 }
 ```
 
 `SyncBailHook` 的调用顺序与规则都跟 `SyncHook` 相似，主要区别一是 `SyncBailHook` 增加了熔断逻辑，例如：
 
 ```js
-const { SyncBailHook } = require("tapable");
+const { SyncBailHook } = require('tapable')
 
 class Somebody {
   constructor() {
     this.hooks = {
-      sleep: new SyncBailHook(),
-    };
+      sleep: new SyncBailHook()
+    }
   }
   sleep() {
-    return this.hooks.sleep.call();
+    return this.hooks.sleep.call()
   }
 }
 
-const person = new Somebody();
+const person = new Somebody()
 
 // 注册回调
-person.hooks.sleep.tap("test", () => {
-  console.log("callback A");
+person.hooks.sleep.tap('test', () => {
+  console.log('callback A')
   // 熔断点
   // 返回非 undefined 的任意值都会中断回调队列
   return '返回值：tecvan'
-});
-person.hooks.sleep.tap("test", () => {
-  console.log("callback B");
-});
+})
+person.hooks.sleep.tap('test', () => {
+  console.log('callback B')
+})
 
-console.log(person.sleep());
+console.log(person.sleep())
 
 // 运行结果：
 // callback A
@@ -261,7 +259,7 @@ class Compiler {
       if (this.hooks.shouldEmit.call(compilation) === false) {
         // ...
       }
-    };
+    }
   }
 }
 ```
@@ -278,14 +276,14 @@ class Compiler {
 
 ```js
 function waterfallCall(arg) {
-  const callbacks = [fn1, fn2, fn3];
-  let lastResult = arg;
+  const callbacks = [fn1, fn2, fn3]
+  let lastResult = arg
   for (let i in callbacks) {
-    const cb = callbacks[i];
+    const cb = callbacks[i]
     // 上次执行结果作为参数传入下一个函数
-    lastResult = cb(lastResult);
+    lastResult = cb(lastResult)
   }
-  return lastResult;
+  return lastResult
 }
 ```
 
@@ -297,33 +295,33 @@ function waterfallCall(arg) {
 例如：
 
 ```js
-const { SyncWaterfallHook } = require("tapable");
+const { SyncWaterfallHook } = require('tapable')
 
 class Somebody {
   constructor() {
     this.hooks = {
-      sleep: new SyncWaterfallHook(["msg"]),
-    };
+      sleep: new SyncWaterfallHook(['msg'])
+    }
   }
   sleep() {
-    return this.hooks.sleep.call("hello");
+    return this.hooks.sleep.call('hello')
   }
 }
 
-const person = new Somebody();
+const person = new Somebody()
 
 // 注册回调
-person.hooks.sleep.tap("test", (arg) => {
-  console.log(`call 调用传入： ${arg}`);
-  return "tecvan";
-});
+person.hooks.sleep.tap('test', arg => {
+  console.log(`call 调用传入： ${arg}`)
+  return 'tecvan'
+})
 
-person.hooks.sleep.tap("test", (arg) => {
-  console.log(`A 回调返回： ${arg}`);
-  return "world";
-});
+person.hooks.sleep.tap('test', arg => {
+  console.log(`A 回调返回： ${arg}`)
+  return 'world'
+})
 
-console.log("最终结果：" + person.sleep());
+console.log('最终结果：' + person.sleep())
 // 运行结果：
 // call 调用传入： hello
 // A 回调返回： tecvan
@@ -345,28 +343,28 @@ console.log("最终结果：" + person.sleep());
 class NormalModuleFactory {
   constructor() {
     this.hooks = {
-      factory: new SyncWaterfallHook(["filename", "data"]),
-    };
+      factory: new SyncWaterfallHook(['filename', 'data'])
+    }
 
-    this.hooks.factory.tap("NormalModuleFactory", () => (result, callback) => {
-      let resolver = this.hooks.resolver.call(null);
+    this.hooks.factory.tap('NormalModuleFactory', () => (result, callback) => {
+      let resolver = this.hooks.resolver.call(null)
 
-      if (!resolver) return callback();
+      if (!resolver) return callback()
 
       resolver(result, (err, data) => {
-        if (err) return callback(err);
+        if (err) return callback(err)
 
         // direct module
-        if (typeof data.source === "function") return callback(null, data);
+        if (typeof data.source === 'function') return callback(null, data)
 
         // ...
-      });
-    });
+      })
+    })
   }
 
   create(data, callback) {
     //   ...
-    const factory = this.hooks.factory.call(null);
+    const factory = this.hooks.factory.call(null)
     // ...
   }
 }
@@ -380,9 +378,9 @@ class NormalModuleFactory {
 
 ```js
 function loopCall() {
-  const callbacks = [fn1, fn2, fn3];
+  const callbacks = [fn1, fn2, fn3]
   for (let i in callbacks) {
-    const cb = callbacks[i];
+    const cb = callbacks[i]
     // 重复执行
     while (cb() !== undefined) {}
   }
@@ -392,36 +390,36 @@ function loopCall() {
 由于 `loop` 钩子循环执行的特性，使用时务必十分注意，避免陷入死循环。示例：
 
 ```js
-const { SyncLoopHook } = require("tapable");
+const { SyncLoopHook } = require('tapable')
 
 class Somebody {
   constructor() {
     this.hooks = {
-      sleep: new SyncLoopHook(),
-    };
+      sleep: new SyncLoopHook()
+    }
   }
   sleep() {
-    return this.hooks.sleep.call();
+    return this.hooks.sleep.call()
   }
 }
 
-const person = new Somebody();
-let times = 0;
+const person = new Somebody()
+let times = 0
 
 // 注册回调
-person.hooks.sleep.tap("test", (arg) => {
-  ++times;
-  console.log(`第 ${times} 次执行回调A`);
+person.hooks.sleep.tap('test', arg => {
+  ++times
+  console.log(`第 ${times} 次执行回调A`)
   if (times < 4) {
-    return times;
+    return times
   }
-});
+})
 
-person.hooks.sleep.tap("test", (arg) => {
-  console.log(`执行回调B`);
-});
+person.hooks.sleep.tap('test', arg => {
+  console.log(`执行回调B`)
+})
 
-person.sleep();
+person.sleep()
 // 运行结果
 // 第 1 次执行回调A
 // 第 2 次执行回调A
@@ -448,52 +446,52 @@ person.sleep();
 
 ```js
 function asyncSeriesCall(callback) {
-  const callbacks = [fn1, fn2, fn3];
+  const callbacks = [fn1, fn2, fn3]
   //   执行回调 1
-  fn1((err1) => {
+  fn1(err1 => {
     if (err1) {
-      callback(err1);
+      callback(err1)
     } else {
       //   执行回调 2
-      fn2((err2) => {
+      fn2(err2 => {
         if (err2) {
-          callback(err2);
+          callback(err2)
         } else {
           //   执行回调 3
-          fn3((err3) => {
+          fn3(err3 => {
             if (err3) {
-              callback(err2);
+              callback(err2)
             }
-          });
+          })
         }
-      });
+      })
     }
-  });
+  })
 }
 ```
 
 先来看一个 `callback` 风格的示例：
 
 ```js
-const { AsyncSeriesHook } = require("tapable");
+const { AsyncSeriesHook } = require('tapable')
 
-const hook = new AsyncSeriesHook();
+const hook = new AsyncSeriesHook()
 
 // 注册回调
-hook.tapAsync("test", (cb) => {
-  console.log("callback A");
+hook.tapAsync('test', cb => {
+  console.log('callback A')
   setTimeout(() => {
-    console.log("callback A 异步操作结束");
+    console.log('callback A 异步操作结束')
     // 回调结束时，调用 cb 通知 tapable 当前回调已结束
-    cb();
-  }, 100);
-});
+    cb()
+  }, 100)
+})
 
-hook.tapAsync("test", () => {
-  console.log("callback B");
-});
+hook.tapAsync('test', () => {
+  console.log('callback B')
+})
 
-hook.callAsync();
+hook.callAsync()
 // 运行结果：
 // callback A
 // callback A 异步操作结束
@@ -505,27 +503,27 @@ hook.callAsync();
 除了 `callback` 风格外，也可以使用 promise 风格调用 `tap/call` 函数，改造上例：
 
 ```js
-const { AsyncSeriesHook } = require("tapable");
+const { AsyncSeriesHook } = require('tapable')
 
-const hook = new AsyncSeriesHook();
+const hook = new AsyncSeriesHook()
 
 // 注册回调
-hook.tapPromise("test", () => {
-  console.log("callback A");
-  return new Promise((resolve) => {
+hook.tapPromise('test', () => {
+  console.log('callback A')
+  return new Promise(resolve => {
     setTimeout(() => {
-      console.log("callback A 异步操作结束");
-      resolve();
-    }, 100);
-  });
-});
+      console.log('callback A 异步操作结束')
+      resolve()
+    }, 100)
+  })
+})
 
-hook.tapPromise("test", () => {
-  console.log("callback B");
-  return Promise.resolve();
-});
+hook.tapPromise('test', () => {
+  console.log('callback B')
+  return Promise.resolve()
+})
 
-hook.promise();
+hook.promise()
 // 运行结果：
 // callback A
 // callback A 异步操作结束
@@ -545,34 +543,34 @@ hook.promise();
 ```js
 class Compiler {
   run(callback) {
-    if (err) return finalCallback(err);
+    if (err) return finalCallback(err)
 
-    this.emitAssets(compilation, (err) => {
-      if (err) return finalCallback(err);
+    this.emitAssets(compilation, err => {
+      if (err) return finalCallback(err)
 
       if (compilation.hooks.needAdditionalPass.call()) {
         // ...
-        this.hooks.done.callAsync(stats, (err) => {
-          if (err) return finalCallback(err);
+        this.hooks.done.callAsync(stats, err => {
+          if (err) return finalCallback(err)
 
-          this.hooks.additionalPass.callAsync((err) => {
-            if (err) return finalCallback(err);
-            this.compile(onCompiled);
-          });
-        });
-        return;
+          this.hooks.additionalPass.callAsync(err => {
+            if (err) return finalCallback(err)
+            this.compile(onCompiled)
+          })
+        })
+        return
       }
 
-      this.emitRecords((err) => {
-        if (err) return finalCallback(err);
+      this.emitRecords(err => {
+        if (err) return finalCallback(err)
 
         // ...
-        this.hooks.done.callAsync(stats, (err) => {
-          if (err) return finalCallback(err);
-          return finalCallback(null, stats);
-        });
-      });
-    });
+        this.hooks.done.callAsync(stats, err => {
+          if (err) return finalCallback(err)
+          return finalCallback(null, stats)
+        })
+      })
+    })
   }
 }
 ```
@@ -583,40 +581,40 @@ class Compiler {
 
 ```js
 function asyncParallelCall(callback) {
-  const callbacks = [fn1, fn2];
+  const callbacks = [fn1, fn2]
   // 内部维护了一个计数器
-  var _counter = 2;
+  var _counter = 2
 
-  var _done = function() {
-    _callback();
-  };
-  if (_counter <= 0) return;
+  var _done = function () {
+    _callback()
+  }
+  if (_counter <= 0) return
   // 按序执行回调
-  var _fn0 = callbacks[0];
-  _fn0(function(_err0) {
+  var _fn0 = callbacks[0]
+  _fn0(function (_err0) {
     if (_err0) {
       if (_counter > 0) {
         // 出错时，忽略后续回调，直接退出
-        _callback(_err0);
-        _counter = 0;
+        _callback(_err0)
+        _counter = 0
       }
     } else {
-      if (--_counter === 0) _done();
+      if (--_counter === 0) _done()
     }
-  });
-  if (_counter <= 0) return;
+  })
+  if (_counter <= 0) return
   // 不需要等待前面回调结束，直接开始执行下一个回调
-  var _fn1 = callbacks[1];
-  _fn1(function(_err1) {
+  var _fn1 = callbacks[1]
+  _fn1(function (_err1) {
     if (_err1) {
       if (_counter > 0) {
-        _callback(_err1);
-        _counter = 0;
+        _callback(_err1)
+        _counter = 0
       }
     } else {
-      if (--_counter === 0) _done();
+      if (--_counter === 0) _done()
     }
-  });
+  })
 }
 ```
 
@@ -660,14 +658,14 @@ function asyncParallelCall(callback) {
 动态编译是一个非常大胆的设计，不同 Hook 所谓的同步、异步、bail、waterfall、loop 等回调规则都是 Tapable 根据 Hook 类型、参数、回调队列等参数，调用 `new Function` 语句动态拼装出一段控制执行流程的 JavaScript 代码实现控制的。例如：
 
 ```js
-const { SyncHook } = require("tapable");
+const { SyncHook } = require('tapable')
 
-const sleep = new SyncHook();
+const sleep = new SyncHook()
 
-sleep.tap("test", () => {
-  console.log("callback A");
-});
-sleep.call();
+sleep.tap('test', () => {
+  console.log('callback A')
+})
+sleep.call()
 ```
 
 调用 `sleep.call` 时，Tapable 内部处理流程大致为：
@@ -683,14 +681,12 @@ sleep.call();
 `SyncHook` （其他钩子类似)）调用 `call` 后，`Hook` 基类收集上下文信息并调用 `createCall` 及子类传入的 `compiler` 函数；`compiler` 调用 `HookCodeFactory` 进而使用 `new Function` 方法动态拼接出回调执行函数。上面例子对应的生成函数：
 
 ```js
-(function anonymous(
-) {
-"use strict";
-var _context;
-var _x = this._x;
-var _fn0 = _x[0];
-_fn0();
-
+;(function anonymous() {
+  'use strict'
+  var _context
+  var _x = this._x
+  var _fn0 = _x[0]
+  _fn0()
 })
 ```
 
@@ -699,34 +695,34 @@ _fn0();
 这放在 `SyncHook` 这种简单场景确实大可不必，但若是更复杂的 Hook，如 `AsyncSeriesWaterfallHook`：
 
 ```js
-const { AsyncSeriesWaterfallHook } = require("tapable");
+const { AsyncSeriesWaterfallHook } = require('tapable')
 
-const sleep = new AsyncSeriesWaterfallHook(["name"]);
+const sleep = new AsyncSeriesWaterfallHook(['name'])
 
-sleep.tapAsync("test1", (name, cb) => {
-  console.log(`执行 A 回调： 参数 name=${name}`);
+sleep.tapAsync('test1', (name, cb) => {
+  console.log(`执行 A 回调： 参数 name=${name}`)
   setTimeout(() => {
-    cb(undefined, "tecvan2");
-  }, 100);
-});
+    cb(undefined, 'tecvan2')
+  }, 100)
+})
 
-sleep.tapAsync("test", (name, cb) => {
-  console.log(`执行 B 回调： 参数 name=${name}`);
+sleep.tapAsync('test', (name, cb) => {
+  console.log(`执行 B 回调： 参数 name=${name}`)
   setTimeout(() => {
-    cb(undefined, "tecvan3");
-  }, 100);
-});
+    cb(undefined, 'tecvan3')
+  }, 100)
+})
 
-sleep.tapAsync("test", (name, cb) => {
-  console.log(`执行 C 回调： 参数 name=${name}`);
+sleep.tapAsync('test', (name, cb) => {
+  console.log(`执行 C 回调： 参数 name=${name}`)
   setTimeout(() => {
-    cb(undefined, "tecvan4");
-  }, 100);
-});
+    cb(undefined, 'tecvan4')
+  }, 100)
+})
 
-sleep.callAsync("tecvan", (err, name) => {
-  console.log(`回调结束， name=${name}`);
-});
+sleep.callAsync('tecvan', (err, name) => {
+  console.log(`回调结束， name=${name}`)
+})
 
 // 运行结果：
 // 执行 A 回调： 参数 name=tecvan
@@ -738,48 +734,48 @@ sleep.callAsync("tecvan", (err, name) => {
 `AsyncSeriesWaterfallHook` 的特点是异步 + 串行 + 前一个回调的返回值会传入下一个回调，对应生成函数：
 
 ```js
-(function anonymous(name, _callback) {
-  "use strict";
-  var _context;
-  var _x = this._x;
+;(function anonymous(name, _callback) {
+  'use strict'
+  var _context
+  var _x = this._x
   function _next1() {
-    var _fn2 = _x[2];
-    _fn2(name, function(_err2, _result2) {
+    var _fn2 = _x[2]
+    _fn2(name, function (_err2, _result2) {
       if (_err2) {
-        _callback(_err2);
+        _callback(_err2)
       } else {
         if (_result2 !== undefined) {
-          name = _result2;
+          name = _result2
         }
-        _callback(null, name);
+        _callback(null, name)
       }
-    });
+    })
   }
   function _next0() {
-    var _fn1 = _x[1];
-    _fn1(name, function(_err1, _result1) {
+    var _fn1 = _x[1]
+    _fn1(name, function (_err1, _result1) {
       if (_err1) {
-        _callback(_err1);
+        _callback(_err1)
       } else {
         if (_result1 !== undefined) {
-          name = _result1;
+          name = _result1
         }
-        _next1();
+        _next1()
       }
-    });
+    })
   }
-  var _fn0 = _x[0];
-  _fn0(name, function(_err0, _result0) {
+  var _fn0 = _x[0]
+  _fn0(name, function (_err0, _result0) {
     if (_err0) {
-      _callback(_err0);
+      _callback(_err0)
     } else {
       if (_result0 !== undefined) {
-        name = _result0;
+        name = _result0
       }
-      _next0();
+      _next0()
     }
-  });
-});
+  })
+})
 ```
 
 核心逻辑：
@@ -802,67 +798,65 @@ Tapable 提供的大多数特性都是基于 `Hook + HookCodeFactory` 实现的�
 除了通常的 `tap/call` 之外，tapable 还提供了简易的中间件机制 —— `intercept` 接口，例如
 
 ```js
-const sleep = new SyncHook();
+const sleep = new SyncHook()
 
 sleep.intercept({
-  name: "test",
+  name: 'test',
   context: true,
   call() {
-    console.log("before call");
+    console.log('before call')
   },
-  loop(){
-    console.log("before loop");
+  loop() {
+    console.log('before loop')
   },
   tap() {
-    console.log("before each callback");
+    console.log('before each callback')
   },
   register() {
-    console.log("every time call tap");
-  },
-});
+    console.log('every time call tap')
+  }
+})
 ```
 
 `intercept` 支持注册如下类型的中间件：
 
-|            | 签名                            | 解释                                       |
-| ---------- | ------------------------------- | ------------------------------------------ |
-| `call`     | `(...args) => void`             | 调用 `call/callAsync/promise` 时触发       |
-| `tap`      | `(tap: Tap) => void`            | 调用 `call` 类函数后，每次调用回调之前触发 |
-| `loop`     | `(...args) => void`             | 仅 `loop` 型的钩子有效，在循环开始之前触发 |
-| `register` | `(tap: Tap) => Tap | undefined` | 调用 `tap/tapAsync/tapPromise` 时触发      |
-
-
+|            | 签名                 | 解释                                       |
+| ---------- | -------------------- | ------------------------------------------ | ------------------------------------- |
+| `call`     | `(...args) => void`  | 调用 `call/callAsync/promise` 时触发       |
+| `tap`      | `(tap: Tap) => void` | 调用 `call` 类函数后，每次调用回调之前触发 |
+| `loop`     | `(...args) => void`  | 仅 `loop` 型的钩子有效，在循环开始之前触发 |
+| `register` | `(tap: Tap) => Tap   | undefined`                                 | 调用 `tap/tapAsync/tapPromise` 时触发 |
 
 其中 `register` 在每次调用 `tap` 时被调用；其他三种中间件的触发时机大致如下：
 
 ```js
-  var _context;
-  const callbacks = [fn1, fn2];
-  var _interceptors = this.interceptors;
-  // 调用 call 函数，立即触发
-  _interceptors.forEach((intercept) => intercept.call(_context));
-  var _loop;
-  var cursor = 0;
-  do {
-    _loop = false;
-    // 每次循环开始时触发 `loop`
-    _interceptors.forEach((intercept) => intercept.loop(_context));
-    // 触发 `tap`
-    var _fn0 = callbacks[0];
-    _interceptors.forEach((intercept) => intercept.tap(_context, _fn0));
-    var _result0 = _fn0();
-    if (_result0 !== undefined) {
-      _loop = true;
-    } else {
-      var _fn1 = callbacks[1];
-      // 再次触发 `tap`
-      _interceptors.forEach((intercept) => intercept.tap(_context, _fn1));
-      var _result1 = _fn1();
-      if (_result1 !== undefined) {
-        _loop = true;
-      }
+var _context
+const callbacks = [fn1, fn2]
+var _interceptors = this.interceptors
+// 调用 call 函数，立即触发
+_interceptors.forEach(intercept => intercept.call(_context))
+var _loop
+var cursor = 0
+do {
+  _loop = false
+  // 每次循环开始时触发 `loop`
+  _interceptors.forEach(intercept => intercept.loop(_context))
+  // 触发 `tap`
+  var _fn0 = callbacks[0]
+  _interceptors.forEach(intercept => intercept.tap(_context, _fn0))
+  var _result0 = _fn0()
+  if (_result0 !== undefined) {
+    _loop = true
+  } else {
+    var _fn1 = callbacks[1]
+    // 再次触发 `tap`
+    _interceptors.forEach(intercept => intercept.tap(_context, _fn1))
+    var _result1 = _fn1()
+    if (_result1 !== undefined) {
+      _loop = true
     }
-  } while (_loop);
+  }
+} while (_loop)
 ```
 
 `intercept` 特性在 Webpack 内主要被用作进度提示，如 `Webpack/lib/ProgressPlugin.js` 插件中，分别对 `compiler.hooks.emit` 、`compiler.hooks.afterEmit` 钩子应用了记录进度的中间件函数。其他类型的插件应用较少。
@@ -872,17 +866,17 @@ sleep.intercept({
 Tapable 还有一个值得注意的特性 —— `HookMap`，它提供了一种集合操作能力，能够降低创建与使用的复杂度，用法比较简单：
 
 ```js
-const { SyncHook, HookMap } = require("tapable");
+const { SyncHook, HookMap } = require('tapable')
 
-const sleep = new HookMap(() => new SyncHook());
+const sleep = new HookMap(() => new SyncHook())
 
 // 通过 for 函数过滤集合中的特定钩子
-sleep.for("statement").tap("test", () => {
-  console.log("callback for statement");
-});
+sleep.for('statement').tap('test', () => {
+  console.log('callback for statement')
+})
 
 // 触发 statement 类型的钩子
-sleep.get("statement").call();
+sleep.get('statement').call()
 ```
 
 `HookMap` 能够用于实现的动态获取钩子功能，例如在 Webpack 的 `lib/parser.js` 文件中，`parser` 文件主要完成将资源内容解析为 AST 集合，之后遍历 AST 并以 `HookMap` 方式对外通知遍历到的内容。
@@ -895,28 +889,28 @@ class Parser {
     this.hooks = {
       // 定义钩子
       // 这里用到 HookMap ，所以不需要提前遍历枚举所有 expression 场景
-      expression: new HookMap(() => new SyncBailHook(["expression"])),
-    };
+      expression: new HookMap(() => new SyncBailHook(['expression']))
+    }
   }
 
   //   不同场景下触发钩子
   walkMemberExpression(expression) {
-    const exprName = this.getNameForExpression(expression);
+    const exprName = this.getNameForExpression(expression)
     if (exprName && exprName.free) {
       // 触发特定类型的钩子
-      const expressionHook = this.hooks.expression.get(exprName.name);
+      const expressionHook = this.hooks.expression.get(exprName.name)
       if (expressionHook !== undefined) {
-        const result = expressionHook.call(expression);
-        if (result === true) return;
+        const result = expressionHook.call(expression)
+        if (result === true) return
       }
     }
     // ...
   }
 
   walkThisExpression(expression) {
-    const expressionHook = this.hooks.expression.get("this");
+    const expressionHook = this.hooks.expression.get('this')
     if (expressionHook !== undefined) {
-      expressionHook.call(expression);
+      expressionHook.call(expression)
     }
   }
 }
@@ -930,41 +924,41 @@ class Parser {
 class CommonJsStuffPlugin {
   apply(compiler) {
     compiler.hooks.compilation.tap(
-      "CommonJsStuffPlugin",
+      'CommonJsStuffPlugin',
       (compilation, { normalModuleFactory }) => {
         const handler = (parser, parserOptions) => {
           // 通过 for 精确消费钩子
           parser.hooks.expression
-            .for("require.main.require")
+            .for('require.main.require')
             .tap(
-              "CommonJsStuffPlugin",
+              'CommonJsStuffPlugin',
               ParserHelpers.expressionIsUnsupported(
                 parser,
-                "require.main.require is not supported by Webpack."
+                'require.main.require is not supported by Webpack.'
               )
-            );
+            )
           parser.hooks.expression
-            .for("module.parent.require")
+            .for('module.parent.require')
             .tap(
-              "CommonJsStuffPlugin",
+              'CommonJsStuffPlugin',
               ParserHelpers.expressionIsUnsupported(
                 parser,
-                "module.parent.require is not supported by Webpack."
+                'module.parent.require is not supported by Webpack.'
               )
-            );
+            )
           parser.hooks.expression
-            .for("require.main")
+            .for('require.main')
             .tap(
-              "CommonJsStuffPlugin",
+              'CommonJsStuffPlugin',
               ParserHelpers.toConstantDependencyWithWebpackRequire(
                 parser,
-                "__Webpack_require__.c[__Webpack_require__.s]"
+                '__Webpack_require__.c[__Webpack_require__.s]'
               )
-            );
+            )
           // ...
-        };
+        }
       }
-    );
+    )
   }
 }
 ```

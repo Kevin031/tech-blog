@@ -18,10 +18,10 @@
 实现上，Loader 通常是一种 mapping 函数形式，接收原始代码内容，返回翻译结果，如：
 
 ```js
-module.exports = function(source) {
+module.exports = function (source) {
   // 执行各种代码计算
-  return modifySource;
-};
+  return modifySource
+}
 ```
 
 在 Webpack 进入构建阶段后，首先会通过 IO 接口读取文件内容，之后调用 [LoaderRunner](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fwebpack%2Floader-runner) 并将文件内容以 `source` 参数形式传递到 Loader 数组，`source` 数据在 Loader 数组内可能会经过若干次形态转换，最终以标准 JavaScript 代码提交给 Webpack 主流程，以此实现内容翻译功能。
@@ -43,17 +43,17 @@ Loader 接收三个参数，分别为：
 其中 `source` 是最重要的参数，大多数 Loader 要做的事情就是将 `source` 转译为另一种形式的 `output` ，比如 [webpack-contrib/raw-loader](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fwebpack-contrib%2Fraw-loader) 的核心源码：
 
 ```js
-//... 
+//...
 export default function rawLoader(source) {
   // ...
   const json = JSON.stringify(source)
     .replace(/\u2028/g, '\\u2028')
-    .replace(/\u2029/g, '\\u2029');
+    .replace(/\u2029/g, '\\u2029')
 
   const esModule =
-    typeof options.esModule !== 'undefined' ? options.esModule : true;
+    typeof options.esModule !== 'undefined' ? options.esModule : true
 
-  return `${esModule ? 'export default' : 'module.exports ='} ${json};`;
+  return `${esModule ? 'export default' : 'module.exports ='} ${json};`
 }
 ```
 
@@ -74,11 +74,11 @@ module.exports = "I am 范文杰"
 为此，Webpack 默认会缓存 Loader 的执行结果直到资源或资源依赖发生变化，开发者需要对此有个基本的理解，必要时可以通过 `this.cachable` 显式声明不作缓存：
 
 ```js
-module.exports = function(source) {
-  this.cacheable(false);
+module.exports = function (source) {
+  this.cacheable(false)
   // ...
-  return output;
-};
+  return output
+}
 ```
 
 ## Loader 简单示例
@@ -100,14 +100,14 @@ loader-custom
 核心代码 `src/index.js` 内容如下：
 
 ```js
-import { validate } from "schema-utils";
-import schema from "./options.json";
+import { validate } from 'schema-utils'
+import schema from './options.json'
 
 export default function loader(source) {
-  const { version, webpack } = this;
-  const options = this.getOptions();
+  const { version, webpack } = this
+  const options = this.getOptions()
 
-  validate(schema, options, "Loader");
+  validate(schema, options, 'Loader')
 
   const newSource = `
   /**
@@ -117,9 +117,9 @@ export default function loader(source) {
   /**
    * Original Source From Loader
    */
-  ${source}`;
+  ${source}`
 
-  return newSource;
+  return newSource
 }
 ```
 
@@ -134,7 +134,7 @@ export default function loader(source) {
 开发完成后，可以通过 `module.rules` 测试该 Loader，如：
 
 ```js
-const path = require("path");
+const path = require('path')
 
 module.exports = {
   // ...
@@ -142,14 +142,16 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: [{ 
-          // 传入示例 Loader 的绝对路径
-          loader: path.resolve(__dirname, "../dist/index.js") 
-        }],
-      },
-    ],
-  },
-};
+        use: [
+          {
+            // 传入示例 Loader 的绝对路径
+            loader: path.resolve(__dirname, '../dist/index.js')
+          }
+        ]
+      }
+    ]
+  }
+}
 ```
 
 > 提示：示例代码已上传到小册 [仓库](https://link.juejin.cn/?target=https%3A%2F%2Fgithub1s.com%2FTecvan-fe%2Fwebpack-book-samples%2Fblob%2Fmain%2Floader-custom%2Fexamples%2Fwebpack.config.js)。
@@ -157,14 +159,14 @@ module.exports = {
 也可以将 `resolveLoader.modules` 配置指向到 Loader 所在目录，Webpack 会在该目录查找加载器，如：
 
 ```js
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   //...
   resolveLoader: {
-    modules: ['node_modules', path.resolve(__dirname, 'loaders')],
-  },
-};
+    modules: ['node_modules', path.resolve(__dirname, 'loaders')]
+  }
+}
 ```
 
 接下来，我们可以开始使用 Loader 上下文接口实现更丰富的功能。
@@ -199,11 +201,11 @@ Webpack 官网对 [Loader Context](https://link.juejin.cn/?target=https%3A%2F%2F
 为此，Webpack 默认会缓存 Loader 的执行结果直到模块或模块所依赖的其它资源发生变化，我们也可以通过 `this.cacheable` 接口显式关闭缓存：
 
 ```js
-module.exports = function(source) {
-  this.cacheable(false);
+module.exports = function (source) {
+  this.cacheable(false)
   // ...
-  return output;
-};
+  return output
+}
 ```
 
 ## 在 Loader 中返回多个结果
@@ -213,8 +215,8 @@ module.exports = function(source) {
 ```js
 export default function loader(content, map) {
   // ...
-  linter.printOutput(linter.lint(content));
-  this.callback(null, content, map);
+  linter.printOutput(linter.lint(content))
+  this.callback(null, content, map)
 }
 ```
 
@@ -239,31 +241,31 @@ this.callback(
 涉及到异步或 CPU 密集操作时，Loader 中还可以以异步形式返回处理结果，例如 [webpack-contrib/less-loader](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fwebpack-contrib%2Fless-loader) 的核心逻辑：
 
 ```js
-import less from "less";
+import less from 'less'
 
 async function lessLoader(source) {
   // 1. 获取异步回调函数
-  const callback = this.async();
+  const callback = this.async()
   // ...
 
-  let result;
+  let result
 
   try {
     // 2. 调用less 将模块内容转译为 css
-    result = await (options.implementation || less).render(data, lessOptions);
+    result = await (options.implementation || less).render(data, lessOptions)
   } catch (error) {
     // ...
   }
 
-  const { css, imports } = result;
+  const { css, imports } = result
 
   // ...
 
   // 3. 转译结束，返回结果
-  callback(null, css, map);
+  callback(null, css, map)
 }
 
-export default lessLoader;
+export default lessLoader
 ```
 
 在 less-loader 中，包含三个重要逻辑：
@@ -280,26 +282,26 @@ Loader Context 的 `emitFile` 接口可用于直接写出新的产物文件，�
 
 ```js
 export default function loader(content) {
-  const options = getOptions(this);
+  const options = getOptions(this)
 
   validate(schema, options, {
     name: 'File Loader',
-    baseDataPath: 'options',
-  });
+    baseDataPath: 'options'
+  })
   // ...
 
   if (typeof options.emitFile === 'undefined' || options.emitFile) {
     // ...
-    this.emitFile(outputPath, content, null, assetInfo);
+    this.emitFile(outputPath, content, null, assetInfo)
   }
 
   const esModule =
-    typeof options.esModule !== 'undefined' ? options.esModule : true;
+    typeof options.esModule !== 'undefined' ? options.esModule : true
 
-  return `${esModule ? 'export default' : 'module.exports ='} ${publicPath};`;
+  return `${esModule ? 'export default' : 'module.exports ='} ${publicPath};`
 }
 
-export const raw = true;
+export const raw = true
 ```
 
 借助 `emitFile` 接口，我们能够在 Webpack 构建主流程之外提交更多产物，这有时候是必要的，除上面提到的 `file-loader` 外，`response-loader` 、`mermaid-loader` 等也依赖于 `emitFile` 实现构建功能。
@@ -309,18 +311,18 @@ export const raw = true;
 Loader Context 的 `addDependency` 接口用于添加额外的文件依赖，当这些依赖发生变化时，也会触发重新构建，例如在 `less-loader` 中包含这样一段代码：
 
 ```js
-  try {
-    result = await (options.implementation || less).render(data, lessOptions);
-  } catch (error) {
-    // ...
-  }
+try {
+  result = await (options.implementation || less).render(data, lessOptions)
+} catch (error) {
+  // ...
+}
 
-  const { css, imports } = result;
+const { css, imports } = result
 
-  imports.forEach((item) => {
-    // ...
-    this.addDependency(path.normalize(item));
-  });
+imports.forEach(item => {
+  // ...
+  this.addDependency(path.normalize(item))
+})
 ```
 
 代码中首先调用 `less` 库编译文件内容，之后遍历所有 `@import` 语句(`result.imports` 数组)，调用 `this.addDependency` 函数将 import 到的文件都注册为依赖，此后这些资源文件发生变化时都会触发重新编译。
@@ -340,9 +342,11 @@ Loader Context 的 `addDependency` 接口用于添加额外的文件依赖，当
 有时候我们期望以二进制方式读入资源文件，例如在 `file-loader`、`image-loader` 等场景中，此时只需要添加 `export const raw = true` 语句即可，如：
 
 ```js
-export default function loader(source) {/* ... */}
+export default function loader(source) {
+  /* ... */
+}
 
-export const raw = true;
+export const raw = true
 ```
 
 之后，`loader` 函数中获取到的第一个参数 `source` 将会是 Buffer 对象形式的二进制内容。
@@ -357,12 +361,12 @@ Webpack 内置了一套 [infrastructureLogging](https://link.juejin.cn/?target=h
 
 ```js
 export default function loader(source) {
-  const logger = this.getLogger("xxx-loader");
+  const logger = this.getLogger('xxx-loader')
   // 使用适当的 logging 接口
   // 支持：verbose/log/info/warn/error
-  logger.info("information");
+  logger.info('information')
 
-  return source;
+  return source
 }
 ```
 
@@ -372,10 +376,10 @@ export default function loader(source) {
 module.exports = {
   // ...
   infrastructureLogging: {
-    level: 'warn',
-  },
+    level: 'warn'
+  }
   // ...
-};
+}
 ```
 
 ## 在 Loader 中正确上报异常
@@ -396,9 +400,9 @@ Webpack Loader 中有多种上报异常信息的方式：
 
 ```js
 export default function loader(source) {
-  this.callback(new Error("发生了一些异常"));
+  this.callback(new Error('发生了一些异常'))
 
-  return source;
+  return source
 }
 ```
 
@@ -431,7 +435,9 @@ export default function loader(source) {
 ```js
 // posthtml-loader/test/helpers/compiler.js 文件
 module.exports = function (fixture, config, options) {
-  config = { /*...*/ }
+  config = {
+    /*...*/
+  }
 
   options = Object.assign({ output: false }, options)
 
@@ -442,11 +448,13 @@ module.exports = function (fixture, config, options) {
   if (!options.output) compiler.outputFileSystem = new MemoryFS()
 
   // 执行，并以 promise 方式返回结果
-  return new Promise((resolve, reject) => compiler.run((err, stats) => {
-    if (err) reject(err)
-    // 异步返回执行结果
-    resolve(stats)
-  }))
+  return new Promise((resolve, reject) =>
+    compiler.run((err, stats) => {
+      if (err) reject(err)
+      // 异步返回执行结果
+      resolve(stats)
+    })
+  )
 }
 ```
 
@@ -489,11 +497,9 @@ function readAsset(compiler, stats, assets) => {
 最后，还需要判断编译过程是否出现异常，同样可以从 `stats` 对象解析：
 
 ```js
-export default getErrors = (stats) => {
+export default getErrors = stats => {
   const errors = stats.compilation.errors.sort()
-  return errors.map(
-    e => e.toString()
-  )
+  return errors.map(e => e.toString())
 }
 ```
 
@@ -509,11 +515,11 @@ module.exports = {
     rules: [
       {
         test: /\.less$/i,
-        use: ["style-loader", "css-loader", "less-loader"],
-      },
-    ],
-  },
-};
+        use: ['style-loader', 'css-loader', 'less-loader']
+      }
+    ]
+  }
+}
 ```
 
 示例针对 `.less` 后缀的文件设定了 less、css、style 三个 Loader，Webpack 启动后会以一种所谓“链式调用”的方式按 `use` 数组顺序从后到前调用 Loader：
@@ -538,13 +544,13 @@ module.exports = {
 Webpack 允许在 Loader 函数上挂载名为 `pitch` 的函数，运行时 pitch 会比 Loader 本身更早执行，例如：
 
 ```js
-const loader = function (source){
-    console.log('后执行')
-    return source;
+const loader = function (source) {
+  console.log('后执行')
+  return source
 }
 
-loader.pitch = function(requestString) {
-    console.log('先执行')
+loader.pitch = function (requestString) {
+  console.log('先执行')
 }
 
 module.exports = loader
@@ -573,13 +579,11 @@ module.exports = {
     rules: [
       {
         test: /\.less$/i,
-        use: [
-          "style-loader", "css-loader", "less-loader"
-        ],
-      },
-    ],
-  },
-};
+        use: ['style-loader', 'css-loader', 'less-loader']
+      }
+    ]
+  }
+}
 ```
 
 `css-loader.pitch` 中拿到的参数依次为：
@@ -595,7 +599,7 @@ data = {}
 
 > `pitch` 函数调度逻辑
 
-Pitch 翻译成中文是_抛、球场、力度、事物最高点_等，它背后折射的是一整套 Loader 被执行的生命周期概念。
+Pitch 翻译成中文是*抛、球场、力度、事物最高点*等，它背后折射的是一整套 Loader 被执行的生命周期概念。
 
 实现上，Loader 链条执行过程分三个阶段：pitch、解析资源、执行，设计上与 DOM 的事件模型非常相似，pitch 对应到捕获阶段；执行对应到冒泡阶段；而两个阶段之间 Webpack 会执行资源内容的读取、解析操作，对应 DOM 事件模型的 AT_TARGET 阶段：
 
@@ -620,7 +624,7 @@ Pitch 翻译成中文是_抛、球场、力度、事物最高点_等，它背后
 ```js
 // ...
 // Loader 本身不作任何处理
-const loaderApi = () => {};
+const loaderApi = () => {}
 
 // pitch 中根据参数拼接模块代码
 loaderApi.pitch = function loader(remainingRequest) {
@@ -631,8 +635,8 @@ loaderApi.pitch = function loader(remainingRequest) {
       return `${
         esModule
           ? `...`
-          // 引入 runtime 模块
-          : `var api = require(${loaderUtils.stringifyRequest(
+          : // 引入 runtime 模块
+            `var api = require(${loaderUtils.stringifyRequest(
               this,
               `!${path.join(__dirname, 'runtime/injectStylesIntoLinkTag.js')}`
             )});
@@ -643,23 +647,23 @@ loaderApi.pitch = function loader(remainingRequest) {
             )});
 
             content = content.__esModule ? content.default : content;`
-      } // ...`;
+      } // ...`
     }
 
     case 'lazyStyleTag':
     case 'lazySingletonStyleTag': {
-        //...
+      //...
     }
 
     case 'styleTag':
     case 'singletonStyleTag':
     default: {
-        // ...
+      // ...
     }
   }
-};
+}
 
-export default loaderApi;
+export default loaderApi
 ```
 
 关键点：
@@ -670,8 +674,6 @@ export default loaderApi;
   loaderApi.pitch
   ```
 
-   
-
   中拼接结果，导出的代码包含：
 
   - 引入运行时模块 `runtime/injectStylesIntoLinkTag.js`；
@@ -681,7 +683,7 @@ export default loaderApi;
 
 ```js
 var api = require('xxx/style-loader/lib/runtime/injectStylesIntoLinkTag.js')
-var content = require('!!css-loader!less-loader!./xxx.less');
+var content = require('!!css-loader!less-loader!./xxx.less')
 ```
 
 注意了，到这里 style-loader 的 pitch 函数返回这一段内容，后续的 Loader 就不会继续执行，当前调用链条中断了：
@@ -691,7 +693,7 @@ var content = require('!!css-loader!less-loader!./xxx.less');
 之后，Webpack 继续解析、构建 style-loader 返回的结果，遇到 inline loader 语句：
 
 ```js
-var content = require('!!css-loader!less-loader!./xxx.less');
+var content = require('!!css-loader!less-loader!./xxx.less')
 ```
 
 所以从 Webpack 的角度看，对同一个文件实际调用了两次 loader 链，第一次在 style-loader 的 pitch 中断，第二次根据 inline loader 的内容跳过了 style-loader。

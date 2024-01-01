@@ -42,28 +42,37 @@
 class Compilation {
   seal(callback) {
     // 初始化 ChunkGraph、ChunkGroup 对象
-    for (const [name, { dependencies, includeDependencies, options }] of this.entries) {
+    for (const [name, { dependencies, includeDependencies, options }] of this
+      .entries) {
       // ...
     }
-    for (const [name,{options: { dependOn, runtime },},] of this.entries) {
+    for (const [
+      name,
+      {
+        options: { dependOn, runtime }
+      }
+    ] of this.entries) {
       // ...
     }
     // 构建 ChunkGroup
-    buildChunkGraph(this, chunkGraphInit);
+    buildChunkGraph(this, chunkGraphInit)
     // 执行诸多优化钩子
-    this.hooks.optimize.call();
+    this.hooks.optimize.call()
     // ...
 
-    this.hooks.optimizeTree.callAsync(this.chunks, this.modules, (err) => {
+    this.hooks.optimizeTree.callAsync(this.chunks, this.modules, err => {
       // ...
-      this.hooks.optimizeChunkModules.callAsync(this.chunks, this.modules, (err) => {
+      this.hooks.optimizeChunkModules.callAsync(
+        this.chunks,
+        this.modules,
+        err => {
           // ...
-          this.hooks.beforeCodeGeneration.call();
+          this.hooks.beforeCodeGeneration.call()
           // 开始生成最终产物代码
-          this.codeGeneration(/* ... */);
+          this.codeGeneration(/* ... */)
         }
-      );
-    });
+      )
+    })
   }
 }
 ```
@@ -78,33 +87,21 @@ class Compilation {
 
   ：这一步主要用于计算模块实际输出代码，遍历
 
-   
-
   ```
   compilation.modules
   ```
-
-   
 
   数组，
 
   调用
 
-   
-
   ```
   module
   ```
 
-   
-
   对象的
 
-   
-
   codeGeneration
-
-   
 
   方法，执行模块转译计算：
 
@@ -114,27 +111,17 @@ class Compilation {
 
   - 执行
 
-     
-
     每个数组项
-
-     
 
     ```
     dependeny
     ```
 
-     
-
     对象对应的
-
-     
 
     ```
     template.apply
     ```
-
-     
 
     方法，方法中视情况可能产生三种副作用：
 
@@ -223,7 +210,7 @@ Webpack 从「构建」(make) 阶段开始，就会通过 `Dependency` 子类记
 Webpack 内部以及社区的很多插件、loader 都会使用 [webpack-sources](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fwebpack%2Fwebpack-sources) 库编辑代码内容，包括上文介绍的 `Template.apply` 体系。逻辑上，在启动模块代码生成流程时，Webpack 会先用模块原始内容[初始化](https://link.juejin.cn/?target=https%3A%2F%2Fgithub1s.com%2Fwebpack%2Fwebpack%2Fblob%2FHEAD%2Flib%2Fjavascript%2FJavascriptGenerator.js%23L95-L96) `Source` 对象，即：
 
 ```js
-const source = new ReplaceSource(module.originalSource());
+const source = new ReplaceSource(module.originalSource())
 ```
 
 之后，不同 `Dependency` 子类按序、按需更改 `source` 内容，例如 [HarmonyImportSpecifierDependency](https://link.juejin.cn/?target=https%3A%2F%2Fgithub1s.com%2Fwebpack%2Fwebpack%2Fblob%2FHEAD%2Flib%2Fdependencies%2FHarmonyImportSpecifierDependency.js) 中：
@@ -233,39 +220,39 @@ HarmonyImportSpecifierDependency.Template = class HarmonyImportSpecifierDependen
   HarmonyImportDependency.Template
 ) {
   apply(dependency, source, templateContext) {
-    const dep = /** @type {HarmonyImportSpecifierDependency} */ (dependency);
+    const dep = /** @type {HarmonyImportSpecifierDependency} */ (dependency)
     // ...
-    const ids = dep.getIds(moduleGraph);
-    const exportExpr = this._getCodeForIds(dep, source, templateContext, ids);
-    const range = dep.range;
+    const ids = dep.getIds(moduleGraph)
+    const exportExpr = this._getCodeForIds(dep, source, templateContext, ids)
+    const range = dep.range
     if (dep.shorthand) {
-      source.insert(range[1], `: ${exportExpr}`);
+      source.insert(range[1], `: ${exportExpr}`)
     } else {
-      source.replace(range[0], range[1] - 1, exportExpr);
+      source.replace(range[0], range[1] - 1, exportExpr)
     }
   }
-};
+}
 ```
 
 举个例子，对于下面这段简单代码：
 
 ```js
-import bar from "./bar";
-console.log(bar);
+import bar from './bar'
+console.log(bar)
 ```
 
 会产生 `HarmonyImportSpecifierDependency` 与 `ConstDependency` 两个依赖对象，之后：
 
 ```js
-import bar from "./bar";
-console.log(bar);
+import bar from './bar'
+console.log(bar)
 
 // 首先，HarmonyImportSpecifierDependency 替换导入变量名：
-import bar from "./bar";
-console.log(_bar__WEBPACK_IMPORTED_MODULE_1__["default"]);
+import bar from './bar'
+console.log(_bar__WEBPACK_IMPORTED_MODULE_1__['default'])
 
 // 之后，ConstDependency 删除模块导入语句：
-console.log(_bar__WEBPACK_IMPORTED_MODULE_1__["default"]);
+console.log(_bar__WEBPACK_IMPORTED_MODULE_1__['default'])
 ```
 
 可以看出，这部分逻辑的效果与 Babel 类似，会直接修改模块源码，实现语言层面的向下兼容。但这还不够，还需要将这段代码包裹进 Webpack 的模块框架中，这部分工作将由 `initFragments` 数组完成。
@@ -283,17 +270,17 @@ HarmonyImportDependency.Template = class HarmonyImportDependencyTemplate extends
   apply(dependency, source, templateContext) {
     // ...
     templateContext.initFragments.push(
-        new ConditionalInitFragment(
-          importStatement[0] + importStatement[1],
-          InitFragment.STAGE_HARMONY_IMPORTS,
-          dep.sourceOrder,
-          key,
-          runtimeCondition
-        )
-      );
+      new ConditionalInitFragment(
+        importStatement[0] + importStatement[1],
+        InitFragment.STAGE_HARMONY_IMPORTS,
+        dep.sourceOrder,
+        key,
+        runtimeCondition
+      )
+    )
     //...
   }
- }
+}
 ```
 
 也就是根据模块需求，不断增加新的代码片段 `initFragments`，所有 `Dependency` 执行完毕后，接着就需要调用 `InitFragment.addToSource` 函数将两者合并为模块产物。`addToSource` 的核心代码如下：
@@ -304,27 +291,27 @@ class InitFragment {
     // 先排好顺序
     const sortedFragments = initFragments
       .map(extractFragmentIndex)
-      .sort(sortFragmentWithIndex);
+      .sort(sortFragmentWithIndex)
     // ...
 
-    const concatSource = new ConcatSource();
-    const endContents = [];
+    const concatSource = new ConcatSource()
+    const endContents = []
     for (const fragment of sortedFragments) {
-        // 合并 fragment.getContent 取出的片段内容
-      concatSource.add(fragment.getContent(generateContext));
-      const endContent = fragment.getEndContent(generateContext);
+      // 合并 fragment.getContent 取出的片段内容
+      concatSource.add(fragment.getContent(generateContext))
+      const endContent = fragment.getEndContent(generateContext)
       if (endContent) {
-        endContents.push(endContent);
+        endContents.push(endContent)
       }
     }
 
     // 合并 source
-    concatSource.add(source);
+    concatSource.add(source)
     // 合并 fragment.getEndContent 取出的片段内容
     for (const content of endContents.reverse()) {
-      concatSource.add(content);
+      concatSource.add(content)
     }
-    return concatSource;
+    return concatSource
   }
 }
 ```
@@ -338,19 +325,20 @@ class InitFragment {
 所以，模块代码合并操作主要就是用 `initFragments` 数组一层一层包裹住模块代码 `source`，而两者都在 `Template.apply` 层面维护。还是上面那个简单例子，经过这段 `Template` 处理后，最终转化为：
 
 ```js
-import bar from "./bar";
-console.log(bar);
+import bar from './bar'
+console.log(bar)
 
 // 首先，HarmonyImportSpecifierDependency 替换导入变量名：
-import bar from "./bar";
-console.log(_bar__WEBPACK_IMPORTED_MODULE_1__["default"]);
+import bar from './bar'
+console.log(_bar__WEBPACK_IMPORTED_MODULE_1__['default'])
 
 // 之后，ConstDependency 删除模块导入语句：
-console.log(_bar__WEBPACK_IMPORTED_MODULE_1__["default"]);
+console.log(_bar__WEBPACK_IMPORTED_MODULE_1__['default'])
 
 // 经过 ConditionalInitFragment 处理：
-/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bar */ "./src/bar.js");
-console.log(_bar__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_1__ =
+  __webpack_require__(/*! ./bar */ './src/bar.js')
+console.log(_bar__WEBPACK_IMPORTED_MODULE_1__['default'])
 ```
 
 简单总结一下，Webpack 生成 ModuleGraph 与 ChunkGraph 后，会立即开始遍历所有 `Dependency` 对象，依次调用对象的静态方法 `template.apply` 修改 `module` 代码，最后再将所有变更后的 `source` 与模块脚手架 `initFragments` 合并为最终产物，完成从单个模块的源码形态到产物形态的转变。
@@ -360,38 +348,41 @@ console.log(_bar__WEBPACK_IMPORTED_MODULE_1__["default"]);
 「**模块转译**」 步骤流程比较长，整体逻辑很复杂，为了加深理解，接下来我们尝试开发一个简单的 Banner 插件：实现在每个模块前自动插入一段字符串。实现上，插件主要涉及 `Dependency`、`Template`、`hooks` 对象，代码：
 
 ```js
-const { Dependency, Template } = require("webpack");
+const { Dependency, Template } = require('webpack')
 
 class DemoDependency extends Dependency {
   constructor() {
-    super();
+    super()
   }
 }
 
 DemoDependency.Template = class DemoDependencyTemplate extends Template {
   apply(dependency, source) {
-    const today = new Date().toLocaleDateString();
-    source.insert(0, `/* Author: Tecvan */
+    const today = new Date().toLocaleDateString()
+    source.insert(
+      0,
+      `/* Author: Tecvan */
 /* Date: ${today} */
-`);
+`
+    )
   }
-};
+}
 
 module.exports = class DemoPlugin {
   apply(compiler) {
-    compiler.hooks.thisCompilation.tap("DemoPlugin", (compilation) => {
+    compiler.hooks.thisCompilation.tap('DemoPlugin', compilation => {
       // 调用 dependencyTemplates ，注册 Dependency 到 Template 的映射
       compilation.dependencyTemplates.set(
         DemoDependency,
         new DemoDependency.Template()
-      );
-      compilation.hooks.succeedModule.tap("DemoPlugin", (module) => {
+      )
+      compilation.hooks.succeedModule.tap('DemoPlugin', module => {
         // 模块构建完毕后，插入 DemoDependency 对象
-        module.addDependency(new DemoDependency());
-      });
-    });
+        module.addDependency(new DemoDependency())
+      })
+    })
   }
-};
+}
 ```
 
 示例插件的关键步骤：
@@ -419,7 +410,7 @@ module.exports = class DemoPlugin {
 
 ```js
 // a.js
-export default 'a module';
+export default 'a module'
 
 // index.js
 import name from './a'
@@ -454,7 +445,7 @@ console.log(name)
 早在「构建」阶段，Webpack 就已经开始在持续收集运行时依赖，例如，在一个非常简单的模块导入语句中：
 
 ```js
-import bar from './bar';
+import bar from './bar'
 ```
 
 Webpack 在处理上述代码 AST 时，会相应生成多个依赖对象，比较重要的有：
@@ -513,31 +504,40 @@ Webpack 在处理上述代码 AST 时，会相应生成多个依赖对象，比�
 示例右边 bundle 文件中，红框框出来的部分为用户代码文件及运行时模块生成的产物，其余部分撑起了一个 IIFE 形式的运行框架，即为**模板框架**，也就是：
 
 ```js
-(() => { // webpackBootstrap
-    "use strict";
-    var __webpack_modules__ = ({
-        "module-a": ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-            // ! module 代码，
-        }),
-        "module-b": ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-            // ! module 代码，
-        })
-    });
-    // The module cache
-    var __webpack_module_cache__ = {};
-    // The require function
-    function __webpack_require__(moduleId) {
-        // ! webpack CMD 实现
+;(() => {
+  // webpackBootstrap
+  'use strict'
+  var __webpack_modules__ = {
+    'module-a': (
+      __unused_webpack_module,
+      __webpack_exports__,
+      __webpack_require__
+    ) => {
+      // ! module 代码，
+    },
+    'module-b': (
+      __unused_webpack_module,
+      __webpack_exports__,
+      __webpack_require__
+    ) => {
+      // ! module 代码，
     }
-    /************************************************************************/
-    // ! 各种 runtime
-    /************************************************************************/
-    var __webpack_exports__ = {};
-    // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-    (() => {
-        // ! entry 模块
-    })();
-})();
+  }
+  // The module cache
+  var __webpack_module_cache__ = {}
+  // The require function
+  function __webpack_require__(moduleId) {
+    // ! webpack CMD 实现
+  }
+  /************************************************************************/
+  // ! 各种 runtime
+  /************************************************************************/
+  var __webpack_exports__ = {}
+  // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+  ;(() => {
+    // ! entry 模块
+  })()
+})()
 ```
 
 捋一下这里的逻辑，运行框架包含如下关键部分：
@@ -559,9 +559,9 @@ Webpack 在处理上述代码 AST 时，会相应生成多个依赖对象，比�
 class Compilation {
   seal() {
     // 先把所有模块的代码都转译，准备好
-    this.codeGenerationResults = this.codeGeneration(this.modules);
+    this.codeGenerationResults = this.codeGeneration(this.modules)
     // 1. 调用 createChunkAssets
-    this.createChunkAssets();
+    this.createChunkAssets()
   }
 
   createChunkAssets() {
@@ -571,10 +571,10 @@ class Compilation {
       const res = this.hooks.renderManifest.call([], {
         chunk,
         codeGenerationResults: this.codeGenerationResults,
-        ...others,
-      });
+        ...others
+      })
       // 提交组装结果
-      this.emitAsset(res.render(), ...others);
+      this.emitAsset(res.render(), ...others)
     }
   }
 }
@@ -582,24 +582,30 @@ class Compilation {
 // lib/javascript/JavascriptModulesPlugin.js
 class JavascriptModulesPlugin {
   apply() {
-    compiler.hooks.compilation.tap("JavascriptModulesPlugin", (compilation) => {
-      compilation.hooks.renderManifest.tap("JavascriptModulesPlugin", (result, options) => {
+    compiler.hooks.compilation.tap('JavascriptModulesPlugin', compilation => {
+      compilation.hooks.renderManifest.tap(
+        'JavascriptModulesPlugin',
+        (result, options) => {
           // JavascriptModulesPlugin 插件中通过 renderManifest 钩子返回组装函数 render
           const render = () =>
             // render 内部根据 chunk 内容，选择使用模板 `renderMain` 或 `renderChunk`
             // 3. 监听钩子，返回打包函数
-            this.renderMain(options);
+            this.renderMain(options)
 
-          result.push({ render /* arguments */ });
-          return result;
+          result.push({ render /* arguments */ })
+          return result
         }
-      );
-    });
+      )
+    })
   }
 
-  renderMain() {/*  */}
+  renderMain() {
+    /*  */
+  }
 
-  renderChunk() {/*  */}
+  renderChunk() {
+    /*  */
+  }
 }
 ```
 
@@ -621,56 +627,56 @@ class JavascriptModulesPlugin {
 ```js
 class JavascriptModulesPlugin {
   renderMain(renderContext, hooks, compilation) {
-    const { chunk, chunkGraph, runtimeTemplate } = renderContext;
+    const { chunk, chunkGraph, runtimeTemplate } = renderContext
 
-    const source = new ConcatSource();
+    const source = new ConcatSource()
     // ...
     // 1. 先计算出 bundle CMD 核心代码，包含：
     //      - "var __webpack_module_cache__ = {};" 语句
     //      - "__webpack_require__" 函数
-    const bootstrap = this.renderBootstrap(renderContext, hooks);
+    const bootstrap = this.renderBootstrap(renderContext, hooks)
 
     // 2. 计算出当前 chunk 下，除 entry 外其它模块的代码
     const chunkModules = Template.renderChunkModules(
       renderContext,
       inlinedModules
-        ? allModules.filter((m) => !inlinedModules.has(m))
+        ? allModules.filter(m => !inlinedModules.has(m))
         : allModules,
-      (module) =>
+      module =>
         this.renderModule(
           module,
           renderContext,
           hooks,
-          allStrict ? "strict" : true
+          allStrict ? 'strict' : true
         ),
       prefix
-    );
+    )
 
     // 3. 计算出运行时模块代码
     const runtimeModules =
-      renderContext.chunkGraph.getChunkRuntimeModulesInOrder(chunk);
+      renderContext.chunkGraph.getChunkRuntimeModulesInOrder(chunk)
 
     // 4. 重点来了，开始拼接 bundle
     // 4.1 首先，合并核心 CMD 实现，即上述 bootstrap 代码
-    const beforeStartup = Template.asString(bootstrap.beforeStartup) + "\n";
+    const beforeStartup = Template.asString(bootstrap.beforeStartup) + '\n'
     source.add(
       new PrefixSource(
         prefix,
         useSourceMap
-          ? new OriginalSource(beforeStartup, "webpack/before-startup")
+          ? new OriginalSource(beforeStartup, 'webpack/before-startup')
           : new RawSource(beforeStartup)
       )
-    );
+    )
 
     // 4.2 合并 runtime 模块代码
     if (runtimeModules.length > 0) {
       for (const module of runtimeModules) {
-        compilation.codeGeneratedModules.add(module);
+        compilation.codeGeneratedModules.add(module)
       }
     }
     // 4.3 合并除 entry 外其它模块代码
     for (const m of chunkModules) {
-      const renderedModule = this.renderModule(m, renderContext, hooks, false);
+      const renderedModule = this.renderModule(m, renderContext, hooks, false)
       source.add(renderedModule)
     }
 
@@ -679,10 +685,10 @@ class JavascriptModulesPlugin {
       hasEntryModules &&
       runtimeRequirements.has(RuntimeGlobals.returnExportsFromRuntime)
     ) {
-      source.add(`${prefix}return __webpack_exports__;\n`);
+      source.add(`${prefix}return __webpack_exports__;\n`)
     }
 
-    return source;
+    return source
   }
 }
 ```

@@ -34,35 +34,35 @@ AST 可视化：[https://astexplorer.net/](https://astexplorer.net/)
 
 ```ts
 interface ExprAST {
-  left: Number | ExprAST;
-  operator: "+" | "-" | "*" | "/";
-  right: ExprAST | number;
+  left: Number | ExprAST
+  operator: '+' | '-' | '*' | '/'
+  right: ExprAST | number
 }
 ```
 
 ```ts
-var Parser = require("jison").Parser;
+var Parser = require('jison').Parser
 
 const grammar = {
   lex: {
     rules: [
-      ["s+", "/* skip whitespace */"],
-      ["[0-9]+(?:.[0-9]+)?\b", "return 'NUMBER';"],
-      ["*", "return '*';"],
-      ["/", "return '/';"],
-      ["-", "return '-';"],
-      ["+", "return '+';"],
-      ["(", "return '(';"],
-      [")", "return ')';"],
-      ["$", "return 'EOF';"],
-    ],
+      ['s+', '/* skip whitespace */'],
+      ['[0-9]+(?:.[0-9]+)?\b', "return 'NUMBER';"],
+      ['*', "return '*';"],
+      ['/', "return '/';"],
+      ['-', "return '-';"],
+      ['+', "return '+';"],
+      ['(', "return '(';"],
+      [')', "return ')';"],
+      ['$', "return 'EOF';"]
+    ]
   },
 
   bnf: {
     // 第一个产生式左边的非终结符会作为语法的起始符号
     // 遇到EOF结束时，输出结果
     // expression ——> e EOF
-    expressions: [["e EOF", "console.log($1); return $1;"]],
+    expressions: [['e EOF', 'console.log($1); return $1;']],
     /**
             e ——> NUMBER |
                   e + e |
@@ -72,30 +72,30 @@ const grammar = {
                   - e
         */
     e: [
-      ["NUMBER", "$$ = Number($1)"],
-      ["e + e", "$$ = { left: $1, operator: '+', right: $3 }"],
-      ["e - e", "$$ = { left: $1, operator: '-', right: $3 }"],
-      ["e * e", "$$ = { left: $1, operator: '*', right: $3 }"],
-      ["e / e", "$$ = { left: $1, operator: '/', right: $3 }"],
+      ['NUMBER', '$$ = Number($1)'],
+      ['e + e', "$$ = { left: $1, operator: '+', right: $3 }"],
+      ['e - e', "$$ = { left: $1, operator: '-', right: $3 }"],
+      ['e * e', "$$ = { left: $1, operator: '*', right: $3 }"],
+      ['e / e', "$$ = { left: $1, operator: '/', right: $3 }"],
       [
-        "- e",
-        "$$ = { left: null, operator: '-', right: { left: $2, operator: null, right: null } }",
+        '- e',
+        "$$ = { left: null, operator: '-', right: { left: $2, operator: null, right: null } }"
       ],
-      ["( e )", "$$ = $2"],
-    ],
+      ['( e )', '$$ = $2']
+    ]
   },
 
   // jison就可以比较移进与规约的选择间涉及的优先级
   operators: [
-    ["left", "+", "-"],
-    ["left", "*", "/"],
-  ],
-};
+    ['left', '+', '-'],
+    ['left', '*', '/']
+  ]
+}
 
-var parser = new Parser(grammar);
+var parser = new Parser(grammar)
 
 // 输出
-parser.parse("1+2*3");
+parser.parse('1+2*3')
 ```
 
 # AST 的前端应用场景
@@ -152,106 +152,106 @@ generate: 目标代码生成
 
 ```js
 // 源代码
-const hello = () => {};
+const hello = () => {}
 
 // 要求修改为
-const world = () => {};
+const world = () => {}
 ```
 
 答案：
 
 ```js
-const parser = require("@babel/parser");
-const traverse = require("@babel/traverse");
-const generator = require("@babel/generator");
+const parser = require('@babel/parser')
+const traverse = require('@babel/traverse')
+const generator = require('@babel/generator')
 
-const code = `const hello = () => {}`;
+const code = `const hello = () => {}`
 
 // 源码解析ast
-const ast = parser.parse(code);
+const ast = parser.parse(code)
 
 // 遍历ast，执行转换
 traverse.default(ast, {
   Identifier(path) {
-    const { node } = path;
-    if (node.name === "hello") {
-      node.name = "world";
+    const { node } = path
+    if (node.name === 'hello') {
+      node.name = 'world'
     }
-  },
-});
+  }
+})
 
 // 生成
-const result = generator.default(ast, {}, code);
+const result = generator.default(ast, {}, code)
 
-console.log(result.code);
+console.log(result.code)
 ```
 
 ## 箭头函数转换
 
 ```js
-const parser = require("@babel/parser");
-const traverse = require("@babel/traverse");
-const generator = require("@babel/generator");
-const types = require("@babel/types");
+const parser = require('@babel/parser')
+const traverse = require('@babel/traverse')
+const generator = require('@babel/generator')
+const types = require('@babel/types')
 
 const code = `const sum = (a, b) => {
   console.log(this)
   return a + b;
-}`;
+}`
 
 // 源码解析ast
-const ast = parser.parse(code);
+const ast = parser.parse(code)
 
 function hoistFunctionEnvironment(path) {
   // 确定当前箭头函数要使用哪个地方的this
-  const thisEnv = path.findParent((parent) => {
+  const thisEnv = path.findParent(parent => {
     return (
       (parent.isFunction() && !parent.isArrowFunctionExpression()) ||
       parent.isProgram()
-    );
-  });
+    )
+  })
 
   // 在副作用域放入一个_this变量
   thisEnv.scope.push({
-    id: types.identifier("_this"),
-    init: types.thisExpression(), // 生成this节点
-  });
+    id: types.identifier('_this'),
+    init: types.thisExpression() // 生成this节点
+  })
 
   // 遍历子节点
-  let thisPaths = [];
+  let thisPaths = []
   path.traverse({
     ThisExpression(thisPath) {
-      thisPaths.push(thisPath);
-    },
-  });
+      thisPaths.push(thisPath)
+    }
+  })
 
   // 替换
-  thisPaths.forEach((thisPath) => {
+  thisPaths.forEach(thisPath => {
     // this => _this
-    thisPath.replaceWith(types.identifier("_this"));
-  });
+    thisPath.replaceWith(types.identifier('_this'))
+  })
 }
 
 // 遍历ast，执行转换
 traverse.default(ast, {
   ArrowFunctionExpression(path) {
-    const { node } = path;
+    const { node } = path
 
     // 提升函数环境
-    hoistFunctionEnvironment(path);
+    hoistFunctionEnvironment(path)
 
-    node.type = "FunctionExpression";
+    node.type = 'FunctionExpression'
 
     if (!types.isBlockStatement(node.body)) {
-      node.body = types.blockStatement([types.returnStatement(node.body)]);
+      node.body = types.blockStatement([types.returnStatement(node.body)])
     }
-  },
-});
+  }
+})
 
 // 生成
-const result = generator.default(ast, {}, code);
+const result = generator.default(ast, {}, code)
 
-console.log(result.code);
+console.log(result.code)
 // 输出代码
 // const _this = this;
 // const sum = function (a, b) {
@@ -264,17 +264,17 @@ console.log(result.code);
 
 ```js
 // 源代码
-console.log("hello world");
+console.log('hello world')
 
 // 要求修改为
-console.log("hello world", "文件名", "具体代码位置信息");
+console.log('hello world', '文件名', '具体代码位置信息')
 ```
 
 ```js
-const parser = require("@babel/parser");
-const traverse = require("@babel/traverse");
-const generator = require("@babel/generator");
-const types = require("@babel/types");
+const parser = require('@babel/parser')
+const traverse = require('@babel/traverse')
+const generator = require('@babel/generator')
+const types = require('@babel/types')
 
 const code = `
 console.log("hello world");
@@ -282,25 +282,25 @@ console.warn(1);
 console.log(2);
 console.log(3);
 console.log(4);
-`;
+`
 
 // 源码解析ast
-const ast = parser.parse(code);
+const ast = parser.parse(code)
 
 // 遍历ast，执行转换
 traverse.default(ast, {
   CallExpression(path, state) {
-    const { node } = path;
+    const { node } = path
     if (types.isMemberExpression(node.callee)) {
       // 找到console
-      if (node.callee.object.name === "console") {
+      if (node.callee.object.name === 'console') {
         // 找到符合的方法名
         if (
-          ["log", "info", "warn", "error"].includes(node.callee.property.name)
+          ['log', 'info', 'warn', 'error'].includes(node.callee.property.name)
         ) {
           // 找到所处的行列
-          const { line, column } = node.loc.start;
-          node.arguments.push(types.stringLiteral(`${line}:${column}`));
+          const { line, column } = node.loc.start
+          node.arguments.push(types.stringLiteral(`${line}:${column}`))
           // 找到文件名
           // const filename = state.file.opts.filename;
           // 输出文件的相对路径
@@ -311,13 +311,13 @@ traverse.default(ast, {
         }
       }
     }
-  },
-});
+  }
+})
 
 // 生成
-const result = generator.default(ast, {}, code);
+const result = generator.default(ast, {}, code)
 
-console.log(result.code);
+console.log(result.code)
 ```
 
 ## 往每个函数作用域添加一行日志函数
@@ -327,15 +327,15 @@ console.log(result.code);
 ```js
 //四种声明函数的方式
 function sum(a, b) {
-  return a + b;
+  return a + b
 }
 const multiply = function (a, b) {
-  return a * b;
-};
-const minus = (a, b) => a - b;
+  return a * b
+}
+const minus = (a, b) => a - b
 class Calculator {
   divide(a, b) {
-    return a / b;
+    return a / b
   }
 }
 ```
@@ -343,24 +343,24 @@ class Calculator {
 转换后：
 
 ```js
-import loggerLib from "logger";
+import loggerLib from 'logger'
 
 function sum(a, b) {
-  loggerLib();
-  return a + b;
+  loggerLib()
+  return a + b
 }
 const multiply = function (a, b) {
-  loggerLib();
-  return a * b;
-};
+  loggerLib()
+  return a * b
+}
 const minus = (a, b) => {
-  loggerLib();
-  return a - b;
-};
+  loggerLib()
+  return a - b
+}
 class Calculator {
   divide(a, b) {
-    loggerLib();
-    return a / b;
+    loggerLib()
+    return a / b
   }
 }
 ```
@@ -371,10 +371,10 @@ class Calculator {
 
 ```js
 function getAge() {
-  var age = 12;
-  console.log(age);
-  var name = "zhufeng";
-  console.log(name);
+  var age = 12
+  console.log(age)
+  var name = 'zhufeng'
+  console.log(name)
 }
 ```
 
@@ -384,13 +384,13 @@ function getAge() {
 
 ```js
 // 源代码
-import { flatten, concat } from "lodash";
-console.log(flatten, concat);
+import { flatten, concat } from 'lodash'
+console.log(flatten, concat)
 
 // 编译后
-import flatten from "lodash/flatten";
-import concat from "lodash/concat";
-console.log(flatten, concat);
+import flatten from 'lodash/flatten'
+import concat from 'lodash/concat'
+console.log(flatten, concat)
 ```
 
 ## 实现 ts 的类型校验

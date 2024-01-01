@@ -85,54 +85,56 @@ Webpack 的打包过程非常复杂，但大致上可简化为：
 ```js
 // webpack.config.js
 module.exports = {
-  entry: "./src/index"
-};
+  entry: './src/index'
+}
 ```
 
 之后，还需要声明产物输出路径：
 
 ```js
 // webpack.config.js
-const path = require("path");
+const path = require('path')
 
 module.exports = {
-  entry: "./src/index",
+  entry: './src/index',
   output: {
-    filename: "[name].js",
-    path: path.join(__dirname, "./dist"),
+    filename: '[name].js',
+    path: path.join(__dirname, './dist')
   }
-};
+}
 ```
 
 至此，已经足够驱动一个最简单项目的编译工作。但是，在前端项目中经常需要处理 JS 之外的其它资源，包括 css、ts、图片等，此时需要为这些资源配置适当的加载器：
 
 ```js
 // webpack.config.js
-const path = require("path");
+const path = require('path')
 
 module.exports = {
-  entry: "./src/index",
+  entry: './src/index',
   output: {
-    filename: "[name].js",
-    path: path.join(__dirname, "./dist"),
+    filename: '[name].js',
+    path: path.join(__dirname, './dist')
   },
   module: {
-    rules: [{
-      test: /\.less$/i,
-      include: {
-        and: [path.join(__dirname, './src/')]
-      },
-      use: [
-        "style-loader",
-        "css-loader",
-        // "./loader",
-        {
-          loader: "less-loader",
+    rules: [
+      {
+        test: /\.less$/i,
+        include: {
+          and: [path.join(__dirname, './src/')]
         },
-      ],
-    }],
-  },
-};
+        use: [
+          'style-loader',
+          'css-loader',
+          // "./loader",
+          {
+            loader: 'less-loader'
+          }
+        ]
+      }
+    ]
+  }
+}
 ```
 
 到这里已经是一个简单但足够完备的配置结构了，接下来还可以根据需要使用其它工程化工具，例如使用 `devtool` 生成 Sourcemap 文件；使用 `watch` 持续监听文件变化并随之重新构建。后面章节会展开细节，此处不赘述。
@@ -213,9 +215,7 @@ Vue CLI 底层依赖于 Webpack 实现编译打包等工程化能力，开发者
 // vue.config.js
 module.exports = {
   configureWebpack: {
-    plugins: [
-      new MyAwesomeWebpackPlugin()
-    ]
+    plugins: [new MyAwesomeWebpackPlugin()]
   }
 }
 ```
@@ -231,10 +231,10 @@ module.exports = {
     config.module
       .rule('vue')
       .use('vue-loader')
-        .tap(options => {
-          // modify the options...
-          return options
-        })
+      .tap(options => {
+        // modify the options...
+        return options
+      })
   }
 }
 ```

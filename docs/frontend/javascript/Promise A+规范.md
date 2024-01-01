@@ -26,9 +26,9 @@
 
 ```js
 // 记录Promise的三种状态
-const PENDING = "pending";
-const FULFILLED = "fulfilled";
-const REJECTED = "rejected";
+const PENDING = 'pending'
+const FULFILLED = 'fulfilled'
+const REJECTED = 'rejected'
 
 /**
  * 运行一个微队列函数
@@ -37,17 +37,17 @@ const REJECTED = "rejected";
 function runMicroTask(callback) {
   if (process) {
     // Node环境
-    return process.nextTick(callback);
+    return process.nextTick(callback)
   } else if (document && MutationObserver) {
     // 浏览器环境
-    const div = document.createElement("div");
-    const observer = new MutationObserver(callback);
+    const div = document.createElement('div')
+    const observer = new MutationObserver(callback)
     observer.observer(div, {
-      childList: true,
-    });
-    div.innerHTML = "1";
+      childList: true
+    })
+    div.innerHTML = '1'
   } else {
-    setTimeout(callback, 0);
+    setTimeout(callback, 0)
   }
 }
 
@@ -58,7 +58,7 @@ function runMicroTask(callback) {
  * @return {boolean}
  */
 function isPromiseLike(obj) {
-  return !!obj && typeof obj === "object" && typeof obj.then === "function";
+  return !!obj && typeof obj === 'object' && typeof obj.then === 'function'
 }
 
 class MyPromise {
@@ -67,16 +67,16 @@ class MyPromise {
    * @param {Function} executor 任务执行器，立即执行
    */
   constructor(executor) {
-    this._state = PENDING; // 状态
-    this._value = undefined; // 数据
-    this._handlers = []; // 执行函数形成的队列
+    this._state = PENDING // 状态
+    this._value = undefined // 数据
+    this._handlers = [] // 执行函数形成的队列
     runMicroTask(() => {
       try {
-        executor(this._resolve.bind(this), this._reject.bind(this));
+        executor(this._resolve.bind(this), this._reject.bind(this))
       } catch (error) {
-        this._reject(error);
+        this._reject(error)
       }
-    });
+    })
   }
 
   /**
@@ -85,9 +85,9 @@ class MyPromise {
    * @param {any} value 新的数据
    */
   _changeState(newState, value) {
-    if (this._state !== PENDING) return;
-    this._state = newState;
-    this._value = value;
+    if (this._state !== PENDING) return
+    this._state = newState
+    this._value = value
   }
 
   /**
@@ -95,8 +95,8 @@ class MyPromise {
    * @param {any} data 任务完成的相关参数
    */
   _resolve(data) {
-    this._changeState(FULFILLED, data);
-    this._runHandlers();
+    this._changeState(FULFILLED, data)
+    this._runHandlers()
   }
 
   /**
@@ -104,8 +104,8 @@ class MyPromise {
    * @param {any} reason 任务失败的相关数据
    */
   _reject(reason) {
-    this._changeState(REJECTED, reason);
-    this._runHandlers();
+    this._changeState(REJECTED, reason)
+    this._runHandlers()
   }
 
   /**
@@ -120,8 +120,8 @@ class MyPromise {
       executor,
       state,
       resolve,
-      reject,
-    });
+      reject
+    })
   }
 
   /**
@@ -129,10 +129,10 @@ class MyPromise {
    */
   _runHandlers() {
     // 目前任务仍在挂起
-    if (this._state === PENDING) return;
+    if (this._state === PENDING) return
     while (this._handlers[0]) {
-      this._runOneHandler(this._handlers[0]);
-      this._handlers.shift();
+      this._runOneHandler(this._handlers[0])
+      this._handlers.shift()
     }
   }
 
@@ -144,23 +144,23 @@ class MyPromise {
     runMicroTask(() => {
       if (state !== this._state) {
         // 处理器的状态和当前不一致
-        return;
+        return
       }
-      if (typeof executor !== "function") {
+      if (typeof executor !== 'function') {
         // 处理器不是一个函数，让then返回的promise和当前的状态保持一致
-        this._state === FULFILLED ? resolve(this._value) : reject(this._value);
+        this._state === FULFILLED ? resolve(this._value) : reject(this._value)
       }
       try {
-        const result = executor(this._value);
+        const result = executor(this._value)
         if (isPromiseLike(result)) {
-          result.then(resolve, reject);
+          result.then(resolve, reject)
         } else {
-          resolve(result);
+          resolve(result)
         }
       } catch (error) {
-        handler.reject(error);
+        handler.reject(error)
       }
-    });
+    })
   }
 
   /**
@@ -171,43 +171,43 @@ class MyPromise {
    */
   then(onFulfilled, onRejected) {
     return new MyPromise((resolve, reject) => {
-      this._pushHandlers(onFulfilled, FULFILLED, resolve, reject);
-      this._pushHandlers(onRejected, REJECTED, resolve, reject);
-      this._runHandlers(); // 执行队列
-    });
+      this._pushHandlers(onFulfilled, FULFILLED, resolve, reject)
+      this._pushHandlers(onRejected, REJECTED, resolve, reject)
+      this._runHandlers() // 执行队列
+    })
   }
 }
 
 const prom = new MyPromise((resolve, reject) => {
   setTimeout(() => {
-    resolve(123);
-  }, 1000);
-});
+    resolve(123)
+  }, 1000)
+})
 
 prom
   .then(
     function A(data) {
-      console.log(1);
+      console.log(1)
       let prom2 = new MyPromise((resolve, reject) => {
         setTimeout(() => {
-          resolve(2);
-        }, 2000);
-      });
-      return prom2;
+          resolve(2)
+        }, 2000)
+      })
+      return prom2
     },
     function B(reason) {
-      console.log("失败", reason);
+      console.log('失败', reason)
     }
   )
-  .then((e) => {
-    console.log("3", e);
-  });
+  .then(e => {
+    console.log('3', e)
+  })
 
 setTimeout(() => {
   prom.then(function D(d) {
-    console.log("d", d);
-  });
-}, 2000);
+    console.log('d', d)
+  })
+}, 2000)
 
 // prom.then((e) => console.log(e));
 
@@ -224,7 +224,7 @@ class MyPromise {
    * ES6 Promise的catch方法
    */
   catch(onRejected) {
-    return this.then(undefined, onRejected);
+    return this.then(undefined, onRejected)
   }
 
   /**
@@ -233,13 +233,13 @@ class MyPromise {
    */
   resolve(value) {
     if (value instanceof Promise) {
-      return value;
+      return value
     } else if (isPromiseLike(value)) {
       return new MyPromise((resolve, reject) => {
-        value.then(resolve, reject);
-      });
+        value.then(resolve, reject)
+      })
     } else {
-      return new Promise((resolve) => resolve(value));
+      return new Promise(resolve => resolve(value))
     }
   }
 
@@ -248,7 +248,7 @@ class MyPromise {
    * @param {reason} 传入的值
    */
   reject(reason) {
-    return new Promise((resolve, reject) => reject(reason));
+    return new Promise((resolve, reject) => reject(reason))
   }
 
   /**
@@ -256,12 +256,12 @@ class MyPromise {
    */
   finally(onFinally) {
     return this.then(
-      (value) => MyPromise.resolve(onFinally()).then(() => value),
-      (err) =>
+      value => MyPromise.resolve(onFinally()).then(() => value),
+      err =>
         MyPromise.resolve(onFinally()).then(() => {
-          throw err;
+          throw err
         })
-    );
+    )
   }
 }
 ```

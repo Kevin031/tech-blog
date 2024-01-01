@@ -112,19 +112,19 @@ failed: 如果在编译和输出流程中遇到异常导致 Webpack 退出时，
 module.exports = function (source) {
   // source 为 compiler 传递给 Loader 的一个文件的原内容
   // 该函数需要返回处理后的内容，这里简单起见，直接把原内容返回了，相当于该 Loader 没有做任何转换
-  return source;
-};
+  return source
+}
 ```
 
 由于 Loader 运行在 Node.js 中，你可以调用任何 Node.js 自带的 API，或者安装第三方模块进行调用：
 
 ```js
-const sass = require("sass");
+const sass = require('sass')
 module.exports = function (source) {
   // source 为 compiler 传递给 Loader 的一个文件的原内容
   // 该函数需要返回处理后的内容，这里简单起见，直接把原内容返回了，相当于该 Loader 没有做任何转换
-  return sass(source);
-};
+  return sass(source)
+}
 ```
 
 Webpack 还提供一些 API 供 Loader 调用
@@ -132,13 +132,13 @@ Webpack 还提供一些 API 供 Loader 调用
 例如，获得 loader 的 options
 
 ```js
-const loaderUtils = require("loader-utils");
+const loaderUtils = require('loader-utils')
 
 module.exports = function (source) {
   // 获取到用户给当前 Loader 传入的 options
-  const options = loaderUtils.getOptions(this);
-  return source;
-};
+  const options = loaderUtils.getOptions(this)
+  return source
+}
 ```
 
 有些场景下还需要返回除了内容之外的东西
@@ -148,11 +148,11 @@ module.exports = function (source) {
 ```js
 module.exports = function (source) {
   // 通过 this.callback 告诉 Webpack 返回的结果
-  this.callback(null, source, sourceMaps);
+  this.callback(null, source, sourceMaps)
   // 当你使用 this.callback 返回内容时，该 Loader 必须返回 undefined，
   // 以让 Webpack 知道该 Loader 返回的结果在 this.callback 中，而不是 return 中
-  return;
-};
+  return
+}
 ```
 
 this.callback 的详细使用方法如下：
@@ -180,12 +180,12 @@ loader 可以同步也可以异步
 ```js
 module.exports = function (source) {
   // 告诉 Webpack 本次转换是异步的，Loader 会在 callback 中回调结果
-  var callback = this.async();
+  var callback = this.async()
   someAsyncOperation(source, function (err, result, sourceMaps, ast) {
     // 通过 callback 返回异步执行后的结果
-    callback(err, result, sourceMaps, ast);
-  });
-};
+    callback(err, result, sourceMaps, ast)
+  })
+}
 ```
 
 在默认的情况下，Webpack 传给 Loader 的原内容都是 UTF-8 格式编码的字符串。 但有些场景下 Loader 不是处理文本文件，而是处理二进制文件，例如 file-loader，就需要 Webpack 给 Loader 传入二进制格式的数据。
@@ -193,14 +193,14 @@ module.exports = function (source) {
 ```js
 module.exports = function (source) {
   // 在 exports.raw === true 时，Webpack 传给 Loader 的 source 是 Buffer 类型的
-  source instanceof Buffer === true;
+  source instanceof Buffer === true
   // Loader 返回的类型也可以是 Buffer 类型的
   // 在 exports.raw !== true 时，Loader 也可以返回 Buffer 类型的结果
-  return source;
-};
+  return source
+}
 
 // 通过 exports.raw 属性告诉 Webpack 该 Loader 是否需要二进制数据
-module.exports.raw = true;
+module.exports.raw = true
 ```
 
 在有些情况下，有些转换操作需要大量计算非常耗时，如果每次构建都重新执行重复的转换操作，构建将会变得非常缓慢。
@@ -210,7 +210,7 @@ module.exports.raw = true;
 ```js
 module.exports = function (source) {
   // 关闭该 Loader 的缓存功能
-  this.cacheable(false);
-  return source;
-};
+  this.cacheable(false)
+  return source
+}
 ```

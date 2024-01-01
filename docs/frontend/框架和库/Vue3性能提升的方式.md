@@ -24,38 +24,38 @@ import {
   createCommentVNode as _createCommentVNode,
   toDisplayString as _toDisplayString,
   openBlock as _openBlock,
-  createElementBlock as _createElementBlock,
-} from "vue";
+  createElementBlock as _createElementBlock
+} from 'vue'
 
 const _hoisted_1 = /*#__PURE__*/ _createElementVNode(
-  "div",
+  'div',
   null,
-  "foo",
+  'foo',
   -1 /* HOISTED */
-);
+)
 const _hoisted_2 = /*#__PURE__*/ _createElementVNode(
-  "div",
+  'div',
   null,
-  "bar",
+  'bar',
   -1 /* HOISTED */
-);
+)
 
 export function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (
     _openBlock(),
-    _createElementBlock("div", null, [
+    _createElementBlock('div', null, [
       _hoisted_1,
-      _createCommentVNode(" hoisted "),
+      _createCommentVNode(' hoisted '),
       _hoisted_2,
-      _createCommentVNode(" hoisted "),
+      _createCommentVNode(' hoisted '),
       _createElementVNode(
-        "div",
+        'div',
         null,
         _toDisplayString(_ctx.dynamic),
         1 /* TEXT */
-      ),
+      )
     ])
-  );
+  )
 }
 ```
 
@@ -84,27 +84,27 @@ import {
   toDisplayString as _toDisplayString,
   createStaticVNode as _createStaticVNode,
   openBlock as _openBlock,
-  createElementBlock as _createElementBlock,
-} from "vue";
+  createElementBlock as _createElementBlock
+} from 'vue'
 
 const _hoisted_1 = /*#__PURE__*/ _createStaticVNode(
   '<div class="foo">foo</div><div class="foo">foo</div><div class="foo">foo</div><div class="foo">foo</div><div class="foo">foo</div>',
   5
-);
+)
 
 export function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (
     _openBlock(),
-    _createElementBlock("div", null, [
+    _createElementBlock('div', null, [
       _hoisted_1,
       _createElementVNode(
-        "div",
+        'div',
         null,
         _toDisplayString(_ctx.dynamic),
         1 /* TEXT */
-      ),
+      )
     ])
-  );
+  )
 }
 
 // Check the console for the AST
@@ -154,7 +154,7 @@ export function render() {
       ],
       64 /* STABLE_FRAGMENT */
     )
-  );
+  )
 }
 ```
 

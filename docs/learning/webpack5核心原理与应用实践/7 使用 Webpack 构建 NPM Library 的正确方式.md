@@ -53,16 +53,16 @@ export const add = (a, b) => a + b
 
 ```js
 // webpack.config.js
-const path = require("path");
+const path = require('path')
 
 module.exports = {
-  mode: "development",
-  entry: "./src/index.js",
+  mode: 'development',
+  entry: './src/index.js',
   output: {
-    filename: "[name].js",
-    path: path.join(__dirname, "./dist"),
+    filename: '[name].js',
+    path: path.join(__dirname, './dist')
   }
-};
+}
 ```
 
 > 提示：我们还可以在上例基础上叠加任意 Loader、Plugin，例如： `babel-loader`、`eslint-loader`、`ts-loader` 等。
@@ -89,17 +89,16 @@ module.exports = {
 - [output.library.name](https://link.juejin.cn/?target=https%3A%2F%2Fwebpack.js.org%2Fconfiguration%2Foutput%2F%23outputlibraryname)：用于定义模块名称，在浏览器环境下使用 `script` 加载该库时，可直接使用这个名字调用模块，例如：
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-...
-<body>
+  ...
+  <body>
     <script src="https://examples.com/dist/main.js"></script>
     <script>
-        // Webpack 会将模块直接挂载到全局对象上
-        window._.add(1, 2)
+      // Webpack 会将模块直接挂载到全局对象上
+      window._.add(1, 2)
     </script>
-</body>
-
+  </body>
 </html>
 ```
 
@@ -114,18 +113,15 @@ module.exports = {
 可以看到，修改前(对应上图左半部分)代码会被包装成一个 IIFE ；而使用 `output.library` 后，代码被包装成 UMD(Universal Module Definition) 模式：
 
 ```js
-(function webpackUniversalModuleDefinition(root, factory) {
-    if(typeof exports === 'object' && typeof module === 'object')
-        module.exports = factory();
-    else if(typeof define === 'function' && define.amd)
-        define([], factory);
-    else if(typeof exports === 'object')
-        exports["_"] = factory();
-    else
-        root["_"] = factory();
-})(self, function() {
- // ...
-});
+;(function webpackUniversalModuleDefinition(root, factory) {
+  if (typeof exports === 'object' && typeof module === 'object')
+    module.exports = factory()
+  else if (typeof define === 'function' && define.amd) define([], factory)
+  else if (typeof exports === 'object') exports['_'] = factory()
+  else root['_'] = factory()
+})(self, function () {
+  // ...
+})
 ```
 
 这种形态会在 NPM 库启动时判断运行环境，自动选择当前适用的模块化方案，此后我们就能在各种场景下使用 `test-lib` 库，例如：
@@ -151,11 +147,11 @@ const {add} = require('test-lib');
 
 ```js
 // src/index.js
-import _ from "lodash";
+import _ from 'lodash'
 
-export const add = (a, b) => a + b;
+export const add = (a, b) => a + b
 
-export const max = _.max;
+export const max = _.max
 ```
 
 此时执行编译命令 `npx webpack`，我们会发现产物文件的体积非常大：
@@ -229,7 +225,7 @@ module.exports = {
 为此，需要在前文基础上添加如下配置：
 
 ```js
-module.exports = {  
+module.exports = {
   // ...
 + module: {
 +   rules: [
@@ -253,7 +249,7 @@ Sourcemap 是一种代码映射协议，它能够将经过压缩、混淆、合�
 
 ```js
 // webpack.config.js
-module.exports = {  
+module.exports = {
   // ...
 + devtool: 'source-map'
 };
@@ -263,16 +259,16 @@ module.exports = {
 
 ```markdown
 ├─ test-lib
-│  ├─ package.json
-│  ├─ webpack.config.js
-│  ├─ src
-│  │  ├─ index.css
-│  │  ├─ index.js
-│  ├─ dist
-│  │  ├─ main.js
-│  │  ├─ main.js.map
-│  │  ├─ main.css
-│  │  ├─ main.css.map
+│ ├─ package.json
+│ ├─ webpack.config.js
+│ ├─ src
+│ │ ├─ index.css
+│ │ ├─ index.js
+│ ├─ dist
+│ │ ├─ main.js
+│ │ ├─ main.js.map
+│ │ ├─ main.css
+│ │ ├─ main.css.map
 ```
 
 此后，业务方只需使用 `source-map-loader` 就可以将这段 Sourcemap 信息加载到自己的业务系统中，实现框架级别的源码调试能力。关于 Sourcemap 的更多信息，可查阅：
@@ -293,7 +289,7 @@ module.exports = {
   // ...
   "scripts": {
     "prepublishOnly": "webpack --mode=production"
-  },
+  }
   // ...
 }
 ```
@@ -308,7 +304,7 @@ module.exports = {
   "module": "src/index.js",
   "scripts": {
     "prepublishOnly": "webpack --mode=production"
-  },
+  }
   // ...
 }
 ```

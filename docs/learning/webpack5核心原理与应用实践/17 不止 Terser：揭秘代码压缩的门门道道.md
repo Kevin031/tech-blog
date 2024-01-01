@@ -17,9 +17,9 @@
 其次，“**同一套**”意味着修改前后必须保持一致的代码逻辑、执行流程、功能效果等，例如：
 
 ```js
-const a = 1;
-const b = 2;
-const c = a + b;
+const a = 1
+const b = 2
+const c = a + b
 ```
 
 代码中，`a/b` 都是字面量常量，那么整段代码完全可以精简为 `const c = 3` ，省略掉 `a/b` 变量的声明语句，前后还能保持功能完全一致。
@@ -46,7 +46,7 @@ module.exports = {
   optimization: {
     minimize: true
   }
-};
+}
 ```
 
 > 提示：使用 `mode = 'production'` 启动生产模式构建时，默认也会开启 Terser 压缩。
@@ -61,7 +61,7 @@ Terser 支持许多压缩 [配置](https://link.juejin.cn/?target=https%3A%2F%2F
 多数情况下使用默认 Terser 配置即可，必要时也可以手动创建 [terser-webpack-plugin](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fwebpack-contrib%2Fterser-webpack-plugin) 实例并传入压缩配置实现更精细的压缩功能，例如：
 
 ```js
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   // ...
@@ -72,14 +72,14 @@ module.exports = {
         terserOptions: {
           compress: {
             reduce_vars: true,
-            pure_funcs: ["console.log"],
-          },
+            pure_funcs: ['console.log']
+          }
           // ...
-        },
-      }),
-    ],
-  },
-};
+        }
+      })
+    ]
+  }
+}
 ```
 
 > 提示：示例中的 `minimize` 用于控制是否开启压缩，只有 `minimize = true'` 时才会调用 `minimizer` 声明的压缩器数组（没错，这是数组形式）执行压缩操作。
@@ -101,12 +101,12 @@ module.exports = {
 1. 可以通过 `test/include/exclude` 过滤插件的执行范围，这个功能配合 `minimizer` 的数组特性，可以实现针对不同产物执行不同的压缩策略，例如：
 
 ```js
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
-  entry: { foo: "./src/foo.js", bar: "./src/bar.js" },
+  entry: { foo: './src/foo.js', bar: './src/bar.js' },
   output: {
-    filename: "[name].js",
+    filename: '[name].js'
     // ...
   },
   optimization: {
@@ -114,15 +114,15 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         test: /foo\.js$/i,
-        extractComments: "all",
+        extractComments: 'all'
       }),
       new TerserPlugin({
         test: /bar\.js/,
-        extractComments: false,
-      }),
-    ],
-  },
-};
+        extractComments: false
+      })
+    ]
+  }
+}
 ```
 
 > 提示：示例代码已上传到 [小册仓库](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2FTecvan-fe%2Fwebpack-book-samples%2Fblob%2Fmain%2Fminify-terser%2Fpackage.json)。
@@ -140,11 +140,11 @@ module.exports = {
         minify: TerserPlugin.swcMinify,
         // `terserOptions` 将被传递到 `swc` (`@swc/core`) 工具
         // 具体配置参数可参考：https://swc.rs/docs/config-js-minify
-        terserOptions: {},
-      }),
-    ],
-  },
-};
+        terserOptions: {}
+      })
+    ]
+  }
+}
 ```
 
 > 提示：TerserPlugin 内置如下压缩器：
@@ -172,12 +172,12 @@ h1::before,
 h1:before {
   /* 下面各种备注都可以删除 */
   /* margin 值可简写 */
-  margin: 10px 20px 10px 20px; 
+  margin: 10px 20px 10px 20px;
   /* 颜色值也可以简写 */
-  color: #ff0000; 
+  color: #ff0000;
   /* 删除重复属性 */
   font-weight: 400;
-  font-weight: 400; 
+  font-weight: 400;
   /* position 字面量值可简化为百分比 */
   background-position: bottom right;
   /* 渐变参数可精简 */
@@ -187,7 +187,7 @@ h1:before {
     #ffe500 50%,
     #121 50%,
     #121 100%
-  ); 
+  );
   /* 初始值也可精简 */
   min-width: initial;
 }
@@ -201,7 +201,7 @@ h1:before {
   color: red;
   font-weight: 400;
   background-position: 100% 100%;
-  quotes: "«" "»";
+  quotes: '«' '»';
   background: linear-gradient(180deg, #ffe500, #ffe500 50%, #121 0, #121);
   min-width: 0;
 }
@@ -220,8 +220,8 @@ yarn add -D css-minimizer-webpack-plugin
 1. 修改 Webpack 配置：
 
 ```js
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   //...
@@ -230,22 +230,22 @@ module.exports = {
       {
         test: /.css$/,
         // 注意，这里用的是 `MiniCssExtractPlugin.loader` 而不是 `style-loader`
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
-    ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
+      }
+    ]
   },
   optimization: {
     minimize: true,
     minimizer: [
       // Webpack5 之后，约定使用 `'...'` 字面量保留默认 `minimizer` 配置
-      "...",
-      new CssMinimizerPlugin(),
-    ],
+      '...',
+      new CssMinimizerPlugin()
+    ]
   },
   // 需要使用 `mini-css-extract-plugin` 将 CSS 代码抽取为单独文件
   // 才能命中 `css-minimizer-webpack-plugin` 默认的 `test` 规则
-  plugins: [new MiniCssExtractPlugin()],
-};
+  plugins: [new MiniCssExtractPlugin()]
+}
 ```
 
 这里的配置逻辑，一是使用 `mini-css-extract-plugin` 将 CSS 代码抽取为单独的 CSS 产物文件，这样才能命中 `css-minimizer-webpack-plugin` 默认的 `test` 逻辑；二是使用 `css-minimizer-webpack-plugin` 压缩 CSS 代码。效果：
@@ -280,7 +280,7 @@ module.exports = {
 
 ```html
 <!-- 原始代码： -->
-<div> <p>    foo </p>    </div>
+<div><p>foo</p></div>
 <!-- 经过压缩的代码： -->
 <div><p>foo</p></div>
 ```
@@ -289,7 +289,8 @@ module.exports = {
 
 ```html
 <!-- 原始代码： -->
-<!-- some comment --><p>blah</p>
+<!-- some comment -->
+<p>blah</p>
 
 <!-- 经过压缩的代码： -->
 <p>blah</p>
@@ -318,8 +319,8 @@ yarn add -D html-minimizer-webpack-plugin
 1. 修改 Webpack 配置，如：
 
 ```js
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const HtmlMinimizerPlugin = require("html-minimizer-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin')
 
 module.exports = {
   // ...
@@ -327,17 +328,17 @@ module.exports = {
     minimize: true,
     minimizer: [
       // Webpack5 之后，约定使用 `'...'` 字面量保留默认 `minimizer` 配置
-      "...",
+      '...',
       new HtmlMinimizerPlugin({
         minimizerOptions: {
           // 折叠 Boolean 型属性
           collapseBooleanAttributes: true,
           // 使用精简 `doctype` 定义
-          useShortDoctype: true,
+          useShortDoctype: true
           // ...
-        },
-      }),
-    ],
+        }
+      })
+    ]
   },
   plugins: [
     // 简单起见，这里我们使用 `html-webpack-plugin` 自动生成 HTML 演示文件
@@ -353,10 +354,10 @@ module.exports = {
         <!-- comments -->
         <script src="index_bundle.js"></script>
       </body>
-    </html>`,
-    }),
-  ],
-};
+    </html>`
+    })
+  ]
+}
 ```
 
 > 提示：示例代码已上传到 [小册仓库](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2FTecvan-fe%2Fwebpack-book-samples%2Fblob%2Fmain%2Fminify-html%2Fwebpack.config.js)。

@@ -8,18 +8,18 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return { message: "Hello World" };
-  },
-};
+  export default {
+    data() {
+      return { message: 'Hello World' }
+    }
+  }
 </script>
 
 <style>
-h3 {
-  margin: 40px 0 0;
-  color: #42b983;
-}
+  h3 {
+    margin: 40px 0 0;
+    color: #42b983;
+  }
 </style>
 ```
 
@@ -51,19 +51,19 @@ yarn add -D webpack webpack-cli vue-loader
 之后，修改 Webpack 配置，加入 `vue-loader` 相关声明：
 
 ```js
-const { VueLoaderPlugin } = require("vue-loader");
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   module: {
     rules: [
       {
         test: /\.vue$/,
-        use: ["vue-loader"],
-      },
-    ],
+        use: ['vue-loader']
+      }
+    ]
   },
-  plugins: [new VueLoaderPlugin()],
-};
+  plugins: [new VueLoaderPlugin()]
+}
 ```
 
 > 提示：`vue-loader` 库同时提供用于处理 SFC 代码转译的 Loader 组件，与用于处理上下文兼容性的 Plugin 组件，两者需要同时配置才能正常运行。
@@ -81,20 +81,20 @@ module.exports = {
 为此需要添加处理 CSS 的规则，完整配置：
 
 ```js
-const { VueLoaderPlugin } = require("vue-loader");
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   module: {
     rules: [
-      { test: /\.vue$/, use: ["vue-loader"] },
+      { test: /\.vue$/, use: ['vue-loader'] },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-    ],
+        use: ['style-loader', 'css-loader']
+      }
+    ]
   },
-  plugins: [new VueLoaderPlugin()],
-};
+  plugins: [new VueLoaderPlugin()]
+}
 ```
 
 同样的，`<style>` 模块也将被转译为 JavaScript 内容：
@@ -117,15 +117,13 @@ yarn add -D html-webpack-plugin
 其次，修改 Webpack 配置：
 
 ```js
-const path = require("path");
-const { VueLoaderPlugin } = require("vue-loader");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   module: {
-    rules: [
-      { test: /\.vue$/, use: ["vue-loader"] }
-    ],
+    rules: [{ test: /\.vue$/, use: ['vue-loader'] }]
   },
   plugins: [
     new VueLoaderPlugin(),
@@ -141,22 +139,23 @@ module.exports = {
     <div id="app" />
   </body>
 </html>
-    `,
-    }),
-  ],
-};
+    `
+    })
+  ]
+}
 ```
 
 之后，运行编译命令 `npx webpack` ，即可自动生成 HTML 文件：
 
 ```html
 <!-- dist/index.html -->
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Webpack App</title>
-  <script defer src="main.js"></script></head>
+    <script defer src="main.js"></script>
+  </head>
   <body>
     <div id="app" />
   </body>
@@ -189,7 +188,7 @@ module.exports = {
   module: {
     rules: [
       { test: /\.vue$/, use: ['vue-loader'] },
-      { test: /\.css$/, use: ["style-loader", "css-loader"] },
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] }
     ]
   },
   plugins: [
@@ -238,17 +237,17 @@ npm install -D typescript ts-loader
 其次，修改 Webpack 配置，添加用于处理 TypeScript 代码的规则：
 
 ```js
-const { VueLoaderPlugin } = require("vue-loader");
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   module: {
     rules: [
-      { test: /\.vue$/, use: ["vue-loader"] },
-      { test: /\.ts$/, use: ["ts-loader"] },
-    ],
+      { test: /\.vue$/, use: ['vue-loader'] },
+      { test: /\.ts$/, use: ['ts-loader'] }
+    ]
   },
-  plugins: [new VueLoaderPlugin()],
-};
+  plugins: [new VueLoaderPlugin()]
+}
 ```
 
 之后，设置 `<script>` 标签的 `lang = "typescript"`：
@@ -278,34 +277,34 @@ yarn add -D less less-loader css-loader style-loader
 其次，修改 Webpack 配置，添加 Less 文件相关处理规则：
 
 ```js
-const path = require("path");
-const { VueLoaderPlugin } = require("vue-loader");
+const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   module: {
     rules: [
-      { test: /\.vue$/, use: ["vue-loader"] },
+      { test: /\.vue$/, use: ['vue-loader'] },
       {
         test: /\.less$/,
-        use: ["style-loader", "css-loader", "less-loader"],
-      },
-    ],
+        use: ['style-loader', 'css-loader', 'less-loader']
+      }
+    ]
   },
-  plugins: [new VueLoaderPlugin()],
-};
+  plugins: [new VueLoaderPlugin()]
+}
 ```
 
 之后，设置 `<style>` 标签的 `lang = "less"`：
 
 ```html
 <style lang="less">
-h3 {
-  margin: 40px 0 0;
-  color: #42b983;
-  span {
-    font-weight: normal;
+  h3 {
+    margin: 40px 0 0;
+    color: #42b983;
+    span {
+      font-weight: normal;
+    }
   }
-}
 </style>
 ```
 
@@ -324,17 +323,17 @@ yarn add -D pug pug-plain-loader
 其次，修改 Webpack 配置：
 
 ```js
-const { VueLoaderPlugin } = require("vue-loader");
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   module: {
     rules: [
-      { test: /\.pug$/, use: ["pug-plain-loader"] },
-      { test: /\.vue$/, use: ["vue-loader"] }
-    ],
+      { test: /\.pug$/, use: ['pug-plain-loader'] },
+      { test: /\.vue$/, use: ['vue-loader'] }
+    ]
   },
-  plugins: [new VueLoaderPlugin()],
-};
+  plugins: [new VueLoaderPlugin()]
+}
 ```
 
 之后，设置 `<template>` 标签的 `lang = " pug"`：
@@ -350,22 +349,22 @@ module.exports = {
 至此，Webpack 就会像处理其它 `.pug` 文件一般使用 `pug-plain-loader` 加载这一模块内容。完整示例：
 
 ```js
-const { VueLoaderPlugin } = require("vue-loader");
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   module: {
     rules: [
-      { test: /\.pug$/, use: ["pug-plain-loader"] },
-      { test: /\.vue$/, use: ["vue-loader"] },
-      { test: /\.ts$/, use: ["ts-loader"] },
+      { test: /\.pug$/, use: ['pug-plain-loader'] },
+      { test: /\.vue$/, use: ['vue-loader'] },
+      { test: /\.ts$/, use: ['ts-loader'] },
       {
         test: /\.less$/,
-        use: ["style-loader", "css-loader", "less-loader"],
-      },
-    ],
+        use: ['style-loader', 'css-loader', 'less-loader']
+      }
+    ]
   },
-  plugins: [new VueLoaderPlugin()],
-};
+  plugins: [new VueLoaderPlugin()]
+}
 ```
 
 ## 使用 Server Side Render
@@ -404,11 +403,9 @@ module.exports = {
 
 1. **需要为客户端、服务端环境分别准备项目 Entry 文件，即上述目录中的 `entry-client.js` 与 `entry-server.js`**，内容：
 
-| `entry-client.js`                                            | `entry-server.js`                                            |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `entry-client.js`                                                                                     | `entry-server.js`                                                                                                          |
+| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `import { createSSRApp } from "vue"; import App from "./App.vue";  createSSRApp(App).mount("#app"); ` | `import { createSSRApp } from "vue"; import App from "./App.vue";  export default () => {   return createSSRApp(App); }; ` |
-
-
 
 两者区别在于：客户端版本会立即调用 `mount` 接口，将组件挂载到页面上；而服务端版本只是 `export` 一个创建应用的工厂函数。
 
@@ -421,29 +418,29 @@ module.exports = {
 
 ```js
 // webpack.client.js
-const Merge = require("webpack-merge");
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
-const base = require("./webpack.base");
+const Merge = require('webpack-merge')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
+const base = require('./webpack.base')
 
 // 继承自 `webpack.base.js`
 module.exports = Merge.merge(base, {
-  mode: "development",
+  mode: 'development',
   entry: {
     // 入口指向 `entry-client.js` 文件
-    client: path.join(__dirname, "./src/entry-client.js"),
+    client: path.join(__dirname, './src/entry-client.js')
   },
   output: {
-    publicPath: "/",
+    publicPath: '/'
   },
   module: {
-    rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }],
+    rules: [{ test: /\.css$/, use: ['style-loader', 'css-loader'] }]
   },
   plugins: [
     // 这里使用 webpack-manifest-plugin 记录产物分布情况
     // 方面后续在 `server.js` 中使用
-    new WebpackManifestPlugin({ fileName: "manifest-client.json" }),
+    new WebpackManifestPlugin({ fileName: 'manifest-client.json' }),
     // 自动生成 HTML 文件内容
     new HtmlWebpackPlugin({
       templateContent: `
@@ -457,10 +454,10 @@ module.exports = Merge.merge(base, {
   <div id="app" />
 </body>
 </html>
-  `,
-    }),
-  ],
-});
+  `
+    })
+  ]
+})
 ```
 
 > 注意：这里我们需要使用 `webpack-manifest-plugin` 插件记录产物分布，后面会在 `server.js` 用到。
@@ -469,20 +466,20 @@ module.exports = Merge.merge(base, {
 
 ```js
 // webpack.server.js
-const Merge = require("webpack-merge");
-const path = require("path");
-const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
-const base = require("./webpack.base");
+const Merge = require('webpack-merge')
+const path = require('path')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
+const base = require('./webpack.base')
 
 module.exports = Merge.merge(base, {
   entry: {
-    server: path.join(__dirname, "src/entry-server.js"),
+    server: path.join(__dirname, 'src/entry-server.js')
   },
-  target: "node",
+  target: 'node',
   output: {
     // 打包后的结果会在 node 环境使用
     // 因此此处将模块化语句转译为 commonjs 形式
-    libraryTarget: "commonjs2",
+    libraryTarget: 'commonjs2'
   },
   module: {
     rules: [
@@ -491,23 +488,23 @@ module.exports = Merge.merge(base, {
         use: [
           // 注意，这里用 `vue-style-loader` 而不是 `style-loader`
           // 因为 `vue-style-loader` 对 SSR 模式更友好
-          "vue-style-loader",
+          'vue-style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
-              esModule: false,
-            },
-          },
-        ],
-      },
-    ],
+              esModule: false
+            }
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     // 这里使用 webpack-manifest-plugin 记录产物分布情况
     // 方面后续在 `server.js` 中使用
-    new WebpackManifestPlugin({ fileName: "manifest-server.json" }),
-  ],
-});
+    new WebpackManifestPlugin({ fileName: 'manifest-server.json' })
+  ]
+})
 ```
 
 至此，我们只需要调用适当命令即可分别生成客户端、服务端版本代码：
@@ -516,35 +513,31 @@ module.exports = Merge.merge(base, {
 # 客户端版本：
 npx webpack --config ./webpack.client.js
 # 服务端版本：
-npx webpack --config ./webpack.server.js 
+npx webpack --config ./webpack.server.js
 ```
 
 1. **编写 Node 应用代码 `server.js`**，简单起见，此处仅实现基础功能：
 
 ```js
 // server.js
-const express = require("express");
-const path = require("path");
-const { renderToString } = require("@vue/server-renderer");
+const express = require('express')
+const path = require('path')
+const { renderToString } = require('@vue/server-renderer')
 
 // 通过 manifest 文件，找到正确的产物路径
-const clientManifest = require("./dist/manifest-client.json");
-const serverManifest = require("./dist/manifest-server.json");
-const serverBundle = path.join(
-  __dirname,
-  "./dist",
-  serverManifest["server.js"]
-);
+const clientManifest = require('./dist/manifest-client.json')
+const serverManifest = require('./dist/manifest-server.json')
+const serverBundle = path.join(__dirname, './dist', serverManifest['server.js'])
 // 这里就对标到 `entry-server.js` 导出的工厂函数
-const createApp = require(serverBundle).default;
+const createApp = require(serverBundle).default
 
-const server = express();
+const server = express()
 
-server.get("/", async (req, res) => {
-  const app = createApp();
+server.get('/', async (req, res) => {
+  const app = createApp()
 
-  const html = await renderToString(app);
-  const clientBundle = clientManifest["client.js"];
+  const html = await renderToString(app)
+  const clientBundle = clientManifest['client.js']
   res.send(`
 <!DOCTYPE html>
 <html>
@@ -559,14 +552,14 @@ server.get("/", async (req, res) => {
       <script src="${clientBundle}"></script>
     </body>
 </html>
-    `);
-});
+    `)
+})
 
-server.use(express.static("./dist"));
+server.use(express.static('./dist'))
 
 server.listen(3000, () => {
-  console.log("ready");
-});
+  console.log('ready')
+})
 ```
 
 可以看出，Node 服务的核心逻辑在于：
@@ -693,10 +686,10 @@ module.exports = {
     config.module
       .rule('vue')
       .use('vue-loader')
-        .tap(options => {
-          // modify the options...
-          return options
-        })
+      .tap(options => {
+        // modify the options...
+        return options
+      })
   }
 }
 ```

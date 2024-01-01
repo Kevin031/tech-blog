@@ -16,12 +16,12 @@
 
 ```js
 module.exports = {
-    //...
-    cache: {
-        type: 'filesystem'
-    },
-    //...
-};
+  //...
+  cache: {
+    type: 'filesystem'
+  }
+  //...
+}
 ```
 
 执行效果：
@@ -68,13 +68,9 @@ module.exports = {
 
 - Make - 构建阶段，从
 
-   
-
   ```
   entry
   ```
-
-   
 
   模块开始，执行：
 

@@ -25,32 +25,32 @@
 class Compilation {
   seal(callback) {
     // ...
-    const chunkGraphInit = new Map();
+    const chunkGraphInit = new Map()
     // 遍历入口模块列表
     for (const [name, { dependencies, includeDependencies, options }] of this
       .entries) {
       // 为每一个 entry 创建对应的 Chunk 对象
-      const chunk = this.addChunk(name);
+      const chunk = this.addChunk(name)
       // 为每一个 entry 创建对应的 ChunkGroup 对象
-      const entrypoint = new Entrypoint(options);
+      const entrypoint = new Entrypoint(options)
       // 关联 Chunk 与 ChunkGroup
-      connectChunkGroupAndChunk(entrypoint, chunk);
+      connectChunkGroupAndChunk(entrypoint, chunk)
 
       // 遍历 entry Dependency 列表
       for (const dep of [...this.globalEntry.dependencies, ...dependencies]) {
         // 为每一个 EntryPoint 关联入口依赖对象，以便下一步从入口依赖开始遍历其它模块
-        entrypoint.addOrigin(null, { name }, /** @type {any} */ (dep).request);
+        entrypoint.addOrigin(null, { name }, /** @type {any} */ (dep).request)
 
-        const module = this.moduleGraph.getModule(dep);
+        const module = this.moduleGraph.getModule(dep)
         if (module) {
           // 在 ChunkGraph 中记录入口模块与 Chunk 关系
-          chunkGraph.connectChunkAndEntryModule(chunk, module, entrypoint);
+          chunkGraph.connectChunkAndEntryModule(chunk, module, entrypoint)
           // ...
         }
       }
     }
     // 调用 buildChunkGraph 方法，开始构建 ChunkGraph
-    buildChunkGraph(this, chunkGraphInit);
+    buildChunkGraph(this, chunkGraphInit)
     // 触发各种优化钩子
     // ...
   }
@@ -108,10 +108,10 @@ class Compilation {
 ```js
 module.exports = {
   entry: {
-    main: "./src/main",
-    home: "./src/home",
+    main: './src/main',
+    home: './src/home'
   }
-};
+}
 ```
 
 遍历 `entry` 对象属性并创建出 `chunk[main]` 、`chunk[home]` 两个对象，此时两个 Chunk 分别包含 `main` 、`home` 模块：
@@ -169,9 +169,9 @@ import './sync-c.js'
 ```js
 module.exports = {
   entry: {
-    index: { import: "./src/index", runtime: "solid-runtime" },
+    index: { import: './src/index', runtime: 'solid-runtime' }
   }
-};
+}
 ```
 
 在 `compilation.seal` 函数中，Webpack 首先为 `entry` 创建 `EntryPoint`，之后判断 `entry` 配置中是否带有 `runtime` 属性，有则创建以 `runtime` 值为名的 Chunk，因此，上例配置将生成两个 Chunk：`chunk[index.js]` 、`chunk[solid-runtime]`，并据此最终产出两个文件：
@@ -184,10 +184,10 @@ module.exports = {
 ```js
 module.exports = {
   entry: {
-    index: { import: "./src/index", runtime: "solid-runtime" },
-    home: { import: "./src/home", runtime: "solid-runtime" },
+    index: { import: './src/index', runtime: 'solid-runtime' },
+    home: { import: './src/home', runtime: 'solid-runtime' }
   }
-};
+}
 ```
 
 入口 `index`、`home` 共享相同的 `runtime` 值，最终生成三个 Chunk，分别为：
