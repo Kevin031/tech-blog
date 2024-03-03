@@ -5,6 +5,21 @@ hero:
   name: 实验室
 
 features:
+  - icon: 👨
+    title: 一起认明星
+    details: 你对娱乐圈了解多少，来答题吧
+    link: /playground/plant-tree/index
+    target: http://guess-the-star.kevinlau.cn/
+  - icon: 🎸
+    title: 吉他谱
+    details: 用 markdown 写吉他谱
+    link: http://guitar-tabs.kevinlau.cn/
+    target: _blank
+  - icon: 💻
+    title: 在线 react 编辑器
+    details: 来 coding 吧
+    link: http://react-live-editor.kevinlau.cn/
+    target: _blank
   - icon: 🌲
     title: 种树
     details: 通过canvas随机种一棵树
