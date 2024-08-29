@@ -52,7 +52,8 @@ const makeNavFromDir = dirName => {
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "peanut的小铺",
+  // title: "peanut的小铺",
+  title: "个人文章云笔记",
   description: "",
   lastUpdated: true,
   markdown: {
@@ -107,7 +108,7 @@ export default defineConfig({
     },
 
     footer: {
-      copyright: "©2017-2023 | 粤ICP备20019685号"
+      copyright: '©2017-2024 | <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备20019685号</a>'
     },
 
     socialLinks: [{ icon: "github", link: "https://github.com/Kevin031" }]
