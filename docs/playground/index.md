@@ -55,7 +55,7 @@ features:
   #  details:
   # - icon: 🎸
   #  title: 音乐播放器（建设中）
-    details:
+  #  details:
   - icon: 🚧
     title: 更多功能建设中...
     details:
