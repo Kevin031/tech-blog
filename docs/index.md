@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: '个人文章云笔记'
-  text: 'peanut的小铺 💻'
+  name: 'peanut的小铺'
+  text: '💻生命在于折腾'
   tagline: 知识、构思和行动
   # actions:
   #   - theme: brand
