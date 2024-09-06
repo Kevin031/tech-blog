@@ -6,6 +6,10 @@ hero:
 
 features:
   - icon: 👨
+    title: 摸鱼日历
+    details: 让我摸个鱼吧
+    link: /playground/calendar/index
+  - icon: 👨
     title: 一起认明星
     details: 你对娱乐圈了解多少，来答题吧
     link: /playground/plant-tree/index
