@@ -52,7 +52,7 @@ const makeNavFromDir = dirName => {
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'peanut的小铺',
+  title: '个人文章云笔记',
   description: '',
   lastUpdated: true,
   markdown: {
