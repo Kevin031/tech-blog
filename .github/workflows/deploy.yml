@@ -1,10 +1,7 @@
 name: Publish Docker image
 
 on:
-  push:
-    branches:
-      - master
-      - record
+  workflow_dispatch:
 jobs:
   push_to_registry:
     name: Build and Push
