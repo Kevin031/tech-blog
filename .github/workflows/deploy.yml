@@ -25,8 +25,7 @@ jobs:
           npm install
           npm run docs:build
 
-      # 资源直接部署到服务器
-      # 部署到 master 分支的服务器路径
+      # 将 master 分支构建产物部署到 1Panel 站点目录
       - name: Deploy to Server Production Path
         if: github.ref == 'refs/heads/master'
         uses: easingthemes/ssh-deploy@v6.0.3
@@ -36,18 +35,5 @@ jobs:
           SOURCE: 'docs/.vitepress/dist/'
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: 'ubuntu'
-          TARGET: '/var/www/tech-blog/master/'
-          EXCLUDE: '/node_modules/'
-
-      # 部署到 record 分支的服务器路径
-      - name: Deploy to Server Record Path
-        if: github.ref == 'refs/heads/record'
-        uses: easingthemes/ssh-deploy@v6.0.3
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: '-rltzv --delete'
-          SOURCE: 'docs/.vitepress/dist/'
-          REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: 'ubuntu'
-          TARGET: '/var/www/tech-blog/record/'
+          TARGET: '/opt/1panel/www/sites/kevinlau.cn/index/'
           EXCLUDE: '/node_modules/'
