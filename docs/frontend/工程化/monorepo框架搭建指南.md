@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # monorepo 框架搭建指南
 
 以下指南以 pnpm 为基础展开

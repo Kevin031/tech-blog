@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # React 事件系统的简易实现
 
 ## 实现合成事件对象

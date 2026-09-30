@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # Bundless 原理与浏览器 ESM
 
 ## 浏览器的 ESM 能力

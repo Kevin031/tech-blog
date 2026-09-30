@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # UMD 模块的定义和实现
 
 ## 概念

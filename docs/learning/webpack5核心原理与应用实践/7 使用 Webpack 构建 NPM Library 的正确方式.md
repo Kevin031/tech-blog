@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 虽然 Webpack 多数情况下被用于构建 Web 应用，但与 Rollup、Snowpack 等工具类似，Webpack 同样具有完备的构建 NPM 库的能力。与一般场景相比，构建 NPM 库时需要注意：
 
 - 正确导出模块内容；

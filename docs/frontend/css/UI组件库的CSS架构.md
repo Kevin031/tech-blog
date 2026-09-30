@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # UI 组件库的 CSS 架构
 
 ## 🌟 WHAT

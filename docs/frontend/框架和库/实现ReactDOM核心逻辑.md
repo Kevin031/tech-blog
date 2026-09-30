@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # 实现 ReactDOM 核心逻辑
 
 `React` 的 `Renderer` 主要是通过 `react-reconciler` 实现的。

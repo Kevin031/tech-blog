@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 受限于 Node.js 的单线程架构，原生 Webpack 对所有资源文件做的所有解析、转译、合并操作本质上都是在同一个线程内串行执行，CPU 利用率极低，因此，理所当然地，社区出现了一些以多进程方式运行 Webpack，或 Webpack 构建过程某部分工作的方案(从而提升单位时间利用率)，例如：
 
 - [HappyPack](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Famireh%2Fhappypack)：多进程方式运行资源加载(Loader)逻辑；

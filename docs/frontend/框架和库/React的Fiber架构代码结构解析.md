@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # React 的 Fiber 架构代码结构解析
 
 React 下的 Fiber 架构，分为三大块`reconcile`, `schedule`, `commit`

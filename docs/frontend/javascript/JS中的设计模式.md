@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # JS 中的设计模式
 
 ## 单例模式

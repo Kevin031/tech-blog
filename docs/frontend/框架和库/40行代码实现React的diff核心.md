@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # 40 行代码实现 React 的 diff 算法核心逻辑
 
 ```ts

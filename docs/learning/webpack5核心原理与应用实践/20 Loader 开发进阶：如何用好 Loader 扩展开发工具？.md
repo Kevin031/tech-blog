@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 在上一篇文章中，我们已经详细了解了开发 Webpack Loader 需要用到的基本技能，包括：Loader 基本形态、如何构建测试环境、如何使用 Loader Context 接口等。接下来我们继续拓展学习一些 Loader 辅助工具，包括：
 
 - 了解 `loader-utils`，并使用 `loader-utils` 拼接文件名；

@@ -1,0 +1,16 @@
+{
+  "docs/challenge/前端手写场景题整理.md": "整理常见前端手写场景的 JavaScript 实现，涵盖数组处理、函数工具和异步控制等练习。",
+  "docs/challenge/设计一个程序模拟红绿灯切换/index.md": "使用异步等待模拟红、绿、黄灯按顺序切换的过程。",
+  "docs/challenge/实现版本号排序/index.md": "按版本号各级数字逐段比较，并对版本字符串进行排序。",
+  "docs/challenge/实现对象深拷贝/index.md": "梳理浅拷贝与深拷贝的常见实现，说明 JSON 序列化的限制，并展示支持循环引用的手写方案。",
+  "docs/challenge/实现一个拼手气抢红包的算法/index.md": "用 JavaScript 模拟随机红包分配，并处理剩余金额与最小金额约束。",
+  "docs/frontend/工程化/monorepo框架搭建指南.md": "以 pnpm 为基础，从工作区配置开始搭建 Monorepo 项目。",
+  "docs/frontend/框架和库/40行代码实现React的diff核心.md": "用简化的节点结构与插入、删除标记，演示子节点 diff 的核心过程。",
+  "docs/frontend/框架和库/低代码架构分析.md": "按入料、编排、配置器、渲染和出码几个环节梳理低代码平台的架构组成。",
+  "docs/frontend/框架和库/微前端为何不推荐iframe.md": "从资源占用、通信、路由和体验等方面梳理 iframe 用于微前端时的局限。",
+  "docs/frontend/框架和库/React v18和Vue3核心流程整理.md": "通过流程图整理 React 18 与 Vue 3 的核心渲染和更新流程。",
+  "docs/frontend/框架和库/React事件系统的简易实现.md": "通过合成事件、回调收集和传播路径，演示事件捕获与冒泡的简化实现。",
+  "docs/frontend/浏览器/Canvas API.md": "介绍 Canvas 2D 的基本绘制方式，并附带图形交互示例的源码。",
+  "docs/frontend/前端算法/快速排序.md": "从基准值选择和子区间划分入手，展示快速排序的实现思路与代码。",
+  "docs/frontend/javascript/Promise A+规范.md": "归纳 Promise/A+ 对状态、then 回调和链式解析的要求，并给出简化实现示例。"
+}

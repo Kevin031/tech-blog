@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # Vue 的 diff 过程
 
 当组件创建和更新时，Vue 均会执行内部的 update 函数，该函数在内部调用 render 函数生成虚拟 DOM 树，组件会指向新树，然后 Vue 将新旧两棵树进行对比找到差异点，最终更新到真实 DOM。

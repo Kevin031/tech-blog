@@ -1,0 +1,3039 @@
+{
+  "schemaVersion": 1,
+  "marker": "cms-import-ready",
+  "summary": {
+    "scanned": 126,
+    "selected": 105,
+    "status": {
+      "ready": 77,
+      "needs_conversion": 28,
+      "blocked": 0
+    },
+    "issues": {
+      "local_article_link": 1,
+      "local_image": 16,
+      "missing_h1": 29,
+      "missing_summary_candidate": 11,
+      "raw_html": 43,
+      "remote_image": 188,
+      "vitepress_container": 34,
+      "vitepress_include": 9
+    },
+    "affectedArticles": {
+      "local_image": 9,
+      "vitepress_include": 8,
+      "vitepress_container": 13,
+      "raw_html": 5,
+      "local_article_link": 1,
+      "missing_h1": 29,
+      "missing_summary_candidate": 11,
+      "remote_image": 30
+    },
+    "remoteImageHosts": {
+      "oxudq29cr.bkt.clouddn.com": 1,
+      "p1-juejin.byteimg.com": 40,
+      "p3-juejin.byteimg.com": 56,
+      "p6-juejin.byteimg.com": 50,
+      "p9-juejin.byteimg.com": 41
+    }
+  },
+  "articles": [
+    {
+      "path": "docs/about/index.md",
+      "sourceHash": "a72e782173fc579c497e36b11322d73a02289c554b08563aa4b6e13fb7cc4d1c",
+      "title": "关于我",
+      "titleSource": "h1",
+      "suggestedSummary": "github：http://www.github.com/Kevin031",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/challenge/前端手写场景题整理.md",
+      "sourceHash": "c56a2d3e2b2cac1b32cadb13093b6ae73417d6fa9d463f0c0373de4d6d922c93",
+      "title": "前端手写场景题整理",
+      "titleSource": "h1",
+      "suggestedSummary": "",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_include",
+          "level": "convert",
+          "line": 8,
+          "detail": "./utils.js"
+        },
+        {
+          "code": "missing_summary_candidate",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/challenge/设计一个程序模拟红绿灯切换/index.md",
+      "sourceHash": "3754746ced849e07a07a98d9e20bfd72c7129c44c80e8d3d9c285347763b4142",
+      "title": "设计一个程序模拟红绿灯切换",
+      "titleSource": "h1",
+      "suggestedSummary": "",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_include",
+          "level": "convert",
+          "line": 8,
+          "detail": "./index.js"
+        },
+        {
+          "code": "missing_summary_candidate",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/challenge/实现版本号排序/index.md",
+      "sourceHash": "c67ced713e584389c1bc51506e25d852d4c90d6e038d68510a393665910451e1",
+      "title": "实现版本号排序",
+      "titleSource": "h1",
+      "suggestedSummary": "这里比较的是由非负整数和点号组成的版本号；缺少的末尾段按  处理，例如  与  视为相等。带预发布标识的 SemVer 版本不在此示例范围内。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_include",
+          "level": "convert",
+          "line": 8,
+          "detail": "./index.js"
+        }
+      ]
+    },
+    {
+      "path": "docs/challenge/实现对象深拷贝/index.md",
+      "sourceHash": "32dc22e5f1b7f3b2940c63e0c9cd06d0e74f9c92dfd3da454054860d3190d3a1",
+      "title": "实现对象深拷贝",
+      "titleSource": "h1",
+      "suggestedSummary": "示例会递归复制数组、普通对象、 和 ，并用  记录已复制对象，避免循环引用造成无限递归。函数仍保留原引用；、、、DOM 节点及带私有字段的类实例等需要按具体类型另行处理，不能把这个示例当作通用克隆器。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_include",
+          "level": "convert",
+          "line": 36,
+          "detail": "./index.js"
+        }
+      ]
+    },
+    {
+      "path": "docs/challenge/实现一个拼手气抢红包的算法/index.md",
+      "sourceHash": "2aca81803fd5172eb2de4dd1c5b9d4c49d2b261bbcfe4b4a778d1631bb28e3ea",
+      "title": "实现一个拼手气抢红包的算法",
+      "titleSource": "h1",
+      "suggestedSummary": "金额在内部统一换算为整数分；每次领取都会为剩余人数至少预留一分钱，最后一人领取全部剩余金额。 保留为旧拼写的兼容方法，新代码使用 。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_include",
+          "level": "convert",
+          "line": 8,
+          "detail": "./index.js"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/工程化/包管理方案.md",
+      "sourceHash": "39a173a38de06c49a2d7167c1fbcf1068c7a79e262b0a21c88be90f9798ae120",
+      "title": "包管理工具",
+      "titleSource": "h1",
+      "suggestedSummary": ": 当你发了一个含有 Breaking Change 的 API",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/工程化/打包体积和性能优化的手段.md",
+      "sourceHash": "7ff80a45077472f90d01ef25b007663284bff8ec8a974bb14543e77d9639cce0",
+      "title": "打包体积和性能优化的手段",
+      "titleSource": "h1",
+      "suggestedSummary": "当  进行编译时的  操作均为  密集型任务，使用  性能低下，此时可采用高性能语言  编写的 。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 60,
+          "detail": ":::"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 62,
+          "detail": ":::"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 89,
+          "detail": ":::"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 91,
+          "detail": ":::"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/工程化/代码校验.md",
+      "sourceHash": "1fae19e0a39acf1a2c2bb4803a1075385be0c9137aa15e4f47ab559bf814a203",
+      "title": "代码风格",
+      "titleSource": "h1",
+      "suggestedSummary": "，对代码不仅有风格的校验，更有可读性、安全性、健壮性的校验。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 10,
+          "detail": "::: warning"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 12,
+          "detail": ":::"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/工程化/前端部署相关.md",
+      "sourceHash": "723923ad0096c08bd54be09576df78b3a74d56b4b967f083bff9f564a12f3e6b",
+      "title": "前端部署相关",
+      "titleSource": "h1",
+      "suggestedSummary": ": Continuous Integration，持续集成",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 8,
+          "detail": "deploy.png"
+        },
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 30,
+          "detail": "cicd.png"
+        },
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 34,
+          "detail": "CICD-workflows.png"
+        },
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 130,
+          "detail": "synk.png"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/工程化/深入webpack的编译流程.md",
+      "sourceHash": "5e7570cfae64f56c79fba33a987d46c2186c91fe322fc046cbd5a64c579a3ae4",
+      "title": "深入 webpack 的编译流程",
+      "titleSource": "h1",
+      "suggestedSummary": "https://juejin.cn/post/6844903935828819981?searchId=20231203145151C2E3FF1CBC41E7D831CD",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/工程化/硬链接与符号链接.md",
+      "sourceHash": "c07cff0e1486be1c91c69837ca369d07e7231247273b736f64803292ef18e23d",
+      "title": "硬链接与符号链接",
+      "titleSource": "h1",
+      "suggestedSummary": "在操作系统中，文件实际上是一个指针，只不过它指向的不是内存地址，而是一个外部存储地址（这里的外部存储可以是硬盘、U 盘、甚至是网络）",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 44,
+          "detail": "::: warning"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 46,
+          "detail": ":::"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/工程化/babel和AST相关.md",
+      "sourceHash": "eef81b2740238228771c075136ea4a9949ba2bb84f5c7e7bacd4ef1d0e112d4d",
+      "title": "AST 相关",
+      "titleSource": "h1",
+      "suggestedSummary": "Abstract Syntax Tree，抽象语法树，是源代码结构的一种抽象表示",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/工程化/Bundless原理与浏览器ESM.md",
+      "sourceHash": "98f85445121146df7b1ecbb4d1d22ae7f93ec2ad366508d2bbae453156abe41c",
+      "title": "Bundless 原理与浏览器 ESM",
+      "titleSource": "h1",
+      "suggestedSummary": "通过，可直接在浏览器中使用原生 。这也使得前端不打包 (Bundless) 成为可能。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/工程化/Monorepo搭建清单.md",
+      "sourceHash": "67594af5364d3d7b0c8afc251c00d05a5eee5df65d93c8481351459e0b2e165e",
+      "title": "Monorepo搭建清单",
+      "titleSource": "h1",
+      "suggestedSummary": "根目录创建 tsconfig.json 文件，添加以下配置：",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/工程化/monorepo框架搭建指南.md",
+      "sourceHash": "7d2cf661ad1bcb33627f7d466c3ed32aa0c6b38bc035b0370c3ac8979341b765",
+      "title": "monorepo 框架搭建指南",
+      "titleSource": "h1",
+      "suggestedSummary": "",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "missing_summary_candidate",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/工程化/UMD模块的定义和实现.md",
+      "sourceHash": "8cdaf938216ec05cf27050e52b2f5d3e5b047d39bbe011ca91665495a63cce6c",
+      "title": "UMD 模块的定义和实现",
+      "titleSource": "h1",
+      "suggestedSummary": "所谓 (Universal Module Definition)，就是一种 javascript 通用模块定义规范，让你的模块能在 javascript**所有**运行环境中发挥作用。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/工程化/webpack的运行时分析.md",
+      "sourceHash": "de41191858774668d9b7c0d641f9ca729d2674ffbd0f1f410da4b3012a1cbf2d",
+      "title": "webpack 的运行时分析",
+      "titleSource": "h1",
+      "suggestedSummary": "rollup 仅仅将所有模块平铺开，对于变量冲突，直接重新命名",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/后端相关/从 0-1 搭建和部署 koa 服务.md",
+      "sourceHash": "cc26d08b2a40d87c3b64509528fa34ac70ea6a4ba54529d584bf0c1526e336ee",
+      "title": "从 0-1 搭建和部署 koa 服务",
+      "titleSource": "h1",
+      "suggestedSummary": "与此同时，package.json 中也需要指定目录别名，这是为了在开发过程中获得路径的提示。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 71,
+          "detail": "::: code-group"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 114,
+          "detail": ":::"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/后端相关/浅谈Serverless.md",
+      "sourceHash": "93a22fec3ed84e7c0d42011f24e72e2090d3710ea7a5585a588279a9b514992b",
+      "title": "浅谈 Serverless 和 DDD",
+      "titleSource": "h1",
+      "suggestedSummary": "Serverless 直译为“无服务器”，但是容易被误解，并不是说代码运行就不需要在服务器上跑了。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/后端相关/React如何实现SSR.md",
+      "sourceHash": "b0788f8925241452776767a037c22087a21ee8af3199e753783016ea886340a3",
+      "title": "React 如何实现 SSR",
+      "titleSource": "h1",
+      "suggestedSummary": "激活过程：在服务器端渲染时，React 会将组件的状态以 JSON 数据的形式嵌入到 HTML 中，通常通过将一个 window.**INITIAL_STATE** 的全局变量设置为包含组件状态的 JSON 对象。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/框架和库/40行代码实现React的diff核心.md",
+      "sourceHash": "1dcf9a057409993467806755f8223f3a6046fa583abdd91c77522cd928ecf002",
+      "title": "40 行代码实现 React 的 diff 算法核心逻辑",
+      "titleSource": "h1",
+      "suggestedSummary": "",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "missing_summary_candidate",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/框架和库/从设计思路看待React和Vue的区别.md",
+      "sourceHash": "d0f62c33bef670cc47e8b84744e57ee4a8ba450fb550e67cd3e6202da79bbb86",
+      "title": "从设计思路看待 React 和 Vue 的差异",
+      "titleSource": "h1",
+      "suggestedSummary": "它们都为了解决同一个问题，即建立 UI 和逻辑的联系。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 102,
+          "detail": ":::info"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 104,
+          "detail": ":::"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/框架和库/低代码架构分析.md",
+      "sourceHash": "b6b8afd7133a38165f36971475e2db54261f84574bfefeae3787e421234b937d",
+      "title": "低代码架构分析",
+      "titleSource": "h1",
+      "suggestedSummary": "",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "missing_summary_candidate",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/框架和库/几个状态管理库的原理分析.md",
+      "sourceHash": "b4366133bbdb1aeb890c87ec4498adda12e52a9d2e047f8ebc55d65a278ab08f",
+      "title": "几个状态管理库的原理分析",
+      "titleSource": "h1",
+      "suggestedSummary": "Reducers 是纯函数，接收当前状态和一个 action，返回一个新的状态。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/框架和库/浅析React状态更新和性能优化.md",
+      "sourceHash": "aa9cdfd1ac3abeb1c5b8813d0ca40625d09700115ade5235fce7003198e33146",
+      "title": "浅析 React 状态更新与性能优化",
+      "titleSource": "h1",
+      "suggestedSummary": "状态更新通常始于事件交互，事件会在 React 的事件系统中传播，不同事件触发的更新拥有不同的优先级。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/框架和库/实现ReactDOM核心逻辑.md",
+      "sourceHash": "beda175fc4a56a89aace7c39256fd262574adb5e109f1f07e902f54331f2cceb",
+      "title": "实现 ReactDOM 核心逻辑",
+      "titleSource": "h1",
+      "suggestedSummary": "在 Reconciler 的工作流程中，采用了 DFS 的顺序构建了 Wip Filber Tree，整个过程划分为“递”和“归”的阶段，分别对应 beginWork 和 completeWork。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/框架和库/微前端为何不推荐iframe.md",
+      "sourceHash": "ab5a2f3a45c04fcac4c950d5edff1090b40bb2bb191f3db5223cc6b8775205d9",
+      "title": "微前端为何不推荐 iframe",
+      "titleSource": "h1",
+      "suggestedSummary": "",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "missing_summary_candidate",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/框架和库/React v18和Vue3核心流程整理.md",
+      "sourceHash": "54cd97839c29e7e52e560227b7ce235f1752337d3b21f26cb57f33a3081b037b",
+      "title": "React v18 和 Vue3 核心流程整理",
+      "titleSource": "h1",
+      "suggestedSummary": "",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 10,
+          "detail": "react-v18-process.png"
+        },
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 14,
+          "detail": "vue3-process.png"
+        },
+        {
+          "code": "missing_summary_candidate",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/框架和库/React的Fiber架构代码结构解析.md",
+      "sourceHash": "262eb86a829a4ca7e9dd094d768e9051d3dc2a9f1ec80abcabb297e5620a0765",
+      "title": "React 的 Fiber 架构代码结构解析",
+      "titleSource": "h1",
+      "suggestedSummary": "React 下的 Fiber 架构，分为三大块, ,",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 53,
+          "detail": "./react-reconcile.png"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 313,
+          "detail": ":::"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 315,
+          "detail": ":::"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/框架和库/React事件系统的简易实现.md",
+      "sourceHash": "102b0d5f11684380ca57edfa87376eb73fdace039a3ea9d2344ee75dba6359dc",
+      "title": "React 事件系统的简易实现",
+      "titleSource": "h1",
+      "suggestedSummary": "",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "missing_summary_candidate",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/框架和库/Vue3性能提升的方式.md",
+      "sourceHash": "065940b33e917ebdb66c458c42e57db8050aa9fbb8e93be7927d2dc7725ac734",
+      "title": "Vue3 性能提升的方式",
+      "titleSource": "h1",
+      "suggestedSummary": "主要是通过 ，在编译时进行大量的优化，从而提高运行时效率。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/框架和库/Vue的diff过程.md",
+      "sourceHash": "b625971a870a4b26f83eaa667f67d5db8f36b9e7d6938789f0563aa003acabbb",
+      "title": "Vue 的 diff 过程",
+      "titleSource": "h1",
+      "suggestedSummary": "当组件创建和更新时，Vue 均会执行内部的 update 函数，该函数在内部调用 render 函数生成虚拟 DOM 树，组件会指向新树，然后 Vue 将新旧两棵树进行对比找到差异点，最终更新到真实 DOM。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 134,
+          "detail": "vue-diff.png"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/框架和库/Vue实现nextTick的原理解析.md",
+      "sourceHash": "a3b1346ae3685706c82d4739b6c5e8a1155b68441380b9f097ea80ab426b773d",
+      "title": "Vue 实现 nextTick 的原理解析",
+      "titleSource": "h1",
+      "suggestedSummary": "在组件的生命周期中，视图更新的方法是在微任务中执行的，这样就避免了在同步代码的执行过程中频繁地触发视图更新。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/浏览器/浏览器的垃圾回收机制.md",
+      "sourceHash": "6418a795b5fa94c8d159913e477a973784391f8708444325896d9b6b847c8d5e",
+      "title": "浏览器的垃圾回收机制",
+      "titleSource": "h1",
+      "suggestedSummary": "垃圾回收又称为 GC（Garbage Collection），这里讲述的垃圾回收机制是基于 V8 引擎而言的。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/浏览器/浏览器的渲染流程与事件循环.md",
+      "sourceHash": "fc2e8eb09bb57083549c7771935d126e93482e3dd46334102c1a5ca9af167d84",
+      "title": "浏览器的渲染流程与事件循环",
+      "titleSource": "h1",
+      "suggestedSummary": "程序运行需要开辟一块专属的内存空间，用来存放、、，这样的运行环境称为。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 26,
+          "detail": ":::"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 28,
+          "detail": ":::"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/浏览器/浏览器拖放操作API.md",
+      "sourceHash": "2ec4dae1dd503758ae2ed8ca7e002e76839ce518f0949f929e2aa7a9a3841985",
+      "title": "浏览器拖放操作 API",
+      "titleSource": "h1",
+      "suggestedSummary": "HTML 拖放（Drag and Drop）接口使应用程序能够在浏览器中使用拖放功能。例如，用户可使用鼠标选择可拖拽（draggable）元素，将元素拖拽到可放置（droppable）元素，并释放鼠标按钮以放置这些元素。拖拽操作期间，会有一个可拖拽元素的半透明快照跟随着鼠标指针。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 6,
+          "detail": "<script setup>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 8,
+          "detail": "</script>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 18,
+          "detail": "<DragAndDrop />"
+        },
+        {
+          "code": "vitepress_include",
+          "level": "convert",
+          "line": 22,
+          "detail": "../../vue-exm/DragAndDrop.vue"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/浏览器/前端安全问题和防范.md",
+      "sourceHash": "c40829a790d41b48016537da4667d3e80fe28a0c687ea1bc5372702d2fd5ab89",
+      "title": "前端安全问题和防范",
+      "titleSource": "h1",
+      "suggestedSummary": "XSS（Cross-Site Scripting）又称跨站脚本，XSS 的重点不在于跨站点，而是在于脚本的执行。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 36,
+          "detail": "./frontend-secure-1.png"
+        },
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 42,
+          "detail": "./frontend-secure-2.png"
+        },
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 50,
+          "detail": "./frontend-secure-3.png"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/浏览器/如何理解BOM API.md",
+      "sourceHash": "6bee0c5ae6169eedd2297a1d05cf9c93ce988964ee7d33bf11d86ecc239d55f6",
+      "title": "如何理解 BOM API",
+      "titleSource": "h1",
+      "suggestedSummary": "BOM 是 browser object model 的缩写，中文意思是浏览器对象模型，BOM API 就是浏览器提供的 API。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/浏览器/网页性能优化指标.md",
+      "sourceHash": "43c950bdccc5fca5db244655048add6392a0d752afa62b1a14a2a58164dee9ba",
+      "title": "性能优化",
+      "titleSource": "h1",
+      "suggestedSummary": "参考文章",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/浏览器/Canvas API.md",
+      "sourceHash": "34a444a1c3600826a3faa101965d899fbb105b8f9f41467285fabdde5741207d",
+      "title": "Canvas API",
+      "titleSource": "h1",
+      "suggestedSummary": "",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 88,
+          "detail": "<canvas ref=\"canvasRef1\" width=\"600\" height=\"400\"></canvas>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 90,
+          "detail": "<script setup>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 126,
+          "detail": "</script>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 130,
+          "detail": "<CanvasLinePoint />"
+        },
+        {
+          "code": "vitepress_include",
+          "level": "convert",
+          "line": 134,
+          "detail": "../../vue-exm/CanvasLinePoint.vue"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 138,
+          "detail": "<CanvasDragAndDrop />"
+        },
+        {
+          "code": "vitepress_include",
+          "level": "convert",
+          "line": 142,
+          "detail": "../../vue-exm/CanvasDragAndDrop.vue"
+        },
+        {
+          "code": "missing_summary_candidate",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/前端算法/动态规划.md",
+      "sourceHash": "89d2b53d0c2153a3be2169ddbd4c70c08fa990776cd9b38669c8d50022bb7645",
+      "title": "动态规划",
+      "titleSource": "h1",
+      "suggestedSummary": "动态规划（英语：Dynamic programming，简称 DP），是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法。动态规划常常适用于有重叠子问题和最优子结构性质的问题。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/前端算法/二叉树刷题模板.md",
+      "sourceHash": "eadf15d6aa88e2a5dfd8decbc66f75b534d22c91586535377d88e6495239fba1",
+      "title": "二叉树刷题模板",
+      "titleSource": "h1",
+      "suggestedSummary": "深度优先：前序（中左右），中序（左中右），后序（左右中）",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/前端算法/滑动窗口刷题模板.md",
+      "sourceHash": "1de115e64a612906c88a778c5edc7807912e2f6a14ecc479923759d8d5295435",
+      "title": "滑动窗口刷题模板",
+      "titleSource": "h1",
+      "suggestedSummary": "以下例子，用于获取数组中满足队列只和大于目标数字的长度最小的子数组",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/前端算法/经典算法问题归类.md",
+      "sourceHash": "b5d2de5c3f31461800d558a0618b93f452b7ba88562569e7881e8b999d3dff5a",
+      "title": "经典算法问题归类",
+      "titleSource": "h1",
+      "suggestedSummary": "https://github.com/Kevin031/my-leetcode-solution",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/前端算法/快速排序.md",
+      "sourceHash": "1e2261232ac968282dbd63655a93530b7ed965b8dec8de211d7d728bdf49ca03",
+      "title": "快速排序",
+      "titleSource": "h1",
+      "suggestedSummary": "",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "missing_summary_candidate",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/前端算法/链表刷题模板.md",
+      "sourceHash": "28f9e98a511ce8f369e569bb672c4f0d51ed752852c6ce6de9599a07ed22dfca",
+      "title": "链表刷题模板",
+      "titleSource": "h1",
+      "suggestedSummary": "链表相关的题目，关键往往是需要创建一个*「空的根节点」*和*「指针」*，再通过 while 循环让指针不停地移到下一位来进行遍历。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/术语表.md",
+      "sourceHash": "fc7974e96981f588b363dd3482941b16b36ef46253aafeee97536c8f3eb582c0",
+      "title": "术语表",
+      "titleSource": "h1",
+      "suggestedSummary": "是 Domain Specific Language 的缩写，中文翻译为；",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/网络/同源策略和跨域处理.md",
+      "sourceHash": "31d3244ab61884c1ddd38cd46d55de4eff189b6d3341e50720bce2fabcc6d55b",
+      "title": "同源策略和跨域处理",
+      "titleSource": "h1",
+      "suggestedSummary": "在浏览器中，内容是很开放的，任何资源都可以接入其中，如 JavaScript 文件、图片、音频、视频等资源，甚至可以下载其他站点的可执行文件。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 12,
+          "detail": "cross-site.png"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/网络/CDN的原理和特点.md",
+      "sourceHash": "78286b6a93b6cd3b8bb50169d7847edd5be60bedf3d651b90b092c672e5e5390",
+      "title": "CDN 的原理和特点",
+      "titleSource": "h1",
+      "suggestedSummary": "CDN 可以加快用户访问网络资源的速度和稳定性，减轻源服务器的访问压力。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/网络/cookie相关.md",
+      "sourceHash": "95bf35a39abe5c3d27a79c594a90b14ce6e0251f11b3eb78578804fb0999d392",
+      "title": "cookie 相关",
+      "titleSource": "h1",
+      "suggestedSummary": "http 是无状态协议，因此请求头中的 cookie 字段就是服务端识别客户端的身份用的。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 58,
+          "detail": "./cookie-session.png"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 70,
+          "detail": ":::"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 72,
+          "detail": ":::"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/网络/HTTP缓存策略.md",
+      "sourceHash": "0ffb9bd5515bd970b47ca0d0100e504e713a5568d62982e2d408cdc8148e75b6",
+      "title": "HTTP 缓存策略",
+      "titleSource": "h1",
+      "suggestedSummary": "对于一些具有重复性的 HTTP 请求，比如每次请求得到的数据都一样的，我们可以把这对 「请求-响应」的数据都缓存在本地，那么下次就直接读取本地的数据，不必在通过网络获取 服务器的响应了，这样的话 HTTP/1.1 的性能肯定肉眼可⻅的提升。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/网络/HTTP特性整理.md",
+      "sourceHash": "69bebd23bb6db2657829c53d978efa4270b37575f920f10631259cbf0a0af0e2",
+      "title": "HTTP 特性整理",
+      "titleSource": "h1",
+      "suggestedSummary": "在网络通信中，数据依次经过每一层的处理，发出的时候**封装**，接收的时候**解封装**",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/网络/WebSocket的概念与使用场景.md",
+      "sourceHash": "381231cb43606a4833e937bed1c2d9d87aacbeb30e760b2b8736d17207b8d12b",
+      "title": "WebSocket 的概念与使用场景",
+      "titleSource": "h1",
+      "suggestedSummary": "WebSocket 是一种在单个 TCP 连接上进行全双工通信的协议。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 18,
+          "detail": "<script setup>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 20,
+          "detail": "</script>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 22,
+          "detail": "<WebsocketDemo />"
+        },
+        {
+          "code": "vitepress_include",
+          "level": "convert",
+          "line": 24,
+          "detail": "./WebsocketDemo.vue"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/杂七杂八/浅析Hybrid架构.md",
+      "sourceHash": "f5157ca9830f66f285e53509520532796115383c6e62cacda05f0edb087ba95f",
+      "title": "浅析 Hybrid 架构",
+      "titleSource": "h1",
+      "suggestedSummary": "简单理解业内主流 App 的做法：客户端内有大量的业务页面使用 webview 加载 h5 页面",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/杂七杂八/AI在前端领域的应用.md",
+      "sourceHash": "6ed92e252c609b33737a46e86a10e1d01655c7338952a842b033dc374ddaa4a9",
+      "title": "AI 在前端领域的应用",
+      "titleSource": "h1",
+      "suggestedSummary": "人工智能（AI）作为一种新兴技术，已经在各行各业得到了广泛的应用。然而，当我们谈到 AI 时，往往会想到机器学习、深度学习和数据科学等领域，而忽略了前端开发中 AI 的重要性。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/知识点摘要大纲.md",
+      "sourceHash": "2a4e00bb66fb54145036f4cff7b27a464e1243e48691dfe186d450d9ecaf43ab",
+      "title": "知识点摘要大纲",
+      "titleSource": "h1",
+      "suggestedSummary": "不能为了背八股文去梳理知识，知识始终是为了建立认知和解决问题而存在的",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 26,
+          "detail": ":::warning"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 28,
+          "detail": ":::"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 163,
+          "detail": ":::"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 165,
+          "detail": ":::"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/桌面端/Electron入门实践.md",
+      "sourceHash": "0ae92d5585933105f18950ecfc41fe3523452db060604fb0e16a39da6411cb98",
+      "title": "Electron 入门实践",
+      "titleSource": "h1",
+      "suggestedSummary": "主进程的任务是创建 electron 实例和开启窗口",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 81,
+          "detail": "::: code-group"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 122,
+          "detail": ":::"
+        },
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 136,
+          "detail": "./electron-runtime.png"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 170,
+          "detail": ":::"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 174,
+          "detail": ":::"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 333,
+          "detail": "::: code-group"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 373,
+          "detail": ":::"
+        },
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 396,
+          "detail": "electron-process-model.png"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/桌面端/Tauri入门实践.md",
+      "sourceHash": "00a6239e0817ad303eedde61be09962e3d745a8e43c45290dd4eb31354d42f56",
+      "title": "Tauri 入门实践",
+      "titleSource": "h1",
+      "suggestedSummary": "Tauri 比 Electron 有什么不一样？更小，更快",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/css/如何理解BFC.md",
+      "sourceHash": "fe484459f1678f25cc0be26f0315069d6ff4d890f88e5525933d9892df1bd701",
+      "title": "如何理解 BFC",
+      "titleSource": "h1",
+      "suggestedSummary": "块级格式化上下文 Block Formatting Context，简称 BFC。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 24,
+          "detail": "<script setup>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 28,
+          "detail": "</script>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 30,
+          "detail": "<style scoped>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 43,
+          "detail": "</style>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 45,
+          "detail": "<div class=\"container-1\">"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 46,
+          "detail": "<div v-for=\"box in boxList\" class=\"box-1\"></div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 47,
+          "detail": "</div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 61,
+          "detail": "<div class=\"container-2\">"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 62,
+          "detail": "<div class=\"container-3\"></div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 63,
+          "detail": "</div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 65,
+          "detail": "<style scoped>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 77,
+          "detail": "</style>"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/css/grid布局.md",
+      "sourceHash": "639632604edc7af56101f93132b2104a817433f038a92a739965c44cbc048438",
+      "title": "grid 布局",
+      "titleSource": "h1",
+      "suggestedSummary": "目前 web 开发主流的布局方式为：block 和 flex，它们都是一维的布局，定义了元素在一条线上的排布方式，而新增的 grid 布局是二维的布局方式。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 44,
+          "detail": "<div class=\"container-1\">"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 45,
+          "detail": "<div class=\"cell-1\"></div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 46,
+          "detail": "<div class=\"cell-2\"></div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 47,
+          "detail": "</div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 49,
+          "detail": "<style lang=\"less\">"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 65,
+          "detail": "</style>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 96,
+          "detail": "<div class=\"container-2\">"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 97,
+          "detail": "<div class=\"cell-1\"></div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 98,
+          "detail": "<div class=\"cell-2\"></div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 99,
+          "detail": "</div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 101,
+          "detail": "<style lang=\"less\">"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 121,
+          "detail": "</style>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 173,
+          "detail": "<div class=\"container-4\">"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 174,
+          "detail": "<div class=\"header\"></div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 175,
+          "detail": "<div class=\"nav\"></div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 176,
+          "detail": "<div class=\"main\"></div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 177,
+          "detail": "<div class=\"footer\"></div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 178,
+          "detail": "</div>"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 180,
+          "detail": "<style lang=\"less\">"
+        },
+        {
+          "code": "raw_html",
+          "level": "convert",
+          "line": 213,
+          "detail": "</style>"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/css/rem布局原理及简单实践.md",
+      "sourceHash": "7b8d99b23649129432c565a7ef638dd9ef071eae956bbf5e7691305c23b90190",
+      "title": "rem 布局原理及简单实践",
+      "titleSource": "h1",
+      "suggestedSummary": "说到用作为尺寸单位的布局，自然会提到，先对比一下两者有什么不同",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/css/UI组件库的CSS架构.md",
+      "sourceHash": "db7b7c726927075c95407d5d256a67d6affa374140f7417a267118495e5f7f16",
+      "title": "UI 组件库的 CSS 架构",
+      "titleSource": "h1",
+      "suggestedSummary": "对于复杂前端项目的开发，优秀的 CSS 的架构可以减少样式冲突，减少开发者的",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/javascript/彻底理解闭包.md",
+      "sourceHash": "91e7a9f3745060cefcd8144acd56f0a6372dfef44017a018c7fd45860a8e7202",
+      "title": "这一次，彻底理解闭包",
+      "titleSource": "h1",
+      "suggestedSummary": "MDN 定义：闭包是指那些可以访问自由变量的函数。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 12,
+          "detail": ":::"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 14,
+          "detail": ":::"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/javascript/迭代器与生成器.md",
+      "sourceHash": "f328684e9473e5d7ad571ecd3ad4d2a096c301ea2ec3584b6c30096706dcd3a6",
+      "title": "迭代器与生成器",
+      "titleSource": "h1",
+      "suggestedSummary": "从一个数据集合中按照一定的顺序，不断取出数据的过程。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/javascript/类与面向对象编程.md",
+      "sourceHash": "43e920243666ccc94925466dc73217aad48a2ee8a57aefa0081343887d14bda8",
+      "title": "类与面向对象编程",
+      "titleSource": "h1",
+      "suggestedSummary": "子类不能访问父类原型上定义的方法，从而导致每次创建实例的时候都会重新创建方法",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/javascript/浅谈javascript中的观察者模式.md",
+      "sourceHash": "b4243ad1d8c66fb7652882bfa24198b1bc7ce9533e5a110c897b7e02f18bca15",
+      "title": "浅谈 javascript 中的观察者模式",
+      "titleSource": "h1",
+      "suggestedSummary": "观察者模式是一种创建松散耦合代码的技术，它定义对象间一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都将得到通知。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 14,
+          "detail": "http://oxudq29cr.bkt.clouddn.com/C4E1DBAAABE0E0029AE266709DE62773.png"
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/javascript/JS中的设计模式.md",
+      "sourceHash": "72f23b24196e97653a7f9877a548934158ab2bfbb0bb4d9f8b4a07f03e8713ac",
+      "title": "JS 中的设计模式",
+      "titleSource": "h1",
+      "suggestedSummary": "使用闭包来创建一个只有一个实例的对象，并确保全局范围内唯一",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/javascript/let和var的区别.md",
+      "sourceHash": "ab01d3db026ef5fe600d86656037682b7e5867e83e16e21942f049029677d245",
+      "title": "let 和 var 的区别",
+      "titleSource": "h1",
+      "suggestedSummary": "通过 var 定义的变量会挂载到 window 上，而通过 let 定义的变量不会",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/javascript/Promise A+规范.md",
+      "sourceHash": "a79a606b41478910e161e8a362e0310d7f9779308ca9d41ca482e0121f875578",
+      "title": "Promise A+规范",
+      "titleSource": "h1",
+      "suggestedSummary": "",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "missing_summary_candidate",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/frontend/typescript/ts常见概念梳理.md",
+      "sourceHash": "6f78d51112a7233f00abad23ab725033aa44af6631b77aae217add274da2227d",
+      "title": "ts 常见概念梳理",
+      "titleSource": "h1",
+      "suggestedSummary": "在 ts 中=>表示函数的定义，左边（必须有括号）是输入，右边是输出，容易和 ES 的箭头函数混淆",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/frontend/typescript/ts中的类型体操.md",
+      "sourceHash": "dfa3b370f61357def6a935237e2a03e4fd0fc5f0e63d4865c0473dd01f0d6ff8",
+      "title": "ts 中的类型体操",
+      "titleSource": "h1",
+      "suggestedSummary": "有以下场景，需要封装一个 Optional 类型将指定字段变成可选",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/1 重新认识 Webpack：旧时代的破局者.md",
+      "sourceHash": "e1114562f81689f9d72b56478ddc84f999a21654c29fb4d1b1cba6fdf4df6090",
+      "title": "1 重新认识 Webpack：旧时代的破局者",
+      "titleSource": "filename",
+      "suggestedSummary": "Hello，同学们，欢迎来到 Webpack 的世界。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 24,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a620f1c107ee4e5b869aca1bcc49ac86~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 75,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/49584dd774ed4c8dbed1dfda09ecae53~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 117,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/25c05841892d41bfae468d496a968442~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/10 深入理解图像加载原理与最佳实践.md",
+      "sourceHash": "0b309689226864d7d3feba9f5aa310675f7f02cd3a873572bf74b625a5445fe2",
+      "title": "10 深入理解图像加载原理与最佳实践",
+      "titleSource": "filename",
+      "suggestedSummary": "4图形图像资源是当代 Web 应用的最常用、实惠的内容、装饰元素之一，但在 Webpack 出现之前对图像资源的处理复杂度特别高，需要借助一系列工具(甚至 Photoshop)完成压缩、雪碧图、hash、部署等操作。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 38,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f6384383d6df4060b973bd3ad8f261eb~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 65,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6d735d771f4c4436bc0b80e145098314~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 90,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c51ac80e214c41b2b695b2ea71e5ab33~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 298,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c1b556bae1db4654a01cd0ceddd43701~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 319,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9f14b1077cf14b2196bf051e4eded84a~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/11 深入理解 Webpack 核心配置结构.md",
+      "sourceHash": "6714634dcb620860a26a71037a0d41717bed5dc950b892c48037ba3bf69b47ef",
+      "title": "11 深入理解 Webpack 核心配置结构",
+      "titleSource": "filename",
+      "suggestedSummary": "Webpack 是一种 **「配置」** 驱动的构建工具，所以站在应用的角度，必须深入学习 Webpack 的各项配置规则，才能灵活应对各种构建需求。本文将作为小册应用系列的一个总结，汇总与应用配置相关的各项知识点，包括：",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 284,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1b0350016e9e4d92868ecbdcbbded33d~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 364,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1558bef8b4cf42f5994750000e1b3725~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 368,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5271c309cfb54c26a3d7d32ec1558001~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 406,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/44051543ac17436abab8dd1844500435~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 478,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/000c2d30c12940018df57f172d33c3b0~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/12 构建性能：分享 7 款常用的性能分析工具.md",
+      "sourceHash": "d8a97ec5771811462380d00df0bb5e6f4bd8b284616de54f7445d1a8553cd781",
+      "title": "12 构建性能：分享 7 款常用的性能分析工具",
+      "titleSource": "filename",
+      "suggestedSummary": "Webpack 最大的优势在于它的功能非常强大、全面，加之繁荣活跃的组件生态，已经足够应对几乎所有 Web 构建需求，包括：SPA、MPA、SSR、桌面应用、Node 程序、WebAssemsbly、PWA、微前端等等，所以即使在近几年工程化领域异军突起、百花齐放的背景下，Webpack 也依然能保持老大哥的位置。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 135,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/faa5b4982c6d49679099edf11967ae29~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 139,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9b28a6b379e24edfabcbd1e9d3567b56~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 143,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3af3b249f4d64133ace6893bdadd5a8c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 180,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f2d2eae9a84c4dad9af99532c82046aa~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 184,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/89229aa5d14e4abe8c07e2866fd7e6d1~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 212,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9e303d6c4fc14656bfb4d385479c2900~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 257,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0df8d57ed3144d688f42d30a028fc1ad~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 297,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/db6aca635d2048768123e27b79647896~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 327,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b1deeb71f04745b1ac71d05b5490f2b9~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 349,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f342a98ef19e42e8ab756891b814d942~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/13 如何使用 Webpack 持久化缓存大幅提升构建性能？.md",
+      "sourceHash": "454bff87893fe463d0ae2cb803c98ffa8c3c215816fa12280ddf24c7659c519e",
+      "title": "13 如何使用 Webpack 持久化缓存大幅提升构建性能？",
+      "titleSource": "filename",
+      "suggestedSummary": "缓存是一种应用非常广泛性能优化技术，在计算机领域几乎无处不在，例如：操作系统层面 CPU 高速缓存、磁盘缓存，网路世界中的 DNS 缓存、HTTP 缓存，以及业务应用中的数据库缓存、分布式缓存等等。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 16,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1e1cc62bb30441eb8c50865f66b45f29~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 34,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9dc585911d5d41bcbf70eee0faccb3be~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 70,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/58feafdeed084eefa40f12f98b627262~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 101,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cc6ac3a471664560b3db676e73cb0c62~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 206,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/44c94fac904645f19fe1d342ff58ec03~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/14 Webpack 都有哪些实现并行构建的方法？.md",
+      "sourceHash": "7f2fda1667b6f79147c31412fbdf9507c2de481e6fb04a2b0a9718ee884fc968",
+      "title": "14 Webpack 都有哪些实现并行构建的方法？",
+      "titleSource": "filename",
+      "suggestedSummary": "受限于 Node.js 的单线程架构，原生 Webpack 对所有资源文件做的所有解析、转译、合并操作本质上都是在同一个线程内串行执行，CPU 利用率极低，因此，理所当然地，社区出现了一些以多进程方式运行 Webpack，或 Webpack 构建过程某部分工作的方案(从而提升单位时间利用率)，例如：",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 100,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/03944215b70543889f573db3c1d0fb33~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 177,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b8c529796f1480f8454cc3ac5f6b2a9~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/15 有哪些值得学习的构建性能极致优化技巧？.md",
+      "sourceHash": "133744f8a6b9ac1b78cf935676ed87e870ba8dc0c155f769224dbdf719774767",
+      "title": "15 有哪些值得学习的构建性能极致优化技巧？",
+      "titleSource": "filename",
+      "suggestedSummary": "前面章节我们已经详细探讨 Webpack 中如何借助若干工具分析构建性能，以及如何使用缓存与多进程能力提升构建性能的基本方法与实现原理，这两种方法都能通过简单的配置，极大提升大型项目的编译效率。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/16 如何正确使用 SplitChunks提升应用性能？.md",
+      "sourceHash": "06e6801f6dbc2abf08c94d7c2c35509a4ff817236c93e0d14b26861eda87f1e7",
+      "title": "16 如何正确使用 SplitChunks提升应用性能？",
+      "titleSource": "filename",
+      "suggestedSummary": "Webpack 默认会将尽可能多的模块代码打包在一起，优点是能减少最终页面的 HTTP 请求数，但缺点也很明显：",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 25,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/73dad47e4d3e45419a9ad3f7ff746fa0~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 41,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1481f62edb484224aefd7498bb9b871a~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 45,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae729e4dd408433ea242733ae9913d89~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 196,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/88d54f6ffcfe44658fddb93c4bd57e95~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 243,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1a1d537299ed44da947a7dbf03e22a18~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 249,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e6ddb044d1d649a297ec76000bcad3d6~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 293,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e8a66c3358fb42e59660a0640210f359~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/17 不止 Terser：揭秘代码压缩的门门道道.md",
+      "sourceHash": "7a17f773bab6e1360a19a1cebf704a2ef3c12dc52417accddc007d884b93d5b9",
+      "title": "17 不止 Terser：揭秘代码压缩的门门道道",
+      "titleSource": "filename",
+      "suggestedSummary": "在 Webpack 生态下，我们可以借助各种插件轻松实现应用代码压缩，本文将从代码压缩的基本原理开始讲起，之后介绍若干适用于 JavaScript、CSS、HTML 的代码压缩工具。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 34,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/aa9c68ef6c6e47918bd6bde4a529513e~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 42,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ca0c4c88962c4f0aba8ff2e188eccbf6~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 258,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bc053101d4e545d39c7be284488b6aa6~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 274,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d6b3e1450c9b4a6e8090374d9c77c707~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 372,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/025bcab658134b6995ea76211a7607db~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/18 还有哪些值得学习的应用性能极致优化技巧？.md",
+      "sourceHash": "ab0468977bb54f692ff950ddd38e1dd48d04776b6b7d8939d74250bd1e940d73",
+      "title": "18 还有哪些值得学习的应用性能极致优化技巧？",
+      "titleSource": "filename",
+      "suggestedSummary": "前面章节我们已经详细探讨 Webpack 中如何使用分包、代码压缩提升应用执行性能。除此之外，还有不少普适、细碎的方法，能够有效降低应用体积，提升网络分发性能，包括：",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 43,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bd205317bb034096b726ae02f0752348~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 120,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21347644521b418397c1454b05924f18~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 136,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/552fd8ddf01649a49f693f12ba297d8f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 140,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e89cf6a8abff4380954e219006e611a3~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 146,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/412eb1f1e36f40b39dfe9d13bd7e5b39~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 150,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bd2ef56310024c05a2f9174e837d4f53~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 172,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/17895ee7fd4649e3b0f86e523ede7d36~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 193,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/96a16f771ffd4377ac8a8a2cefada387~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 235,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/60e56f7cdd6f4d869094275e86e5467b~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 423,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f7a142bb02ea4615b3cb5e3bb73a9da4~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/19 Loader 开发基础：从开源项目学到的 Loader 开发技巧.md",
+      "sourceHash": "250e98c658e0293c32df2fdc422fd9bb8f908a7a6b3bc9052fc8cf763b95eaaf",
+      "title": "19 Loader 开发基础：从开源项目学到的 Loader 开发技巧",
+      "titleSource": "filename",
+      "suggestedSummary": "如何扩展 Webpack？有两种主流方式，一是 Loader —— 主要负责将资源内容翻译成 Webpack 能够理解、处理的 JavaScript 代码；二是 Plugin —— 深度介入 Webpack 构建过程，**重塑** 构建逻辑。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 185,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6bf7dcc372ca483ba07edf6f1018ebdf~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 396,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/41c7568e25394b258824516207392fc7~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 400,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d8e5b25744af47f79734155a1094ca3e~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 416,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef581459bbfd47bc93c9ef73c02f7424~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 536,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b30799fe744941f1b66aeb43f5df49c4~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 611,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/55d6c8006a4243d687f044aab0bd1b86~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 615,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06f0126b303644449fce1cb8970001a6~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/2 如何理解 Webpack 配置底层结构逻辑？.md",
+      "sourceHash": "d17d2efb7c822888a11d6fc6b7edacac24042ce93d3e752ebd825a2a9d575373",
+      "title": "2 如何理解 Webpack 配置底层结构逻辑？",
+      "titleSource": "filename",
+      "suggestedSummary": "Webpack 5 提供了非常强大、灵活的模块打包功能，配合其成熟生态下数量庞大的插件、Loader 资源，已经能够满足大多数前端项目的工程化需求，**但代价则是日益复杂、晦涩的使用方法**，开发者通常需要根据项目环境、资源类型、编译目标编写一份复杂的配置文件，用以定制资源打包行为。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 18,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/784ef02a144a4b3ebfbcbe13b06ac7bb~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 71,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/02ccea1194e045689143011ef62ff553~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 177,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d212c315f0f44ca49178e6e9a8c695c9~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 199,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e0f2b01c9864747a63f212c6fee355e~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 213,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/040c12736c64414f9c9390ea31eaae59~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 257,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dbe1cb77ffa0492cb32d5236cc0e22f0~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/20 Loader 开发进阶：如何用好 Loader 扩展开发工具？.md",
+      "sourceHash": "5a6354dabfad1b461da668085e915f21cdafdebd4a20ff620633758c7571dd25",
+      "title": "20 Loader 开发进阶：如何用好 Loader 扩展开发工具？",
+      "titleSource": "filename",
+      "suggestedSummary": "在上一篇文章中，我们已经详细了解了开发 Webpack Loader 需要用到的基本技能，包括：Loader 基本形态、如何构建测试环境、如何使用 Loader Context 接口等。接下来我们继续拓展学习一些 Loader 辅助工具，包括：",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 67,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/077c1aab02994c9a912f3614de6f60c0~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 71,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/461958492c45459bb25cff296651d89e~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 623,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2ba22f6bdf754a00997c607117e6c881~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/21 插件开发基础：实例剖析插件基本形态与架构逻辑.md",
+      "sourceHash": "e34a36c0e40ab8933f16e99a01045ad786aadba884672cf7cb760c6ddf34440d",
+      "title": "21 插件开发基础：实例剖析插件基本形态与架构逻辑",
+      "titleSource": "filename",
+      "suggestedSummary": "Webpack 对外提供了 Loader 与 Plugin 两种扩展方式，其中 Loader 职责比较单一，开发方法比较简单容易理解；Plugin 则功能强大，借助 Webpack 数量庞大的 Hook，我们几乎能改写 Webpack 所有特性，但也伴随着巨大的开发复杂度。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 49,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/407f8596a5b24203b091a51b5fca6726~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 53,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/08c337e97f664f3da4d301a3a5404f7d~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 329,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3ad70295b2214f3ebb77b9024d41ae1f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 460,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4eaa247a0d034d6dbcc4a5624573311c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/22 插件开发进阶：如何提升插件健壮性？.md",
+      "sourceHash": "14e9d8c793ac8d6a5c5564e109a99d4b04688e6fd5cc2e5cc253a7f0f036c535",
+      "title": "22 插件开发进阶：如何提升插件健壮性？",
+      "titleSource": "filename",
+      "suggestedSummary": "在上一章节中，我们详细介绍了 Webpack 插件的开发方式与基本架构逻辑，并结合若干开源项目剖析插件中如何与 Webpack 上下文交互，从而修改构建逻辑，实现插件功能需求。本文将继续介绍 Webpack 插件开发方法，总结一些较为常用，有助于提升插件可用性、健壮性的开发技巧，包括：",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 74,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1035c8f81506496f90535eb366d762a1~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 219,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3416427756ea48048cddcaf9aa7cbcdc~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/23 插件架构：Hook 体系是如何影响 Webpack 架构的？.md",
+      "sourceHash": "bb62ab0d5e61b2ac91f34e2facfe56c9e385d6e4b551b06cd9c67bacefe97b0e",
+      "title": "23 插件架构：Hook 体系是如何影响 Webpack 架构的？",
+      "titleSource": "filename",
+      "suggestedSummary": "Webpack 之所以能够应对 Web 场景下极度复杂、多样的构建需求，关键就在于其健壮、扩展性极强的插件架构，而插件架构的精髓又在于其灵活多变的 Hook 体系，可以说，只有真正掌握 Hook 底层设计与实现逻辑，深入理解不同 Hook 的运行特性与用法，才能灵活处理各种问题，更快更好地编写出 Webpack 插件。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 137,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b92ebab230e746caaa7a0ae4b90ae581~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 638,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4a27c1a2560c4926aa76f9a8adefa035~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 648,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba180e097d804216800ec285758b9a44~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 678,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1353e6ffa8794086b3dadb91a1de8b04~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 795,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3b5b6274428f46649a9fd71ffa3d7834~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 799,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/472e9bca1ddf442a9d44970ae700f59c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/24 Init、Make、Seal：真正读懂 Webpack 核心流程.md",
+      "sourceHash": "0814cf7deef3fe24b394dcf1549341808b4d4f55f4f68e3f2de53d826e954d64",
+      "title": "24 Init、Make、Seal：真正读懂 Webpack 核心流程",
+      "titleSource": "filename",
+      "suggestedSummary": "前面章节中，我们详细讲解了 Webpack 的基本应用、性能优化、Loader 与 Plugin 组件开发方方面面的知识，相信学习过这些内容之后，你已经对 Webpack 有相当深入的理解了，可以开始从更底层的视角，自底向上重新审视 Webpack 实现原理。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 10,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f6c8846ed06646fdba24cc3053d66f5e~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 16,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a26d60df160440adae904dcdeefb44d7~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 20,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3293ad8708e14a8db0567dac24fb8668~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 36,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/83d697220d324ed5a3ddba7e90d332ca~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 129,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1bf47933e15042deb0b2051d907847fa~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 147,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/604e4c7e9dac4069be57bd3be9f9800c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 159,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bdb0ecf9b1144117851a8279aabe59e2~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 163,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/29c82d31f5a144f1a63def697453caa5~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 167,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/42239b4cb1c24df9981ccb1477f60877~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 171,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7066113b7aeb4f78bd21d67121e16602~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 175,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6cfc533ae9204df48bf70ebc2dfda0fa~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 179,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8daff06d0ef544bd979b18b22d265735~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 205,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2657e3ff33214d3aac023556d8858c77~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 247,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d3fe03a7c0c745e199d1b4c3f817c955~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 273,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/150a2a6fd43f401a806b61975f69ce42~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 277,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/58b94810c0df4ea485f9ab2c07c1d700~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 287,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/defaaadcd2f04cf4ae950a746455a86d~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/25 Dependency Graph：如何管理模块间依赖？.md",
+      "sourceHash": "c75ba104145e8d09a8e7b47e87d7a14db001789db76b6d8ffb3410e99872a3a0",
+      "title": "25 Dependency Graph：如何管理模块间依赖？",
+      "titleSource": "filename",
+      "suggestedSummary": "Dependency Graph 概念来自官网 Dependency Graph | webpack 一文，原文解释：",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 25,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/923e83d508b445b0bd0d4bfbc2300365~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 36,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eca01f5a133a49bca2ed14be69d2b303~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 58,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fa6ad679ab4c4ce8944608dd23714d21~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/26 Chunk：三种产物的打包逻辑.md",
+      "sourceHash": "8c24bed9eccb10525986bb136c2c3670fbdb6ee1277cf70ca6dde36740a66e55",
+      "title": "26 Chunk：三种产物的打包逻辑",
+      "titleSource": "filename",
+      "suggestedSummary": "在上一篇文章《Dependency Graph：如何管理模块间依赖？》中，我们已经详细讲解了「构建」阶段如何从 Entry 开始逐步递归读入、解析模块内容，并最终构建出模块依赖关系图 —— ModuleGraph 对象。本文我们继续往下，讲解在接下来的「封装」阶段，如何根据 ModuleGraph 内容组织 Chunk",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 17,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d54599450fe94d0a988ec70214e4ead8~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 23,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/92e472f300934c009836445743dd6996~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 67,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/39e2b041b1994fa2b9c4cb92046f1b90~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 73,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f065f4c71784477abff7b113eb6dd2bf~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 77,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cd08a1a0b94b4f2d804399c77e916862~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 89,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2bac3fb532bc406fb16331555c309f9b~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 93,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/219d44ad9b4e4d2e9847761f83774d89~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 97,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/424fe595633d41649a616f2f5076adb4~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 124,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1a40257760914ba08783bf2d6a3c1bef~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 128,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d7fbfc917b1416cb1ee86216c3131a0~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 132,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/83a4ebfe25b940d5adfb9d04a7507646~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 151,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/716dba615b424147ad4076ce0a735eb5~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 155,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/892f542a06ae4d31a18130e93b07648a~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 163,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/de9a9cbc02a9452baa1feddcd7c5ef71~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 200,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dcbe4fdd5f2d41d0af0b7fcf990a9bb7~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 208,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b483355b9b3e4acfb022a2e3aa54d226~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 212,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/452ebaf82f7c4df88ae7b5334ff17cba~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/27 Runtime：模块编译打包及运行时逻辑.md",
+      "sourceHash": "6da9b62b62bfd7175e14346e0c6e554a7ab5156e1a72a104f1d11ae886cf05b1",
+      "title": "27 Runtime：模块编译打包及运行时逻辑",
+      "titleSource": "filename",
+      "suggestedSummary": "回顾最近几节内容，Webpack 运行过程中首先会根据  之间的引用关系构建  对象；接下来按照若干内置规则将  组织进不同  对象中，形成  关系图。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 16,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3276ff5d31014f7d913f07b6bc61e4ab~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 26,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/72e8b113bab844e9acf2e5d682339590~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 87,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6a5888bf286248adaf7b627310aebbd9~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 149,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f6d0eb4a736b493b86fc8c6945f8534a~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 198,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/683c91eefab04caf8875b859a7f7910c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 402,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e9bb7223e90c4054bb50f95c74191dd8~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 427,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df188ee10e674b068e4bd4ea654aa923~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 463,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/098592e677784728ba6c4947235b0460~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 475,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4ced49e0b3764a4aaf168db7bae8c1cb~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 483,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f1d02df6676942acac39290096af3d4c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 501,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/67a464acdc17450487c13f649c7d9b4f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 507,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/37ce17c38d524705b0f4dfbb7f408782~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/28 Tree-shaking：如何删除无用模块导出？.md",
+      "sourceHash": "975fe431226d7005362770db5e1382f1e6b0f8224afcdf363e22b31cef50abbb",
+      "title": "28 Tree-shaking：如何删除无用模块导出？",
+      "titleSource": "filename",
+      "suggestedSummary": "在前面章节中，我们已经完整介绍了 Webpack 从模块解析，到 Chunk 封装，到合并生成最终 Bundle 整个运行过程，接下来我们可以开始关注一些高频使用功能的底层实现，加深理解。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 61,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/05e8226fab374ee5a3d65bac3d249e54~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 92,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d63187fd15224e70ab40832aa2f7ab08~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 123,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d81684c319ef4571843339868c557a21~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 129,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9ac9143a00324895bd98857d6ca25bcb~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 170,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5d9c38d9ab5d425b80c2755e273fdaa4~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 174,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6d5a972823bc479b90bf4fdf98ec2348~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 210,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2abfbdbeaa4c4df69747f928cd4775eb~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 220,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6d1c9af4e61a48ea91b295782261888e~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/29 Sourcemap：源码映射原理与应用技巧.md",
+      "sourceHash": "d3f5c52d067a027efb749f0eb5fb350f9f2b42cb3398a396e952d3ae2c5f40e7",
+      "title": "29 Sourcemap：源码映射原理与应用技巧",
+      "titleSource": "filename",
+      "suggestedSummary": "Sourcemap 协议 最初由 Google 设计并率先在 Closure Inspector 实现，它的主要作用就是将经过压缩、混淆、合并的产物代码还原回未打包的原始形态，帮助开发者在生产环境中精确定位问题发生的行列位置，例如：",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 8,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2fa7318e270d451684c3f8da78bbab5c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 137,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3885498f30a7462789d05fe8af482c6f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 147,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ebe7f1a58974319badd51afa21d9f62~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 169,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5a3c5cc523044b959ec2ae1fcefee6a4~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 288,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/830f8d072cfd4b8bae4c95e7d29c974b~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 294,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0630aad5c07744f8be3d2a3d0198d959~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 330,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/98e6b0cd9aa54f6b8f3090dcd36c91b9~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/3 如何借助 Babel+TS+ESLint 构建现代 JS 工程环境？.md",
+      "sourceHash": "24da5e40bdee32320025fc25714cff154ff914aee5e15aa6dcab8c8025618d97",
+      "title": "3 如何借助 Babel+TS+ESLint 构建现代 JS 工程环境？",
+      "titleSource": "filename",
+      "suggestedSummary": "上一节我们聊到如何用结构化思维理解 Webpack 核心配置项，按惯例很多教程接下来会开始罗列各个配置项的作用，但这种方式记忆成本比较高，学习效率偏低。为此，接下来几章我会换一种思维模式，场景化介绍 Webpack 处理各种代码资源的工具与方法。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 104,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d453fe2d92294004971422a2001204d0~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 203,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c8f12f682beb4d9288eeb7c3cf107835~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 261,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d6910d770c114cd89a1d3e8a1c426e77~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 335,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dd3bd994134743a9a30200da59b47606~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/30 HMR：如何动态替换页面代码？.md",
+      "sourceHash": "5e57ac0ee12f62a130ed35b64764a8affaa6a8632caa800f962de86a2271fe97",
+      "title": "30 HMR：如何动态替换页面代码？",
+      "titleSource": "filename",
+      "suggestedSummary": "HMR 全称 Hot Module Replacement，可以翻译为「**模块热更新**」，最初由 Webpack 设计实现，至今已几乎成为现代工程化必备工具之一，它能够在保持页面状态不变的情况下动态替换、删除、添加代码模块，提供超级丝滑顺畅的 Web 页面开发体验。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 67,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b16905bf7c1342e5aedc1647241f8c06~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 78,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f11ad665cc384facb7edade1e0390a7b~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 93,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/abda76328bdd45ce945e5c3626a33b21~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 97,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/788951089ec84360b17cc0bcefa23385~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 151,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/636a4ada949c4e048d416883c35f89da~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 177,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2533c45468554dd4a09f4addaedcaa8a~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/4 如何借助预处理器、PostCSS 等构建现代 CSS 工程环境？.md",
+      "sourceHash": "083e43813e5742675a5c02442968c90c3f4ab1384d8e866f0b67fa877b7158e6",
+      "title": "4 如何借助预处理器、PostCSS 等构建现代 CSS 工程环境？",
+      "titleSource": "filename",
+      "suggestedSummary": "在开发 Web 应用时，我们通常需要编写大量 JavaScript 代码 —— 用于控制页面逻辑；编写大量 CSS 代码 —— 用于调整页面呈现形式。问题在于，CSS 语言在过去若干年中一直在追求样式表现力方面的提升，工程化能力薄弱，例如缺乏成熟的模块化机制、依赖处理能力、逻辑判断能力等。为此，在开发现代大型 Web ",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 18,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f538975af33141acb130ced3e89ab220~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 30,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5be680b877f44414a4349b62bc0143ba~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 107,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4c4206f0d4834065acaf50f53147228b~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 156,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1f787b0f8d5b4088b4de4e64dc71ec04~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 156,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d436857927f94c418538da8120513824~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/5 如何搭建 Vue 全栈开发环境？.md",
+      "sourceHash": "775bffeb145cc12ffa96d739953b04f7713dd482755cd049f177d8ef1b0432f4",
+      "title": "5 如何搭建 Vue 全栈开发环境？",
+      "titleSource": "filename",
+      "suggestedSummary": "传统 Web 开发通常会强调将页面的 HTML、CSS、JavaScript 代码分开用不同文件承载，这种思维本质上是将页面层级的结构、样式、逻辑分离成不同关注点；而现代 MVVM 框架，包括 React、Vue、Angular，则强调在组件内完成所有结构、样式、逻辑定义，从而进一步缩小关注点粒度，降低开发者心智负担。",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 78,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c441aaebe67043e79788a43854ef4e3c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 84,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5fc0ae8bd6404939aaff9134744051bf~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 107,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/558e51fc8a0d4653a2cc990ae6c2f583~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 224,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f876c28d9d8c49c6b6f0f30faaf9057e~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 384,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/68c6fb2c07d1439bb312add6191eefb4~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 392,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06c7576bbb6b4ee596baa2bf4f2192ed~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 632,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2b54e012772444efab25adcd91d8c0ec~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 636,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/667d9a7da7af44b38fbb7670496a740a~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 683,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9e97ba4bfe51433697d24f6e626e4b1f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/6 如何搭建 React 全栈开发环境？.md",
+      "sourceHash": "beb2da0e4db82c9c1991aba782b932d0f5dbc87a94d62ccabb91b51cc6c8ee74",
+      "title": "6 如何搭建 React 全栈开发环境？",
+      "titleSource": "filename",
+      "suggestedSummary": "传统 Web 开发强调样式、结构、逻辑分离，以此降低技术复杂度。但 React 认为渲染逻辑本质上与其它 UI 逻辑存在内在耦合关系，所以提倡将结构、逻辑与样式共同存放在同一文件中，以“组件”这种松散耦合结构实现关注点分离，并为此设计实现了一套 JavaScript-XML(JSX) 技术，以支持在 JavaScrip",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 59,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/11c6cca0522148af9ebb80368613802f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 77,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c8949ce39cad48529a72e827e189e53d~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 85,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b7f0da0a54a468c850603553e8108a7~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 148,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f41ba0c2c6ed4c57b5576ab8f8067b9a~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 468,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b2898268b18f4d85ad36eff2b64b79c0~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 472,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae1b5a2d37db4d86ba5a7282a049a0ef~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/7 使用 Webpack 构建 NPM Library 的正确方式.md",
+      "sourceHash": "3b8229f3971746eb3b4bdd03eadfd06f4d52a01ccacaf3aecba393d7a02f87f2",
+      "title": "7 使用 Webpack 构建 NPM Library 的正确方式",
+      "titleSource": "filename",
+      "suggestedSummary": "虽然 Webpack 多数情况下被用于构建 Web 应用，但与 Rollup、Snowpack 等工具类似，Webpack 同样具有完备的构建 NPM 库的能力。与一般场景相比，构建 NPM 库时需要注意：",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 116,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9676ffea7de5445d809662f3355760b2~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 164,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/af64ed8d6e4a45a1b0a9909ca487a739~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 192,
+          "detail": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d59a2a8dcc5c40f489b3c39dbafcc27c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/8 使用 Webpack 构建微前端应用.md",
+      "sourceHash": "55f2451fbf64a51198f996ef999ebc6908edcb803bfd6bc81f5a9a0eeffb2245",
+      "title": "8 使用 Webpack 构建微前端应用",
+      "titleSource": "filename",
+      "suggestedSummary": "英文社区对 Webpack Module Federation 的响应非常热烈，甚至被誉为“A game-changer in JavaScript architecture”，相对而言国内对此热度并不高，这一方面是因为 MF 强依赖于 Webpack5，升级成本有点高；另一方面是国内已经有一些成熟微前端框架，例如 q",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 17,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dbb78e89b39941818ab0c323d4873c1f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 164,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a52bfa6daf0e4c0fb181a6bdfb6698e2~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 227,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/55d6c1597e6743a29067aa5ab64c3544~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 227,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d216a327b16d414eaa4f7cba93d16476~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 278,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0bbdf553eb2b4c8e9d38ffb2e1695948~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/learning/webpack5核心原理与应用实践/9 如何借助 Webpack 开发 PWA、Node、Electron 应用？.md",
+      "sourceHash": "87ccd42434b35ae1b1ec9a607575075577ab8e2a237b2802ee50b97a8882c7d5",
+      "title": "9 如何借助 Webpack 开发 PWA、Node、Electron 应用？",
+      "titleSource": "filename",
+      "suggestedSummary": "毋庸置疑，对前端开发者而言，当下正是一个日升月恒的美好时代！在久远的过去，Web 页面的开发技术链条非常原始而粗糙，那时候的 JavaScript 更多用来点缀 Web 页面交互而不是用来构建一个完整的应用。直到 2009年5月 Ryan Dahl 正式发布 NodeJS，JavaScript 终于有机会脱离 Web ",
+      "status": "ready",
+      "issues": [
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 24,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/46045f1163244ae5ab365e13d8db0a20~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 113,
+          "detail": "https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5b138e624b01470c8e0e4e8fa66806ab~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 117,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/44a00677f9104c30bec98dd3c49edf80~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 179,
+          "detail": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b9a6e1e4df514535ae1d5e641a905199~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "remote_image",
+          "level": "review",
+          "line": 194,
+          "detail": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/487e3db9d38d41728117c7951652bdb1~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?"
+        },
+        {
+          "code": "missing_h1",
+          "level": "review",
+          "line": 5,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "path": "docs/posts/【怪物猎人世界】之太刀侠攻略.md",
+      "sourceHash": "2b0ee486ba4aa21f16f91a480b540090cf813179b7efde51695bad87902311d3",
+      "title": "怪物猎人：世界之太刀侠攻略",
+      "titleSource": "h1",
+      "suggestedSummary": "需要回到家里，和喵管家对话，对话选项中进入训练场，适合练习各种武器的操作。",
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "path": "docs/posts/【专题】低代码平台的架构和思考.md",
+      "sourceHash": "9417a3f6b24538b402d651efc3a45dbc21b041f44e3912e5c94ccabaecc93915",
+      "title": "专题: 低代码平台的架构和思考",
+      "titleSource": "h1",
+      "suggestedSummary": "这篇文章的目标是结合我的经验说清楚这个东西到底是什么，并同时辅以 demo 项目和可用的代码。",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 8,
+          "detail": ":::"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 10,
+          "detail": ":::"
+        }
+      ]
+    },
+    {
+      "path": "docs/posts/12月前端面试复盘.md",
+      "sourceHash": "cd0887d666d0bead8764dde274d403093b8c72ff146df973085856bdab9a5705",
+      "title": "12 月前端面试复盘",
+      "titleSource": "h1",
+      "suggestedSummary": "最近离职后开启了复习和面试模式，这里记录一下面试问到的问题",
+      "status": "needs_conversion",
+      "issues": [
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 8,
+          "detail": ":::"
+        },
+        {
+          "code": "vitepress_container",
+          "level": "convert",
+          "line": 10,
+          "detail": ":::"
+        },
+        {
+          "code": "local_image",
+          "level": "convert",
+          "line": 273,
+          "detail": "./lcr-129.png"
+        },
+        {
+          "code": "local_article_link",
+          "level": "convert",
+          "line": 362,
+          "detail": "../frontend/浏览器/网页性能优化指标.md"
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 <script setup>
 import DragAndDrop from "../../vue-exm/DragAndDrop.vue";
 </script>

@@ -1,0 +1,144 @@
+# CMS 文章迁移预检
+
+源标签：`cms-import-ready`；扫描 126 篇，选中 105 篇。
+
+状态：可直接处理 77 篇，需转换 28 篇，资源阻断 0 篇。
+
+此报告只检查迁移格式和资源，不代表文章内容已经过事实核查。`ready` 表示未发现脚本已知的不兼容语法；上线前仍需预览。
+
+## 后续处理顺序
+
+1. 展开 `<<<` 代码引用，并将 VitePress 容器转换为普通 Markdown；含 Vue 组件和原始 HTML 的交互内容需要逐篇决定替代呈现方式。
+2. 上传本地图片并改写链接；逐批核对远程图片，避免线上文章依赖失效的外部地址。
+3. 核对文件名回退得到的标题与摘要候选文本，再以草稿导入 CMS 并逐篇预览。发布应在预览之后单独执行。
+
+## 问题汇总
+
+- 站内文章链接需要映射：影响 1 篇，共 1 处
+- 本地图片需要上传并改写链接：影响 9 篇，共 16 处
+- 缺少一级标题，暂用文件名：影响 29 篇，共 29 处
+- 未提取到摘要候选文本：影响 11 篇，共 11 处
+- 原始 HTML 或 Vue 组件需要转换：影响 5 篇，共 43 处
+- 远程图片需要确认可长期访问：影响 30 篇，共 188 处
+- VitePress 容器需要转换：影响 13 篇，共 34 处
+- VitePress 代码引用需要展开：影响 8 篇，共 9 处
+
+远程图片来源：
+
+- oxudq29cr.bkt.clouddn.com：1 张
+- p1-juejin.byteimg.com：40 张
+- p3-juejin.byteimg.com：56 张
+- p6-juejin.byteimg.com：50 张
+- p9-juejin.byteimg.com：41 张
+
+## 逐篇结果
+
+| 源文件 | 状态 | 待处理项 |
+| --- | --- | --- |
+| [docs/about/index.md](../docs/about/index.md) | ready | 无 |
+| [docs/challenge/前端手写场景题整理.md](../docs/challenge/%E5%89%8D%E7%AB%AF%E6%89%8B%E5%86%99%E5%9C%BA%E6%99%AF%E9%A2%98%E6%95%B4%E7%90%86.md) | needs_conversion | 未提取到摘要候选文本 1；VitePress 代码引用需要展开 1 |
+| [docs/challenge/设计一个程序模拟红绿灯切换/index.md](../docs/challenge/%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%A8%A1%E6%8B%9F%E7%BA%A2%E7%BB%BF%E7%81%AF%E5%88%87%E6%8D%A2/index.md) | needs_conversion | 未提取到摘要候选文本 1；VitePress 代码引用需要展开 1 |
+| [docs/challenge/实现版本号排序/index.md](../docs/challenge/%E5%AE%9E%E7%8E%B0%E7%89%88%E6%9C%AC%E5%8F%B7%E6%8E%92%E5%BA%8F/index.md) | needs_conversion | VitePress 代码引用需要展开 1 |
+| [docs/challenge/实现对象深拷贝/index.md](../docs/challenge/%E5%AE%9E%E7%8E%B0%E5%AF%B9%E8%B1%A1%E6%B7%B1%E6%8B%B7%E8%B4%9D/index.md) | needs_conversion | VitePress 代码引用需要展开 1 |
+| [docs/challenge/实现一个拼手气抢红包的算法/index.md](../docs/challenge/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%8B%BC%E6%89%8B%E6%B0%94%E6%8A%A2%E7%BA%A2%E5%8C%85%E7%9A%84%E7%AE%97%E6%B3%95/index.md) | needs_conversion | VitePress 代码引用需要展开 1 |
+| [docs/frontend/工程化/包管理方案.md](../docs/frontend/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%8C%85%E7%AE%A1%E7%90%86%E6%96%B9%E6%A1%88.md) | ready | 无 |
+| [docs/frontend/工程化/打包体积和性能优化的手段.md](../docs/frontend/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E6%89%93%E5%8C%85%E4%BD%93%E7%A7%AF%E5%92%8C%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E6%89%8B%E6%AE%B5.md) | needs_conversion | VitePress 容器需要转换 4 |
+| [docs/frontend/工程化/代码校验.md](../docs/frontend/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E4%BB%A3%E7%A0%81%E6%A0%A1%E9%AA%8C.md) | needs_conversion | VitePress 容器需要转换 2 |
+| [docs/frontend/工程化/前端部署相关.md](../docs/frontend/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%89%8D%E7%AB%AF%E9%83%A8%E7%BD%B2%E7%9B%B8%E5%85%B3.md) | needs_conversion | 本地图片需要上传并改写链接 4 |
+| [docs/frontend/工程化/深入webpack的编译流程.md](../docs/frontend/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E6%B7%B1%E5%85%A5webpack%E7%9A%84%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B.md) | ready | 无 |
+| [docs/frontend/工程化/硬链接与符号链接.md](../docs/frontend/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E7%A1%AC%E9%93%BE%E6%8E%A5%E4%B8%8E%E7%AC%A6%E5%8F%B7%E9%93%BE%E6%8E%A5.md) | needs_conversion | VitePress 容器需要转换 2 |
+| [docs/frontend/工程化/babel和AST相关.md](../docs/frontend/%E5%B7%A5%E7%A8%8B%E5%8C%96/babel%E5%92%8CAST%E7%9B%B8%E5%85%B3.md) | ready | 无 |
+| [docs/frontend/工程化/Bundless原理与浏览器ESM.md](../docs/frontend/%E5%B7%A5%E7%A8%8B%E5%8C%96/Bundless%E5%8E%9F%E7%90%86%E4%B8%8E%E6%B5%8F%E8%A7%88%E5%99%A8ESM.md) | ready | 无 |
+| [docs/frontend/工程化/Monorepo搭建清单.md](../docs/frontend/%E5%B7%A5%E7%A8%8B%E5%8C%96/Monorepo%E6%90%AD%E5%BB%BA%E6%B8%85%E5%8D%95.md) | ready | 无 |
+| [docs/frontend/工程化/monorepo框架搭建指南.md](../docs/frontend/%E5%B7%A5%E7%A8%8B%E5%8C%96/monorepo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97.md) | ready | 未提取到摘要候选文本 1 |
+| [docs/frontend/工程化/UMD模块的定义和实现.md](../docs/frontend/%E5%B7%A5%E7%A8%8B%E5%8C%96/UMD%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%AE%9E%E7%8E%B0.md) | ready | 无 |
+| [docs/frontend/工程化/webpack的运行时分析.md](../docs/frontend/%E5%B7%A5%E7%A8%8B%E5%8C%96/webpack%E7%9A%84%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90.md) | ready | 无 |
+| [docs/frontend/后端相关/从 0-1 搭建和部署 koa 服务.md](../docs/frontend/%E5%90%8E%E7%AB%AF%E7%9B%B8%E5%85%B3/%E4%BB%8E%200-1%20%E6%90%AD%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2%20koa%20%E6%9C%8D%E5%8A%A1.md) | needs_conversion | VitePress 容器需要转换 2 |
+| [docs/frontend/后端相关/浅谈Serverless.md](../docs/frontend/%E5%90%8E%E7%AB%AF%E7%9B%B8%E5%85%B3/%E6%B5%85%E8%B0%88Serverless.md) | ready | 无 |
+| [docs/frontend/后端相关/React如何实现SSR.md](../docs/frontend/%E5%90%8E%E7%AB%AF%E7%9B%B8%E5%85%B3/React%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0SSR.md) | ready | 无 |
+| [docs/frontend/框架和库/40行代码实现React的diff核心.md](../docs/frontend/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BA%93/40%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0React%E7%9A%84diff%E6%A0%B8%E5%BF%83.md) | ready | 未提取到摘要候选文本 1 |
+| [docs/frontend/框架和库/从设计思路看待React和Vue的区别.md](../docs/frontend/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BA%93/%E4%BB%8E%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF%E7%9C%8B%E5%BE%85React%E5%92%8CVue%E7%9A%84%E5%8C%BA%E5%88%AB.md) | needs_conversion | VitePress 容器需要转换 2 |
+| [docs/frontend/框架和库/低代码架构分析.md](../docs/frontend/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BA%93/%E4%BD%8E%E4%BB%A3%E7%A0%81%E6%9E%B6%E6%9E%84%E5%88%86%E6%9E%90.md) | ready | 未提取到摘要候选文本 1 |
+| [docs/frontend/框架和库/几个状态管理库的原理分析.md](../docs/frontend/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BA%93/%E5%87%A0%E4%B8%AA%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E5%BA%93%E7%9A%84%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90.md) | ready | 无 |
+| [docs/frontend/框架和库/浅析React状态更新和性能优化.md](../docs/frontend/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BA%93/%E6%B5%85%E6%9E%90React%E7%8A%B6%E6%80%81%E6%9B%B4%E6%96%B0%E5%92%8C%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.md) | ready | 无 |
+| [docs/frontend/框架和库/实现ReactDOM核心逻辑.md](../docs/frontend/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BA%93/%E5%AE%9E%E7%8E%B0ReactDOM%E6%A0%B8%E5%BF%83%E9%80%BB%E8%BE%91.md) | ready | 无 |
+| [docs/frontend/框架和库/微前端为何不推荐iframe.md](../docs/frontend/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BA%93/%E5%BE%AE%E5%89%8D%E7%AB%AF%E4%B8%BA%E4%BD%95%E4%B8%8D%E6%8E%A8%E8%8D%90iframe.md) | ready | 未提取到摘要候选文本 1 |
+| [docs/frontend/框架和库/React v18和Vue3核心流程整理.md](../docs/frontend/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BA%93/React%20v18%E5%92%8CVue3%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%E6%95%B4%E7%90%86.md) | needs_conversion | 本地图片需要上传并改写链接 2；未提取到摘要候选文本 1 |
+| [docs/frontend/框架和库/React的Fiber架构代码结构解析.md](../docs/frontend/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BA%93/React%E7%9A%84Fiber%E6%9E%B6%E6%9E%84%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E8%A7%A3%E6%9E%90.md) | needs_conversion | 本地图片需要上传并改写链接 1；VitePress 容器需要转换 2 |
+| [docs/frontend/框架和库/React事件系统的简易实现.md](../docs/frontend/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BA%93/React%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%AE%80%E6%98%93%E5%AE%9E%E7%8E%B0.md) | ready | 未提取到摘要候选文本 1 |
+| [docs/frontend/框架和库/Vue3性能提升的方式.md](../docs/frontend/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BA%93/Vue3%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E7%9A%84%E6%96%B9%E5%BC%8F.md) | ready | 无 |
+| [docs/frontend/框架和库/Vue的diff过程.md](../docs/frontend/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BA%93/Vue%E7%9A%84diff%E8%BF%87%E7%A8%8B.md) | needs_conversion | 本地图片需要上传并改写链接 1 |
+| [docs/frontend/框架和库/Vue实现nextTick的原理解析.md](../docs/frontend/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BA%93/Vue%E5%AE%9E%E7%8E%B0nextTick%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90.md) | ready | 无 |
+| [docs/frontend/浏览器/浏览器的垃圾回收机制.md](../docs/frontend/%E6%B5%8F%E8%A7%88%E5%99%A8/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6.md) | ready | 无 |
+| [docs/frontend/浏览器/浏览器的渲染流程与事件循环.md](../docs/frontend/%E6%B5%8F%E8%A7%88%E5%99%A8/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B%E4%B8%8E%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.md) | needs_conversion | VitePress 容器需要转换 2 |
+| [docs/frontend/浏览器/浏览器拖放操作API.md](../docs/frontend/%E6%B5%8F%E8%A7%88%E5%99%A8/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8B%96%E6%94%BE%E6%93%8D%E4%BD%9CAPI.md) | needs_conversion | 原始 HTML 或 Vue 组件需要转换 3；VitePress 代码引用需要展开 1 |
+| [docs/frontend/浏览器/前端安全问题和防范.md](../docs/frontend/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E5%92%8C%E9%98%B2%E8%8C%83.md) | needs_conversion | 本地图片需要上传并改写链接 3 |
+| [docs/frontend/浏览器/如何理解BOM API.md](../docs/frontend/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3BOM%20API.md) | ready | 无 |
+| [docs/frontend/浏览器/网页性能优化指标.md](../docs/frontend/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E9%A1%B5%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E6%A0%87.md) | ready | 无 |
+| [docs/frontend/浏览器/Canvas API.md](../docs/frontend/%E6%B5%8F%E8%A7%88%E5%99%A8/Canvas%20API.md) | needs_conversion | 未提取到摘要候选文本 1；原始 HTML 或 Vue 组件需要转换 5；VitePress 代码引用需要展开 2 |
+| [docs/frontend/前端算法/动态规划.md](../docs/frontend/%E5%89%8D%E7%AB%AF%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92.md) | ready | 无 |
+| [docs/frontend/前端算法/二叉树刷题模板.md](../docs/frontend/%E5%89%8D%E7%AB%AF%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%88%B7%E9%A2%98%E6%A8%A1%E6%9D%BF.md) | ready | 无 |
+| [docs/frontend/前端算法/滑动窗口刷题模板.md](../docs/frontend/%E5%89%8D%E7%AB%AF%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%88%B7%E9%A2%98%E6%A8%A1%E6%9D%BF.md) | ready | 无 |
+| [docs/frontend/前端算法/经典算法问题归类.md](../docs/frontend/%E5%89%8D%E7%AB%AF%E7%AE%97%E6%B3%95/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95%E9%97%AE%E9%A2%98%E5%BD%92%E7%B1%BB.md) | ready | 无 |
+| [docs/frontend/前端算法/快速排序.md](../docs/frontend/%E5%89%8D%E7%AB%AF%E7%AE%97%E6%B3%95/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.md) | ready | 未提取到摘要候选文本 1 |
+| [docs/frontend/前端算法/链表刷题模板.md](../docs/frontend/%E5%89%8D%E7%AB%AF%E7%AE%97%E6%B3%95/%E9%93%BE%E8%A1%A8%E5%88%B7%E9%A2%98%E6%A8%A1%E6%9D%BF.md) | ready | 无 |
+| [docs/frontend/术语表.md](../docs/frontend/%E6%9C%AF%E8%AF%AD%E8%A1%A8.md) | ready | 无 |
+| [docs/frontend/网络/同源策略和跨域处理.md](../docs/frontend/%E7%BD%91%E7%BB%9C/%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5%E5%92%8C%E8%B7%A8%E5%9F%9F%E5%A4%84%E7%90%86.md) | needs_conversion | 本地图片需要上传并改写链接 1 |
+| [docs/frontend/网络/CDN的原理和特点.md](../docs/frontend/%E7%BD%91%E7%BB%9C/CDN%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E7%89%B9%E7%82%B9.md) | ready | 无 |
+| [docs/frontend/网络/cookie相关.md](../docs/frontend/%E7%BD%91%E7%BB%9C/cookie%E7%9B%B8%E5%85%B3.md) | needs_conversion | 本地图片需要上传并改写链接 1；VitePress 容器需要转换 2 |
+| [docs/frontend/网络/HTTP缓存策略.md](../docs/frontend/%E7%BD%91%E7%BB%9C/HTTP%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5.md) | ready | 无 |
+| [docs/frontend/网络/HTTP特性整理.md](../docs/frontend/%E7%BD%91%E7%BB%9C/HTTP%E7%89%B9%E6%80%A7%E6%95%B4%E7%90%86.md) | ready | 无 |
+| [docs/frontend/网络/WebSocket的概念与使用场景.md](../docs/frontend/%E7%BD%91%E7%BB%9C/WebSocket%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF.md) | needs_conversion | 原始 HTML 或 Vue 组件需要转换 3；VitePress 代码引用需要展开 1 |
+| [docs/frontend/杂七杂八/浅析Hybrid架构.md](../docs/frontend/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E6%B5%85%E6%9E%90Hybrid%E6%9E%B6%E6%9E%84.md) | ready | 无 |
+| [docs/frontend/杂七杂八/AI在前端领域的应用.md](../docs/frontend/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/AI%E5%9C%A8%E5%89%8D%E7%AB%AF%E9%A2%86%E5%9F%9F%E7%9A%84%E5%BA%94%E7%94%A8.md) | ready | 无 |
+| [docs/frontend/知识点摘要大纲.md](../docs/frontend/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%91%98%E8%A6%81%E5%A4%A7%E7%BA%B2.md) | needs_conversion | VitePress 容器需要转换 4 |
+| [docs/frontend/桌面端/Electron入门实践.md](../docs/frontend/%E6%A1%8C%E9%9D%A2%E7%AB%AF/Electron%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5.md) | needs_conversion | 本地图片需要上传并改写链接 2；VitePress 容器需要转换 6 |
+| [docs/frontend/桌面端/Tauri入门实践.md](../docs/frontend/%E6%A1%8C%E9%9D%A2%E7%AB%AF/Tauri%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5.md) | ready | 无 |
+| [docs/frontend/css/如何理解BFC.md](../docs/frontend/css/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3BFC.md) | needs_conversion | 原始 HTML 或 Vue 组件需要转换 12 |
+| [docs/frontend/css/grid布局.md](../docs/frontend/css/grid%E5%B8%83%E5%B1%80.md) | needs_conversion | 原始 HTML 或 Vue 组件需要转换 20 |
+| [docs/frontend/css/rem布局原理及简单实践.md](../docs/frontend/css/rem%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86%E5%8F%8A%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5.md) | ready | 无 |
+| [docs/frontend/css/UI组件库的CSS架构.md](../docs/frontend/css/UI%E7%BB%84%E4%BB%B6%E5%BA%93%E7%9A%84CSS%E6%9E%B6%E6%9E%84.md) | ready | 无 |
+| [docs/frontend/javascript/彻底理解闭包.md](../docs/frontend/javascript/%E5%BD%BB%E5%BA%95%E7%90%86%E8%A7%A3%E9%97%AD%E5%8C%85.md) | needs_conversion | VitePress 容器需要转换 2 |
+| [docs/frontend/javascript/迭代器与生成器.md](../docs/frontend/javascript/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8.md) | ready | 无 |
+| [docs/frontend/javascript/类与面向对象编程.md](../docs/frontend/javascript/%E7%B1%BB%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B.md) | ready | 无 |
+| [docs/frontend/javascript/浅谈javascript中的观察者模式.md](../docs/frontend/javascript/%E6%B5%85%E8%B0%88javascript%E4%B8%AD%E7%9A%84%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.md) | ready | 远程图片需要确认可长期访问 1 |
+| [docs/frontend/javascript/JS中的设计模式.md](../docs/frontend/javascript/JS%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md) | ready | 无 |
+| [docs/frontend/javascript/let和var的区别.md](../docs/frontend/javascript/let%E5%92%8Cvar%E7%9A%84%E5%8C%BA%E5%88%AB.md) | ready | 无 |
+| [docs/frontend/javascript/Promise A+规范.md](../docs/frontend/javascript/Promise%20A%2B%E8%A7%84%E8%8C%83.md) | ready | 未提取到摘要候选文本 1 |
+| [docs/frontend/typescript/ts常见概念梳理.md](../docs/frontend/typescript/ts%E5%B8%B8%E8%A7%81%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86.md) | ready | 无 |
+| [docs/frontend/typescript/ts中的类型体操.md](../docs/frontend/typescript/ts%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E4%BD%93%E6%93%8D.md) | ready | 无 |
+| [docs/learning/webpack5核心原理与应用实践/1 重新认识 Webpack：旧时代的破局者.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/1%20%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%20Webpack%EF%BC%9A%E6%97%A7%E6%97%B6%E4%BB%A3%E7%9A%84%E7%A0%B4%E5%B1%80%E8%80%85.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 3 |
+| [docs/learning/webpack5核心原理与应用实践/10 深入理解图像加载原理与最佳实践.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/10%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%9B%BE%E5%83%8F%E5%8A%A0%E8%BD%BD%E5%8E%9F%E7%90%86%E4%B8%8E%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 5 |
+| [docs/learning/webpack5核心原理与应用实践/11 深入理解 Webpack 核心配置结构.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/11%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Webpack%20%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E7%BB%93%E6%9E%84.md) | ready | 远程图片需要确认可长期访问 5 |
+| [docs/learning/webpack5核心原理与应用实践/12 构建性能：分享 7 款常用的性能分析工具.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/12%20%E6%9E%84%E5%BB%BA%E6%80%A7%E8%83%BD%EF%BC%9A%E5%88%86%E4%BA%AB%207%20%E6%AC%BE%E5%B8%B8%E7%94%A8%E7%9A%84%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 10 |
+| [docs/learning/webpack5核心原理与应用实践/13 如何使用 Webpack 持久化缓存大幅提升构建性能？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/13%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Webpack%20%E6%8C%81%E4%B9%85%E5%8C%96%E7%BC%93%E5%AD%98%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87%E6%9E%84%E5%BB%BA%E6%80%A7%E8%83%BD%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 5 |
+| [docs/learning/webpack5核心原理与应用实践/14 Webpack 都有哪些实现并行构建的方法？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/14%20Webpack%20%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AE%9E%E7%8E%B0%E5%B9%B6%E8%A1%8C%E6%9E%84%E5%BB%BA%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 2 |
+| [docs/learning/webpack5核心原理与应用实践/15 有哪些值得学习的构建性能极致优化技巧？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/15%20%E6%9C%89%E5%93%AA%E4%BA%9B%E5%80%BC%E5%BE%97%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%9E%84%E5%BB%BA%E6%80%A7%E8%83%BD%E6%9E%81%E8%87%B4%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1 |
+| [docs/learning/webpack5核心原理与应用实践/16 如何正确使用 SplitChunks提升应用性能？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/16%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%20SplitChunks%E6%8F%90%E5%8D%87%E5%BA%94%E7%94%A8%E6%80%A7%E8%83%BD%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 7 |
+| [docs/learning/webpack5核心原理与应用实践/17 不止 Terser：揭秘代码压缩的门门道道.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/17%20%E4%B8%8D%E6%AD%A2%20Terser%EF%BC%9A%E6%8F%AD%E7%A7%98%E4%BB%A3%E7%A0%81%E5%8E%8B%E7%BC%A9%E7%9A%84%E9%97%A8%E9%97%A8%E9%81%93%E9%81%93.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 5 |
+| [docs/learning/webpack5核心原理与应用实践/18 还有哪些值得学习的应用性能极致优化技巧？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/18%20%E8%BF%98%E6%9C%89%E5%93%AA%E4%BA%9B%E5%80%BC%E5%BE%97%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%BA%94%E7%94%A8%E6%80%A7%E8%83%BD%E6%9E%81%E8%87%B4%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 10 |
+| [docs/learning/webpack5核心原理与应用实践/19 Loader 开发基础：从开源项目学到的 Loader 开发技巧.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/19%20Loader%20%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%EF%BC%9A%E4%BB%8E%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E5%88%B0%E7%9A%84%20Loader%20%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 7 |
+| [docs/learning/webpack5核心原理与应用实践/2 如何理解 Webpack 配置底层结构逻辑？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/2%20%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%20Webpack%20%E9%85%8D%E7%BD%AE%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84%E9%80%BB%E8%BE%91%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 6 |
+| [docs/learning/webpack5核心原理与应用实践/20 Loader 开发进阶：如何用好 Loader 扩展开发工具？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/20%20Loader%20%E5%BC%80%E5%8F%91%E8%BF%9B%E9%98%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%A5%BD%20Loader%20%E6%89%A9%E5%B1%95%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 3 |
+| [docs/learning/webpack5核心原理与应用实践/21 插件开发基础：实例剖析插件基本形态与架构逻辑.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/21%20%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%AE%9E%E4%BE%8B%E5%89%96%E6%9E%90%E6%8F%92%E4%BB%B6%E5%9F%BA%E6%9C%AC%E5%BD%A2%E6%80%81%E4%B8%8E%E6%9E%B6%E6%9E%84%E9%80%BB%E8%BE%91.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 4 |
+| [docs/learning/webpack5核心原理与应用实践/22 插件开发进阶：如何提升插件健壮性？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/22%20%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%9B%E9%98%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E5%8D%87%E6%8F%92%E4%BB%B6%E5%81%A5%E5%A3%AE%E6%80%A7%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 2 |
+| [docs/learning/webpack5核心原理与应用实践/23 插件架构：Hook 体系是如何影响 Webpack 架构的？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/23%20%E6%8F%92%E4%BB%B6%E6%9E%B6%E6%9E%84%EF%BC%9AHook%20%E4%BD%93%E7%B3%BB%E6%98%AF%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%20Webpack%20%E6%9E%B6%E6%9E%84%E7%9A%84%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 6 |
+| [docs/learning/webpack5核心原理与应用实践/24 Init、Make、Seal：真正读懂 Webpack 核心流程.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/24%20Init%E3%80%81Make%E3%80%81Seal%EF%BC%9A%E7%9C%9F%E6%AD%A3%E8%AF%BB%E6%87%82%20Webpack%20%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 17 |
+| [docs/learning/webpack5核心原理与应用实践/25 Dependency Graph：如何管理模块间依赖？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/25%20Dependency%20Graph%EF%BC%9A%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E9%97%B4%E4%BE%9D%E8%B5%96%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 3 |
+| [docs/learning/webpack5核心原理与应用实践/26 Chunk：三种产物的打包逻辑.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/26%20Chunk%EF%BC%9A%E4%B8%89%E7%A7%8D%E4%BA%A7%E7%89%A9%E7%9A%84%E6%89%93%E5%8C%85%E9%80%BB%E8%BE%91.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 17 |
+| [docs/learning/webpack5核心原理与应用实践/27 Runtime：模块编译打包及运行时逻辑.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/27%20Runtime%EF%BC%9A%E6%A8%A1%E5%9D%97%E7%BC%96%E8%AF%91%E6%89%93%E5%8C%85%E5%8F%8A%E8%BF%90%E8%A1%8C%E6%97%B6%E9%80%BB%E8%BE%91.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 12 |
+| [docs/learning/webpack5核心原理与应用实践/28 Tree-shaking：如何删除无用模块导出？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/28%20Tree-shaking%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4%E6%97%A0%E7%94%A8%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%87%BA%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 8 |
+| [docs/learning/webpack5核心原理与应用实践/29 Sourcemap：源码映射原理与应用技巧.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/29%20Sourcemap%EF%BC%9A%E6%BA%90%E7%A0%81%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E6%8A%80%E5%B7%A7.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 7 |
+| [docs/learning/webpack5核心原理与应用实践/3 如何借助 Babel+TS+ESLint 构建现代 JS 工程环境？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/3%20%E5%A6%82%E4%BD%95%E5%80%9F%E5%8A%A9%20Babel%2BTS%2BESLint%20%E6%9E%84%E5%BB%BA%E7%8E%B0%E4%BB%A3%20JS%20%E5%B7%A5%E7%A8%8B%E7%8E%AF%E5%A2%83%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 4 |
+| [docs/learning/webpack5核心原理与应用实践/30 HMR：如何动态替换页面代码？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/30%20HMR%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8A%A8%E6%80%81%E6%9B%BF%E6%8D%A2%E9%A1%B5%E9%9D%A2%E4%BB%A3%E7%A0%81%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 6 |
+| [docs/learning/webpack5核心原理与应用实践/4 如何借助预处理器、PostCSS 等构建现代 CSS 工程环境？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/4%20%E5%A6%82%E4%BD%95%E5%80%9F%E5%8A%A9%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E3%80%81PostCSS%20%E7%AD%89%E6%9E%84%E5%BB%BA%E7%8E%B0%E4%BB%A3%20CSS%20%E5%B7%A5%E7%A8%8B%E7%8E%AF%E5%A2%83%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 5 |
+| [docs/learning/webpack5核心原理与应用实践/5 如何搭建 Vue 全栈开发环境？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/5%20%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%20Vue%20%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 9 |
+| [docs/learning/webpack5核心原理与应用实践/6 如何搭建 React 全栈开发环境？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/6%20%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%20React%20%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 6 |
+| [docs/learning/webpack5核心原理与应用实践/7 使用 Webpack 构建 NPM Library 的正确方式.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/7%20%E4%BD%BF%E7%94%A8%20Webpack%20%E6%9E%84%E5%BB%BA%20NPM%20Library%20%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E5%BC%8F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 3 |
+| [docs/learning/webpack5核心原理与应用实践/8 使用 Webpack 构建微前端应用.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/8%20%E4%BD%BF%E7%94%A8%20Webpack%20%E6%9E%84%E5%BB%BA%E5%BE%AE%E5%89%8D%E7%AB%AF%E5%BA%94%E7%94%A8.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 5 |
+| [docs/learning/webpack5核心原理与应用实践/9 如何借助 Webpack 开发 PWA、Node、Electron 应用？.md](../docs/learning/webpack5%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/9%20%E5%A6%82%E4%BD%95%E5%80%9F%E5%8A%A9%20Webpack%20%E5%BC%80%E5%8F%91%20PWA%E3%80%81Node%E3%80%81Electron%20%E5%BA%94%E7%94%A8%EF%BC%9F.md) | ready | 缺少一级标题，暂用文件名 1；远程图片需要确认可长期访问 5 |
+| [docs/posts/【怪物猎人世界】之太刀侠攻略.md](../docs/posts/%E3%80%90%E6%80%AA%E7%89%A9%E7%8C%8E%E4%BA%BA%E4%B8%96%E7%95%8C%E3%80%91%E4%B9%8B%E5%A4%AA%E5%88%80%E4%BE%A0%E6%94%BB%E7%95%A5.md) | ready | 无 |
+| [docs/posts/【专题】低代码平台的架构和思考.md](../docs/posts/%E3%80%90%E4%B8%93%E9%A2%98%E3%80%91%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%9E%B6%E6%9E%84%E5%92%8C%E6%80%9D%E8%80%83.md) | needs_conversion | VitePress 容器需要转换 2 |
+| [docs/posts/12月前端面试复盘.md](../docs/posts/12%E6%9C%88%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98.md) | needs_conversion | 站内文章链接需要映射 1；本地图片需要上传并改写链接 1；VitePress 容器需要转换 2 |
+
+逐项行号与资源地址见 [JSON 报告](./cms-import-preflight.json)。

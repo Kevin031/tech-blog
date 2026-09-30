@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # 浅析 Hybrid 架构
 
 简单理解业内主流 App 的做法：客户端内有大量的业务页面使用 webview 加载 h5 页面

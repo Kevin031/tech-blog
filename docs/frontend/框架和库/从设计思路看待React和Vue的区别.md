@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # 从设计思路看待 React 和 Vue 的差异
 
 ## 共同特点

@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 > Module Federation 通常译作“**模块联邦**”，是 Webpack 5 新引入的一种远程模块动态加载、运行技术。MF 允许我们将原本单个巨大应用按我们理想的方式拆分成多个体积更小、职责更内聚的小应用形式，理想情况下各个应用能够实现独立部署、独立开发(不同应用甚至允许使用不同技术栈)、团队自治，从而降低系统与团队协作的复杂度 —— 没错，这正是所谓的微前端架构。
 >
 > _An architectural style where independently deliverable frontend applications are composed into a greater whole —— 摘自《**[Micro Frontends](https://link.juejin.cn/?target=https%3A%2F%2Fmartinfowler.com%2Farticles%2Fmicro-frontends.html)**》。_

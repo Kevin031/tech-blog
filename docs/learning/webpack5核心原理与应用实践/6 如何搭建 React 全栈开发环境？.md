@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 传统 Web 开发强调样式、结构、逻辑分离，以此降低技术复杂度。但 React 认为渲染逻辑本质上与其它 UI 逻辑存在内在耦合关系，所以提倡将结构、逻辑与样式共同存放在同一文件中，以“组件”这种松散耦合结构实现关注点分离，并为此设计实现了一套 [JavaScript-XML](https://link.juejin.cn/?target=https%3A%2F%2Fzh-hans.reactjs.org%2Fdocs%2Fintroducing-jsx.html)(JSX) 技术，以支持在 JavaScript 中编写 Template 代码，如：
 
 ```JavaScript

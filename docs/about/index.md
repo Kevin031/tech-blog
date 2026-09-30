@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # 关于我
 
 ## 我的编程方法论

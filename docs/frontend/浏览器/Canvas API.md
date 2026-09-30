@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # Canvas API
 
 ## 基本绘图

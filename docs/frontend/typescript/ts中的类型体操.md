@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # ts 中的类型体操
 
 ## 实现 Optional

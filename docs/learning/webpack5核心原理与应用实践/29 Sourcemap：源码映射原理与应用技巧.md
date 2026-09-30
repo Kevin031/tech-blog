@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 [Sourcemap 协议](https://link.juejin.cn/?target=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k%2Fedit%23heading%3Dh.qz3o9nc69um5) 最初由 Google 设计并率先在 Closure Inspector 实现，它的主要作用就是将经过压缩、混淆、合并的产物代码还原回未打包的原始形态，帮助开发者在生产环境中精确定位问题发生的行列位置，例如：
 
 ![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2fa7318e270d451684c3f8da78bbab5c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?)

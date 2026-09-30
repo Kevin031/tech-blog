@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # Promise A+规范
 
 ## 规范要求

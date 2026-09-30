@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # grid 布局
 
 目前 web 开发主流的布局方式为：block 和 flex，它们都是一维的布局，定义了元素在一条线上的排布方式，而新增的 grid 布局是二维的布局方式。

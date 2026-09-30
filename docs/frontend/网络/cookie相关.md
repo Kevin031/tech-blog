@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # cookie 相关
 
 http 是无状态协议，因此请求头中的 cookie 字段就是服务端识别客户端的身份用的。
@@ -26,19 +31,19 @@ cookie 本身是一系列键值对生成的字符串，形如 a=xxx; b=xxx;携�
 
 - `Path`: 路径，指定了这条 cookie 所属的路径
 
-其中`Domain`和`Path`都可以设置多条，让浏览器自行匹配，两者互不干扰
+每条 Cookie 分别指定自己的 `Domain` 和 `Path`；浏览器按请求目标和这些属性决定是否携带该 Cookie。
 
 ## cookie 的安全性
 
 cookie 是可以通过`document.cookie = xxx`修改的，因此浏览器为了不让恶意脚本篡改，提供了以下几个属性
 
-- `HttpOnly`: 声明此 cookie 只能通过 http 协议访问，不允许其它方式访问（这种情况 js 调用则会报错）
+- `HttpOnly`: 禁止 JavaScript 通过 `document.cookie` 读取或修改该 Cookie；符合条件的 HTTP 请求仍会自动携带它，访问时通常不会因这个属性而抛错
 
 - `SameSite`:
 
   - 设置`SameSite=Strict`可以严格限定 cookie 不能随着跳转链接跨站发送
 
-  - 设置`SameSite=Lax`则宽松一点，允许`GET`, `HEAD`类型的请求发送，但是禁止`POST`
+  - 设置 `SameSite=Lax` 时，跨站请求只有在顶层导航且使用安全方法（如 `GET`、`HEAD`）时才会携带该 Cookie；跨站 `fetch`、图片等子资源请求即使用 `GET` 也不会携带。这里说的是显式设置 `Lax`，浏览器将未设置 `SameSite` 的 Cookie 默认视为 `Lax` 时可能有短时间内的例外
 
 - `Secure`: 表示这个 Cookie 仅能用 HTTPS 协议加密发送，但是浏览器里还是明文保存
 

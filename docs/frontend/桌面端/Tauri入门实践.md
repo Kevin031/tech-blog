@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # Tauri 入门实践
 
 ## 认识 Tauri

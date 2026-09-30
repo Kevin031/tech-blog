@@ -12,13 +12,17 @@ const delay = (duration = 1000) => {
 class Signal {
   sig = ''
   times = [0, 0, 0]
-  start = 0
   end = 0
+  running = false
   constructor(data) {
+    if (!serial.includes(data.init) || !Array.isArray(data.times) ||
+        data.times.length !== serial.length ||
+        data.times.some(time => !Number.isFinite(time) || time <= 0)) {
+      throw new Error('初始灯色或持续时间无效')
+    }
     this.sig = data.init
     this.times = data.times
     this.setTime()
-    this.exchange()
   }
 
   get remain() {
@@ -30,26 +34,35 @@ class Signal {
   }
 
   get next() {
-    const nextIdx = serial.indexOf(this.sig) + (1 % serial.length)
+    const nextIdx = (serial.indexOf(this.sig) + 1) % serial.length
     return serial[nextIdx]
   }
 
-  async exchange() {
-    if (this.remain > 0) {
+  async start() {
+    if (this.running) return
+    this.running = true
+    while (this.running) {
+      if (this.remain === 0) {
+        this.sig = this.next
+        this.setTime()
+      }
       console.log(this.remain, this.sig)
       await delay(1000)
-    } else {
-      this.sig = this.next
-      this.setTime()
     }
-    this.exchange()
+  }
+
+  stop() {
+    this.running = false
   }
 
   setTime() {
-    this.start = Date.now()
     const time = this.times[serial.indexOf(this.sig)]
-    this.end = this.start + time * 1000
+    this.end = Date.now() + time * 1000
   }
 }
 
-let s = new Signal({ init: 'red', times: [10, 5, 3] })
+module.exports = Signal
+
+if (require.main === module) {
+  new Signal({ init: 'red', times: [10, 5, 3] }).start()
+}

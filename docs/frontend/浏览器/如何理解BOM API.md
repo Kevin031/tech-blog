@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # 如何理解 BOM API
 
 BOM 是 browser object model 的缩写，中文意思是浏览器对象模型，BOM API 就是浏览器提供的 API。

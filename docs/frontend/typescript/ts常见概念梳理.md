@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # ts 常见概念梳理
 
 ## 数据类型

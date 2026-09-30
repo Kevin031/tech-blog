@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 # let 和 var 的区别
 
 ## 1. 全局污染

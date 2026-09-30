@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 Dependency Graph 概念来自官网 [Dependency Graph | webpack](https://link.juejin.cn/?target=https%3A%2F%2Fwebpack.js.org%2Fconcepts%2Fdependency-graph%2F) 一文，原文解释：
 
 > Any time one file depends on another, webpack treats this as a _dependency_. This allows webpack to take non-code assets, such as images or web fonts, and also provide them as _dependencies_ for your application.

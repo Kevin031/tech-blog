@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 如何扩展 Webpack？有两种主流方式，一是 Loader —— 主要负责将资源内容翻译成 Webpack 能够理解、处理的 JavaScript 代码；二是 Plugin —— 深度介入 Webpack 构建过程，**重塑** 构建逻辑。
 
 相对而言，Loader 的职责更单一，入门成本相对较低。

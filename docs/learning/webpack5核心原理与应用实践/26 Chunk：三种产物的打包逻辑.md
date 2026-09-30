@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 在上一篇文章《[Dependency Graph：如何管理模块间依赖？](https://juejin.cn/book/7115598540721618944/section/7119035705153552419)》中，我们已经详细讲解了「构建」阶段如何从 Entry 开始逐步递归读入、解析模块内容，并最终构建出模块依赖关系图 —— ModuleGraph 对象。本文我们继续往下，讲解在接下来的「封装」阶段，如何根据 ModuleGraph 内容组织 Chunk，并进一步构建出 ChunkGroup、ChunkGraph 依赖关系对象的主流程。
 
 主流程之外，我们还会详细讲解几个比较模糊的概念：

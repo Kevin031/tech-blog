@@ -1,3 +1,8 @@
+---
+tags:
+  - cms-import-ready
+---
+
 回顾最近几节内容，Webpack 运行过程中首先会根据 `Module` 之间的引用关系构建 `ModuleGraph` 对象；接下来按照若干内置规则将 `Module` 组织进不同 `Chunk` 对象中，形成 `ChunkGraph` 关系图。
 
 接着，构建流程将来到最后一个重要步骤：生成产物代码，这个过程会将所有 `Module` 内容一一转换为适当的产物代码形态，并以 `Chunk` 为单位合并 `Module` 产物代码，之后根据 `Module` 中出现的特性依赖，补充相应运行时代码，最终构建出我们日常所见的 Webpack Bundle 代码文件。
