@@ -12,45 +12,45 @@ jobs:
     # 用于配置当前workflow的参数
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [22.x]
     steps:
       # checkout
       - name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # 在当前操作系统安装node
       # vitepress build
       - name: Build VitePress with Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
       - run: |
-          npm install
+          npm ci
           npm run docs:build
 
       # 资源直接部署到服务器
       # 部署到 master 分支的服务器路径
       - name: Deploy to Server Production Path
         if: github.ref == 'refs/heads/master'
-        uses: easingthemes/ssh-deploy@v2.1.6
+        uses: easingthemes/ssh-deploy@v6.0.3
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: '-rltgoDzvO'
+          ARGS: '-rltzv --delete'
           SOURCE: 'docs/.vitepress/dist/'
           REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: 'root'
-          TARGET: '/www/wwwroot/blog.kevinlau.cn/'
+          REMOTE_USER: 'ubuntu'
+          TARGET: '/var/www/tech-blog/master/'
           EXCLUDE: '/node_modules/'
 
       # 部署到 record 分支的服务器路径
       - name: Deploy to Server Record Path
         if: github.ref == 'refs/heads/record'
-        uses: easingthemes/ssh-deploy@v2.1.6
+        uses: easingthemes/ssh-deploy@v6.0.3
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: '-rltgoDzvO'
+          ARGS: '-rltzv --delete'
           SOURCE: 'docs/.vitepress/dist/'
           REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: 'root'
-          TARGET: '/www/wwwroot/kevinlau.cn/'
+          REMOTE_USER: 'ubuntu'
+          TARGET: '/var/www/tech-blog/record/'
           EXCLUDE: '/node_modules/'

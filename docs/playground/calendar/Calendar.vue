@@ -6,13 +6,16 @@
 
 <script setup lang="tsx">
 import axios from 'axios'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 let imgSrc = ref(null)
 
-axios.get('https://root.zhuayuya.com:8325/get_calendar').then(res => {
-  console.log('res', res)
-  imgSrc.value = res.data.img
+onMounted(() => {
+  axios.get('https://root.zhuayuya.com:8325/get_calendar').then(res => {
+    imgSrc.value = res.data.img
+  }).catch(err => {
+    console.error('获取日历图片失败', err)
+  })
 })
 </script>
 
